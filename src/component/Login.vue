@@ -3,7 +3,7 @@
     <form id="myform">
       <input type="text"  v-model="zhh" placeholder="请输入账号">
       <input type="password" v-model="pwd"  placeholder="请输入密码">
-      <input type="submit" id="btn01" value="登录" @click="logindl">
+      <input type="submit" id="btn" value="登录" @click="logindl">
     </form>
   </div>
 </template>

@@ -75,12 +75,15 @@ export default {
             return
           }
         }
-       if(res.data!=0){
-         this.$message({
-           message:"登录成功",
-           type:"success"
-         })
-       }
+        if(res.data!=0){
+          this.$message({
+            message:"登录成功",
+            type:"success"
+          })
+        //    this.$router.push("/index").catch(err=> {
+        //     console.log("aaaa",err)
+        //   })
+        }
       }).catch()
     }
   }

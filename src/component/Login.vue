@@ -23,7 +23,7 @@ export default {
       var params= new URLSearchParams();
       params.append("loginname",this.zhh)
       params.append("password",this.pwd)
-      this.$axios.post("login.action",params).then(
+      this.$axios.get("login.action",params).then(
         val=>{
           if(val==0){
             alert("账号密码有误")

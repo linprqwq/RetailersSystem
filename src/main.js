@@ -3,6 +3,7 @@ import Login from "./component/Login";
 import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
 import CommodityDisplay from "./component/Commodity/CommodityDisplay";
+import ShoppingCart from "./component/Cart/ShoppingCart";
 Vue.use(ElementUI)
 //axios
 import  Axios from 'axios'
@@ -13,5 +14,5 @@ Vue.prototype.$axios = Axios
 
 new Vue({
   el: '#app',
-  render: h => h(Login)
+  render: h => h(ShoppingCart)
 })

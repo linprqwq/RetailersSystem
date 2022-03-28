@@ -1,5 +1,5 @@
 <template>
-<button @click="querysp()">按钮</button>
+<button @click="querysp()">商品详情按钮</button>
 </template>
 
 <script>

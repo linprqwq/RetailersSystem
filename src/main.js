@@ -4,7 +4,7 @@ import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
 import CommodityDisplay from "./component/Commodity/CommodityDisplay";
 import ShoppingCart from "./component/Cart/ShoppingCart";
-import Router from 'config/routerconfig'
+import Router from './config/routerconfig'
 Vue.use(ElementUI)
 //axios
 import  Axios from 'axios'

@@ -2,7 +2,7 @@ import Vue from 'vue'
 
 //导入router.js
 import VueRouter from 'vue-router'
-import Login from "../components/Login";
+import Login from '../component/Login'
 //Vue组件使用Vue-router组件*******************
 Vue.use(VueRouter)
 

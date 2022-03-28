@@ -1,7 +1,7 @@
-<template >
-
-          <div class="login">
-            <div class="title">京东不会以任何理由要求您转账汇款，谨防诈骗。</div>
+<template>
+  <div id="back">
+          <div class="login" >
+            <div class="title">兴盛不会以任何理由要求您转账汇款，谨防诈骗。</div>
             <div class="login-tab">
               <div class="login-l">
                 <a href="#" id="smdl">扫码登录</a>
@@ -13,10 +13,10 @@
             </div>
             <div class="content" id="content">
               <div class="user">
-                <label id="user"  for="user1"></label><input type="text" v-model="zhh" name="user1" id="user1" placeholder="邮箱/用户名/登录手机">
+                <label id="user"  for="user1"></label><input type="text" v-model="loginqwq.zhh" name="user1" id="user1" placeholder="邮箱/用户名/登录手机">
               </div>
               <div class="pwd">
-                <label id="pwd"  for="pwd1"></label><input type="password" v-model="pwd" name="pwd1" id="pwd1" placeholder="密码">
+                <label id="pwd"  for="pwd1"></label><input type="password" v-model="loginqwq.pwd" name="pwd1" id="pwd1" placeholder="密码">
               </div>
               <div class="safe">
                 <a href="#">忘记密码</a>
@@ -42,6 +42,7 @@
               <div class="phone" id="phone"></div>
             </div>
           </div>
+  </div>
 </template>
 
 <script>
@@ -50,19 +51,30 @@ export default {
   name: "Login",
   data(){
     return{
-      zhh:"",
-      pwd:"",
+     loginqwq:{
+       zhh:"",
+       pwd:""
+     }
     }
   },
   methods:{
     logindl(){
       var params= new URLSearchParams();
-      params.append("loginname",this.zhh)
-      params.append("password",this.pwd)
+      params.append("loginname",this.loginqwq.zhh)
+      params.append("password",this.loginqwq.pwd)
       this.$axios.post("login.action",params).then(res=>{
-       if(res.data==0){
-        this.$message.error("账号或密码有误")
-       }
+        if(this.loginqwq.zhh =="" || this.loginqwq.zhh  ==null){
+          this.$message.error("账号不能为空")
+          return
+        }else if(this.loginqwq.pwd=="" || this.loginqwq.pwd==null){
+          this.$message.error("密码不能为空")
+          return
+        }else {
+          if(res.data==0){
+            this.$message.error("账号或密码有误")
+            return
+          }
+        }
        if(res.data!=0){
          this.$message({
            message:"登录成功",
@@ -311,6 +323,11 @@ label {
   transform: translateY(-50%);
   transition: all 0.5s 0.3s;
   opacity: 0;
+}
+#back{
+  background: url("../image/loginn.png");
+  background-repeat:no-repeat;
+  background-size: cover;
 }
 </style>
 

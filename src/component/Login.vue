@@ -1,10 +1,10 @@
 <template>
   <div>
-    <form id="myform">
+
       <input type="text"  v-model="zhh" placeholder="请输入账号">
       <input type="password" v-model="pwd"  placeholder="请输入密码">
-      <input type="submit" id="btn" value="登录" @click="logindl">
-    </form>
+      <input type="button" id="btn" value="登录" @click="logindl">
+
   </div>
 </template>
 
@@ -23,13 +23,11 @@ export default {
       var params= new URLSearchParams();
       params.append("loginname",this.zhh)
       params.append("password",this.pwd)
-      this.$axios.get("login.action",params).then(
-        val=>{
-          if(val==0){
-            alert("账号密码有误")
-          }
-        }
-      ).catch()
+      this.$axios.post("login.action",params).then(res=>{
+        alert(res.data)
+      }).catch()
+
+
     }
   }
 }

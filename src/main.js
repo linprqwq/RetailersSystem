@@ -13,5 +13,5 @@ Vue.prototype.$axios = Axios
 
 new Vue({
   el: '#app',
-  render: h => h(CommodityDisplay)
+  render: h => h(Login)
 })

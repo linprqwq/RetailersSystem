@@ -4,6 +4,8 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Login from '../component/Login'
 import Index from '../component/Index'
+import SystemList from "../component/SystemList";
+import EmpLogin from "../component/EmpLogin";
 //Vue组件使用Vue-router组件*******************
 Vue.use(VueRouter)
 
@@ -14,7 +16,7 @@ var routes=[
     component:SystemList
   },
   {
-    path:"/",
+    path:"/emplogin",
     component:EmpLogin
   },
   {
@@ -24,7 +26,7 @@ var routes=[
   {
     path: "/index",
     name:"index",
-    component:Index
+    component:Index,
   },
   {
     path: "/login",

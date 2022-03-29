@@ -6,6 +6,7 @@ import 'element-ui/lib/theme-chalk/index.css'
 import CommodityDisplay from "./component/Commodity/CommodityDisplay";
 import ShoppingCart from "./component/Cart/ShoppingCart";
 import Router from './config/routerconfig'
+import Index from './component/Index'
 import App from "./App";
 Vue.use(ElementUI)
 //axios
@@ -17,6 +18,6 @@ Vue.prototype.$axios = Axios
 
 new Vue({
   el: '#app',
-  render: h => h(App),
+  render: h => h(Index),
   router:Router
 })

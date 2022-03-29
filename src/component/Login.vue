@@ -80,9 +80,9 @@ export default {
             message:"登录成功",
             type:"success"
           })
-        //    this.$router.push("/index").catch(err=> {
-        //     console.log("aaaa",err)
-        //   })
+           this.$router.push("/index").catch(err=> {
+            console.log("aaaa",err)
+          })
         }
       }).catch()
     }
@@ -113,6 +113,8 @@ a {
   margin: 100px auto;
   font-size: 0;
   background-color: #ffffff;
+  left: 400px;
+  top: 130px;
 }
 .login .title {
   width: 100%;
@@ -331,6 +333,9 @@ label {
   background: url("../image/loginn.png");
   background-repeat:no-repeat;
   background-size: cover;
+  height: 600px;
+  position: relative;
+  top: -100px;
 }
 </style>
 

@@ -10,6 +10,14 @@ Vue.use(VueRouter)
 //路由数组
 var routes=[
   {
+    path:"/syslist",
+    component:SystemList
+  },
+  {
+    path:"/",
+    component:EmpLogin
+  },
+  {
     path:"/",
     redirect:"/login"
   },

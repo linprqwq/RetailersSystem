@@ -2,12 +2,12 @@ import Vue from 'vue'
 
 //导入router.js
 import VueRouter from 'vue-router'
-import Register from "../component/Register";
 import Login from '../component/Login'
 import Index from '../component/Index'
 import SystemList from "../component/SystemList";
 import EmpView from "../component/sysindex/sysguanli/employee/EmpView";
 import EmpLogin from "../component/EmpLogin";
+import CommodityDisplay from "../component/Commodity/CommodityDisplay";
 //Vue组件使用Vue-router组件*******************
 Vue.use(VueRouter)
 
@@ -41,6 +41,12 @@ var routes=[
   {
     path: "/register",
     component:Register,
+  },
+
+  {
+    path: "/CommodityDisplay",
+    name: "CommodityDisplay",
+    component: CommodityDisplay
   }
 ]
 

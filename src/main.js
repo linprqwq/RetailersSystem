@@ -1,14 +1,11 @@
 import Vue from 'vue'
 import Login from "./component/Login";
 import SystemList from "./component/SystemList";
-import Register from "./component/Register"
 import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
 import CommodityDisplay from "./component/Commodity/CommodityDisplay";
 import ShoppingCart from "./component/Cart/ShoppingCart";
 import Router from './config/routerconfig'
-// import Cookie from 'js-cookie'
-// Vue.use(Cookie)
 import App from "./App";
 Vue.use(ElementUI)
 //axios

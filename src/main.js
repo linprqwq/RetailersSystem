@@ -10,6 +10,7 @@ import App from "./App";
 Vue.use(ElementUI)
 //axios
 import  Axios from 'axios'
+import Index from "./component/Index";
 //设置axios默认访问路径
 Axios.defaults.baseURL = "http://127.0.0.1:9090/RetailersBackSystem"
 // 将baseURL绑定到全局
@@ -17,6 +18,6 @@ Vue.prototype.$axios = Axios
 
 new Vue({
   el: '#app',
-  render: h => h(CommodityDisplay),
+  render: h => h(Index),
   router:Router
 })

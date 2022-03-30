@@ -2,6 +2,7 @@ import Vue from 'vue'
 
 //导入router.js
 import VueRouter from 'vue-router'
+import Register from "../component/Register";
 import Login from '../component/Login'
 import Index from '../component/Index'
 import SystemList from "../component/SystemList";
@@ -36,7 +37,11 @@ var routes=[
   //   path: "/login",
   //   name:"login",
   //   component: Login
-  // }
+  // },
+  {
+    path: "/register",
+    component:Register,
+  }
 ]
 
 //路由管理器

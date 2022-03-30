@@ -17,10 +17,11 @@
         <a href="#">智能生活</a>
         <a href="#">Select Location</a>
       </div>
-      <div class="you">
-        <a @click="$router.push('/login')">登录</a>
-        <a href="XiaoMi/zhuce.html">注册</a>
-        <a href="#">消息通知</a>
+      <div class="you" >
+        <a class="mzz">ttt</a>
+        <a class="mzz" @click="$router.push('/login')">登录</a>
+        <a class="mzz" @click="$router.push('/register')">注册</a>
+        <a class="mzz" href="#">消息通知</a>
         <div class="he">
           <div class="che">
             <a href="#"></a>
@@ -485,7 +486,17 @@
 
 <script>
 export default {
-  name: "Index"
+  name: "Index",
+  data(){
+      return{
+
+      }
+  },
+  computed:{
+    // showLoginname(){
+    //   return Cookie.get("loginname")
+    // }
+  }
 }
 </script>
 
@@ -1330,4 +1341,9 @@ img#lunbo {
   position: relative;
   top: 29px;
 }
+.mzz{
+  position: relative;
+  top: 0px ;
+}
+
 </style>

@@ -70,20 +70,22 @@ export default {
           this.$message.error("密码不能为空")
           return
         }else {
-          if(res.data==0){
+          if(res.data==null){
             this.$message.error("账号或密码有误")
             return
           }
         }
-        if(res.data!=0){
+        if(res.data!=null){
           this.$message({
             message:"登录成功",
             type:"success"
           })
-           this.$router.push("/index").catch(err=> {
+          // Cookies.set("loginname",this.res.data.loginname)
+          this.$parent.$router.push("/").catch(err=> {
             console.log("aaaa",err)
           })
         }
+        console.log(res.data.loginname)
       }).catch()
     }
   }

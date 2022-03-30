@@ -5,8 +5,6 @@ import VueRouter from 'vue-router'
 import Login from '../component/Login'
 import Index from '../component/Index'
 import SystemList from "../component/SystemList";
-import EmpLogin from "../component/EmpLogin";
-import SystemList from "../component/SystemList";
 import EmpView from "../component/sysindex/sysguanli/employee/EmpView";
 import EmpLogin from "../component/EmpLogin";
 //Vue组件使用Vue-router组件*******************
@@ -23,19 +21,22 @@ var routes=[
     component:EmpLogin
   },
   {
-    path:"/",
-    redirect:"/login"
+    path:"/login",
+    component:Login,
+    // meta:{
+    //   requireAuth:true //判断是否需要登录
+    // }
   },
   {
-    path: "/index",
+    path: "/",
     name:"index",
     component:Index,
   },
-  {
-    path: "/login",
-    name:"login",
-    component: Login
-  }
+  // {
+  //   path: "/login",
+  //   name:"login",
+  //   component: Login
+  // }
 ]
 
 //路由管理器

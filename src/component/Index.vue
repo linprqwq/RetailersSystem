@@ -18,7 +18,7 @@
         <a href="#">Select Location</a>
       </div>
       <div class="you">
-        <a href="XiaoMi/loading.html">登录</a>
+        <a @click="$router.push('/login')">登录</a>
         <a href="XiaoMi/zhuce.html">注册</a>
         <a href="#">消息通知</a>
         <div class="he">

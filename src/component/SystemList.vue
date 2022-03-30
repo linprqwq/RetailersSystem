@@ -73,10 +73,12 @@
 <script>
   import Welcome from "./Welcome";
   import EmpView from "./sysindex/sysguanli/employee/EmpView";
+  import AuthcView from "./sysindex/sysguanli/authcs/AuthcView";
+  import UserView from "./User/UserView";
     export default {
         name: "SystemList",
       components:{
-        Welcome,EmpView
+        Welcome,EmpView,AuthcView,UserView
       },
       data(){
         return {

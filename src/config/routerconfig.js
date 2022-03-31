@@ -8,6 +8,7 @@ import SystemList from "../component/SystemList";
 import EmpView from "../component/sysindex/sysguanli/employee/EmpView";
 import EmpLogin from "../component/EmpLogin";
 import CommodityDisplay from "../component/Commodity/CommodityDisplay";
+import Register from "../component/Register";
 //Vue组件使用Vue-router组件*******************
 Vue.use(VueRouter)
 

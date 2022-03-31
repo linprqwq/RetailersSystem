@@ -518,7 +518,7 @@ export default {
   position: relative;
   top: -11px;
   left: -8px;
-  width: 1533px;
+  width: auto;
 }
 
 .zhong {

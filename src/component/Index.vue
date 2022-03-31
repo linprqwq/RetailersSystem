@@ -493,9 +493,6 @@ export default {
       }
   },
   computed:{
-    // showLoginname(){
-    //   return Cookie.get("loginname")
-    // }
     showLoginname(){
       return this.userid
     }

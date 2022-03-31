@@ -19,7 +19,7 @@
       </div>
       <div class="you" >
         <a class="mzz" v-show="userid!=null">{{showLoginname}}</a>
-        <a class="mzz" v-show="userid==null" @click="$router.push('/login')">登录</a>
+        <a class="mzz" v-show="userid==null"  @click="$router.push('/login')">登录</a>
         <a class="mzz" v-show="userid==null" @click="$router.push('/register')">注册</a>
         <a class="mzz" href="#">消息通知</a>
         <div class="he">
@@ -27,7 +27,7 @@
             <a href="#"></a>
           </div>
           <div class="ziti">
-            <a href="MyShopping.html">购物车 (0)</a>
+            <a @click="shopping">购物车 (0)</a>
           </div>
         </div>
       </div>
@@ -498,6 +498,13 @@ export default {
     // }
     showLoginname(){
       return this.userid
+    }
+  },
+  methods:{
+    shopping(){
+      if(this.userid==null){
+        this.$router.push("/ShoppingFalst")
+      }
     }
   }
 }

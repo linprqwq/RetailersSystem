@@ -9,6 +9,7 @@ import EmpView from "../component/sysindex/sysguanli/employee/EmpView";
 import EmpLogin from "../component/EmpLogin";
 import CommodityDisplay from "../component/Commodity/CommodityDisplay";
 import Register from "../component/Register";
+import ShoppingFalst from '../component/Cart/ShoppingFalst'
 //Vue组件使用Vue-router组件*******************
 Vue.use(VueRouter)
 
@@ -48,6 +49,11 @@ var routes=[
     path: "/CommodityDisplay",
     name: "CommodityDisplay",
     component: CommodityDisplay
+  },
+  {
+    path: "/ShoppingFalst",
+    name:"ShoppingFalst",
+    component: ShoppingFalst
   }
 ]
 

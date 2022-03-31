@@ -5,6 +5,7 @@ import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
 import CommodityDisplay from "./component/Commodity/CommodityDisplay";
 import ShoppingCart from "./component/Cart/ShoppingCart";
+import ShoppingFalst from './component/Cart/ShoppingFalst'
 import Router from './config/routerconfig'
 import App from "./App";
 Vue.use(ElementUI)

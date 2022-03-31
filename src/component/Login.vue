@@ -81,6 +81,9 @@ export default {
             type:"success"
           })
           // Cookies.set("loginname",this.res.data.loginname)
+          sessionStorage.setItem('user',res.data.loginname)
+          var userid=sessionStorage.getItem('user')
+          alert(userid)
           this.$parent.$router.push("/").catch(err=> {
             console.log("aaaa",err)
           })

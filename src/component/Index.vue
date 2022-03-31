@@ -18,9 +18,9 @@
         <a href="#">Select Location</a>
       </div>
       <div class="you" >
-        <a class="mzz">ttt</a>
-        <a class="mzz" @click="$router.push('/login')">登录</a>
-        <a class="mzz" @click="$router.push('/register')">注册</a>
+        <a class="mzz" v-show="userid!=null">{{showLoginname}}</a>
+        <a class="mzz" v-show="userid==null" @click="$router.push('/login')">登录</a>
+        <a class="mzz" v-show="userid==null" @click="$router.push('/register')">注册</a>
         <a class="mzz" href="#">消息通知</a>
         <div class="he">
           <div class="che">
@@ -489,13 +489,16 @@ export default {
   name: "Index",
   data(){
       return{
-
+        userid:sessionStorage.getItem('user')
       }
   },
   computed:{
     // showLoginname(){
     //   return Cookie.get("loginname")
     // }
+    showLoginname(){
+      return this.userid
+    }
   }
 }
 </script>

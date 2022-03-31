@@ -1,10 +1,10 @@
 <template>
   <div>
-  <div class="top">
+  <div class="top" >
     <div class="zhong">
       <div class="zuo">
-        <a href="#">小米商城</a>
-        <a href="#">MIUI</a>
+        <a href="#">兴盛商城</a>
+        <a href="#">XISI</a>
         <a href="#">loT</a>
         <a href="#">云服务</a>
         <a href="#">天星数科</a>
@@ -37,7 +37,7 @@
   <div class="bj1">
     <div class="topd">
       <div class="tu">
-        <a href="#"><img src="images/logo-mi2.png" alt="图片出错"></a>
+        <a href="#"><img :src="require('../image/logo-mi2.png')" alt="图片出错"></a>
       </div>
       <div class="topdzh">
         <a href="#" id="xm">小米手机</a>
@@ -77,53 +77,53 @@
         <div class="quanjin">
           <a href="#">
             <div>
-              <img src="images/小1.png" alt="图片出错">
-              <p>小米秒杀</p>
+              <img :src="require('../image/小1.png')" alt="图片出错">
+              <p>兴盛秒杀</p>
             </div>
           </a>
           <a href="#">
             <div>
-              <img src="images/小2.png" alt="图片出错">
+              <img :src="require('../image/小2.png')" alt="图片出错">
               <p>企业团购</p>
             </div>
           </a>
           <a href="#">
             <div>
-              <img src="images/小3.png" alt="图片出错">
-              <p>F码通道</p>
+              <img :src="require('../image/小3.png')" alt="图片出错">
+              <p>绿色通道</p>
             </div>
           </a>
           <a href="#">
             <div>
-              <img src="images/小4.png" alt="图片出错">
-              <p>米粉卡</p>
+              <img :src="require('../image/小4.png')" alt="图片出错">
+              <p>兴盛粉</p>
             </div>
           </a>
           <a href="#">
             <div>
-              <img src="images/小5.png" alt="图片出错">
-              <p>以旧换新</p>
+              <img :src="require('../image/小5.png')" alt="图片出错">
+              <p>无理由退换</p>
             </div>
           </a>
           <a href="#">
             <div>
-              <img src="images/小6.png" alt="图片出错">
-              <p>花费充值</p>
+              <img :src="require('../image/小6.png')" alt="图片出错">
+              <p>账号充值</p>
             </div>
           </a>
         </div>
       </div>
       <div class="zhongxiayou">
         <div class="xia1">
-          <a href="#"><img src="images/中下右1.png" alt="图片出错" height="169px" width="316px"></a>
+          <a href="#"><img :src="require('../image/广告3.jpg')" alt="图片出错" height="169px" width="316px"></a>
 
         </div>
         <div class="xia2">
-          <a href=""><img src="images/中下右2.png" alt="图片出错" height="169px" width="316px"></a>
+          <a href=""><img :src="require('../image/时令生鲜.jpg')" alt="图片出错" height="169px" width="316px"></a>
 
         </div>
         <div class="xia3">
-          <a href=""><img src="images/中下右3.png" alt="图片出错" height="169px" width="316px"></a>
+          <a href=""><img :src="require('../image/潮流肉蛋.jpg')" alt="图片出错" height="169px" width="316px"></a>
         </div>
       </div>
     </div>
@@ -135,11 +135,11 @@
       </div>
       <div class="xiatu">
         <div class="xiatu1">
-          <a href="#"><img src="images/左边webp.webp" alt="图片出错" height="298px" width="233px"></a>
+          <a href="#"><img :src="require('../image/左边1.jpg')" alt="图片出错" height="298px" width="233px"></a>
         </div>
-        <div class="xiatu2">
+        <div class="xiatu2" v-for="qwq in commodity">
           <a href="#"><img src="images/E65x.webp" alt="图片出错" height="196px" width="233px"></a>
-          <p>小米全面屏电视65英寸 E65X</p>
+          <p>{{qwq.proname}}</p>
           <span>全面屏设计</span>
           <div class="nei1">
             <p>2888元</p>
@@ -321,14 +321,14 @@
     </div>
     <div class="wenzitiao">
       <div class="wenzitiaoxia">
-        <a href="#"><img class="img1" src="images/字1.png" alt="图片出错" width="24px" height="24px">预约维修服务
+        <a href="#"><img class="img1" :src="require('../image/字1.png')" alt="图片出错" width="24px" height="24px">送货上门服务
         </a>
-        <a href="#"><img class="img2" src="images/字2.png" alt="图片出错" width="24px" height="24px">7天无理由退货
+        <a href="#"><img class="img2" :src="require('../image/字2.png')" alt="图片出错" width="24px" height="24px">1天无理由退货
         </a>
-        <a href="#"><img class="img3" src="images/字3.png" alt="图片出错" width="24px" height="24px">15天免费换货
+        <a href="#"><img class="img3" :src="require('../image/字3.png')" alt="图片出错" width="24px" height="24px">2天免费换货
         </a>
-        <a href="#"><img class="img4" src="images/字4.png" alt="图片出错" width="24px" height="24px">满69包邮（米粉节特惠） </a>
-        <a href="#" class="shebian"><img class="img5" src="images/字5.png" alt="图片出错" width="24px"
+        <a href="#"><img class="img4" :src="require('../image/字4.png')" alt="图片出错" width="24px" height="24px">满69包邮（兴盛节特惠） </a>
+        <a href="#" class="shebian"><img class="img5" :src="require('../image/字5.png')" alt="图片出错" width="24px"
                                          height="24px">520余家售后网点
         </a>
       </div>
@@ -363,7 +363,7 @@
           </div>
           <div class="xiali3">
             <ul>
-              <li><a href="#">小米之家</a></li>
+              <li><a href="#">兴盛之家</a></li>
               <li><a href="#">服务网点</a></li>
               <li><a href="#">授权体验店</a></li>
             </ul>
@@ -375,8 +375,8 @@
           </div>
           <div class="xiali4">
             <ul>
-              <li><a href="#">了解小米</a></li>
-              <li><a href="#">加入小米</a></li>
+              <li><a href="#">了解兴盛</a></li>
+              <li><a href="#">加入兴盛</a></li>
               <li><a href="#">投资者关系</a></li>
               <li><a href="#">企业社会责任</a></li>
               <li><a href="#">廉洁举报</a></li>
@@ -402,7 +402,7 @@
           </div>
           <div class="xiali6">
             <ul>
-              <li><a href="#">F码通道</a></li>
+              <li><a href="#">S码通道</a></li>
               <li><a href="#">礼物码</a></li>
               <li><a href="#">防伪查询</a></li>
             </ul>
@@ -415,10 +415,10 @@
           <div class="xiali7">
             <ul>
               <li>8：00-18：00（仅收市花费）</li>
-              <li><a href="#" class="diyia"><img src="images/客服.png" alt="图片出错">人工客服</a></li>
-              <li class="diera">关注小米：<a href="#"><img class="dd" src="images/微博.png" alt="图片出错"
+              <li><a href="#" class="diyia"><img :src="require('../image/客服.png')" alt="图片出错">人工客服</a></li>
+              <li class="diera">关注小米：<a href="#"><img class="dd" :src="require('../image/微博.png')" alt="图片出错"
                                                       height="22px" width="22px
-                                "></a><a href="#"><img class="tt" src="images/微信.png" alt="图片出错" height="22px"
+                                "></a><a href="#"><img class="tt" :src="require('../image/微信.png')" alt="图片出错" height="22px"
                                                        width="22px"></a>
               </li>
             </ul>
@@ -428,21 +428,21 @@
     </div>
     <div class="zuihouxiaozi">
       <div class="zuihouxiaozitu">
-        <img src="images/logo-mi2.png" alt="图片出错" height="70px" width="70px">
+        <img :src="require('../image/logo-mi2.png')" alt="图片出错" height="70px" width="70px">
       </div>
       <div class="zuihouxiaozizi">
-        <a href="#">小米商城 |</a>
-        <a href="#">MIUI |</a>
-        <a href="#">米家 |</a>
-        <a href="#">米聊 |</a>
+        <a href="#">兴盛商城 |</a>
+        <a href="#">XISI |</a>
+        <a href="#">兴盛家 |</a>
+        <a href="#">兴盛聊 |</a>
         <a href="#">多看 |</a>
         <a href="#">游戏 |</a>
         <a href="#">政企服务 |</a>
-        <a href="#">小米天猫店 |</a>
-        <a href="#">小米集团隐私政策 |</a>
-        <a href="#">小米公司儿童信息保护规则 |</a>
-        <a href="#">小米商城隐私政策 |</a>
-        <a href="#">小米商城用户协议 |</a>
+        <a href="#">兴盛线下店 |</a>
+        <a href="#">兴盛集团隐私政策 |</a>
+        <a href="#">兴盛公司儿童信息保护规则 |</a>
+        <a href="#">兴盛商城隐私政策 |</a>
+        <a href="#">兴盛商城用户协议 |</a>
         <a href="#">问题反馈 |</a>
         <a href="#">Select Location</a>
         <br>
@@ -451,7 +451,7 @@
         <a href="#">北京市消费者协会</a>
         <br>
         <span>@</span>
-        <a href="#">mi.com</a>
+        <a href="#">xs.com</a>
         <span>京ICP备10046444号</span>
         <a href="#">京公网安备11010802020134号</a>
         <a href="#">京网文[2020]027-042号</a>
@@ -470,11 +470,11 @@
         <a href="#">知识产权侵权投诉</a>
         <span>本网站所列数据，除特殊说明，所有数据均出自我司实验室测试</span>
         <br>
-        <a href="#"><img src="images/底图1.png" alt="图片出错"></a>
-        <a href="#"><img src="images/底图2.png" alt="图片出错"></a>
-        <a href="#"><img src="images/底图3.png" alt="图片出错"></a>
-        <a href="#"><img src="images/底图4.png" alt="图片出错"></a>
-        <a href="#"><img src="images/底图5.png" alt="图片出错"></a>
+        <a href="#"><img :src="require('../image/底图1.png')" alt="图片出错"></a>
+        <a href="#"><img :src="require('../image/底图2.png')" alt="图片出错"></a>
+        <a href="#"><img :src="require('../image/底图3.png')" alt="图片出错"></a>
+        <a href="#"><img :src="require('../image/底图4.png')" alt="图片出错"></a>
+        <a href="#"><img :src="require('../image/底图5.png')" alt="图片出错"></a>
       </div>
     </div>
     <div class="dibuzi">
@@ -489,20 +489,28 @@ export default {
   name: "Index",
   data(){
       return{
-        userid:sessionStorage.getItem('user')
+        userid:sessionStorage.getItem('user'),
+        commodity:[]
       }
   },
   computed:{
     showLoginname(){
       return this.userid
-    }
+    },
   },
   methods:{
     shopping(){
       if(this.userid==null){
         this.$router.push("/ShoppingFalst")
       }
-    }
+    },
+    },
+  created(){
+    var _this=this;
+    this.$axios.post("queryAllcom.action").then(val=>{
+      _this.commodity=val.data
+      console.log(val.data)
+    }).catch()
   }
 }
 </script>

@@ -27,7 +27,7 @@
             <a href="#"></a>
           </div>
           <div class="ziti">
-            <a href="MyShopping.html">购物车 (0)</a>
+            <a @click="shopping">购物车 (0)</a>
           </div>
         </div>
       </div>

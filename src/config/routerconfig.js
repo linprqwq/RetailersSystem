@@ -11,6 +11,7 @@ import CommodityDisplay from "../component/Commodity/CommodityDisplay";
 import Register from "../component/Register";
 import ShoppingFalst from '../component/Cart/ShoppingFalst'
 import tabs from "../component/supplier/tabs";
+import shopping2 from "../component/Cart/shopping2";
 //Vue组件使用Vue-router组件*******************
 Vue.use(VueRouter)
 
@@ -60,6 +61,11 @@ var routes=[
     path: "/tabs",
     name:"tabs",
     component: tabs
+  },
+  {
+    path: "shopping2",
+    name: "shopping2",
+    component: shopping2
   }
 
 ]

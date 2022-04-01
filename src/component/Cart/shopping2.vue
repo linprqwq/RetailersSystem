@@ -22,16 +22,16 @@
           </div>
           <div class="content">
             <div class="name">{{item.commodity.proname}}</div>
-            <div class="specification">商品副标题</div>
+            <div class="specification">{{ item.commodity.prodetails }}</div>
           </div>
         </div>
         <div class="product-price">
           ${{item.commodity.prosprice}}
         </div>
         <div class="product-quantity">
-          <input type="button" class="btn-add" value="-" @click="jj(item.cartid,true,item.quantity)">
+          <input type="button" class="btn-sub" value="-"@click="jj(item.cartid,true,item.quantity)" >
              {{item.quantity}}
-          <input type="button" class="btn-sub" value="+" @click="jj(item.cartid,false)">
+          <input type="button" class="btn-add" value="+" @click="jj(item.cartid,false)">
         </div>
       </div>
     </div>
@@ -59,32 +59,6 @@ export default {
       checkAll: false,
       isIndeterminate: false,
       totalPrice: 0,
-      cartList: [
-        {
-          id: 1,
-          img: '//img10.joybuy.com/N4/jfs/t1/176101/8/13660/51184/60c01ea8E1204306a/1687f0f76f243965.jpg.dpg',
-          name: 'Western Digital (WD) New My Passport 2.5 "Classic Black Mobile Hard Drive WDBYFT0020BBK-CESN',
-          num: 1,
-          price: 100,
-          checked: true
-        },
-        {
-          id: 2,
-          img: '//img10.joybuy.com/N4/jfs/t1/176101/8/13660/51184/60c01ea8E1204306a/1687f0f76f243965.jpg.dpg',
-          name: 'Western Digital (WD) New My Passport 2.5 "Classic Black Mobile Hard Drive WDBYFT0020BBK-CESN',
-          num: 2,
-          price: 200,
-          checked: false
-        },
-        {
-          id: 3,
-          img: '//img10.joybuy.com/N4/jfs/t1/176101/8/13660/51184/60c01ea8E1204306a/1687f0f76f243965.jpg.dpg',
-          name: 'Western Digital (WD) New My Passport 2.5 "Classic Black Mobile Hard Drive WDBYFT0020BBK-CESN',
-          num: 3,
-          price: 300,
-          checked: true
-        }
-      ],
       allgoods:[],
 
       cart: []

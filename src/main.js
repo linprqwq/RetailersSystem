@@ -8,7 +8,7 @@ import ShoppingCart from "./component/Cart/ShoppingCart";
 import ShoppingFalst from './component/Cart/ShoppingFalst'
 import Router from './config/routerconfig'
 import shopping from "./component/Cart/shopping2";
-
+import PersonalCenter from "./component/PersonalCenter/PersonalCenter";
 import App from "./App";
 Vue.use(ElementUI)
 //axios
@@ -21,6 +21,6 @@ Vue.prototype.$axios = Axios
 
 new Vue({
   el: '#app',
-  render: h => h(App),
+  render: h => h(PersonalCenter),
   router:Router,
 })

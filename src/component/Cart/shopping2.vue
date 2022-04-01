@@ -18,7 +18,7 @@
                      @change="checkedChange(item.cartid)"></el-checkbox>
         <div class="product-detail">
           <div class="img">
-            <img :src="(item.commodity.proimage)" alt="图片出错">
+            <img :src="require('../../image/dddbbt2.png')" alt="图片出错">
           </div>
           <div class="content">
             <div class="name">{{item.commodity.proname}}</div>
@@ -42,9 +42,9 @@
                      @change="handleCheckAllChange">全选</el-checkbox>
       </div>
       <div class="total">
-        Total : <span style="color:#e33333">${{totalPrice}}</span>
+        金额 : <span style="color:#e33333">${{totalPrice}}</span>
       </div>
-        <el-button class="btn">结算</el-button>
+        <el-button class="btn" @click="jwcjiesuan()">结算</el-button>
     </div>
   </div>
 
@@ -52,7 +52,7 @@
 
 <script>
 export default {
-  name: "s",
+  name: "shopping2",
   data () {
     return {
       quantity: 4,
@@ -60,8 +60,8 @@ export default {
       isIndeterminate: false,
       totalPrice: 0,
       allgoods:[],
-
-      cart: []
+      cart: [],
+      jiesuanlist:[],
     }
   },
   mounted () {
@@ -117,6 +117,29 @@ export default {
         }
       }
       this.setCart()
+    },
+    //购物车结算
+    jwcjiesuan(){
+      console.log(this.allgoods)
+      this.allgoods.forEach(item=>{
+       if (item.ck==true){
+         this.jiesuanlist.push(item);
+       }
+     })
+      // 跳转路由传递对象参数
+      var arr=JSON.stringify(this.songList)
+      this.$router.push('/shop/'+encodeURIComponent(arr))
+    //   这里跳转路由的时候，先用JSON.stringify将参数转换一下，
+    //   有人会将转换的参数直接传递过去，然后在那边接收的时候用JSON.parse会报错
+    // ，这里用JSON.stringify转换完毕后再用encodeURIComponent()将参数再次转换一下，然后就可以传递了。
+      // 获取传过来的参数
+      var list = decodeURIComponent(this.$route.params.obj);
+      this.songList = JSON.parse(list);
+    //   这里接收参数的时候，先用decodeURIComponent()将传递过来的参数转换一下，
+    //   然后再用JSON.parse再次转换，这样，一个对象就完整的传递过来了，
+    //   然后可以开心的使用各种参数，不用再次去请求数据了。 但是上传文件的文件流数据file用这个方法不好使
+    // ，file数据不能用JSON来转换，一转换就为空了，所以也不能用本地存贮了，可以使用vuex来保存。
+
     },
     //数量改变
     qtyChange (value) {

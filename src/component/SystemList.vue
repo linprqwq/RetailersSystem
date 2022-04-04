@@ -76,10 +76,11 @@
   import AuthcView from "./sysindex/sysguanli/authcs/AuthcView";
   import UserView from "./User/UserView";
   import CgsqView from "./procurement/CgsqView";
+  import GysShJlView from "./Gys/GysShJlView";
     export default {
         name: "SystemList",
       components:{
-        Welcome,EmpView,AuthcView,UserView,CgsqView
+        Welcome,EmpView,AuthcView,UserView,CgsqView,GysShJlView
       },
       data(){
         return {

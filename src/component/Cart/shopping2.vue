@@ -126,19 +126,11 @@ export default {
          this.jiesuanlist.push(item);
        }
      })
+      console.log(this.jiesuanlist)
+
       // 跳转路由传递对象参数
-      var arr=JSON.stringify(this.songList)
-      this.$router.push('/shop/'+encodeURIComponent(arr))
-    //   这里跳转路由的时候，先用JSON.stringify将参数转换一下，
-    //   有人会将转换的参数直接传递过去，然后在那边接收的时候用JSON.parse会报错
-    // ，这里用JSON.stringify转换完毕后再用encodeURIComponent()将参数再次转换一下，然后就可以传递了。
-      // 获取传过来的参数
-      var list = decodeURIComponent(this.$route.params.obj);
-      this.songList = JSON.parse(list);
-    //   这里接收参数的时候，先用decodeURIComponent()将传递过来的参数转换一下，
-    //   然后再用JSON.parse再次转换，这样，一个对象就完整的传递过来了，
-    //   然后可以开心的使用各种参数，不用再次去请求数据了。 但是上传文件的文件流数据file用这个方法不好使
-    // ，file数据不能用JSON来转换，一转换就为空了，所以也不能用本地存贮了，可以使用vuex来保存。
+      var arr=JSON.stringify(this.jiesuanlist)
+      this.$router.push({path: '/ordertijiao',name:'ordertijiao', query: {res: arr}})
 
     },
     //数量改变

@@ -11,6 +11,7 @@
           <a href="login.html">登录</a>
           <span>|</span>
           <a href="register.html">注册</a>
+          <el-button @click="aaa"></el-button>
         </div>
         <div class="user_link fl">
           <span>|</span>
@@ -128,7 +129,35 @@
 
 <script>
 export default {
-  name: "OrderTijiao"
+  name: "OrderTijiao",
+  data(){
+    return{
+      userinfo:JSON.parse(this.$route.query.res),
+      list:[],
+      uid:sessionStorage.getItem('id'),
+    }
+  },
+  methods:{
+    aaa(){
+      this.userinfo.forEach(item=>{
+   console.log(item)
+      })
+    },
+    queryusergwc(){
+      this.userinfo.forEach(item=>{
+        this.list.push(item.cid)
+      })
+      var params = new URLSearchParams();
+      params.append("list",this.list);
+      params.append("uid",this.uid);
+      this.$axios.post("queryusergwc",params).then(res=>{
+            console.log(res.data);
+      }).catch()
+    },
+  },
+  created(){
+    this.queryusergwc();
+  }
 }
 </script>
 

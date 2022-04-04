@@ -27,7 +27,7 @@
             <a href="#"></a>
           </div>
           <div class="ziti">
-            <a @click="shopping" >购物车({{cartcount}})</a>
+            <a   @click="gwc()">购物车 ({{cartcount}})</a>
           </div>
         </div>
       </div>
@@ -320,6 +320,13 @@ export default {
         this.$router.push("/ShoppingFalst")
       }
     },
+    gwc(){
+      if (this.userid==null){
+        this.$router.push('/ShoppingFalst');
+      }else{
+        this.$router.push('/shopping2');
+      }
+    }
     },
   created(){
     var _this=this;
@@ -327,7 +334,6 @@ export default {
       _this.commodity=val.data
       console.log(val.data)
     }).catch()
-
     if(this.useridd!=null){
       var params= new URLSearchParams();
       params.append("id",this.useridd)

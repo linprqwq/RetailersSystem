@@ -8,10 +8,12 @@ import ShoppingCart from "./component/Cart/ShoppingCart";
 import ShoppingFalst from './component/Cart/ShoppingFalst'
 import Router from './config/routerconfig'
 import App from "./App";
+import Zlwh from "./component/shzlwh/Zlwh";
+import Allorder from "./component/Shorder/Allorder";
 Vue.use(ElementUI)
 //axios
 import  Axios from 'axios'
-import Index from "./component/Index";
+
 //设置axios默认访问路径
 Axios.defaults.baseURL = "http://127.0.0.1:9090/RetailersBackSystem"
 // 将baseURL绑定到全局
@@ -19,6 +21,6 @@ Vue.prototype.$axios = Axios
 
 new Vue({
   el: '#app',
-  render: h => h(App),
+  render: h => h(Allorder),
   router:Router,
 })

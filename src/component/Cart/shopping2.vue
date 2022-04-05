@@ -44,7 +44,7 @@
       <div class="total">
         金额 : <span style="color:#e33333">${{totalPrice}}</span>
       </div>
-        <el-button class="btn" @click="jwcjiesuan()">结算</el-button>
+      <el-button class="btn" :plain="true" @click="jwcjiesuan()">结算</el-button>
     </div>
   </div>
 
@@ -62,6 +62,7 @@ export default {
       allgoods:[],
       cart: [],
       jiesuanlist:[],
+      uid:sessionStorage.getItem('id'),
     }
   },
   mounted () {
@@ -96,7 +97,7 @@ export default {
     //查询当前用户购物车
     queryshopping() {
       var params = new URLSearchParams();
-      params.append("uid", 1);
+      params.append("uid", this.uid);
 
       this.$axios.post("querygwcid.action", params).then(res => {
         this.allgoods = res.data;
@@ -126,7 +127,12 @@ export default {
          this.jiesuanlist.push(item);
        }
      })
+      if (this.jiesuanlist.length==0){
+        this.$message.error('请选择商品结算');
+        return
+      }
       console.log(this.jiesuanlist)
+
 
       // 跳转路由传递对象参数
       var arr=JSON.stringify(this.jiesuanlist)

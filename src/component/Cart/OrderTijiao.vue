@@ -56,8 +56,8 @@
       <label class="bank">银行卡支付</label>
     </div>
   </div>
+<br><br>
 
-  <h3 class="common_title">商品列表</h3>
 
   <div class="common_list_con clearfix">
     <ul class="goods_list_th clearfix">
@@ -83,7 +83,7 @@
 
   <div class="common_list_con clearfix">
     <div class="settle_con">
-      <div class="total_goods_count">共<em>2</em>件商品，总金额<b>42.60元</b></div>
+      <div class="total_goods_count">共<em>2</em>件商品，总金额<b>{{zongmoney}}</b></div>
       <div class="transit">运费：<b>10元</b></div>
       <div class="total_pay">实付款：<b>52.60元</b></div>
     </div>
@@ -126,6 +126,7 @@ export default {
       list:[],
       uid:sessionStorage.getItem('id'),
       jsljgm:[],
+
     }
   },
   methods:{
@@ -146,6 +147,15 @@ export default {
             console.log(this.jsljgm)
       }).catch()
     },
+  },
+  computed:{
+    zongmoney: function () {
+      let s = 0;
+      this.jsljgm.forEach(item=>{
+        s+=item.commodity.prosprice*item.quantity;
+      })
+      return s;
+    }
   },
   created(){
     this.queryusergwc();

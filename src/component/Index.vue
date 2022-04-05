@@ -39,7 +39,7 @@
         <a href="#"><img :src="require('../image/logo-mi2.png')" alt="图片出错"></a>
       </div>
       <div class="topdzh">
-        <a href="#" id="xm">水果</a>
+        <a href="#shuiguo" id="xm">水果</a>
         <a href="#" id="hm">海鲜</a>
         <a href="#" id="ds">肉类</a>
         <a href="#" id="bjbb">冷饮</a>
@@ -127,11 +127,197 @@
       </div>
     </div>
   </div>
-    <div class="qwq">
-      1
-    </div>
   <div class="bj2">
-
+    <div class="xiaxia">
+      <div class="xiazi">
+        <p>水果</p>
+      </div>
+      <div class="xiatu"  name="shuiguo">
+        <div class="xiatu1">
+          <a href="#"><img :src="require('../image/甜瓜1.jpg')" alt="图片出错" height="298px" width="233px"></a>
+        </div>
+        <div class="xiatu2">
+          <a href="#"><img :src="require('../image/百香果1.jpg')" alt="图片出错" height="196px" width="233px"></a>
+          <p>小米全面屏电视65英寸 E65X</p>
+          <span>全面屏设计</span>
+          <div class="nei1">
+            <p>2888元</p>
+            <span>3299元</span>
+          </div>
+        </div>
+        <div class="xiatu3">
+          <a href="#"><img :src="require('../image/石榴1.jpg')" alt="图片出错" height="196px" width="233px"></a>
+          <p>全面屏电视 E43K</p>
+          <span>全面屏设计，海量内容</span>
+          <div class="nei2">
+            <p>1288元</p>
+            <span>1599元</span>
+          </div>
+        </div>
+        <div class="xiatu4">
+          <a href="#"><img :src="require('../image/芒果1.jpg')" alt="图片出错" height="196px" width="233px"></a>
+          <p>小米电视4A 70英寸</p>
+          <span>大屏更享受</span>
+          <div class="nei3">
+            <p>3388元</p>
+            <span>3999元</span>
+          </div>
+        </div>
+        <div class="xiatu5">
+          <a href="#"><img :src="require('../image/荔枝11.jpg')" alt="图片出错" height="196px" width="233px"></a>
+          <p>米家互联网对开门冰箱 540L</p>
+          <span>重磅新品福利特惠</span>
+          <div class="nei4">
+            <p>2888元</p>
+            <span>3699元</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="ditu">
+      <a href="#"><img :src="require('../image/底图.png')" alt="图片出错" width="1227px"></a>
+    </div>
+    <div class="xiaxia">
+      <div class="xiazi">
+        <p>海鲜</p>
+      </div>
+      <div class="xiatu">
+        <div class="xiatu1">
+          <a href="#"><img :src="require('../image/左首.png')" alt="图片出错" height="298px" width="233px"></a>
+        </div>
+        <div class="xiatu2">
+          <a href="#"><img :src="require('../image/火龙果1.jpg')" alt="图片出错" height="160px" width="160px"></a>
+          <p>Note 10 Pro</p>
+          <span>天玑1100年度旗舰芯，VC液冷散热</span>
+          <div class="nei1">
+            <p>1699元起</p>
+            <span></span>
+          </div>
+        </div>
+        <div class="xiatu3">
+          <a href="#"><img :src="require('../image/猕猴桃27.jpg')" alt="图片出错" height="160px" width="160px"></a>
+          <p> Redmi Note 10 5G</p>
+          <span>5G小金刚，旗舰长续航</span>
+          <div class="nei2">
+            <p>1099元起</p>
+            <span></span>
+          </div>
+        </div>
+        <div class="xiatu4">
+          <a href="#"><img :src="require('../image/蟠桃1.jpg')" alt="图片出错" height="160px" width="160px"></a>
+          <p>小米MIX FOLD</p>
+          <span>大屏更享受</span>
+          <div class="nei3">
+            <p>9999元起</p>
+            <span></span>
+          </div>
+        </div>
+        <div class="xiatu5">
+          <a href="#"><img :src="require('../image/血橙1.jpg')" alt="图片出错" height="160px" width="160px"></a>
+          <p>小米11 Ultra</p>
+          <span>1/1.12''GN2｜2K四微曲屏</span>
+          <div class="nei4">
+            <p>5999元起</p>
+            <span></span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="xiaxia">
+      <div class="xiatu">
+        <div class="xiatu1">
+          <a href="#"><img :src="require('../image/左首.png')" alt="图片出错" height="298px" width="233px"></a>
+        </div>
+        <div class="xiatu2">
+          <a href="#"><img :src="require('../image/西瓜2.jpg')" alt="图片出错" height="160px" width="160px"></a>
+          <p> 小米11 Pro</p>
+          <span>1/1.12''GN2｜骁龙888</span>
+          <div class="nei1">
+            <p>4999元起</p>
+            <span></span>
+          </div>
+        </div>
+        <div class="xiatu3">
+          <a href="#"><img :src="require('../image/车厘子6.jpg')" alt="图片出错" height="160px" width="160px"></a>
+          <p> Redmi Note 10 5G</p>
+          <span>5G小金刚，旗舰长续航</span>
+          <div class="nei2">
+            <p>2299元起</p>
+            <span></span>
+          </div>
+        </div>
+        <div class="xiatu4">
+          <a href="#"><img :src="require('../image/释迦果1.jpg')" alt="图片出错" height="160px" width="160px"></a>
+          <p>K40 游戏增强版</p>
+          <span>轻薄电竞设计</span>
+          <div class="nei3">
+            <p>1999元起</p>
+            <span></span>
+          </div>
+        </div>
+        <div class="xiatu5">
+          <a href="#"><img :src="require('../image/青梅1.jpg')" alt="图片出错" height="160px" width="160px"></a>
+          <p>小米11 Ultra</p>
+          <span>1/1.12''GN2｜2K四微曲屏</span>
+          <div class="nei4">
+            <p>3999元</p>
+            <span></span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="ditu2">
+      <a href="#"><img :src="require('../image/mensuo2.jpg')" alt="图片出错" width="1227px"></a>
+    </div>
+    <div class="xiaxia">
+      <div class="xiazi">
+        <p>肉类</p>
+      </div>
+      <div class="xiatu">
+        <div class="xiatu1">
+          <a href="#"><img :src="require('../image/黄皮1.jpg')" alt="图片出错" height="298px" width="233px"></a>
+        </div>
+        <div class="xiatu2">
+          <a href="#"><img :src="require('../image/橘子.jpg')" alt="图片出错" height="196px" width="233px"></a>
+          <p>小米真无线蓝牙耳机Air 2 Pro</p>
+          <span> 主动降噪/持久续航/无线充</span>
+          <div class="nei1">
+            <p>649元</p>
+            <span>699元</span>
+          </div>
+        </div>
+        <div class="xiatu3">
+          <a href="#"><img :src="require('../image/干杏2.jpg')" alt="图片出错" height="196px" width="233px"></a>
+          <p> 高速无线充套装</p>
+          <span>快速无线闪充，Qi充电标准</span>
+          <div class="nei2">
+            <p>149元</p>
+            <span></span>
+          </div>
+        </div>
+        <div class="xiatu4">
+          <a href="#"><img :src="require('../image/哈密瓜18.jpg')" alt="图片出错" height="196px" width="233px"></a>
+          <p>小米真无线蓝牙耳机Air 2s</p>
+          <span>全面升级，智慧真无线</span>
+          <div class="nei3">
+            <p>359元</p>
+            <span>399元</span>
+          </div>
+        </div>
+        <div class="xiatu5">
+          <a href="#"><img :src="require('../image/榴莲2.jpg')" alt="图片出错" height="196px" width="233px"></a>
+          <p>Redmi AirDots 2真无线蓝牙耳机</p>
+          <span>支持蓝牙5.0，自动秒连，拿起就能用</span>
+          <div class="nei4">
+            <p>89元</p>
+            <span>99元</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="ditu3">
+      <a href="#"><img :src="require('../image/ywwq2.jpg')" alt="图片出错" width="1227px"></a>
+    </div>
     <div class="wenzitiao">
       <div class="wenzitiaoxia">
         <a href="#"><img class="img1" :src="require('../image/字1.png')" alt="图片出错" width="24px" height="24px">送货上门服务
@@ -353,52 +539,6 @@ export default {
 * {
   margin: 0;
   padding: 0;
-}
-.qwq{
-  background-color: white;
-  width: 1227px;
-  height: 1500px;
-  position: relative;
-  left: 145px;
-}
-
-.qwq .qwqback2 .title {
-  margin: 0;
-  font-size: 22px;
-  font-weight: 200;
-  line-height: 58px;
-  color: #333;
-}
-.qwq .qwqback2 .shuiguo-list{
-  margin: 0 0 -14px -14px;
-}
-.qwq .qwqback2 .shuiguo-list img{
-  width: 160px;
-  height: 160px;
-}
-
-.brick-item-m-2 {
-  position: relative;
-  z-index: 1;
-  float: left;
-  width: 234px;
-  margin-left: 14px;
-  margin-bottom: 14px;
-  background: #fff;
-  -webkit-transition: all .2s linear;
-  transition: all .2s linear;
-  height: 300px;
-  padding: 0;
-}
-.leftshuiguo{
-  float: left;
-  margin-left: 14px;
-  min-height: 1px;
-  width: 234px;
-  border: red 1px solid;
-}
-.leftshuiguo .leftshuiguolist{
-  margin: 0 0 -14px -14px;
 }
 .bj1 {
   background-color: white;

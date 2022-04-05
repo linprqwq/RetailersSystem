@@ -18,7 +18,7 @@
         <a href="#">Select Location</a>
       </div>
       <div class="you" >
-        <a class="mzz" v-show="userid!=null">{{showLoginname}}</a>
+        <a class="mzz" v-show="userid!=null" @click="$router.push('/personalCenter')">{{showLoginname}}</a>
         <a class="mzz" v-show="userid==null"  @click="$router.push('/login')">登录</a>
         <a class="mzz" v-show="userid==null" @click="$router.push('/register')">注册</a>
         <a class="mzz" href="#">消息通知</a>
@@ -267,7 +267,7 @@
       </div>
     </div>
     <div class="ditu2">
-      <a href="#"><img :src="require('../image/mensuo2.jpg')" alt="图片出错" width="1227px"></a>
+      <a href="#"><img :src="require('../image/人参果2.jpg')" alt="图片出错" width="1227px"></a>
     </div>
     <div class="xiaxia">
       <div class="xiazi">
@@ -316,7 +316,7 @@
       </div>
     </div>
     <div class="ditu3">
-      <a href="#"><img :src="require('../image/ywwq2.jpg')" alt="图片出错" width="1227px"></a>
+      <a href="#"><img :src="require('../image/人参果1.jpg')" alt="图片出错" width="1227px"></a>
     </div>
     <div class="wenzitiao">
       <div class="wenzitiaoxia">

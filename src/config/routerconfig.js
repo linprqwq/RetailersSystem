@@ -13,6 +13,7 @@ import ShoppingFalst from '../component/Cart/ShoppingFalst'
 import tabs from "../component/supplier/tabs";
 import shopping2 from "../component/Cart/shopping2";
 import OrderTijiao from "../component/Cart/OrderTijiao";
+import PersonalCenter from "../component/PersonalCenter/PersonalCenter";
 //Vue组件使用Vue-router组件*******************
 Vue.use(VueRouter)
 
@@ -72,6 +73,11 @@ var routes=[
     path: "/ordertijiao",
     name: "ordertijiao",
     component: OrderTijiao
+  },
+  {
+    path: "/personalCenter",
+    name: "personalCenter",
+    component: PersonalCenter
   }
 
 ]

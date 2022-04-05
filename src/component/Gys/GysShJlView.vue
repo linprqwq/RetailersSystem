@@ -39,9 +39,9 @@
             prop="shState"
             label="审核状态">
             <template slot-scope="scope">
-              <span v-if="scope.row.shState==0">等待审核</span>
-              <span v-else-if="scope.row.shState==1">审核通过</span>
-              <span v-else-if="scope.row.shState==2">审核未通过</span>
+              <span v-if="scope.row.gysState==0">等待审核</span>
+              <span v-else-if="scope.row.gysState==1">审核通过</span>
+              <span v-else-if="scope.row.gysState==2">审核未通过</span>
             </template>
           </el-table-column>
         </el-table>

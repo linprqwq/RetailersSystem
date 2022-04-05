@@ -35,14 +35,13 @@
               <span v-else-if="scope.row.ustate==2">注销</span>
             </template>
           </el-table-column>
-          <el-table-column>
+          <el-table-column
+            prop="shState"
+            label="审核状态">
             <template slot-scope="scope">
-              <el-button
-                size="mini"
-                @click="shtg(1,scope.row)">通过</el-button>
-              <el-button
-                size="mini"
-                @click="shbtg(2,scope.row)">不通过</el-button>
+              <span v-if="scope.row.shState==0">等待审核</span>
+              <span v-else-if="scope.row.shState==1">审核通过</span>
+              <span v-else-if="scope.row.shState==2">审核未通过</span>
             </template>
           </el-table-column>
         </el-table>
@@ -63,7 +62,7 @@
 
 <script>
     export default {
-        name: "GysShView",
+        name: "ShJlView",
       data(){
         return{
           GysData: [],
@@ -78,9 +77,8 @@
           var params = new URLSearchParams();
           params.append("pageno", this.pageno);
           params.append("pagesize", this.pagesize);
-          params.append("gysState", 0);
 
-          this.$axios.post("queryallUser2.action", params)
+          this.$axios.post("queryallShJl.action", params)
             .then(response => {
               console.log(response)
               this.GysData = response.data.rows;//获取所有要展示的数据
@@ -101,33 +99,10 @@
           console.log(`当前页: ${val}`);
           this.pageno = val;
           this.getdata()
-        },
-        shtg(val,data){
-          this.$axios.put("updstatetg.action",{"gysState":val,"id":data.id}).
-          then( (response)=> {
-            if(response.data.code==1){
-              alert(response.data.msg)
-              this.getdata();
-            }else{
-              alert(response.data.msg)
-            }
-          }).catch();
-        },
-        shbtg(val,data){
-          data.shState=val;
-          this.$axios.put("updstatebtg.action",{"gysState":val,"id":data.id}).
-          then((response)=> {
-            if(response.data.code==1){
-              alert(response.data.msg)
-              this.getdata();
-            }else{
-              alert(response.data.msg)
-            }
-          }).catch();
         }
       },
       created(){
-        this.getdata();
+          this.getdata();
       }
     }
 </script>

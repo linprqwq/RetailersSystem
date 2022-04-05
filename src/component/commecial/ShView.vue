@@ -63,10 +63,10 @@
 
 <script>
     export default {
-        name: "GysShView",
+        name: "ShView",
       data(){
         return{
-          GysData: [],
+          shData: [],
           pageno: 1,   //页码
           pagesize: 5,   //页size
           total: 1,   //编辑页面数据 对象
@@ -78,7 +78,7 @@
           var params = new URLSearchParams();
           params.append("pageno", this.pageno);
           params.append("pagesize", this.pagesize);
-          params.append("gysState", 0);
+          params.append("shState", 0);
 
           this.$axios.post("queryallUser2.action", params)
             .then(response => {
@@ -92,42 +92,42 @@
 
             }).catch();
         },
-        handleSizeChange(val) { //分页控件  页面size改变 触发  val参数就是选择的条数
-          console.log(`每页 ${val} 条`);
-          this.pagesize = val;
-          this.getdata()
-        },
-        handleCurrentChange(val) { //页码改变 触发  val  当前准备跳转的页码
-          console.log(`当前页: ${val}`);
-          this.pageno = val;
-          this.getdata()
-        },
-        shtg(val,data){
-          this.$axios.put("updstatetg.action",{"gysState":val,"id":data.id}).
-          then( (response)=> {
-            if(response.data.code==1){
-              alert(response.data.msg)
-              this.getdata();
-            }else{
-              alert(response.data.msg)
-            }
-          }).catch();
-        },
-        shbtg(val,data){
-          data.shState=val;
-          this.$axios.put("updstatebtg.action",{"gysState":val,"id":data.id}).
-          then((response)=> {
-            if(response.data.code==1){
-              alert(response.data.msg)
-              this.getdata();
-            }else{
-              alert(response.data.msg)
-            }
-          }).catch();
-        }
+      handleSizeChange(val) { //分页控件  页面size改变 触发  val参数就是选择的条数
+        console.log(`每页 ${val} 条`);
+        this.pagesize = val;
+        this.getdata()
+      },
+      handleCurrentChange(val) { //页码改变 触发  val  当前准备跳转的页码
+        console.log(`当前页: ${val}`);
+        this.pageno = val;
+        this.getdata()
+      },
+      shtg(val,data){
+        this.$axios.put("updshstatetg.action",{"shState":val,"id":data.id}).
+        then( (response)=> {
+          if(response.data.code==1){
+            alert(response.data.msg)
+            this.getdata();
+          }else{
+            alert(response.data.msg)
+          }
+        }).catch();
+      },
+      shbtg(val,data){
+        data.shState=val;
+        this.$axios.put("updshstatebtg.action",{"shState":val,"id":data.id}).
+        then((response)=> {
+          if(response.data.code==1){
+            alert(response.data.msg)
+            this.getdata();
+          }else{
+            alert(response.data.msg)
+          }
+        }).catch();
+      }
       },
       created(){
-        this.getdata();
+          this.getdata();
       }
     }
 </script>

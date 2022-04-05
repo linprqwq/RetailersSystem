@@ -70,25 +70,25 @@ export default {
           this.$message.error("密码不能为空")
           return
         }else {
-          if(res.data==null){
+          if(res.data==''){
             this.$message.error("账号或密码有误")
             return
           }
         }
-        if(res.data!=null){
+        if(res.data!=''){
           this.$message({
-            message:"登录成功",
+            message:"登录成功,欢迎您",
             type:"success"
           })
           // Cookies.set("loginname",this.res.data.loginname)
-          sessionStorage.setItem('user',res.data.loginname)
+          sessionStorage.setItem('user',res.data.username)
+          sessionStorage.setItem('id',res.data.id)
           var userid=sessionStorage.getItem('user')
-          alert(userid)
+          var  useridd=sessionStorage.getItem('id')
           this.$parent.$router.push("/").catch(err=> {
             console.log("aaaa",err)
           })
         }
-        console.log(res.data.loginname)
       }).catch()
     }
   }

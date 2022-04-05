@@ -33,7 +33,7 @@
     </div>
   </div>
   <div class="block">
-    <span class="demonstration">默认 Hover 指示器触发</span>
+
     <el-carousel height="150px">
       <el-carousel-item v-for="item in carouseData" :key="item">
         <img class="small" :src="item.url ">

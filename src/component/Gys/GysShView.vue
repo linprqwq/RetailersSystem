@@ -103,7 +103,12 @@
           this.getdata()
         },
         shtg(val,data){
+<<<<<<< HEAD
           this.$axios.put("updstatetg.action",{"gysState":val,"id":data.id}).
+=======
+
+          this.$axios.put("updstatetg.action",{"shState":val,"id":data.id}).
+>>>>>>> origin/master
           then( (response)=> {
             if(response.data.code==1){
               alert(response.data.msg)
@@ -115,7 +120,11 @@
         },
         shbtg(val,data){
           data.shState=val;
+<<<<<<< HEAD
           this.$axios.put("updstatebtg.action",{"gysState":val,"id":data.id}).
+=======
+          this.$axios.put("updstatebtg.action",{"shState":val,"id":data.id}).
+>>>>>>> origin/master
           then((response)=> {
             if(response.data.code==1){
               alert(response.data.msg)

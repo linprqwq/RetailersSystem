@@ -79,6 +79,9 @@
   import GysShView from "./Gys/GysShView";
   import ShJlView from "./commecial/ShJlView";
   import ShView from "./commecial/ShView";
+  import CgsqView from "./procurement/CgsqView";
+  import GysShView from "./Gys/GysShView";
+  import GysShJlView from "./Gys/GysShJlView";
     export default {
         name: "SystemList",
       components:{

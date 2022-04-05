@@ -10,6 +10,9 @@ import EmpLogin from "../component/EmpLogin";
 import CommodityDisplay from "../component/Commodity/CommodityDisplay";
 import Register from "../component/Register";
 import ShoppingFalst from '../component/Cart/ShoppingFalst'
+import tabs from "../component/supplier/tabs";
+import shopping2 from "../component/Cart/shopping2";
+import OrderTijiao from "../component/Cart/OrderTijiao";
 //Vue组件使用Vue-router组件*******************
 Vue.use(VueRouter)
 
@@ -54,7 +57,23 @@ var routes=[
     path: "/ShoppingFalst",
     name:"ShoppingFalst",
     component: ShoppingFalst
+  },
+  {
+    path: "/tabs",
+    name:"tabs",
+    component: tabs
+  },
+  {
+    path: "/shopping2",
+    name: "shopping2",
+    component: shopping2
+  },
+  {
+    path: "/ordertijiao",
+    name: "ordertijiao",
+    component: OrderTijiao
   }
+
 ]
 
 //路由管理器

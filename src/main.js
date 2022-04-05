@@ -4,9 +4,11 @@ import SystemList from "./component/SystemList";
 import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
 import CommodityDisplay from "./component/Commodity/CommodityDisplay";
-import ShoppingCart from "./component/Cart/ShoppingCart";
 import ShoppingFalst from './component/Cart/ShoppingFalst'
 import Router from './config/routerconfig'
+import shopping from "./component/Cart/shopping2";
+import PersonalCenter from "./component/PersonalCenter/PersonalCenter";
+import OrderTijiao from "./component/Cart/OrderTijiao";
 import App from "./App";
 import Zlwh from "./component/shzlwh/Zlwh";
 import Allorder from "./component/Shorder/Allorder";

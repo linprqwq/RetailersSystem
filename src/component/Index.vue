@@ -27,7 +27,7 @@
             <a href="#"></a>
           </div>
           <div class="ziti">
-            <a @click="shopping">购物车 (0)</a>
+            <a   @click="gwc()">购物车 ({{cartcount}})</a>
           </div>
         </div>
       </div>
@@ -301,13 +301,18 @@ export default {
   data(){
       return{
         userid:sessionStorage.getItem('user'),
-        commodity:[]
+        useridd:sessionStorage.getItem('id'),
+        commodity:[],
+        cartcount:0
       }
   },
   computed:{
     showLoginname(){
       return this.userid
     },
+    showlgoinid(){
+      return this.useridd
+    }
   },
   methods:{
     shopping(){
@@ -315,6 +320,13 @@ export default {
         this.$router.push("/ShoppingFalst")
       }
     },
+    gwc(){
+      if (this.userid==null){
+        this.$router.push('/ShoppingFalst');
+      }else{
+        this.$router.push('/shopping2');
+      }
+    }
     },
   created(){
     var _this=this;
@@ -322,6 +334,15 @@ export default {
       _this.commodity=val.data
       console.log(val.data)
     }).catch()
+    if(this.useridd!=null){
+      var params= new URLSearchParams();
+      params.append("id",this.useridd)
+      this.$axios.post("cartcount.action",params).then(
+        val=>{
+          _this.cartcount=val.data
+        }
+      ).catch()
+    }
   }
 }
 </script>

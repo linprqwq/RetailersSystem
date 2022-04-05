@@ -11,6 +11,7 @@
           <a href="login.html">登录</a>
           <span>|</span>
           <a href="register.html">注册</a>
+          <el-button @click="aaa"></el-button>
         </div>
         <div class="user_link fl">
           <span>|</span>
@@ -48,17 +49,15 @@
   <div class="common_list_con clearfix">
     <div class="pay_style_con clearfix">
       <input type="radio" name="pay_style" checked>
-      <label class="cash">货到付款</label>
-      <input type="radio" name="pay_style">
       <label class="weixin">微信支付</label>
       <input type="radio" name="pay_style">
-      <label class="zhifubao"></label>
+      <label class="zhifubao">余额支付</label>
       <input type="radio" name="pay_style">
       <label class="bank">银行卡支付</label>
     </div>
   </div>
+<br><br>
 
-  <h3 class="common_title">商品列表</h3>
 
   <div class="common_list_con clearfix">
     <ul class="goods_list_th clearfix">
@@ -68,31 +67,23 @@
       <li class="col04">数量</li>
       <li class="col05">小计</li>
     </ul>
-    <ul class="goods_list_td clearfix">
-      <li class="col01">1</li>
-      <li class="col02"><img src="images/goods/goods012.jpg"></li>
-      <li class="col03">奇异果</li>
+    <ul class="goods_list_td clearfix" v-for="(item,index) in jsljgm">
+      <li class="col01">{{index+1}}</li>
+      <li class="col02"> <img :src="require('../../image/dddbbt2.png')" alt="图片出错"></li>
+      <li class="col03">{{ item.commodity.proname }}</li>
       <li class="col04">500g</li>
-      <li class="col05">25.80元</li>
-      <li class="col06">1</li>
-      <li class="col07">25.80元</li>
+      <li class="col05">{{ item.commodity.prosprice }}</li>
+      <li class="col06">{{ item.quantity }}</li>
+      <li class="col07">{{item.commodity.prosprice*item.quantity}}</li>
     </ul>
-    <ul class="goods_list_td clearfix">
-      <li class="col01">2</li>
-      <li class="col02"><img src="images/goods/goods003.jpg"></li>
-      <li class="col03">大兴大棚草莓</li>
-      <li class="col04">500g</li>
-      <li class="col05">16.80元</li>
-      <li class="col06">1</li>
-      <li class="col07">16.80元</li>
-    </ul>
+
   </div>
 
   <h3 class="common_title">总金额结算</h3>
 
   <div class="common_list_con clearfix">
     <div class="settle_con">
-      <div class="total_goods_count">共<em>2</em>件商品，总金额<b>42.60元</b></div>
+      <div class="total_goods_count">共<em>2</em>件商品，总金额<b>{{zongmoney}}</b></div>
       <div class="transit">运费：<b>10元</b></div>
       <div class="total_pay">实付款：<b>52.60元</b></div>
     </div>
@@ -128,7 +119,47 @@
 
 <script>
 export default {
-  name: "OrderTijiao"
+  name: "OrderTijiao",
+  data(){
+    return{
+      userinfo:JSON.parse(this.$route.query.res),
+      list:[],
+      uid:sessionStorage.getItem('id'),
+      jsljgm:[],
+
+    }
+  },
+  methods:{
+    aaa(){
+      this.userinfo.forEach(item=>{
+   console.log(item)
+      })
+    },
+    queryusergwc(){
+      this.userinfo.forEach(item=>{
+        this.list.push(item.cid)
+      })
+      var params = new URLSearchParams();
+      params.append("list",this.list);
+      params.append("uid",this.uid);
+      this.$axios.post("queryusergwc",params).then(res=>{
+            this.jsljgm = res.data;
+            console.log(this.jsljgm)
+      }).catch()
+    },
+  },
+  computed:{
+    zongmoney: function () {
+      let s = 0;
+      this.jsljgm.forEach(item=>{
+        s+=item.commodity.prosprice*item.quantity;
+      })
+      return s;
+    }
+  },
+  created(){
+    this.queryusergwc();
+  }
 }
 </script>
 

@@ -65,10 +65,13 @@
         <a href="#">生活 箱包</a>
       </div>
       <div class="youtu">
-        <div class="ycleft">
+        <div class="qwq">
+          <el-carousel height="460px">
+            <el-carousel-item v-for="item in carouseData">
+              <img class="small" :src="item.url ">
+            </el-carousel-item>
+          </el-carousel>
         </div>
-        <a href="#" class="tp"><img id="lunbo" height="460px" width="992px"></a>
-        <span class="yuandian"></span>
       </div>
     </div>
     <div class="zhongxia">
@@ -491,7 +494,14 @@ export default {
         userid:sessionStorage.getItem('user'),
         useridd:sessionStorage.getItem('id'),
         commodity:[],
-        cartcount:0
+        cartcount:0,
+        num: 1,
+        carouseData: [
+          { url: "src/image/lunbo1.png" },
+          { url: "src/image/lunbo2.png" },
+          { url: "src/image/lunbo3.jpg" },
+          { url: "src/image/lunbo4.jpg" },
+        ],
       }
   },
   computed:{
@@ -694,7 +704,7 @@ export default {
   height: 460px;
   width: 1227px;
   margin: 0 auto;
-  background-color: yellow;
+  background-color: transparent;
   z-index: -22200;
 }
 .youtu {
@@ -1379,5 +1389,11 @@ img#lunbo {
   position: relative;
   top: 0px ;
 }
-
+.qwq{
+  position: relative;
+  top: 29px;
+}
+.small{
+  height: 500px;
+}
 </style>

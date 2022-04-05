@@ -1,5 +1,6 @@
 <template>
 <div>
+  <top></top>
   <div class="header_con">
     <div class="header">
       <div class="welcome fl">欢迎来到天天生鲜!</div>
@@ -119,6 +120,8 @@
 </template>
 
 <script>
+import IndexTop from "../User/IndexTop";
+
 export default {
   name: "OrderTijiao",
   data(){
@@ -130,7 +133,9 @@ export default {
 
     }
   },
-
+  components:{
+    top:IndexTop,
+  },
   methods:{
     //测试
     aaa(){

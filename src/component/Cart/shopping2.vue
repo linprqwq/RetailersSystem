@@ -1,4 +1,6 @@
 <template>
+<div>
+  <top></top>
   <div class="cart-group">
     <div class="sellect-all">
       <div class="radio">
@@ -30,7 +32,7 @@
         </div>
         <div class="product-quantity">
           <input type="button" class="btn-sub" value="-"@click="jj(item.cartid,true,item.quantity)" >
-             {{item.quantity}}
+          {{item.quantity}}
           <input type="button" class="btn-add" value="+" @click="jj(item.cartid,false)">
         </div>
       </div>
@@ -47,10 +49,13 @@
       <el-button class="btn" :plain="true" @click="jwcjiesuan()">结算</el-button>
     </div>
   </div>
+</div>
 
 </template>
 
 <script>
+import IndexTop from "../User/IndexTop";
+
 export default {
   name: "shopping2",
   data () {
@@ -64,6 +69,9 @@ export default {
       jiesuanlist:[],
       uid:sessionStorage.getItem('id'),
     }
+  },
+  components:{
+    top:IndexTop,
   },
   mounted () {
     this.setCart()

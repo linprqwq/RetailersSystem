@@ -1,40 +1,6 @@
 <template>
 <div>
-  <div class="top">
-    <div class="zhong">
-      <div class="zuo">
-        <a href="#">小米商城</a>
-        <a href="#">MIUI</a>
-        <a href="#">loT</a>
-        <a href="#">云服务</a>
-        <a href="#">天星数科</a>
-        <a href="#">有品</a>
-        <a href="#">小爱开放平台</a>
-        <a href="#">企业团购</a>
-        <a href="#">资质证照</a>
-        <a href="#">协议规则</a>
-        <a href="#">下载app</a>
-        <a href="#">智能生活</a>
-        <a href="#">Select Location</a>
-      </div>
-      <div class="you">
-        <a href="XiaoMi/loading.html">{{showLoginname}}</a>
-        <a href="../XiaoMi/zhuce.html">注册</a>
-        <a href="#">消息通知</a>
-        <div class="he">
-          <div class="che">
-            <a href="#"></a>
-          </div>
-          <div class="ziti">
-            <a href="#">购物车 (0)</a>
-            <div class="yincang">
-              <span>你还没有登录</span>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
+  <top></top>
   <div class="site-header">
     <div class="site-info">
       <div class="site-logo">
@@ -458,12 +424,16 @@
 </template>
 
 <script>
+import IndexTop from "../User/IndexTop";
 export default {
   name: "PersonalCenter",
   data(){
     return{
       userid:sessionStorage.getItem('user'),
     }
+  },
+  components:{
+    top:IndexTop,
   },
   computed:{
     showLoginname(){

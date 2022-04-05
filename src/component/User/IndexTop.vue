@@ -3,7 +3,7 @@
     <div class="top" >
       <div class="zhong">
         <div class="zuo">
-          <a href="#">兴盛商城</a>
+          <a href="#" @click="$router.push('/')">兴盛商城</a>
           <a href="#">XISI</a>
           <a href="#">loT</a>
           <a href="#">云服务</a>

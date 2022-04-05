@@ -33,20 +33,19 @@
       </div>
     </div>
   </div>
-
   <div class="bj1">
     <div class="topd">
       <div class="tu">
         <a href="#"><img :src="require('../image/logo-mi2.png')" alt="图片出错"></a>
       </div>
       <div class="topdzh">
-        <a href="#" id="xm">小米手机</a>
-        <a href="#" id="hm">Redmi红米</a>
-        <a href="#" id="ds">电视</a>
-        <a href="#" id="bjbb">笔记本</a>
-        <a href="#" id="jd">家电</a>
-        <a href="#" id="lyq">路由器</a>
-        <a href="#">智能硬件</a>
+        <a href="#" id="xm">水果</a>
+        <a href="#" id="hm">海鲜</a>
+        <a href="#" id="ds">肉类</a>
+        <a href="#" id="bjbb">冷饮</a>
+        <a href="#" id="jd">速食</a>
+        <a href="#" id="lyq">蔬菜</a>
+        <a href="#">选购</a>
         <a href="#">服务</a>
         <a href="#">社区</a>
       </div>
@@ -128,6 +127,9 @@
       </div>
     </div>
   </div>
+    <div class="qwq">
+      1
+    </div>
   <div class="bj2">
 
     <div class="wenzitiao">
@@ -352,7 +354,52 @@ export default {
   margin: 0;
   padding: 0;
 }
+.qwq{
+  background-color: white;
+  width: 1227px;
+  height: 1500px;
+  position: relative;
+  left: 145px;
+}
 
+.qwq .qwqback2 .title {
+  margin: 0;
+  font-size: 22px;
+  font-weight: 200;
+  line-height: 58px;
+  color: #333;
+}
+.qwq .qwqback2 .shuiguo-list{
+  margin: 0 0 -14px -14px;
+}
+.qwq .qwqback2 .shuiguo-list img{
+  width: 160px;
+  height: 160px;
+}
+
+.brick-item-m-2 {
+  position: relative;
+  z-index: 1;
+  float: left;
+  width: 234px;
+  margin-left: 14px;
+  margin-bottom: 14px;
+  background: #fff;
+  -webkit-transition: all .2s linear;
+  transition: all .2s linear;
+  height: 300px;
+  padding: 0;
+}
+.leftshuiguo{
+  float: left;
+  margin-left: 14px;
+  min-height: 1px;
+  width: 234px;
+  border: red 1px solid;
+}
+.leftshuiguo .leftshuiguolist{
+  margin: 0 0 -14px -14px;
+}
 .bj1 {
   background-color: white;
   height: 760px;

@@ -18,7 +18,7 @@
         <a href="#">Select Location</a>
       </div>
       <div class="you">
-        <a href="XiaoMi/loading.html">木子</a>
+        <a href="XiaoMi/loading.html">{{showLoginname}}</a>
         <a href="../XiaoMi/zhuce.html">注册</a>
         <a href="#">消息通知</a>
         <div class="he">
@@ -90,7 +90,7 @@
               <p>个人中心</p>
               <ul>
                 <li><a id="uid" class="a1">我的个人中心</a></li>
-                <li><a href="">消息通知</a></li>
+                <li><a href="">我的自提店</a></li>
                 <li><a href="">购买资格</a></li>
                 <li><a href="">现金账户</a></li>
                 <li><a href="">小米礼品卡</a></li>
@@ -459,7 +459,17 @@
 
 <script>
 export default {
-  name: "PersonalCenter"
+  name: "PersonalCenter",
+  data(){
+    return{
+      userid:sessionStorage.getItem('user'),
+    }
+  },
+  computed:{
+    showLoginname(){
+      return this.userid
+    },
+  },
 }
 </script>
 

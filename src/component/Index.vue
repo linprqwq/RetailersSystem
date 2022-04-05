@@ -267,7 +267,7 @@
       </div>
     </div>
     <div class="ditu2">
-      <a href="#"><img :src="require('../image/人参果2.jpg')" alt="图片出错" width="1227px"></a>
+      <a href="#"><img :src="require('../image/mensuo2.jpg')" alt="图片出错" width="1227px"></a>
     </div>
     <div class="xiaxia">
       <div class="xiazi">
@@ -275,7 +275,7 @@
       </div>
       <div class="xiatu">
         <div class="xiatu1">
-          <a href="#"><img :src="require('../image/黄皮1.jpg')" alt="图片出错" height="298px" width="233px"></a>
+          <a href="#"><img :src="require('../image/圣女果4.jpg')" alt="图片出错" height="298px" width="233px"></a>
         </div>
         <div class="xiatu2">
           <a href="#"><img :src="require('../image/橘子.jpg')" alt="图片出错" height="196px" width="233px"></a>
@@ -316,7 +316,7 @@
       </div>
     </div>
     <div class="ditu3">
-      <a href="#"><img :src="require('../image/人参果1.jpg')" alt="图片出错" width="1227px"></a>
+      <a href="#"><img :src="require('../image/ywwq2.jpg')" alt="图片出错" width="1227px"></a>
     </div>
     <div class="wenzitiao">
       <div class="wenzitiaoxia">

@@ -40,8 +40,8 @@
       </div>
       <div class="topdzh">
         <a href="#shuiguo" id="xm">水果</a>
-        <a href="#" id="hm">海鲜</a>
-        <a href="#" id="ds">肉类</a>
+        <a href="#haixiang" id="hm">海鲜</a>
+        <a href="#roulei" id="ds">肉类</a>
         <a href="#" id="bjbb">冷饮</a>
         <a href="#" id="jd">速食</a>
         <a href="#" id="lyq">蔬菜</a>
@@ -131,13 +131,13 @@
     </div>
   </div>
   <div class="bj2">
-    <div class="xiaxia">
+    <div class="xiaxia" id="shuiguo">
       <div class="xiazi">
         <p>水果</p>
       </div>
-      <div class="xiatu"  name="shuiguo">
+      <div class="xiatu"  >
         <div class="xiatu1">
-          <a href="#"><img :src="require('../image/甜瓜1.jpg')" alt="图片出错" height="298px" width="233px"></a>
+          <a href="#"><img :src="require('../image/商品左边背景图2.png')" alt="图片出错" height="298px" width="233px"></a>
         </div>
         <div class="xiatu2">
           <a href="#"><img :src="require('../image/百香果1.jpg')" alt="图片出错" height="196px" width="233px"></a>
@@ -180,13 +180,13 @@
     <div class="ditu">
       <a href="#"><img :src="require('../image/底图.png')" alt="图片出错" width="1227px"></a>
     </div>
-    <div class="xiaxia">
+    <div class="xiaxia" id="haixiang">
       <div class="xiazi">
         <p>海鲜</p>
       </div>
       <div class="xiatu">
         <div class="xiatu1">
-          <a href="#"><img :src="require('../image/左首.png')" alt="图片出错" height="298px" width="233px"></a>
+          <a href="#"><img :src="require('../image/商品左边背景图3.png')" alt="图片出错" height="298px" width="233px"></a>
         </div>
         <div class="xiatu2">
           <a href="#"><img :src="require('../image/火龙果1.jpg')" alt="图片出错" height="160px" width="160px"></a>
@@ -229,7 +229,7 @@
     <div class="xiaxia">
       <div class="xiatu">
         <div class="xiatu1">
-          <a href="#"><img :src="require('../image/左首.png')" alt="图片出错" height="298px" width="233px"></a>
+          <a href="#"><img :src="require('../image/商品左边背景图3.png')" alt="图片出错" height="298px" width="233px"></a>
         </div>
         <div class="xiatu2">
           <a href="#"><img :src="require('../image/西瓜2.jpg')" alt="图片出错" height="160px" width="160px"></a>
@@ -272,13 +272,13 @@
     <div class="ditu2">
       <a href="#"><img :src="require('../image/mensuo2.jpg')" alt="图片出错" width="1227px"></a>
     </div>
-    <div class="xiaxia">
+    <div class="xiaxia" id="roulei">
       <div class="xiazi">
         <p>肉类</p>
       </div>
       <div class="xiatu">
         <div class="xiatu1">
-          <a href="#"><img :src="require('../image/圣女果4.jpg')" alt="图片出错" height="298px" width="233px"></a>
+          <a href="#"><img :src="require('../image/商品左边背景图1.png')" alt="图片出错" height="298px" width="233px"></a>
         </div>
         <div class="xiatu2">
           <a href="#"><img :src="require('../image/橘子.jpg')" alt="图片出错" height="196px" width="233px"></a>

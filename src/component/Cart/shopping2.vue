@@ -20,8 +20,11 @@
                      @change="checkedChange(item.cartid)"></el-checkbox>
         <div class="product-detail">
           <div class="img">
-            <img :src="require('../../image/dddbbt2.png')" alt="图片出错">
+
+            <img :src="'http://127.0.0.1:9090/RetailersBackSystem/'+item.commodity.proimage" alt="图片出错">
+
           </div>
+<!--          '../../image/dddbbt2.png'-->
           <div class="content">
             <div class="name">{{item.commodity.proname}}</div>
             <div class="specification">{{ item.commodity.prodetails }}</div>

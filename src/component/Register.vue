@@ -32,6 +32,30 @@
         <el-form-item label="确认密码" prop="password2">
           <el-input type="password" v-model="ruleForm.password2"  autocomplete="off"></el-input>
         </el-form-item>
+        <el-form-item
+          label="手机号"
+          prop="phone"
+          :rules="[
+      { required: true, message: '手机号不能为空'},
+    ]">
+          <el-input type="phone" v-model.number="ruleForm.phone" autocomplete="off"></el-input>
+        </el-form-item>
+        <el-form-item label="头像">
+          <el-upload
+            class="upload-demo"
+            ref="upload"
+            action="#"
+            :before-remove="beforeRemove"
+            :limit="1"
+            :on-change="changeFile"
+            :on-exceed="handleExceed"
+            :file-list="fileList"
+            list-type="picture-card"
+            :auto-upload="false"
+            multiple>
+            <el-button slot="trigger" size="small" type="primary">选取头像</el-button>
+          </el-upload>
+        </el-form-item>
         <el-form-item>
           <el-button type="primary" @click="submitForm('ruleForm')">提交</el-button>
         </el-form-item>
@@ -64,30 +88,38 @@ export default {
         callback();
       }
     };
-    var testusername = (rule,value,callback)=>{
-      var params=new URLSearchParams()
-      params.append("username",this.username)
-      this.$axios.post("checkusername.action",params).then(val=>{
-        if(val.data!=0){
+    var testusername = (rule, value, callback) => {
+      var params = new URLSearchParams()
+      params.append("username", this.username)
+      this.$axios.post("checkusername.action", params).then(val => {
+        if (val.data == 0) {
           callback(new Error("用户名重复"))
-        }else{
-
+        } else {
+          callback();
         }
       }).catch()
     };
-    var testloginname = (rule,val,callback)=>{
-      var params=new URLSearchParams()
-      params.append("loginname",this.loginname)
-      this.$axios.post("checkloginname.action",params).then(val=>{
-        if(val.data!=0){
+    var testloginname = (rule, val, callback) => {
+      var params = new URLSearchParams()
+      params.append("loginname", this.loginname)
+      this.$axios.post("checkloginname.action", params).then(val => {
+        if (val.data == 0) {
           callback(new Error("登录账号重复"))
-        }else{
+        } else {
           callback()
         }
       }).catch()
     }
+    var testphone = (rule, val, callback) => {
+      var myreg = /^[1][3,4,5,7,8][0-9]{9}$/;
+      if (!myreg.test(this.phone)) {
+        callback(new Error("电话号码不符合规则"))
+      } else {
+        callback()
+      }
+    }
     return {
-      // fileList:[]
+      fileList: [],
       ruleForm: {
         password1: "",
         password2: "",
@@ -103,10 +135,13 @@ export default {
           {validator: validatePass2, trigger: 'blur'}
         ],
         username: [
-          {validator:testusername,trigger:'blur'}
+          {validator: testusername, trigger: 'blur'}
         ],
         loginname: [
-          {validator:testloginname,trigger:'blur'}
+          {validator: testloginname, trigger: 'blur'}
+        ],
+        phone: [
+          {validator: testphone, trigger: 'blur'}
         ]
       }
     };
@@ -121,6 +156,20 @@ export default {
           return false;
         }
       });
+    },
+    //移除文件 更新头像数组数据
+    beforeRemove(file, fileList) {
+      if (this.$confirm(`确定移除 ${file.name}？`)) {
+        this.fileList = fileList;
+      }
+    },
+    //每次文件改变选择，都将最新的选择文件 更新到data中的头像数组中
+    changeFile(file, fileList) {
+      console.log(file.raw)
+      this.fileList = fileList;
+    },
+    handleExceed(files, fileList) {
+      this.$message.warning(`当前限制选择 1 个文件，本次选择了 ${files.length} 个文件，共选择了 ${files.length} 个文件`)
     }
   }
 }

@@ -75,17 +75,10 @@
   import EmpView from "./sysindex/sysguanli/employee/EmpView";
   import AuthcView from "./sysindex/sysguanli/authcs/AuthcView";
   import UserView from "./User/UserView";
-  import GysShJlView from "./Gys/GysShJlView";
-  import GysShView from "./Gys/GysShView";
-  import ShJlView from "./commecial/ShJlView";
-  import ShView from "./commecial/ShView";
-  import CgsqView from "./procurement/CgsqView";
-  import GysShView from "./Gys/GysShView";
-  import GysShJlView from "./Gys/GysShJlView";
     export default {
         name: "SystemList",
       components:{
-        Welcome,EmpView,AuthcView,UserView,GysShJlView,GysShView,ShJlView,ShView
+        Welcome,EmpView,AuthcView,UserView
       },
       data(){
         return {

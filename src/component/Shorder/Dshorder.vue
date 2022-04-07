@@ -56,8 +56,6 @@
           width="180">
           <template slot-scope="scope">
             <span v-if="scope.row.status=='3'">待收货</span>
-            <span v-if="scope.row.status=='4'">待提货</span>
-            <span v-if="scope.row.status=='5'">已提货</span>
           </template>
         </el-table-column>
         <el-table-column label="操作">
@@ -65,6 +63,9 @@
             <el-button
               size="mini" type="primary"
               @click="handleEdit(scope.row)">查看详情</el-button>
+            <el-button
+            size="mini" type="success"
+            @click="uptsaatus(scope.row)">确认收货</el-button>
           </template>
         </el-table-column>
       </el-table>
@@ -139,59 +140,69 @@
     margin-bottom: 0;
     width: 70%;
   }
-</style>
+  </style>
+
 <script>
     export default {
-        name: "Allorder",
+        name: "Dshorder",
       data(){
-        return{
-          tableData:[],
-          tableData2:[],
-          tableData3:[],
-          pageno:1,   //页码
-          pagesize:5,   //页size
-          total:1,
-          editmodalVisible:false
-        }
+          return{
+            tableData:[],
+            tableData2:[],
+            tableData3:[],
+            pageno:1,   //页码
+            pagesize:5,   //页size
+            total:1,
+            editmodalVisible:false
+          }
       },
       methods:{
-          getdata(){
-            var params=new URLSearchParams();
-            params.append("sid",2);
-            params.append("pageno",this.pageno);
-            params.append("pagesize",this.pagesize);
-            this.$axios.post("queryshorder.action",params).then(res=>{
-              this.tableData=res.data.records;//获取所有要展示的数据
-              this.total = res.data.total; //总记录数量
-            }).catch()
-          },
-      handleSizeChange(val) { //分页控件  页面size改变 触发  val参数就是选择的条数
-        this.pagesize= val;
-        this.getdata()
-      },
-      handleCurrentChange(val) { //页码改变 触发  val  当前准备跳转的页码
-        this.pageno=val;
-        this.getdata()
+        getdata(){
+          var params=new URLSearchParams();
+          params.append("sid",2);
+          params.append("status",4);
+          params.append("pageno",this.pageno);
+          params.append("pagesize",this.pagesize);
+          this.$axios.post("queryshdshorder.action",params).then(res=>{
+            this.tableData=res.data.records;//获取所有要展示的数据
+            this.total = res.data.total; //总记录数量
+          }).catch()
+        },
+        handleSizeChange(val) { //分页控件  页面size改变 触发  val参数就是选择的条数
+          this.pagesize= val;
+          this.getdata()
+        },
+        handleCurrentChange(val) { //页码改变 触发  val  当前准备跳转的页码
+          this.pageno=val;
+          this.getdata()
 
-      },
-      handleEdit(row){  //编辑按钮
-        //打开边界模态框
-        this.editmodalVisible=true;
-        var params=new URLSearchParams();
-        params.append("orderid",row.orderid);
-        this.$axios.post("ordderdetails/queryshorderdetails.action",params).then(res=>{
-          this.tableData2=res.data;//获取所有要展示的数据
-        }).catch()
-      },
+        },
+        handleEdit(row){  //编辑按钮
+          //打开边界模态框
+          this.editmodalVisible=true;
+          var params=new URLSearchParams();
+          params.append("orderid",row.orderid);
+          this.$axios.post("ordderdetails/queryshorderdetails.action",params).then(res=>{
+            this.tableData2=res.data;//获取所有要展示的数据
+          }).catch()
+        },
+        uptsaatus(row){
+              var params=new URLSearchParams();
+              params.append("orderid",row.orderid);
+              this.$axios.post("uptorderdsh.action",params).then(res=>{
+              alert(res.data.msg)
+                this.getdata()
+              }).catch()
+        },
         alluser(){
-            this.$axios.post("queryallusername.action").then(res=>{
-              this.tableData3=res.data;
-            }).catch()
+          this.$axios.post("queryallusername.action").then(res=>{
+            this.tableData3=res.data;
+          }).catch()
         }
       },
       created() {
-          this.getdata();
-          this.alluser()
+        this.getdata();
+        this.alluser();
       }
     }
 </script>

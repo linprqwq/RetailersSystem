@@ -15,6 +15,11 @@ import shopping2 from "../component/Cart/shopping2";
 import OrderTijiao from "../component/Cart/OrderTijiao";
 import PersonalCenter from "../component/PersonalCenter/PersonalCenter";
 import myshoppingkk from "../component/Cart/myshoppingkk";
+import Allorder from "../component/Shorder/Allorder";
+import Dshorder from "../component/Shorder/Dshorder";
+import Dthorder from "../component/Shorder/Dthorder";
+import Yrhorder from "../component/Shorder/Yrhorder";
+import Zlwh from "../component/shzlwh/Zlwh";
 //Vue组件使用Vue-router组件*******************
 Vue.use(VueRouter)
 
@@ -55,7 +60,6 @@ var routes=[
     name: "CommodityDisplay",
     component: CommodityDisplay
   },
-  //你没登录
   {
     path: "/ShoppingFalst",
     name:"ShoppingFalst",
@@ -66,17 +70,39 @@ var routes=[
     name:"tabs",
     component: tabs
   },
-  //购物车
   {
     path: "/shopping2",
     name: "shopping2",
     component: shopping2
   },
-  //订单提交
   {
     path: "/ordertijiao",
     name: "ordertijiao",
     component: OrderTijiao
+  },
+  {
+    path: "/qbdd",
+    component:Allorder
+  }
+  ,
+  {
+    path: "/dsh",
+    component:Dshorder
+  }
+  ,
+  {
+    path: "/dth",
+    component:Dthorder
+  }
+  ,
+  {
+    path: "/yth",
+    component:Yrhorder
+  }
+  ,
+  {
+    path: "/zlwh",
+    component:Zlwh
   },
   {
     path: "/personalCenter",

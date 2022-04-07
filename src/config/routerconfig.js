@@ -20,6 +20,7 @@ import Dshorder from "../component/Shorder/Dshorder";
 import Dthorder from "../component/Shorder/Dthorder";
 import Yrhorder from "../component/Shorder/Yrhorder";
 import Zlwh from "../component/shzlwh/Zlwh";
+import Supplier_registration from "../component/supplier/Supplier_registration";
 //Vue组件使用Vue-router组件*******************
 Vue.use(VueRouter)
 
@@ -113,6 +114,12 @@ var routes=[
   {
     path: "/myshoppingkk",
     name: "myshoppingkk",
+    component: myshoppingkk
+  },
+  //供应商
+  {
+    path: "/Supplier_registration",
+    name: "Supplier_registration",
     component: myshoppingkk
   }
 

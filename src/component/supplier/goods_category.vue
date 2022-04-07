@@ -25,6 +25,7 @@
           }
       },
       methods:{
+
         getAllshopTypeInfos(){
                   //调用异步 去查询没有被删除的商品的分类
                   this.$axios.get("shopinfo.action/queryallshoptype.action",null).

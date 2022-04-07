@@ -54,19 +54,25 @@
         //取进行提交
         //数据组装
         //获取选择的商品分类数组、
-
         var  formData=new FormData();
+       /* formData.append("id",1);//this.addForm.id);*/
 
+        formData.append("id",this.addForm.id);
+        Object.keys(this.$refs["goods_category"].ShopTypeInfos).forEach(index=>{
+        formData.append("supplierGoodsCategoryIds",this.$refs["goods_category"].ShopTypeInfos[index]);
+        })
+
+          formData.append("img",this.addForm.img.raw)
         //调用异步申请
         this.$axios({
-          methods: "post",
-          url: "apply_supplier",
-          data: this.addForm,
+          method: "post",
+          url: "apply_supplier.action",
+          data: formData,
           headers: {
             'Content-Type': 'multipart/form-data'
           }
         }).then(res => {
-                if(res.data().x){
+                if(res.data.x){
                 this.$message.success(res.data.msg);
                 }else{
                   this.$message.error(res.data.msg);

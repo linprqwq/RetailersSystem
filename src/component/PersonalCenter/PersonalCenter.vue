@@ -37,6 +37,10 @@
         <el-tab-pane label="我的自提点">地址组件</el-tab-pane>
         <el-tab-pane label="个人信息维护">个信息组件</el-tab-pane>
         <el-tab-pane label="充值">充值组件</el-tab-pane>
+        <el-tab-pane label="商户">商户</el-tab-pane>
+        <el-tab-pane label="供销商">
+              <supplier_registration></supplier_registration>
+        </el-tab-pane>
       </el-tabs>
     </div>
     <div><!--  <div class="site-footer">-->
@@ -210,6 +214,7 @@
 <script>
 import IndexTop from "../User/IndexTop";
 import orderall from "../Orderassembly/orderall";
+import Supplier_registration from "../supplier/Supplier_registration";
 
 export default {
   name: "PersonalCenter",
@@ -220,6 +225,7 @@ export default {
     }
   },
   components: {
+    Supplier_registration,
     top: IndexTop,
     orderall,
 

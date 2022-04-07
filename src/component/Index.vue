@@ -1,38 +1,6 @@
 <template>
   <div>
-  <div class="top" >
-    <div class="zhong">
-      <div class="zuo">
-        <a href="#">兴盛商城</a>
-        <a href="#">XISI</a>
-        <a href="#">loT</a>
-        <a href="#">云服务</a>
-        <a href="#">天星数科</a>
-        <a href="#">有品</a>
-        <a href="#">小爱开放平台</a>
-        <a href="#">企业团购</a>
-        <a href="#">资质证照</a>
-        <a href="#">协议规则</a>
-        <a href="#">下载app</a>
-        <a href="#">智能生活</a>
-        <a href="#">Select Location</a>
-      </div>
-      <div class="you" >
-        <a class="mzz" v-show="userid!=null" @click="$router.push('/personalCenter')">{{showLoginname}}</a>
-        <a class="mzz" v-show="userid==null"  @click="$router.push('/login')">登录</a>
-        <a class="mzz" v-show="userid==null" @click="$router.push('/register')">注册</a>
-        <a class="mzz" href="#">消息通知</a>
-        <div class="he">
-          <div class="che">
-            <a href="#"></a>
-          </div>
-          <div class="ziti">
-            <a   @click="gwc()">购物车 ({{cartcount}})</a>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
+  <top></top>
   <div class="bj1">
     <div class="topd">
       <div class="tu">
@@ -487,6 +455,7 @@
 </template>
 
 <script>
+import IndexTop from "./User/IndexTop";
 export default {
   name: "Index",
   data(){
@@ -503,6 +472,9 @@ export default {
           { url: "src/image/lunbo4.jpg" },
         ],
       }
+  },
+  components:{
+   top: IndexTop
   },
   computed:{
     showLoginname(){
@@ -522,7 +494,7 @@ export default {
       if (this.userid==null){
         this.$router.push('/ShoppingFalst');
       }else if (this.cartcount==0){
-  alert("购物车里空空")
+        this.$router.push('/myshoppingkk');
       }else{
         this.$router.push('/shopping2');
       }

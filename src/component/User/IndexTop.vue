@@ -64,6 +64,8 @@ export default {
     gwc(){
       if (this.userid==null){
         this.$router.push('/ShoppingFalst');
+      }else if (this.cartcount==0){
+        this.$router.push('/myshoppingkk');
       }else{
         this.$router.push('/shopping2');
       }

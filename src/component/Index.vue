@@ -521,6 +521,8 @@ export default {
     gwc(){
       if (this.userid==null){
         this.$router.push('/ShoppingFalst');
+      }else if (this.cartcount==0){
+  alert("购物车里空空")
       }else{
         this.$router.push('/shopping2');
       }

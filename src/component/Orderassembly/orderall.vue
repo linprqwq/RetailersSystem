@@ -17,35 +17,25 @@
       label="订单编号"
       width="180">
     </el-table-column>
-    <el-table-column
-      prop="ordderdetails.proname"
-      label="订单商品"
-      width="180">
+
+    <el-table-column label="商品信息">
+      <template slot-scope="scope">
+        <el-table border :data='scope.row.ordderdetails' >
+          <el-table-column prop='proname' label="订单商品"></el-table-column>
+          <el-table-column prop='quantity' label="数量"></el-table-column>
+        </el-table>
+      </template>
     </el-table-column>
-    <el-table-column
-      prop="name"
-      label="姓名"
-      width="180">
-    </el-table-column>
-    <el-table-column
-      prop="ordderdetails.quantity"
-      label="数量">
-    </el-table-column>
+
     <el-table-column
       prop="ordderdetails.totalpirce"
       label="总价">
     </el-table-column>
     <el-table-column label="操作">
-      <template slot="header" slot-scope="scope">
-        <el-input
-          v-model="search"
-          size="mini"
-          placeholder="输入关键字搜索"/>
-      </template>
       <template slot-scope="scope">
         <el-button
           size="mini"
-          @click="handleEdit(scope.$index, scope.row)" v-if="scope.row.status==3">取消订单</el-button>
+          @click="updatestatus(scope.$index, scope.row)" v-if="scope.row.status==3">取消订单</el-button>
         <el-button
           size="mini"
           type="danger"
@@ -93,6 +83,7 @@ export default {
       this.$axios.post("queryuserorder.action",params).then(res=>{
         this.total = res.data.total; //总记录数量
         this.list = res.data.records;
+        console.log(this.list)
       }).catch()
     },
     handleSizeChange(val) { //分页控件  页面size改变 触发  val参数就是选择的条数

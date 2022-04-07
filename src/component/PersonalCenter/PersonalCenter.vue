@@ -30,7 +30,7 @@
     </div>
   </div>
   <div class="mi-orderlist">
-    <el-tabs :tab-position="tabPosition" style="height: 600px;">
+    <el-tabs :tab-position="tabPosition" style="height: 900px;">
       <el-tab-pane label="我的个人中心"><orderall></orderall></el-tab-pane>
       <el-tab-pane label="我的自提点">地址组件</el-tab-pane>
       <el-tab-pane label="个人信息维护">个信息组件</el-tab-pane>

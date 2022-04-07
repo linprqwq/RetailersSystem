@@ -10,6 +10,8 @@ import shopping from "./component/Cart/shopping2";
 import PersonalCenter from "./component/PersonalCenter/PersonalCenter";
 import OrderTijiao from "./component/Cart/OrderTijiao";
 import IndexTop from "./component/User/IndexTop";
+import goods_category from "./component/supplier/goods_category";
+import Supplier_registration from "./component/supplier/Supplier_registration";
 import App from "./App";
 Vue.use(ElementUI)
 //axios
@@ -22,6 +24,6 @@ Vue.prototype.$axios = Axios
 
 new Vue({
   el: '#app',
-  render: h => h(App),
+  render: h => h(Supplier_registration),
   router:Router,
 })

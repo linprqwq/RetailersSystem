@@ -9,23 +9,33 @@
       </div>
     </div>
     <div class="middle">
-      <el-input class="sr" v-model="username" @blur="testname"  placeholder="请输入你的昵称"></el-input>
-      <el-input class="sr" v-model="loginname" @blur="testlogin"  placeholder="请输入登录账号"></el-input>
-      <el-input class="sr" v-model="password1" show-password placeholder="请输入你的密码"></el-input>
-      <el-input class="sr" v-model="password2" @blur="testpassword" show-password placeholder="请确认你的密码"></el-input>
-      <el-input class="sr" v-model="phone"  placeholder="请输入你的手机号"></el-input>
-
-      <el-upload class="sr"
-        action="https://jsonplaceholder.typicode.com/posts/"
-        list-type="picture-card"
-        :on-preview="handlePictureCardPreview"
-        :on-remove="handleRemove">
-        <i class="el-icon-plus"></i>
-      </el-upload>
-      <el-dialog :visible.sync="dialogVisible">
-        <img width="100%" :src="dialogImageUrl" alt="">
-      </el-dialog>
-      <el-button icon="el-icon-check" class="sr" round :loading="false">注册</el-button>
+      <el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-width="100px" class="demo-ruleForm">
+        <el-form-item
+          label="昵称"
+          prop="username"
+          :rules="[
+      { required: true, message: '昵称不能为空'},
+    ]">
+          <el-input type="username" v-model.number="ruleForm.username" autocomplete="off"></el-input>
+        </el-form-item>
+        <el-form-item
+          label="登录名"
+          prop="loginname"
+          :rules="[
+      { required: true, message: '登录名不能为空'},
+    ]">
+          <el-input type="loginname" v-model.number="ruleForm.loginname" autocomplete="off"></el-input>
+        </el-form-item>
+        <el-form-item label="密码" prop="password1">
+          <el-input type="password" v-model="ruleForm.password1" autocomplete="off"></el-input>
+        </el-form-item>
+        <el-form-item label="确认密码" prop="password2">
+          <el-input type="password" v-model="ruleForm.password2"  autocomplete="off"></el-input>
+        </el-form-item>
+        <el-form-item>
+          <el-button type="primary" @click="submitForm('ruleForm')">提交</el-button>
+        </el-form-item>
+      </el-form>
     </div>
   </div>
 
@@ -35,43 +45,82 @@
 export default {
   name: "Register",
   data() {
+    var validatePass = (rule, value, callback) => {
+      if (value === '') {
+        callback(new Error('请输入密码'));
+      } else {
+        if (this.ruleForm.password2 !== '') {
+          this.$refs.ruleForm.validateField('password2');
+        }
+        callback();
+      }
+    };
+    var validatePass2 = (rule, value, callback) => {
+      if (value === '') {
+        callback(new Error('请再次输入密码'));
+      } else if (value !== this.ruleForm.password1) {
+        callback(new Error('两次输入密码不一致!'));
+      } else {
+        callback();
+      }
+    };
+    var testusername = (rule,value,callback)=>{
+      var params=new URLSearchParams()
+      params.append("username",this.username)
+      this.$axios.post("checkusername.action",params).then(val=>{
+        if(val.data!=0){
+          callback(new Error("用户名重复"))
+        }else{
+
+        }
+      }).catch()
+    };
+    var testloginname = (rule,val,callback)=>{
+      var params=new URLSearchParams()
+      params.append("loginname",this.loginname)
+      this.$axios.post("checkloginname.action",params).then(val=>{
+        if(val.data!=0){
+          callback(new Error("登录账号重复"))
+        }else{
+          callback()
+        }
+      }).catch()
+    }
     return {
-      username:"",
-      loginname:"",
-      password1:"",
-      password2:"",
-      phone:"",
-      dialogImageUrl: '',
-      dialogVisible: false
+      // fileList:[]
+      ruleForm: {
+        password1: "",
+        password2: "",
+        username: "",
+        loginname: "",
+        phone: "",
+      },
+      rules: {
+        password1: [
+          {validator: validatePass, trigger: 'blur'}
+        ],
+        password2: [
+          {validator: validatePass2, trigger: 'blur'}
+        ],
+        username: [
+          {validator:testusername,trigger:'blur'}
+        ],
+        loginname: [
+          {validator:testloginname,trigger:'blur'}
+        ]
+      }
     };
   },
-  methods:{
-    handleRemove(file, fileList) {
-      console.log(file, fileList);
-    },
-    handlePictureCardPreview(file) {
-      this.dialogImageUrl = file.url;
-      this.dialogVisible = true;
-    },
-    testname(){
-      if(this.username=='' || this.username==null){
-        this.$message.error("昵称不能为空")
-      }else{
-        alert("成功")
-      }
-    },
-    testlogin(){
-      if(this.loginname=='' || this.loginname==null){
-        alert(11)
-      }
-    },
-    testpassword(){
-     if(this.password1!=this.password2){
-        this.$message.error("两次密码不一致 检查后再试")
-     }else if(this.password1=='' || this.password1==null){
-       this.$message.error("密码不能为空")
-     }
-     alert(1)
+  methods: {
+    submitForm(formName) {
+      this.$refs[formName].validate((valid) => {
+        if (valid) {
+          alert('成功!');
+        } else {
+          alert('检查');
+          return false;
+        }
+      });
     }
   }
 }

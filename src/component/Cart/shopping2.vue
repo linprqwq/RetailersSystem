@@ -1,4 +1,6 @@
 <template>
+<div>
+  <top></top>
   <div class="cart-group">
     <div class="sellect-all">
       <div class="radio">
@@ -18,8 +20,11 @@
                      @change="checkedChange(item.cartid)"></el-checkbox>
         <div class="product-detail">
           <div class="img">
-            <img :src="require('../../image/dddbbt2.png')" alt="图片出错">
+
+            <img :src="'http://127.0.0.1:9090/RetailersBackSystem/'+item.commodity.proimage" alt="图片出错">
+
           </div>
+<!--          '../../image/dddbbt2.png'-->
           <div class="content">
             <div class="name">{{item.commodity.proname}}</div>
             <div class="specification">{{ item.commodity.prodetails }}</div>
@@ -30,7 +35,7 @@
         </div>
         <div class="product-quantity">
           <input type="button" class="btn-sub" value="-"@click="jj(item.cartid,true,item.quantity)" >
-             {{item.quantity}}
+          {{item.quantity}}
           <input type="button" class="btn-add" value="+" @click="jj(item.cartid,false)">
         </div>
       </div>
@@ -47,10 +52,13 @@
       <el-button class="btn" :plain="true" @click="jwcjiesuan()">结算</el-button>
     </div>
   </div>
+</div>
 
 </template>
 
 <script>
+import IndexTop from "../User/IndexTop";
+
 export default {
   name: "shopping2",
   data () {
@@ -64,6 +72,9 @@ export default {
       jiesuanlist:[],
       uid:sessionStorage.getItem('id'),
     }
+  },
+  components:{
+    top:IndexTop,
   },
   mounted () {
     this.setCart()

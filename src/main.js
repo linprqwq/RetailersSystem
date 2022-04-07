@@ -9,6 +9,9 @@ import Router from './config/routerconfig'
 import shopping from "./component/Cart/shopping2";
 import PersonalCenter from "./component/PersonalCenter/PersonalCenter";
 import OrderTijiao from "./component/Cart/OrderTijiao";
+import IndexTop from "./component/User/IndexTop";
+import goods_category from "./component/supplier/goods_category";
+import Supplier_registration from "./component/supplier/Supplier_registration";
 import App from "./App";
 import Zlwh from "./component/shzlwh/Zlwh";
 import Allorder from "./component/Shorder/Allorder";

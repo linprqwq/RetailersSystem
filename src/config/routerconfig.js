@@ -13,6 +13,8 @@ import ShoppingFalst from '../component/Cart/ShoppingFalst'
 import tabs from "../component/supplier/tabs";
 import shopping2 from "../component/Cart/shopping2";
 import OrderTijiao from "../component/Cart/OrderTijiao";
+import PersonalCenter from "../component/PersonalCenter/PersonalCenter";
+import myshoppingkk from "../component/Cart/myshoppingkk";
 //Vue组件使用Vue-router组件*******************
 Vue.use(VueRouter)
 
@@ -53,6 +55,7 @@ var routes=[
     name: "CommodityDisplay",
     component: CommodityDisplay
   },
+  //你没登录
   {
     path: "/ShoppingFalst",
     name:"ShoppingFalst",
@@ -63,15 +66,28 @@ var routes=[
     name:"tabs",
     component: tabs
   },
+  //购物车
   {
     path: "/shopping2",
     name: "shopping2",
     component: shopping2
   },
+  //订单提交
   {
     path: "/ordertijiao",
     name: "ordertijiao",
     component: OrderTijiao
+  },
+  {
+    path: "/personalCenter",
+    name: "personalCenter",
+    component: PersonalCenter
+  },
+  //购物车空空
+  {
+    path: "/myshoppingkk",
+    name: "myshoppingkk",
+    component: myshoppingkk
   }
 
 ]

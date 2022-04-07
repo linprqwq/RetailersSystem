@@ -1,5 +1,6 @@
 <template>
 <div>
+  <top></top>
   <div class="header_con">
     <div class="header">
       <div class="welcome fl">欢迎来到天天生鲜!</div>
@@ -73,7 +74,9 @@
       <li class="col03">{{ item.commodity.proname }}</li>
       <li class="col04">500g</li>
       <li class="col05">{{ item.commodity.prosprice }}</li>
-      <li class="col06">{{ item.quantity }}</li>
+      <li class="col06">         <input type="button" class="btn-sub" value="-"@click="jj(item.cartid,true,item.quantity)" >
+        {{item.quantity}}
+        <input type="button" class="btn-add" value="+" @click="jj(item.cartid,false)"></li>
       <li class="col07">{{item.commodity.prosprice*item.quantity}}</li>
     </ul>
 
@@ -83,14 +86,13 @@
 
   <div class="common_list_con clearfix">
     <div class="settle_con">
-      <div class="total_goods_count">共<em>2</em>件商品，总金额<b>{{zongmoney}}</b></div>
-      <div class="transit">运费：<b>10元</b></div>
-      <div class="total_pay">实付款：<b>52.60元</b></div>
+      <div class="total_goods_count">共<em>{{sl}}</em>件商品，总金额<b>{{zongmoney}}</b></div>
+
     </div>
   </div>
 
   <div class="order_submit clearfix">
-    <a href="javascript:;" id="order_btn">提交订单</a>
+    <a @click="ordertijiaodd()">提交订单</a>
   </div>
 
   <div class="footer">
@@ -118,6 +120,8 @@
 </template>
 
 <script>
+import IndexTop from "../User/IndexTop";
+
 export default {
   name: "OrderTijiao",
   data(){
@@ -129,12 +133,17 @@ export default {
 
     }
   },
+  components:{
+    top:IndexTop,
+  },
   methods:{
+    //测试
     aaa(){
       this.userinfo.forEach(item=>{
    console.log(item)
       })
     },
+    //查询当前用户购物车和商品
     queryusergwc(){
       this.userinfo.forEach(item=>{
         this.list.push(item.cid)
@@ -147,12 +156,60 @@ export default {
             console.log(this.jsljgm)
       }).catch()
     },
+    //提交订单
+    ordertijiaodd(){
+      var params = new URLSearchParams();
+      //用户id
+      params.append("uid",this.uid);
+
+      //商品id
+      params.append("list",this.list);
+      //商品地址id
+
+      this.$axios.post("usertijiaodd.action",params).then(res=>{
+            alert(res.data.msg)
+      }).catch()
+    },
+    //购物车数量加减跟删除
+    jj(id,boolean,sl){
+      console.log(boolean)
+      console.log(sl)
+      if (boolean==true&&sl==1){
+        if (confirm("您确定要移除购物车吗?")){
+          var params = new URLSearchParams();
+          params.append("cartid",id);
+          params.append("pdjj",boolean)
+          this.$axios.post("gwcssjj.action",params).then(res=>{
+
+            this.queryshopping();
+          }).catch();
+        }else{
+          return
+        }
+      }
+      var params = new URLSearchParams();
+      params.append("cartid",id);
+      params.append("pdjj",boolean)
+      this.$axios.post("gwcssjj.action",params).then(res=>{
+
+        this.queryusergwc();
+      }).catch();
+    },
   },
   computed:{
+    //总金额
     zongmoney: function () {
       let s = 0;
       this.jsljgm.forEach(item=>{
         s+=item.commodity.prosprice*item.quantity;
+      })
+      return s;
+    },
+    //总数量
+    sl: function (){
+      let s = 0;
+      this.jsljgm.forEach(item=>{
+        s+=item.quantity;
       })
       return s;
     }
@@ -164,6 +221,18 @@ export default {
 </script>
 
 <style scoped>
+.btn-add,
+.btn-sub {
+  width: 1.5rem; height: 1.5rem;
+  border: 1px solid gray;
+  background: linear-gradient(currentColor, currentColor) no-repeat center/.875em 2px,
+  linear-gradient(currentColor, currentColor) no-repeat center/2px .875em,
+  ghostwhite;
+  color: dimgray;
+}
+.btn-sub {
+  background-size: .875em 2px, 0;
+}
 body{font-family:'Microsoft Yahei';font-size:12px;color:#666;}
 html,body{height:100%}
 /* 顶部样式 */

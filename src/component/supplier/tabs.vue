@@ -12,7 +12,7 @@
 </template>
 
 <script>
-    import Supplierindex from "./supplierindex";
+    import Supplierindex from "./Supplierindex";
     export default {
         name: "tabs",
       data() {

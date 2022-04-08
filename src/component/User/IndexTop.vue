@@ -3,7 +3,7 @@
     <div class="top" >
       <div class="zhong">
         <div class="zuo">
-          <a href="#">兴盛商城</a>
+          <a href="#" @click="$router.push('/')">兴盛商城</a>
           <a href="#">XISI</a>
           <a href="#">loT</a>
           <a href="#">云服务</a>
@@ -64,6 +64,8 @@ export default {
     gwc(){
       if (this.userid==null){
         this.$router.push('/ShoppingFalst');
+      }else if (this.cartcount==0){
+        this.$router.push('/myshoppingkk');
       }else{
         this.$router.push('/shopping2');
       }

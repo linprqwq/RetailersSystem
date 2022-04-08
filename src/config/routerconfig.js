@@ -14,6 +14,13 @@ import tabs from "../component/supplier/tabs";
 import shopping2 from "../component/Cart/shopping2";
 import OrderTijiao from "../component/Cart/OrderTijiao";
 import PersonalCenter from "../component/PersonalCenter/PersonalCenter";
+import myshoppingkk from "../component/Cart/myshoppingkk";
+import Allorder from "../component/Shorder/Allorder";
+import Dshorder from "../component/Shorder/Dshorder";
+import Dthorder from "../component/Shorder/Dthorder";
+import Yrhorder from "../component/Shorder/Yrhorder";
+import Zlwh from "../component/shzlwh/Zlwh";
+import Supplier_registration from "../component/supplier/Supplier_registration";
 //Vue组件使用Vue-router组件*******************
 Vue.use(VueRouter)
 
@@ -76,9 +83,45 @@ var routes=[
     component: OrderTijiao
   },
   {
+    path: "/qbdd",
+    component:Allorder
+  }
+  ,
+  {
+    path: "/dsh",
+    component:Dshorder
+  }
+  ,
+  {
+    path: "/dth",
+    component:Dthorder
+  }
+  ,
+  {
+    path: "/yth",
+    component:Yrhorder
+  }
+  ,
+  {
+    path: "/zlwh",
+    component:Zlwh
+  },
+  {
     path: "/personalCenter",
     name: "personalCenter",
     component: PersonalCenter
+  },
+  //购物车空空
+  {
+    path: "/myshoppingkk",
+    name: "myshoppingkk",
+    component: myshoppingkk
+  },
+  //供应商
+  {
+    path: "/Supplier_registration",
+    name: "Supplier_registration",
+    component: myshoppingkk
   }
 
 ]

@@ -10,11 +10,15 @@ import shopping from "./component/Cart/shopping2";
 import PersonalCenter from "./component/PersonalCenter/PersonalCenter";
 import OrderTijiao from "./component/Cart/OrderTijiao";
 import IndexTop from "./component/User/IndexTop";
+import goods_category from "./component/supplier/goods_category";
+import Supplier_registration from "./component/supplier/Supplier_registration";
 import App from "./App";
+import Zlwh from "./component/shzlwh/Zlwh";
+import Allorder from "./component/Shorder/Allorder";
 Vue.use(ElementUI)
 //axios
 import  Axios from 'axios'
-import Index from "./component/Index";
+
 //设置axios默认访问路径
 Axios.defaults.baseURL = "http://127.0.0.1:9090/RetailersBackSystem"
 // 将baseURL绑定到全局

@@ -1,7 +1,8 @@
 <template>
   <div id="div1">
-    <span>还没登录哦 请登录以后再进行操作</span><br>
-    <img :src="require('../../image/请登录.svg')" alt="">
+    <span>一眼顶真 鉴定为假请去登录！</span><br>
+    <img :src="require('../../image/jzfalst.jpg')" alt="">
+
   </div>
 </template>
 

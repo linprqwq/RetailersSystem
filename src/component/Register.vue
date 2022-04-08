@@ -12,19 +12,13 @@
       <el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-width="100px" class="demo-ruleForm">
         <el-form-item
           label="昵称"
-          prop="username"
-          :rules="[
-      { required: true, message: '昵称不能为空'},
-    ]">
-          <el-input type="username" v-model.number="ruleForm.username" autocomplete="off"></el-input>
+          prop="username">
+          <el-input  v-model.number="ruleForm.username" autocomplete="off"></el-input>
         </el-form-item>
         <el-form-item
           label="登录名"
-          prop="loginname"
-          :rules="[
-      { required: true, message: '登录名不能为空'},
-    ]">
-          <el-input type="loginname" v-model.number="ruleForm.loginname" autocomplete="off"></el-input>
+          prop="loginname">
+          <el-input  v-model.number="ruleForm.loginname" autocomplete="off"></el-input>
         </el-form-item>
         <el-form-item label="密码" prop="password1">
           <el-input type="password" v-model="ruleForm.password1" autocomplete="off"></el-input>
@@ -35,9 +29,7 @@
         <el-form-item
           label="手机号"
           prop="phone"
-          :rules="[
-      { required: true, message: '手机号不能为空'},
-    ]">
+        >
           <el-input type="phone" v-model.number="ruleForm.phone" autocomplete="off"></el-input>
         </el-form-item>
         <el-form-item label="头像">
@@ -66,6 +58,8 @@
 </template>
 
 <script>
+import {Loading} from "element-ui";
+
 export default {
   name: "Register",
   data() {
@@ -89,10 +83,11 @@ export default {
       }
     };
     var testusername = (rule, value, callback) => {
+      console.log(this.username)
       var params = new URLSearchParams()
-      params.append("username", this.username)
+      params.append("username",this.username)
       this.$axios.post("checkusername.action", params).then(val => {
-        if (val.data == 0) {
+        if (val.data != 0) {
           callback(new Error("用户名重复"))
         } else {
           callback();
@@ -101,9 +96,9 @@ export default {
     };
     var testloginname = (rule, val, callback) => {
       var params = new URLSearchParams()
-      params.append("loginname", this.loginname)
+      params.append("loginname",this.loginname)
       this.$axios.post("checkloginname.action", params).then(val => {
-        if (val.data == 0) {
+        if (val.data != 0) {
           callback(new Error("登录账号重复"))
         } else {
           callback()
@@ -111,8 +106,8 @@ export default {
       }).catch()
     }
     var testphone = (rule, val, callback) => {
-      var myreg = /^[1][3,4,5,7,8][0-9]{9}$/;
-      if (!myreg.test(this.phone)) {
+      var myreg = /^1[35678]\d{9}$/;
+      if (!myreg.test(val)) {
         callback(new Error("电话号码不符合规则"))
       } else {
         callback()
@@ -135,12 +130,15 @@ export default {
           {validator: validatePass2, trigger: 'blur'}
         ],
         username: [
+          {required: true, message: '昵称不能为空'},
           {validator: testusername, trigger: 'blur'}
         ],
         loginname: [
+          {required: true, message: '登录名不能为空'},
           {validator: testloginname, trigger: 'blur'}
         ],
         phone: [
+          {required: true, message: '手机号不能为空'},
           {validator: testphone, trigger: 'blur'}
         ]
       }
@@ -149,8 +147,10 @@ export default {
   methods: {
     submitForm(formName) {
       this.$refs[formName].validate((valid) => {
+
         if (valid) {
-          alert('成功!');
+          const  qwq = Loading.service()
+          console.log('成功!');
         } else {
           alert('检查');
           return false;

@@ -107,7 +107,7 @@
           <div class="xiatu1">
             <a href="#"><img :src="require('../image/商品左边背景图2.png')" alt="图片出错" height="298px" width="233px"></a>
           </div>
-          <div class="xiatu2">
+          <div class="xiatu2" >
             <a href="#"><img :src="require('../image/百香果1.jpg')" alt="图片出错" height="196px" width="233px"></a>
             <p>小米全面屏电视65英寸 E65X</p>
             <span>全面屏设计</span>
@@ -485,7 +485,7 @@ export default {
     },
     showlgoinid() {
       return this.useridd
-    }
+    },
   },
   methods: {
     shopping() {
@@ -506,8 +506,10 @@ export default {
   created() {
     var _this = this;
     this.$axios.post("queryAllcom.action").then(val => {
+      val.data.forEach(key=>{
+        console.log(key.prozimg+"******")
+      })
       _this.commodity = val.data
-      console.log(val.data)
     }).catch()
     if (this.useridd != null) {
       var params = new URLSearchParams();

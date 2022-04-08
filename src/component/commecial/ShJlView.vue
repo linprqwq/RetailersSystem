@@ -3,16 +3,16 @@
     <el-row :gutter="20">
       <el-col :span="5" :offset="9">
         状态：<el-select v-model="opvalue" clearable placeholder="请选择" @change="getdata()">
-        <el-option value="0" label="等待审核"></el-option>
-        <el-option value="1" label="审核通过"></el-option>
-        <el-option value="2" label="审核未通过"></el-option>
-      </el-select>
+          <el-option value="0" label="等待审核"></el-option>
+          <el-option value="1" label="审核通过"></el-option>
+          <el-option value="2" label="审核未通过"></el-option>
+        </el-select>
       </el-col>
     </el-row>
     <el-container>
       <el-main>
         <el-table
-          :data="GysData"
+          :data="shjlData"
           style="width: 100%">
           <el-table-column
             prop="id"
@@ -48,9 +48,9 @@
             prop="shState"
             label="审核状态">
             <template slot-scope="scope">
-              <span v-if="scope.row.gysState==0">等待审核</span>
-              <span v-else-if="scope.row.gysState==1">审核通过</span>
-              <span v-else-if="scope.row.gysState==2">审核未通过</span>
+              <span v-if="scope.row.shState==0">等待审核</span>
+              <span v-else-if="scope.row.shState==1">审核通过</span>
+              <span v-else-if="scope.row.shState==2">审核未通过</span>
             </template>
           </el-table-column>
         </el-table>
@@ -71,10 +71,10 @@
 
 <script>
     export default {
-        name: "GysShJlView",
+        name: "ShJlView",
       data(){
         return{
-          GysData: [],
+          shjlData: [],
           pageno: 1,   //页码
           pagesize: 5,   //页size
           total: 1,   //编辑页面数据 对象
@@ -87,18 +87,15 @@
           var params = new URLSearchParams();
           params.append("pageno", this.pageno);
           params.append("pagesize", this.pagesize);
-          params.append("gysState", this.opvalue);
+          params.append("shState",this.opvalue);
 
-          this.$axios.post("queryallGysJl.action", params)
+          this.$axios.post("queryallShJl.action", params)
             .then(response => {
-              console.log(response)
-              this.GysData = response.data.rows;//获取所有要展示的数据
-              this.total = response.data.total; //总记录数量
-              console.log(response);
-              this.GysData.forEach((item) => {
+              this.shjlData = response.data.rows;//获取所有要展示的数据
+              this.total = response.data.total; //总记
+              this.shjlData.forEach((item) => {
                 item.imgpath = this.path + item.imgpath;
               })
-
             }).catch();
         },
         handleSizeChange(val) { //分页控件  页面size改变 触发  val参数就是选择的条数
@@ -113,7 +110,7 @@
         }
       },
       created(){
-        this.getdata();
+          this.getdata();
       }
     }
 </script>

@@ -21,7 +21,8 @@ Vue.use(VueRouter)
 var routes=[
   {
     path:"/syslist",
-    component:SystemList
+    component:SystemList,
+    name:"syslist_route"
   },
   {
     path:"/emplogin",

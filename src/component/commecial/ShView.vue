@@ -1,18 +1,9 @@
 <template>
   <div>
-    <el-row :gutter="20">
-      <el-col :span="5" :offset="9">
-        状态：<el-select v-model="opvalue" clearable placeholder="请选择" @change="getdata()">
-        <el-option value="0" label="等待审核"></el-option>
-        <el-option value="1" label="审核通过"></el-option>
-        <el-option value="2" label="审核未通过"></el-option>
-      </el-select>
-      </el-col>
-    </el-row>
     <el-container>
       <el-main>
         <el-table
-          :data="GysData"
+          :data="shData"
           style="width: 100%">
           <el-table-column
             prop="id"
@@ -44,13 +35,14 @@
               <span v-else-if="scope.row.ustate==2">注销</span>
             </template>
           </el-table-column>
-          <el-table-column
-            prop="shState"
-            label="审核状态">
+          <el-table-column>
             <template slot-scope="scope">
-              <span v-if="scope.row.gysState==0">等待审核</span>
-              <span v-else-if="scope.row.gysState==1">审核通过</span>
-              <span v-else-if="scope.row.gysState==2">审核未通过</span>
+              <el-button
+                size="mini"
+                @click="shtg(1,scope.row)">通过</el-button>
+              <el-button
+                size="mini"
+                @click="shbtg(2,scope.row)">不通过</el-button>
             </template>
           </el-table-column>
         </el-table>
@@ -71,15 +63,14 @@
 
 <script>
     export default {
-        name: "GysShJlView",
+        name: "ShView",
       data(){
         return{
-          GysData: [],
+          shData: [],
           pageno: 1,   //页码
           pagesize: 5,   //页size
           total: 1,   //编辑页面数据 对象
-          path: "http://127.0.0.1:9090/RetailersBackSystem/",
-          opvalue:""
+          path: "http://127.0.0.1:9090/RetailersBackSystem/"
         }
       },
       methods:{
@@ -87,15 +78,15 @@
           var params = new URLSearchParams();
           params.append("pageno", this.pageno);
           params.append("pagesize", this.pagesize);
-          params.append("gysState", this.opvalue);
+          params.append("shState", 0);
 
-          this.$axios.post("queryallGysJl.action", params)
+          this.$axios.post("queryallUser2.action", params)
             .then(response => {
               console.log(response)
-              this.GysData = response.data.rows;//获取所有要展示的数据
+              this.shData = response.data.rows;//获取所有要展示的数据
               this.total = response.data.total; //总记录数量
               console.log(response);
-              this.GysData.forEach((item) => {
+              this.shData.forEach((item) => {
                 item.imgpath = this.path + item.imgpath;
               })
 
@@ -110,10 +101,34 @@
           console.log(`当前页: ${val}`);
           this.pageno = val;
           this.getdata()
+        },
+        shtg(val,data){
+
+          this.$axios.put("updshstatetg.action",{"shState":val,"identity":2,"id":data.id}).
+          then( (response)=> {
+            if(response.data.code==1){
+              alert(response.data.msg)
+              this.getdata();
+            }else{
+              alert(response.data.msg)
+            }
+          }).catch();
+        },
+        shbtg(val,data){
+          data.shState=val;
+          this.$axios.put("updshstatebtg.action",{"shState":val,"id":data.id}).
+          then((response)=> {
+            if(response.data.code==1){
+              alert(response.data.msg)
+              this.getdata();
+            }else{
+              alert(response.data.msg)
+            }
+          }).catch();
         }
       },
       created(){
-        this.getdata();
+          this.getdata()
       }
     }
 </script>

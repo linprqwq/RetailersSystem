@@ -1,19 +1,28 @@
 <template>
   <div>
-    <el-container>
+    <el-button class="addbtn" type="warning" @click="openaddwin">添加</el-button>
+    <el-form :inline="true" class="demo-form-inline">
+      <el-form-item label="用户名">
+        <el-input v-model="username" placeholder="请输入用户名"></el-input>
+      </el-form-item>
+      <el-form-item>
+        <el-button type="primary" @click="getdata">查询</el-button>
+      </el-form-item>
+    </el-form>
+
       <el-main>
         <el-table
           :data="tableData"
-          style="width: 100%">
+          style="width: 100%;">
           <el-table-column
             prop="id"
             label="编号"
-            width="180">
+            width="60">
           </el-table-column>
           <el-table-column
             prop="username"
             label="用户名"
-            width="180">
+            width="80">
           </el-table-column>
           <el-table-column
             prop="loginname"
@@ -39,12 +48,34 @@
             prop="img"
             label="用户头像">
             <template slot-scope="scope">
-              <img :src="scope.row.img" style="width: 80px;height: 80px">
+              <img :src="scope.row.imgpath" style="width: 40px;height: 40px">
             </template>
           </el-table-column>
           <el-table-column
             prop="ustate"
             label="状态">
+            <template slot-scope="scope">
+              <span v-if="scope.row.ustate==0">正常</span>
+              <span v-else-if="scope.row.ustate==1">冻结</span>
+              <span v-else-if="scope.row.ustate==2">注销</span>
+            </template>
+          </el-table-column>
+          <el-table-column
+            label="操作">
+            <template slot-scope="scope">
+              <el-button
+                size="mini"
+                @click="handleEdit(scope.row)">编辑</el-button>
+              <el-popconfirm
+                title="确定删除吗？"
+                @confirm="handleDelete(scope.row.id)"
+              >
+                <el-button
+                  size="mini"
+                  type="danger"
+                  slot="reference">删除</el-button>
+              </el-popconfirm>
+            </template>
           </el-table-column>
         </el-table>
         <!-- 分页控件-->
@@ -58,16 +89,46 @@
           :total="total">
         </el-pagination>
       </el-main>
-    </el-container>
+
+    <!--  添加页面-->
+    <el-dialog
+      title="添加用户信息"
+      :visible.sync="adddialogVisible"
+      width="40%"
+      :before-close="handleClose">
+      <!-- 动态组件   指定添加vue页面在模态框显示-->
+      <component ref="addView" is="AddView"></component>
+
+      <el-button type="primary" @click="addUser">确 定</el-button>
+      <el-button @click="adddialogVisible = false">取 消</el-button>
+
+    </el-dialog>
+    <!--  编辑页面-->
+    <el-dialog
+      title="编辑用户信息"
+      :visible.sync="editdialogVisible"
+      width="40%"
+      :before-close="handleClose">
+      <!-- 动态组件   指定添加vue页面在模态框显示-->
+      <component ref="editUser" is="EditUserView"></component>
+
+      <el-button type="primary" @click="editUser">确 定</el-button>
+      <el-button @click="editdialogVisible = false">取 消</el-button>
+
+    </el-dialog>
   </div>
 </template>
 
 <script>
+  import AddView from "./AddView";
+  import EditUserView from "./EditUserView";
   export default {
     name: "UserView",
     data(){
       return{
         tableData:[],
+        adddialogVisible:false,
+        editdialogVisible:false,
         useraddFrom:{},
         useredittFrom:{},
         pageno:1,   //页码
@@ -75,15 +136,42 @@
         total:1,   //查询到的总记录数量页面 显示标志
         editform:{},   //编辑页面数据 对象
         path:"http://127.0.0.1:9090/RetailersBackSystem/",
-        img:null
+        img:null,
+        username:""
       }
 
     },
+    components:{
+      AddView,EditUserView
+    },
     methods:{
+      editUser(){
+        this.$refs.editUser.submitUpload("editform");
+      },
+      addUser(){
+        this.$refs.addView.submitUpload("addform");
+
+      },
+      openaddwin(){
+        this.adddialogVisible=true;
+      },
+      //窗口关闭确认
+      handleClose(done) {
+        this.$confirm('确认关闭？')
+          .then(_ => {
+            this.editdialogVisible = false
+            this.adddialogVisible = false
+            this.$refs.editUser.fileList=[];
+
+          })
+          .catch(_ => {});
+      },
       getdata(){   //获取数据的方法
+
         var params = new URLSearchParams();
         params.append("pageno",this.pageno);
         params.append("pagesize",this.pagesize);
+        params.append("username",this.username);
 
         this.$axios.post("queryallUser.action",params)
           .then(response=>{
@@ -108,9 +196,12 @@
         this.getdata()
       },
       handleEdit(row){
-        this.dialogTableUpdate=true
-        this.useredittFrom=row
-        console.log(this.useredittFrom)
+        this.editdialogVisible=true
+        //根据id查询数据
+        this.$nextTick(item=>{
+          this.$refs.editUser.getdata(row.id);
+        })
+
       },
       handleDelete(id){
         this.$axios.delete("delUser.action/"+id)
@@ -151,8 +242,14 @@
     text-align: center;
   }
   .avatar {
-    width: 98px;
-    height: 98px;
+    width: 78px;
+    height: 78px;
     display: block;
+  }
+  .addbtn{
+    float: left;
+  }
+  .el-table-column{
+    height: 30px;
   }
 </style>

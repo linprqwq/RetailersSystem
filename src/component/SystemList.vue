@@ -1,10 +1,20 @@
 <template>
   <div id="app" class="homeWrap">
     <el-container style="height:100%">
-      <el-header>Header</el-header>
+      <el-header>
+        <el-row class="demo-avatar demo-basic">
+          <el-col :span="1">
+            <div style="width: 90px;" class="sub-title">{{empname}}，欢迎登录</div>
+            <div class="demo-basic--circle">
+              <div class="block">
+                <el-avatar shape="square" :size="35" :src="circleUrl"></el-avatar>
+              </div>
+            </div>
+          </el-col>
+        </el-row>
+      </el-header>
       <el-container>
         <el-aside width="200px">
-          菜单
           <el-menu
             default-active="1"
             class="el-menu-vertical-demo"
@@ -78,10 +88,12 @@
   import CgsqView from "./procurement/CgsqView";
   import GysShView from "./Gys/GysShView";
   import GysShJlView from "./Gys/GysShJlView";
+  import ShJlView from "./commecial/ShJlView";
+  import ShView from "./commecial/ShView";
     export default {
         name: "SystemList",
       components:{
-        Welcome,EmpView,AuthcView,UserView,CgsqView,GysShView,GysShJlView
+        Welcome,EmpView,AuthcView,UserView,CgsqView,GysShView,GysShJlView,ShView,ShJlView
       },
       data(){
         return {
@@ -92,10 +104,23 @@
             name: '1',
             content: 'Welcome'
           }],
-          tabIndex: 1
+          tabIndex: 1,
+          empname:"",
+          path:"http://127.0.0.1:9090/RetailersBackSystem/",
+          circleUrl:"",
         }
       },
       methods:{
+          empdata(){
+           var name = sessionStorage.getItem("empname");
+           var eid =  sessionStorage.getItem("eid");
+            this.empname=name;
+            this.$axios.get("queryempbyid.action/"+eid)
+              .then(response => {
+               this.circleUrl =this.path+ response.data.empImg;//获取所有要展示的数据
+                console.log(this.circleUrl)
+              }).catch();
+          },
         addTab(targetName,vuename) {
           //数组找有没有
           var obj= this.editableTabs.find(item=>item.title == targetName);
@@ -140,6 +165,7 @@
       },
       created(){   //钩子函数   对象创建好 后执行此方法
         this.getdata()
+        this.empdata()
       }
     }
 </script>
@@ -154,20 +180,24 @@
   }
 
   .el-header, .el-footer {
-    background-color: #B3C0D1;
     color: #333;
     text-align: center;
   }
 
   .el-aside {
-    background-color: #D3DCE6;
-    color: #333;
 
+    color: #333;
+    height: 100%;
+    background-color: #424242;
   }
+  .component{
 
+    height: 100%;
+    background-color: pink;
+  }
   .el-main {
-    background-color: #E9EEF3;
-    color: #333;
+    width: 90%;
+    background-color: palegoldenrod;
     text-align: center;
   }
 

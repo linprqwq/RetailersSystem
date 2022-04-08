@@ -1,6 +1,6 @@
 <template>
   <div>
-    <el-select v-model="opvalue" clearable placeholder="请选择" @change="getmenudata(opvalue)">
+    角色选择：<el-select v-model="opvalue" clearable placeholder="请选择" @change="getmenudata(opvalue)">
       <el-option
         v-for="item in roleoptions"
         :key="item.id"
@@ -8,16 +8,32 @@
         :value="item.id">
       </el-option>
     </el-select>
-    <el-tree ref="mytree"
-             :data="authcdata"
-             show-checkbox
-             node-key="id"
-             accordion
-             :default-expanded-keys="[1, 1]"
-             :default-checked-keys="mids"
-             :props="defaultProps">
-    </el-tree>
     <el-button type="primary" @click="shoquan">授权</el-button>
+    <br>
+    <br>
+    <br>
+    <br>
+    授权菜单：<el-row :gutter="20">
+      <el-col :span="5" :offset="9">
+      <div style="width: 300px;height: 240px;border: 1px solid red;font-size: 20px;">
+        <el-tree ref="mytree"
+                 :data="authcdata"
+                 show-checkbox
+                 node-key="id"
+                 accordion
+                 :default-expanded-keys="[1, 1]"
+                 :default-checked-keys="mids"
+                 :props="defaultProps">
+        </el-tree>
+      </div>
+      </el-col>
+    </el-row>
+<br>
+<br>
+<br>
+<br>
+<br>
+
   </div>
 </template>
 

@@ -78,6 +78,7 @@
           var params = new URLSearchParams();
           params.append("pageno", this.pageno);
           params.append("pagesize", this.pagesize);
+          params.append("gysState", 0);
 
           this.$axios.post("queryallUser2.action", params)
             .then(response => {
@@ -103,7 +104,7 @@
         },
         shtg(val,data){
 
-          this.$axios.put("updstatetg.action",{"shState":val,"id":data.id}).
+          this.$axios.put("updstatetg.action",{"gysState":val,"identity":3,"id":data.id}).
           then( (response)=> {
             if(response.data.code==1){
               alert(response.data.msg)
@@ -115,7 +116,7 @@
         },
         shbtg(val,data){
           data.shState=val;
-          this.$axios.put("updstatebtg.action",{"shState":val,"id":data.id}).
+          this.$axios.put("updstatebtg.action",{"gysState":val,"id":data.id}).
           then((response)=> {
             if(response.data.code==1){
               alert(response.data.msg)

@@ -76,7 +76,7 @@ export default {
     var validatePass2 = (rule, value, callback) => {
       if (value === '') {
         callback(new Error('请再次输入密码'));
-      } else if (value !== this.ruleForm.password1) {
+      } else if (value !== this.ruleForm.password) {
         callback(new Error('两次输入密码不一致!'));
       } else {
         callback();
@@ -116,14 +116,14 @@ export default {
     return {
       fileList: [],
       ruleForm: {
-        password1: "",
+        password: "",
         password2: "",
         username: "",
         loginname: "",
         phone: "",
       },
       rules: {
-        password1: [
+        password: [
           {validator: validatePass, trigger: 'blur'}
         ],
         password2: [
@@ -149,6 +149,21 @@ export default {
       this.$refs[formName].validate((valid) => {
 
         if (valid) {
+          // //将需要提交的文件，和附带的数据，append  FormData中 然后提交
+          // var formData = new FormData();
+          // //先组装表单简单数据
+          // /*  formData.append('name', this.addform.name)
+          //   formData.append('type', this.addform.type)
+          //   formData.append('price', this.addform.price)*/
+          //
+          // Object.keys(this.ruleForm).forEach(item=>{
+          //   formData.append(item, this.ruleForm[item])
+          // })
+          // //循环文件数组   将多个文件保存入formdata中
+          // this.fileList.forEach(item => {
+          //   formData.append('file', item.raw)
+          // })
+          // this.sendFile(formData)
           const  qwq = Loading.service()
           console.log('成功!');
         } else {
@@ -157,6 +172,64 @@ export default {
         }
       });
     },
+    //真正进行异步，保存数据的方法
+    sendFile(data) {
+      //等待效果
+      const loading = this.$loading({
+        lock: true,
+        text: '添加中，请稍等...',
+        spinner: 'el-icon-loading',
+        background: 'rgba(0, 0, 0, 0.7)'
+      })
+      //异步提交
+      this.$axios({
+        method: 'post',
+        url: 'registerUser.action',
+        data: data,
+        headers: {
+          'Content-Type': 'multipart/form-data'
+        }
+      }).then(response => {
+        if(response.data){
+          //结束等待效果
+          loading.close()
+          //弹出结果消息
+          this.$message({
+            showClose: true,
+            message: '上传成功',
+            type: 'success'
+          })
+          this.formReset()// 上传成功清空
+          // //更新父页面数据
+          // this.$parent.$parent.getdata();
+        }else{
+          //结束等待效果
+          loading.close()
+          //弹出结果消息
+          this.$message({
+            showClose: true,
+            message: '上传失败',
+            type: 'warning'
+          })
+        }
+
+      }).catch(error => {
+        console.log(error)
+        alert("错误")
+        loading.close()
+      });
+    },
+  formReset() { // 重置
+    this.ruleform = {
+      password: "",
+      password2: "",
+      username: "",
+      loginname: "",
+      phone: "",
+    }
+    this.fileList = [];  //添加完成后，上传文件控件内容清空
+  },
+
     //移除文件 更新头像数组数据
     beforeRemove(file, fileList) {
       if (this.$confirm(`确定移除 ${file.name}？`)) {

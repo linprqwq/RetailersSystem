@@ -19,7 +19,7 @@
         <dt>寄送到：</dt>
         <dd><input type="radio" name="" checked="">北京市 海淀区 东北旺西路8号中关村软件园 （李思 收） 182****7528</dd>
       </dl>
-      <a href="user_center_site.html" class="edit_site">切换</a>
+      <a href="#" class="edit_site">切换</a>
 
     </div>
 
@@ -29,7 +29,7 @@
         <input type="radio" name="pay_style" checked>
         <label class="weixin">微信支付</label>
         <input type="radio" name="pay_style">
-        <label class="zhifubao"><span>余额:{{user.umoney}}</span></label>
+        <label ><span>余额:{{user.umoney}}</span></label>
       </div>
     </div>
     <br><br>
@@ -199,6 +199,7 @@ export default {
 </script>
 
 <style scoped>
+
 .btn-add,
 .btn-sub {
   width: 1.5rem;

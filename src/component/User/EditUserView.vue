@@ -11,13 +11,13 @@
       <el-input v-model="editform.loginname" style="width: 200px" placeholder="请输入登录名"></el-input>
     </el-form-item>
     <el-form-item label="密码" prop="password">
-      <el-input  v-model="editform.password" style="width: 200px"
+      <el-input  type="password"  v-model="editform.password" style="width: 200px"
                 placeholder="请输入密码"
                 autocomplete="off"></el-input>
     </el-form-item>
-    <el-form-item label="重复密码" prop="repassword">
+    <el-form-item   label="重复密码" prop="repassword">
       <el-input  v-model="editform.repassword" style="width: 200px"
-                placeholder="请输入重复密码"
+                 type="password"    placeholder="请输入重复密码"
                 autocomplete="off"></el-input>
     </el-form-item>
     <el-form-item label="手机号" prop="phone">

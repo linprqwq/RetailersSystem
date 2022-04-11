@@ -3,7 +3,7 @@
   <div>
     <el-tabs v-model="activeName" >
       <el-tab-pane label="供应商首页" name="first"><supplierindex></supplierindex> </el-tab-pane>
-      <el-tab-pane label="供应商订单" name="second">供应商订单</el-tab-pane>
+      <el-tab-pane label="修改供应商" name="second">修改</el-tab-pane>
       <el-tab-pane label="供应商退货" name="third">供应商退货</el-tab-pane>
       <el-tab-pane label="统计" name="fourth">统计</el-tab-pane>
     </el-tabs>

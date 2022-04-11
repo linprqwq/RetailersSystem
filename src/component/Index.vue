@@ -107,8 +107,8 @@
           <div class="xiatu1">
             <a href="#"><img :src="require('../image/商品左边背景图2.png')" alt="图片出错" height="298px" width="233px"></a>
           </div>
-          <div class="xiatu2" >
-            <a href="#"><img :src="require('../image/百香果1.jpg')" alt="图片出错" height="196px" width="233px"></a>
+          <div class="xiatu2" @click="$router.push('/CommodityDisplay')">
+            <a href="#"><img :src="require('../image/百香果1.jpg')"  alt="图片出错" height="196px" width="233px"></a>
             <p>小米全面屏电视65英寸 E65X</p>
             <span>全面屏设计</span>
             <div class="nei1">

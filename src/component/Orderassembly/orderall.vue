@@ -23,13 +23,24 @@
         <el-table border :data='scope.row.ordderdetails' >
           <el-table-column prop='proname' label="订单商品"></el-table-column>
           <el-table-column prop='quantity' label="数量"></el-table-column>
+          <el-table-column v-if="scope.row.status==1">
+<template  slot-scope="scope1">
+  <el-button
+    size="mini"
+    type="danger"
+    @click="addspingcart(scope1.$index, scope1.row.proid)" v-if="scope.row.status==1">加入购物车</el-button>
+</template>
+          </el-table-column>
+
         </el-table>
+
       </template>
     </el-table-column>
 
     <el-table-column
-      prop="ordderdetails.totalpirce"
-      label="总价">
+      prop="zprice"
+      label="总价"
+    >
     </el-table-column>
     <el-table-column label="操作">
       <template slot-scope="scope">
@@ -42,7 +53,7 @@
         <el-button
           size="mini"
           type="danger"
-          @click="handleDelete(scope.$index, scope.row)" v-if="scope.row.status==4">确认收货</el-button>
+          @click="confirmorder(scope.$index, scope.row)" v-if="scope.row.status==4">确认收货</el-button>
         <el-button
           size="mini"
           type="danger"
@@ -58,7 +69,7 @@
         <el-button
           size="mini"
           type="danger"
-          @click="handleDelete(scope.$index, scope.row)" v-if="scope.row.status==1">加入购物车</el-button>
+          @click="addgwc(scope.$index, scope.row)" v-if="scope.row.status==1">加入购物车</el-button>
       </template>
     </el-table-column>
   </el-table>
@@ -86,6 +97,7 @@ export default {
       pageno:1,   //页码
       pagesize:5,   //页size
       total:1,   //查询到的总记录数量
+      gwcall:[],
     }
   },
   methods: {
@@ -124,8 +136,44 @@ export default {
         this.$message.success(res.data.msg);
           this.queryorderdfk();
       }).catch();
-    }
+    },
+
+    //多个购物车添加
+    addgwc(a,b){
+    b.ordderdetails.forEach(item=>{
+      this.gwcall.push(item.proid)
+    })
+      var  params = new URLSearchParams();
+
+      params.append("arr",this.gwcall);
+      params.append("uid",b.uid);
+      this.$axios.post("addgwc.action",params).then(res=>{
+        this.$message.success(res.data.msg);
+      }).catch();
+    },
+    //单个购物车添加
+    addspingcart(a,b){
+      console.log(b);
+      var params = new URLSearchParams();
+      // 加入购物车  商品id 用户id 商品数量默认为1   如果购物车已有 购物车商品数量加1
+      params.append("uid",this.useridd)
+      params.append("cid",b)
+
+      this.$axios.post("addspingcart.action",params).then(res=>{
+        this.$message.success(res.data.msg);
+      }).catch();
+    },
+    confirmorder(a,b){
+      console.log(b)
+      var params = new URLSearchParams();
+      params.append("orderid",b.orderid);
+
+      this.$axios.post("cofirmorder.action",params).then(res=>{
+        this.$message.error(res.data.msg);
+      }).catch()
+    },
   },
+
 
   mounted(){
     this.queryorderdfk();

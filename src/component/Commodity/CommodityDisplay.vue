@@ -1,53 +1,7 @@
 <template>
 <div>
-  <div class="top" >
-    <div class="zhong">
-      <div class="zuo">
-        <a href="#">小米商城</a>
-        <a href="#">MIUI</a>
-        <a href="#">loT</a>
-        <a href="#">云服务</a>
-        <a href="#">天星数科</a>
-        <a href="#">有品</a>
-        <a href="#">小爱开放平台</a>
-        <a href="#">企业团购</a>
-        <a href="#">资质证照</a>
-        <a href="#">协议规则</a>
-        <a href="#">下载app</a>
-        <a href="#">智能生活</a>
-        <a href="#">Select Location</a>
-      </div>
-      <div class="you">
-        <a @click="$router.push('/login')">登录</a>
-        <a href="XiaoMi/zhuce.html">注册</a>
-        <a href="#">消息通知</a>
-        <div class="he">
-          <div class="che">
-            <a href="#"></a>
-          </div>
-          <div class="ziti">
-            <a href="MyShopping.html">购物车 (0)</a>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="block">
-
-    <el-carousel height="150px">
-      <el-carousel-item v-for="item in carouseData" :key="item">
-        <img class="small" :src="item.url ">
-      </el-carousel-item>
-    </el-carousel>
-  </div>
+    <top></top>
   <div>
-  <el-button @click="querysp()">商品详情按钮</el-button>
-  <el-button @click="addspingcart()">加入购物车</el-button>
-  <el-button @click="queryuserorder()">我的订单</el-button>
-  <el-button @click="queryorderdfk()">待付款</el-button>
-  <el-button @click="queryorderdsh()">待收货</el-button>
-  <el-button @click="queryorderyth()">已提货</el-button>
-  <el-button @click="addusergys()">申请成为供应商</el-button>
 
 <!--  //面包屑-->
   <el-breadcrumb separator-class="el-icon-arrow-right">
@@ -111,18 +65,18 @@
 </template>
 
 <script>
+import IndexTop from "../User/IndexTop";
 export default {
   name: "CommodityDisplay",
 
   data(){
     return{
       num: 1,
-      carouseData: [
-        { url: "src/image/sg1.jpg" },
-        { url: "src/image/jdlogin.png" },
-      ],
 
     }
+  },
+  components:{
+   top: IndexTop
   },
   methods:{
 

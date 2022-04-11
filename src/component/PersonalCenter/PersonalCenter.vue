@@ -221,6 +221,7 @@ import IndexTop from "../User/IndexTop";
 import orderall from "../Orderassembly/orderall";
 import Supplier_registration from "../supplier/Supplier_registration";
 import tabs from "../supplier/tabs";
+import Recharge from "./Recharge";
 export default {
   name: "PersonalCenter",
   data() {
@@ -235,6 +236,8 @@ export default {
     Supplier_registration,
     top: IndexTop,
     orderall,
+    Recharge,
+
     tabs
   },
   computed: {

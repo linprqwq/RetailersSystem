@@ -183,7 +183,9 @@ export default {
             setTimeout(()=>{
               this.loadingInstance.close();
               this.$message.success("注册成功 正在去往登录界面")
-              this.$router.push("/login")
+             setTimeout(()=>{
+               this.$router.push("/login")
+             },2000)
             },2000)
           }
         }

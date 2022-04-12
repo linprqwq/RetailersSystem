@@ -40,6 +40,10 @@
               if(response.data!=""){
                 alert("登录成功")
                 // window.location.href="SystemList.vue"
+
+                sessionStorage.setItem("empname",response.data.empName);
+                sessionStorage.setItem("eid",response.data.id);
+
                 this.$router.push("/syslist")
               }else{
                 alert("登录失败")

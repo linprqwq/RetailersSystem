@@ -70,19 +70,24 @@ export default {
           this.$message.error("密码不能为空")
           return
         }else {
-          if(res.data==0){
-            this.$message.error("账号或密码有误")
+          if(res.data==''){
+            this.$message.error("账号或密码有误 或者账号已被冻结")
             return
           }
         }
-        if(res.data!=0){
+        if(res.data!=''){
           this.$message({
-            message:"登录成功",
+            message:"登录成功,欢迎您",
             type:"success"
           })
-        //    this.$router.push("/index").catch(err=> {
-        //     console.log("aaaa",err)
-        //   })
+          // Cookies.set("loginname",this.res.data.loginname)
+          sessionStorage.setItem('user',res.data.username)
+          sessionStorage.setItem('id',res.data.id)
+          var userid=sessionStorage.getItem('user')
+          var  useridd=sessionStorage.getItem('id')
+          this.$parent.$router.push("/").catch(err=> {
+            console.log("aaaa",err)
+          })
         }
       }).catch()
     }
@@ -113,6 +118,8 @@ a {
   margin: 100px auto;
   font-size: 0;
   background-color: #ffffff;
+  left: 400px;
+  top: 130px;
 }
 .login .title {
   width: 100%;
@@ -331,6 +338,9 @@ label {
   background: url("../image/loginn.png");
   background-repeat:no-repeat;
   background-size: cover;
+  height: 600px;
+  position: relative;
+  top: -100px;
 }
 </style>
 

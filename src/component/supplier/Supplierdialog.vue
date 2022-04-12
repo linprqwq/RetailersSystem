@@ -1,18 +1,15 @@
 <template>
 
-<!--供应商对话框-->
+  <!--供应商对话框-->
   <div>
-    <el-form label-width="80px" :model="shop">
-          <el-form-item label="商品名">
-          <el-input v-model="shop.proname"  ></el-input>
-          </el-form-item>
+    <el-form :inline="true" label-width="80px" :model="shop" class="demo-form-inline">
 
-      <!--<el-form-item label="商品分类">
-        <el-input v-model="shop.shoptype.name" readonly></el-input>
-      </el-form-item>-->
+      <el-form-item label="商品名">
+        <el-input v-model="shop.proname" readonly></el-input>
+      </el-form-item>
 
       <el-form-item label="提供价格">
-        <el-input v-model="shop.supplierPrice"></el-input>
+        <el-input v-model="shop.supplierPrice" placeholder="提供价格"></el-input>
       </el-form-item>
     </el-form>
 
@@ -22,54 +19,55 @@
 
 <script>
 
-    export default {
-        name: "Supplierdialog",
-      data(){
-          return{
-            shop:{/*proname:"1",type:{name:"1"}*/},
-            addform:{
-            pId:"",
-            gId:""
-            }
-          }
+  export default {
+    name: "Supplierdialog",
+    data() {
+      return {
+        shopId: "",
+        shop: {
+          supplierPrice: ""
+        },
+        pid:sessionStorage.getItem("id")
+      }
+    },
+    methods: {
+      getObject(id) {
+        this.shopId = id;
+        //根据商品id去 获取商品表数据
+        this.$axios.get("queryspid.action?id=" + id, null).then(response => {
+          this.shop = response.data;
+
+          console.log(response.data)
+        })
+          .catch();
       },
-      methods:{
-            getObject(id){
-              //去根据商品id查询商品表里面的数据
-              let params=new URLSearchParams();
-              params.append("id",id);
-              console.log(id)
-          this.$axios.get("queryspid.action", {params:params}).
-          then(res=>{
-
-            this.shop=res.data;
-            console.log(res.data)
-          })
-              .catch(err=>{
-            this.$message.warning(err)
-                alert(Array)
-              })
-            }
-      },
-        submit(id){
-                //当前用户id从coke里面取出
-            this.addform.pid=sessionStorage.getItem("id");
-            this.addform.gid=id;
-
-
+      submit() {
+        //组装数据
+        let goodsuppplier = {
+          gid: this.shopId,
+          pid: sessionStorage.getItem("id"),
+          supplierPrice: this.shop.supplierPrice,
+        }
+        console.log(this.pid)
 //去调用异步，进行数据添加，需要去审核
-      this.$axios.put("goodsSupplied/addsupplierSupplyOfGoods.action",this.addform).then(res=>{
-        if(res.data.x){
-          this.$message.success(res.data.msg);
+        if(!this.pid){
+          this.$axios.put("goodsSupplied/addsupplierSupplyOfGoods.action", goodsuppplier)
+            .then(res => {
+              if (res.data.x) {
+                this.$message.success(res.data.msg);
+              } else {
+                this.$message.error(res.data.msg);
+              }
+            }).catch();
         }else{
-this.$message.error(res.data.msg);
+          alert("请供应商登录后再去停供货物")
         }
-      }).catch(err=>{
-        this.$message.warning(err);
-        alert(err);
-      })
-        }
+      }
+    },
+
+    created() {
     }
+  }
 </script>
 
 <style scoped>

@@ -46,7 +46,7 @@
       <template slot-scope="scope">
         <el-button
           size="mini"
-          @click="updatestatus(scope.$index, scope.row)" v-if="scope.row.status==2">取消订单</el-button>
+          @click="qxddorder(scope.$index, scope.row)" v-if="scope.row.status==2">取消订单</el-button>
         <el-button
           size="mini"
           @click="updatestatus(scope.$index, scope.row)" v-if="scope.row.status==3">取消订单</el-button>
@@ -70,6 +70,10 @@
           size="mini"
           type="danger"
           @click="addgwc(scope.$index, scope.row)" v-if="scope.row.status==1">加入购物车</el-button>
+        <el-button
+          size="mini"
+          type="danger"
+          @click="sqtuikuan(scope.$index, scope.row)" v-if="scope.row.status==5">申请退款</el-button>
       </template>
     </el-table-column>
   </el-table>
@@ -149,6 +153,7 @@ export default {
       params.append("uid",b.uid);
       this.$axios.post("addgwc.action",params).then(res=>{
         this.$message.success(res.data.msg);
+        this.queryorderdfk();
       }).catch();
     },
     //单个购物车添加
@@ -161,17 +166,29 @@ export default {
 
       this.$axios.post("addspingcart.action",params).then(res=>{
         this.$message.success(res.data.msg);
+        this.queryorderdfk();
       }).catch();
     },
+    //确认收货
     confirmorder(a,b){
       console.log(b)
       var params = new URLSearchParams();
       params.append("orderid",b.orderid);
 
       this.$axios.post("cofirmorder.action",params).then(res=>{
-        this.$message.error(res.data.msg);
+        this.$message.success(res.data.msg);
+        this.queryorderdfk();
       }).catch()
     },
+    qxddorder(a,b){
+      var params = new URLSearchParams();
+      params.append("orderid",b.orderid);
+      params.append("status",1);
+      this.$axios.post("qxddorder,action",params).then(res=>{
+        this.$message.success(res.data.msg);
+        this.queryorderdfk();
+      }).catch()
+    }
   },
 
 

@@ -144,8 +144,12 @@ export default {
       params.append("list", this.list);
       //商品地址id
 
+      //当前状态 （有无付款）
+      params.append("status",2);
+      //订单总价
+      params.append("zprice",this.zongmoney)
       this.$axios.post("usertijiaodd.action", params).then(res => {
-        alert(res.data.msg)
+       this.$message.error(res.data.msg);
       }).catch()
     },
     //购物车数量加减跟删除

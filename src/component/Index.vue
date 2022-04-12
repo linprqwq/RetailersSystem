@@ -354,7 +354,10 @@ export default {
     return {
       userid: sessionStorage.getItem('user'),
       useridd: sessionStorage.getItem('id'),
-      commodity: [],
+      commoditysg: [],
+      commodityhx1:[],
+      commodityhx2:[],
+      commodityrl:[],
       cartcount: 0,
       num: 1,
       carouseData: [
@@ -390,15 +393,42 @@ export default {
       } else {
         this.$router.push('/shopping2');
       }
+    },
+    dianji(id){
+        console.log(id)
     }
   },
   created() {
     var _this = this;
     this.$axios.post("queryAllcom.action").then(val => {
       val.data.forEach(key=>{
-        console.log(key.prozimg+"******")
+        console.log(key+"加载完毕")
       })
-      _this.commodity = val.data
+      _this.commoditysg = val.data.splice(0,4)
+      _this.commoditysg.forEach(itme=>{
+        console.log(itme.prozimg)
+      })
+    }).catch()
+
+    this.$axios.post("queryAllcomhs.action").then(val => {
+      val.data.forEach(key=>{
+        console.log(key+"加载完毕")
+      })
+      _this.commodityhx1 = val.data.splice(0,4)
+    }).catch()
+
+    this.$axios.post("queryAllcomhs.action").then(val => {
+      val.data.forEach(key=>{
+        console.log(key+"加载完毕")
+      })
+      _this.commodityhx2 = val.data.splice(4,8)
+    }).catch()
+
+    this.$axios.post("queryAllcomrl.action").then(val => {
+      val.data.forEach(key=>{
+        console.log(key+"加载完毕")
+      })
+      _this.commodityrl = val.data
     }).catch()
     if (this.useridd != null) {
       var params = new URLSearchParams();

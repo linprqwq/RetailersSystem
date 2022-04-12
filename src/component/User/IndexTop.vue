@@ -21,6 +21,8 @@
           <a class="mzz" v-show="userid!=null" @click="$router.push('/personalCenter')">{{userid}}</a>
           <a class="mzz" v-show="userid==null"  @click="$router.push('/login')">登录</a>
           <a class="mzz" v-show="userid==null" @click="$router.push('/register')">注册</a>
+          <a class="mzz" v-show="userid!=null" @click="$router.push('/login')">注销</a>
+
           <a class="mzz" href="#">消息通知</a>
           <div class="he">
             <div class="che">

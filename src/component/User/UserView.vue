@@ -26,19 +26,23 @@
           </el-table-column>
           <el-table-column
             prop="loginname"
-            label="登录名">
+            label="登录名"
+            width="80">
           </el-table-column>
           <el-table-column
             prop="password"
-            label="密码">
+            label="密码"
+            width="80">
           </el-table-column>
           <el-table-column
             prop="phone"
-            label="手机号">
+            label="手机号"
+            width="120">
           </el-table-column>
           <el-table-column
             prop="umoney"
-            label="用户余额">
+            label="用户余额"
+            width="100">
           </el-table-column>
           <el-table-column
             prop="address"
@@ -46,7 +50,8 @@
           </el-table-column>
           <el-table-column
             prop="img"
-            label="用户头像">
+            label="用户头像"
+            width="100">
             <template slot-scope="scope">
               <img :src="scope.row.imgpath" style="width: 40px;height: 40px">
             </template>
@@ -63,6 +68,15 @@
           <el-table-column
             label="操作">
             <template slot-scope="scope">
+              <el-popconfirm
+                title="确定要冻结此用户吗？"
+                @confirm="dongjie(scope.row)"
+              >
+                <el-button
+                  size="mini"
+                  type="warning"
+                  slot="reference">冻结</el-button>
+              </el-popconfirm>
               <el-button
                 size="mini"
                 @click="handleEdit(scope.row)">编辑</el-button>
@@ -145,6 +159,17 @@
       AddView,EditUserView
     },
     methods:{
+      dongjie(row){
+        this.$axios.put("updstateuser.action",{"ustate":1,"id":row.id})
+          .then(response=>{
+          if(response.data.code=="1"){
+            alert(response.data.msg)
+            this.getdata()
+          }else{
+            alert(response.data.msg)
+          }
+        }).catch();
+      },
       editUser(){
         this.$refs.editUser.submitUpload("editform");
       },

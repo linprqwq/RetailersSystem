@@ -30,15 +30,21 @@
       </div>
     </div>
     <div class="mi-orderlist">
-      <el-tabs :tab-position="tabPosition" style="height: 100%;">
-        <el-tab-pane label="我的个人中心">个人中心组件</el-tab-pane>
-        <el-tab-pane label="我的订单"><orderall></orderall></el-tab-pane>
+      <el-tabs :tab-position="tabPosition" style="height: 900px;">
+        <el-tab-pane label="我的个人中心">
+          <orderall></orderall>
+        </el-tab-pane>
         <el-tab-pane label="我的自提点">地址组件</el-tab-pane>
         <el-tab-pane label="个人信息维护">个信息组件</el-tab-pane>
-        <el-tab-pane label="充值"><Recharge></Recharge></el-tab-pane>
+        <el-tab-pane label="充值">充值组件</el-tab-pane>
         <el-tab-pane label="商户">商户</el-tab-pane>
         <el-tab-pane label="供销商">
-              <supplier_registration></supplier_registration>
+              <div v-if="gysState==1">
+                <tabs></tabs>
+              </div>
+              <div v-else-if="gysState==0">
+                <supplier_registration></supplier_registration>
+              </div>
         </el-tab-pane>
       </el-tabs>
     </div>
@@ -214,13 +220,16 @@
 import IndexTop from "../User/IndexTop";
 import orderall from "../Orderassembly/orderall";
 import Supplier_registration from "../supplier/Supplier_registration";
+import tabs from "../supplier/tabs";
 import Recharge from "./Recharge";
 export default {
   name: "PersonalCenter",
   data() {
     return {
       userid: sessionStorage.getItem('user'),
+      useridd: sessionStorage.getItem('id'),
       tabPosition: 'left',
+      gysState:""
     }
   },
   components: {
@@ -229,12 +238,26 @@ export default {
     orderall,
     Recharge,
 
+    tabs
   },
   computed: {
     showLoginname() {
       return this.userid
     },
   },
+  methods:{
+    userGysone(){
+      let params=new URLSearchParams();
+      params.append("id",this.useridd);
+      this.$axios.get("queryUserGysone.action/",{params:params}).
+      then(response=>{
+        this.gysState=response.data.gysState
+      }).catch();
+    }
+  },
+  created(){
+    this.userGysone()
+  }
 }
 </script>
 

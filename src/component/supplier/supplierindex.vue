@@ -30,11 +30,11 @@
 <el-dialog title="供应信息填写" :visible.sync="dialogVisible"
 width="35%" center>
 <!--弹出对话框组件-->
-<component ref="top" is="top"></component>
+<component ref="Supplierdialog"  is="Supplierdialog"></component>
 
 <span slot="footer" class="dialog-footer">
     <el-button @click="dialogVisible=false">取消</el-button>
-    <el-button type="primary" @click="supply_true">提交</el-button>
+    <el-button type="primary" @click="supply_true()">提交</el-button>
 </span>
 </el-dialog>
 
@@ -51,7 +51,7 @@ width="35%" center>
       data(){
           return{
             shop:{
-            proname:""
+              proname:""
             },
             shop_add_id:"",
             shops:[],
@@ -79,6 +79,7 @@ width="35%" center>
       },
       //去打开对话框
         opensupplier(id) {
+          alert(id)
         console.log(id)
         this.dialogVisible = true;
         this.shop_add_id = id;
@@ -91,7 +92,7 @@ width="35%" center>
         //提交
         supply_true(){
         //去调用对话框组件的方法
-          this.$refs.Supplierdialog.submit(this.shop_add_id);
+          this.$refs.Supplierdialog.submit();
           //关闭模态框
           this.dialogVisible=false;
           //重新刷新页面
@@ -102,7 +103,7 @@ width="35%" center>
           this.getData();
         },
       components:{
-       top: Supplierdialog
+        Supplierdialog
       }
     }
 </script>

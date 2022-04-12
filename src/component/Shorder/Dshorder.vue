@@ -98,8 +98,10 @@
               label="商品名称">
             </el-table-column>
             <el-table-column
-              prop="proimag"
               label="商品图片">
+              <template slot-scope="scope">
+                <img :src="scope.row.proimage" style="width: 80px;height: 80px">
+              </template>
             </el-table-column>
             <el-table-column
               prop="prosprice"
@@ -190,7 +192,7 @@
               var params=new URLSearchParams();
               params.append("orderid",row.orderid);
               this.$axios.post("uptorderdsh.action",params).then(res=>{
-              alert(res.data.msg)
+                this.$message.success(res.data.msg);
                 this.getdata()
               }).catch()
         },

@@ -193,7 +193,7 @@
     params.append("orderid",row.orderid);
     params.append("status",5);
   this.$axios.post("uptorderdsh.action",params).then(res=>{
-                                                         alert(res.data.msg)
+    this.$message.success(res.data.msg);
                                                          this.getdata()
                                                          }).catch()
   },

@@ -7,7 +7,7 @@
           <!--分类组件-->
           <goods_category ref="goods_category"></goods_category>
 
-        <el-form-item label="去上传营业执照">
+        <el-form-item label="头像">
           <el-upload
             :limit="1"
             list-type="picture-card"

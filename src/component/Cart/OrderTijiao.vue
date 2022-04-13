@@ -26,8 +26,6 @@
     <h3 class="common_title">支付方式</h3>
     <div class="common_list_con clearfix">
       <div class="pay_style_con clearfix">
-        <input type="radio" name="pay_style" checked>
-        <label class="weixin">微信支付</label>
         <input type="radio" name="pay_style">
         <label ><span>余额:{{user.umoney}}</span></label>
       </div>

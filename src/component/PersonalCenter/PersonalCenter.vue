@@ -35,8 +35,8 @@
           <orderall></orderall>
         </el-tab-pane>
         <el-tab-pane label="我的自提点">地址组件</el-tab-pane>
-        <el-tab-pane label="个人信息维护">个信息组件</el-tab-pane>
-        <el-tab-pane label="充值">充值组件</el-tab-pane>
+        <el-tab-pane label="个人信息维护">个人信息维护组件</el-tab-pane>
+        <el-tab-pane label="充值"><Recharge></Recharge></el-tab-pane>
         <el-tab-pane label="商户">商户</el-tab-pane>
         <el-tab-pane label="供销商">
               <div v-if="gysState==1">

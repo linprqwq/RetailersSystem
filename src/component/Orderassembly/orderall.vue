@@ -29,6 +29,10 @@
     size="mini"
     type="danger"
     @click="addspingcart(scope1.$index, scope1.row.proid)" v-if="scope.row.status==1">加入购物车</el-button>
+  <el-button
+    size="mini"
+    type="danger"
+    @click="sqtuikuan(scope.$index, scope.row)" v-if="scope.row.status==5">申请退货</el-button>
 </template>
           </el-table-column>
 
@@ -46,10 +50,10 @@
       <template slot-scope="scope">
         <el-button
           size="mini"
-          @click="qxddorder(scope.$index, scope.row)" v-if="scope.row.status==2">取消订单</el-button>
+          @click="qxddorder(scope.$index, scope.row,true)" v-if="scope.row.status==2">取消订单</el-button>
         <el-button
           size="mini"
-          @click="updatestatus(scope.$index, scope.row)" v-if="scope.row.status==3">取消订单</el-button>
+          @click="qxddorder(scope.$index, scope.row,false)" v-if="scope.row.status==3">取消订单</el-button>
         <el-button
           size="mini"
           type="danger"
@@ -61,7 +65,7 @@
         <el-button
           size="mini"
           type="danger"
-          @click="pj(scope.$index, scope.row)" v-if="scope.row.status==5">待评价</el-button>
+          @click="pj(scope.$index, scope.row)" v-if="scope.row.evaluate==2">待评价</el-button>
         <el-button
           size="mini"
           type="danger"
@@ -208,11 +212,23 @@ export default {
       }).catch()
     },
     //取消订单
-    qxddorder(a,b){
+    qxddorder(a,b,boolea){
+
+        var params = new URLSearchParams();
+        params.append("orderid",b.orderid);
+        params.append("status",1);
+      params.append("boolea",boolea);
+        this.$axios.post("qxddorder,action",params).then(res=>{
+          this.$message.success(res.data.msg);
+          this.queryorderdfk();
+        }).catch()
+      },
+    //取消付款过的订单
+    qxfkorder(a,b){
       var params = new URLSearchParams();
       params.append("orderid",b.orderid);
       params.append("status",1);
-      this.$axios.post("qxddorder,action",params).then(res=>{
+      this.$axios.post("qxfkorder",params).then(res=>{
         this.$message.success(res.data.msg);
         this.queryorderdfk();
       }).catch()
@@ -247,8 +263,8 @@ export default {
       this.editdialogVisible = false;
       this.$refs.eds.submitUpload();
     },
+    },
 
-  },
 
 
   mounted(){

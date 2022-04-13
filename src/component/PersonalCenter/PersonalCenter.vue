@@ -1,37 +1,10 @@
 <template>
   <div>
     <top></top>
-    <div class="site-header">
-      <div class="site-info">
-        <div class="site-logo">
-          <img src="image2/favicon.ico" alt="" width="56px" height="56px"/>
-        </div>
-        <div class="site-nav">
-          <ul>
-            <li><a href="">全部商品分类</a></li>
-            <li><a href="">小米手机</a></li>
-            <li><a href="">Redmi红米</a></li>
-            <li><a href="">电视</a></li>
-            <li><a href="">笔记本</a></li>
-            <li><a href="">家电</a></li>
-            <li><a href="">路由器</a></li>
-            <li><a href="">智能硬件</a></li>
-            <li><a href="">服务</a></li>
-            <li><a href="">社区</a></li>
-          </ul>
-        </div>
-        <div class="site-search ">
-          <form action="">
-            <input id="gname" type="text" name="gname" value="智能">
-            <input id="gbtn" type="submit" value="搜索">
-          </form>
-        </div>
 
-      </div>
-    </div>
     <div class="mi-orderlist">
-      <el-tabs :tab-position="tabPosition" style="height: 100%;">
-        <el-tab-pane label="我的个人中心">
+      <el-tabs :tab-position="tabPosition"  style="height: 100%;">
+        <el-tab-pane label="我的个人中心" >
           <orderall></orderall>
         </el-tab-pane>
         <el-tab-pane label="我的自提点">地址组件</el-tab-pane>
@@ -65,7 +38,7 @@ export default {
       userid: sessionStorage.getItem('user'),
       useridd: sessionStorage.getItem('id'),
       tabPosition: 'left',
-      gysState:""
+      gysState:"",
     }
   },
   components: {

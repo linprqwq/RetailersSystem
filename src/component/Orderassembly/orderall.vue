@@ -142,8 +142,18 @@ export default {
       }).catch()
     },
     //付款
-    fk(){
-
+    fk(a,b){
+        var params = new URLSearchParams();
+        console.log(b)
+        params.append("orderid",b.orderid);
+        params.append("uid",b.orderid);
+        this.$axios.post("fkorder.action",params).then(res=>{
+          this.$message.success(res.data.msg);
+          if (res.data.code==0){
+            this.$emit('update:msg','3');
+          }
+          this.queryorderdfk();
+        }).catch();
     },
     //评价
     pj(){

@@ -150,7 +150,7 @@ export default {
         this.$axios.post("fkorder.action",params).then(res=>{
           this.$message.success(res.data.msg);
           if (res.data.code==0){
-            this.$emit('update:msg','3');
+        console.log(1)
           }
           this.queryorderdfk();
         }).catch();

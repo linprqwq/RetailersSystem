@@ -11,6 +11,7 @@
               </div>
             </div>
           </el-col>
+          <el-col :span="12" :offset="10">   <el-button @click="zx()" type="danger" size="mini"  style="" >注销</el-button></el-col>
         </el-row>
       </el-header>
       <el-container>
@@ -91,10 +92,12 @@
   import GysShJlView from "./Gys/GysShJlView";
   import ShJlView from "./commecial/ShJlView";
   import ShView from "./commecial/ShView";
+  import commmodity from "./shop/commmodity";
     export default {
         name: "SystemList",
       components:{
-        Welcome,EmpView,AuthcView,UserView,CgsqView,GysShView,GysShJlView,ShView,ShJlView
+        Welcome,EmpView,AuthcView,UserView,CgsqView,GysShView,GysShJlView,ShView,ShJlView,
+        commmodity
       },
       data(){
         return {
@@ -122,6 +125,15 @@
                 console.log(this.circleUrl)
               }).catch();
           },
+        zx(){
+          localStorage.clear()
+          sessionStorage.clear()
+          this.$router.push("/Emplogin")
+          history.pushState(null, null, document.URL);
+          window.addEventListener("popstate",function(e) {
+            history.pushState(null, null, document.URL);
+          }, false);
+        },
         addTab(targetName,vuename) {
           //数组找有没有
           var obj= this.editableTabs.find(item=>item.title == targetName);

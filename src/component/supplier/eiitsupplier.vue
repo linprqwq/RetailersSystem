@@ -60,9 +60,10 @@
         //清空图片数组
         this.fileList = [];
         //调用异步,去根据id查询用户
-        this.$axios.get("selsid.action?id=" + this.ruleForm.id, null).then(response => {
+        this.$axios.get("selsid.action?id=" + this.ruleForm.id, null).
+        then(response => {
           this.ruleForm = response.data;
-          response.data.supplierGoodsCategoryList.forEach(item => {
+          response.data.supplierGoodsCategoryList.forEach(item=>{
             this.ShopTypeInfos.push(item.sortId);
           });
           this.fileList.push({

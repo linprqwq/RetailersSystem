@@ -78,7 +78,7 @@ export default {
       /*去清空 token 浏览器的缓存  紧张浏览器回退*/
       localStorage.clear()
       sessionStorage.clear()
-      this.$router.push('/login')
+      this.$router.go(0)
       history.pushState(null, null, document.URL);
       window.addEventListener("popstate",function(e) {
         history.pushState(null, null, document.URL);

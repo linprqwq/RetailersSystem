@@ -56,6 +56,7 @@
         //获取选择的商品分类数组、
         var  formData=new FormData();
        /* formData.append("id",1);//this.addForm.id);*/
+        this.addForm["supplierGoodsCategoryList"]=this.$refs["goods_category"].ShopTypeInfos;
 
         formData.append("id",this.addForm.id);
         Object.keys(this.$refs["goods_category"].ShopTypeInfos).forEach(index=>{

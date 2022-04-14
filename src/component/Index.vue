@@ -129,7 +129,7 @@
             <a href="#"><img :src="require('../image/商品左边背景图3.png')" alt="图片出错" height="298px" width="233px"></a>
           </div>
           <div class="xiatu2" v-for="com in commodityhx1">
-            <a href="#"><img :src="'/src/'+com.prozimg" alt="图片出错" height="160px" width="160px"></a>
+            <a href="#"><img :src="'/src/'+com.prozimg" alt="图片出错" height="160px" width="160px" @click="dianji(com.id)"></a>
             <p>{{com.proname}}</p>
             <span>{{com.prosubtitle}}</span>
             <div class="nei1">
@@ -145,7 +145,7 @@
             <a href="#"><img :src="require('../image/商品左边背景图3.png')" alt="图片出错" height="298px" width="233px"></a>
           </div>
           <div class="xiatu2" v-for="com in commodityhx2">
-            <a href="#"><img :src="'/src/'+com.prozimg" alt="图片出错" height="160px" width="160px"></a>
+            <a href="#"><img :src="'/src/'+com.prozimg" alt="图片出错" height="160px" width="160px" @click="dianji(com.id)"></a>
             <p>{{com.proname}}</p>
             <span>{{com.prosubtitle}}</span>
             <div class="nei1">
@@ -166,7 +166,7 @@
             <a href="#"><img :src="require('../image/商品左边背景图1.png')" alt="图片出错" height="298px" width="233px"></a>
           </div>
           <div class="xiatu2" v-for="com in commodityrl">
-            <a href="#"><img :src="'/src/'+com.prozimg" alt="图片出错" height="196px" width="233px"></a>
+            <a href="#"><img :src="'/src/'+com.prozimg" alt="图片出错" height="196px" width="233px" @click="dianji(com.id)"></a>
             <p>{{com.proname}}</p>
             <span>{{com.prosubtitle}}</span>
             <div class="nei1">

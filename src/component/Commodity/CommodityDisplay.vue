@@ -69,7 +69,7 @@
 
           <div class="btn-box">
             <div class="sale-btn">
-              <a href="#" class="btn-primary">加入购物车</a>
+              <a href="#" class="btn-primary" @click="addspingcart">加入购物车</a>
             </div>
             <div class="favorite-btn">
               <a href="#">
@@ -83,7 +83,7 @@
     </div>
     <div class="detail-box">
       <div class="img-box">
-        <img src="'/src/'+commodityList.proimage" alt="维护中"/>
+        <img :src="'/src/'+commodityList.proimage" alt="维护中"/>
       </div>
     </div>
 
@@ -267,7 +267,9 @@ export default {
       num: 1,
       comqwq:null,
       commodityList:"",
-      tp:[]
+      tp:[],
+      userid: sessionStorage.getItem('user'),
+      useridd: sessionStorage.getItem('id')
     }
   },
   components:{
@@ -276,13 +278,17 @@ export default {
   methods:{
     //加入购物车
     addspingcart(){
-      var params = new URLSearchParams();
-      //加入购物车  商品id 用户id 商品数量默认为1   如果购物车已有 购物车商品数量加1
-      params.append("uid",3)
-      params.append("cid",1)
-      this.$axios.post("addspingcart.action",params).then(res=>{
-        //alert(res.data.msg);
-      }).catch();
+      if(this.userid==null){
+        this.$message.warning("异样顶针 鉴定为假 请去登录")
+      }else{
+        var params = new URLSearchParams();
+        //加入购物车  商品id 用户id 商品数量默认为1   如果购物车已有 购物车商品数量加1
+        params.append("uid",this.useridd)
+        params.append("cid",this.comqwq)
+        this.$axios.post("addspingcart.action",params).then(res=>{
+          console.log(res.data.msg);
+        }).catch();
+      }
     },
   },
   created() {
@@ -293,7 +299,7 @@ export default {
       params.append("id",_this.comqwq)
       this.$axios.post("queryspid.action",params).then(res=>{
         _this.commodityList=res.data
-
+        console.log(_this.commodityList.proimage)
         if(res.data==null){
           this.$message.error("请求失败 稍后再试");
         }

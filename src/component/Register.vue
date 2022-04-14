@@ -36,6 +36,7 @@
           <el-upload
             class="upload-demo"
             ref="upload"
+            :on-change="changeFile"
             action="#"
             :limit="1"
             :file-list="fileList"
@@ -190,6 +191,9 @@ export default {
           }
         }
       ).catch()
+    },  //每次文件改变选择，都将最新的选择文件 更新到头像数组中
+    changeFile(file, fileList) {
+      this.fileList = fileList;
     }
   }
 }

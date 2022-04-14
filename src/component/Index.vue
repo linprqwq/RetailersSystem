@@ -2,23 +2,23 @@
   <div>
     <top></top>
     <div class="bj1">
-      <div class="topd">
-        <div class="tu">
-          <a href="#"><img :src="require('../image/logo-mi2.png')" alt="图片出错"></a>
+        <div class="topd">
+          <div class="tu">
+            <a href="#"><img :src="require('../image/logo-mi2.png')" alt="图片出错"></a>
+          </div>
+          <div class="topdzh">
+            <a href="#shuiguo" id="xm">水果</a>
+            <a href="#haixiang" id="hm">海鲜</a>
+            <a href="#roulei" id="ds">肉类</a>
+            <a href="#" id="bjbb">冷饮</a>
+            <a href="#" id="jd">速食</a>
+            <a href="#" id="lyq">蔬菜</a>
+            <a href="#">选购</a>
+            <a href="#">服务</a>
+            <a href="#">社区</a>
+          </div>
+          <!--      //搜索-->
         </div>
-        <div class="topdzh">
-          <a href="#shuiguo" id="xm">水果</a>
-          <a href="#haixiang" id="hm">海鲜</a>
-          <a href="#roulei" id="ds">肉类</a>
-          <a href="#" id="bjbb">冷饮</a>
-          <a href="#" id="jd">速食</a>
-          <a href="#" id="lyq">蔬菜</a>
-          <a href="#">选购</a>
-          <a href="#">服务</a>
-          <a href="#">社区</a>
-        </div>
-        <!--      //搜索-->
-      </div>
       <div class="tope">
         <div class="zuozi">
           <a href="#" class="top-left1">手机 电话卡</a>
@@ -129,7 +129,7 @@
             <a href="#"><img :src="require('../image/商品左边背景图3.png')" alt="图片出错" height="298px" width="233px"></a>
           </div>
           <div class="xiatu2" v-for="com in commodityhx1">
-            <a href="#"><img :src="'/src/'+com.prozimg" alt="图片出错" height="160px" width="160px"></a>
+            <a href="#"><img :src="'/src/'+com.prozimg" alt="图片出错" height="160px" width="160px" @click="dianji(com.id)"></a>
             <p>{{com.proname}}</p>
             <span>{{com.prosubtitle}}</span>
             <div class="nei1">
@@ -145,7 +145,7 @@
             <a href="#"><img :src="require('../image/商品左边背景图3.png')" alt="图片出错" height="298px" width="233px"></a>
           </div>
           <div class="xiatu2" v-for="com in commodityhx2">
-            <a href="#"><img :src="'/src/'+com.prozimg" alt="图片出错" height="160px" width="160px"></a>
+            <a href="#"><img :src="'/src/'+com.prozimg" alt="图片出错" height="160px" width="160px" @click="dianji(com.id)"></a>
             <p>{{com.proname}}</p>
             <span>{{com.prosubtitle}}</span>
             <div class="nei1">
@@ -166,7 +166,7 @@
             <a href="#"><img :src="require('../image/商品左边背景图1.png')" alt="图片出错" height="298px" width="233px"></a>
           </div>
           <div class="xiatu2" v-for="com in commodityrl">
-            <a href="#"><img :src="'/src/'+com.prozimg" alt="图片出错" height="196px" width="233px"></a>
+            <a href="#"><img :src="'/src/'+com.prozimg" alt="图片出错" height="196px" width="233px" @click="dianji(com.id)"></a>
             <p>{{com.proname}}</p>
             <span>{{com.prosubtitle}}</span>
             <div class="nei1">
@@ -395,8 +395,14 @@ export default {
       }
     },
     dianji(id){
-        console.log(id)
-    }
+      this.$router.push({
+        path: '/CommodityDisplay',
+        query: {
+          comid: id
+        }
+      })
+    },
+
   },
   created() {
     var _this = this;

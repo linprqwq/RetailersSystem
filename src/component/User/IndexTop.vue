@@ -78,27 +78,12 @@ export default {
       /*去清空 token 浏览器的缓存  紧张浏览器回退*/
       localStorage.clear()
       sessionStorage.clear()
-      this.$router.go(0)
-      history.pushState(null, null, document.URL);
-      window.addEventListener("popstate",function(e) {
-        history.pushState(null, null, document.URL);
-      }, false);
+      this.$message.success("注销成功")
+      setTimeout(()=>{
+        this.$router.go(0)
+      },200)
 
 
-      /*this.$confirm('此操作将注销登录, 是否继续?', '提示', {
-        confirmButtonText: '确定',
-        cancelButtonText: '取消',
-        type: 'warning'
-      }).then(() => {
-        sessionStorage.removeItem("user,id")
-        this.$router.push('/login')
-      }).catch(() => {
-        this.$message({
-          type: 'info',
-          message: '已取消操作'
-        });
-      });
-*/
     }
 
   },

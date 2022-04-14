@@ -293,6 +293,16 @@ export default {
             this.$router.go(0)
           })
         });
+        //刷新购物车
+        if(this.useridd!=null){
+          var params= new URLSearchParams();
+          params.append("id",this.useridd)
+          this.$axios.post("cartcount.action",params).then(
+            val=>{
+              _this.cartcount=val.data
+            }
+          ).catch()
+        }
       }
     },
   },

@@ -61,8 +61,9 @@ width="35%" center>
 
       methods:{
         getData(){
-            let params={};
-            params["id"]=1;
+            let params={
+              id:sessionStorage.getItem("id")
+            };
         Object.keys(this.shop).forEach(item=>{
               params[item]=this.shop[item];
         })

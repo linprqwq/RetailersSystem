@@ -91,10 +91,11 @@
   import GysShJlView from "./Gys/GysShJlView";
   import ShJlView from "./commecial/ShJlView";
   import ShView from "./commecial/ShView";
+  import GygoodsShView from "./Gys/GygoodsShView";
     export default {
         name: "SystemList",
       components:{
-        Welcome,EmpView,AuthcView,UserView,CgsqView,GysShView,GysShJlView,ShView,ShJlView
+        Welcome,EmpView,AuthcView,UserView,CgsqView,GysShView,GysShJlView,ShView,ShJlView,GygoodsShView
       },
       data(){
         return {
@@ -184,12 +185,15 @@
     color: #333;
     text-align: center;
   }
-
+  .el-menu{
+    position: relative;
+    top: -25px;
+  }
   .el-aside {
 
     color: #333;
     height: 100%;
-    background-color: #424242;
+    background-color: white;
   }
   .component{
 
@@ -197,7 +201,7 @@
     background-color: pink;
   }
   .el-main {
-    width: 90%;
+    width: 100%;
     background-color: palegoldenrod;
     text-align: center;
   }

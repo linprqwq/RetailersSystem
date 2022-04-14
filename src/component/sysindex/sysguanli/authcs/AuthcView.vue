@@ -113,27 +113,31 @@
           }).catch();
       },
       shoquan() {
-        //授权按钮按下
-        //获取下拉框的角色id
-        let  rid= this.opvalue;
-        //获取树形选中的菜单id//则返回目前被选中的节点所组成的数组
-        let menuId="";
-        this.$refs.mytree.getCheckedNodes().forEach(item=>{
-          menuId+=item.id+",";
-        })
-        var params = new URLSearchParams();
-        params.append("menuId", menuId);
-        params.append("roleId", rid);
-        this.$axios.post("setauthc.action",params)
-          .then(response => {
-            if(response.data==true){
-              alert("授权成功")
-            }else{
-              alert("授权失败")
-            }
-          }).catch();
-        //axios 传送给后端
+        if(this.opvalue!=""){
+          //授权按钮按下
+          //获取下拉框的角色id
+          let  rid= this.opvalue;
+          //获取树形选中的菜单id//则返回目前被选中的节点所组成的数组
+          let menuId="";
+          this.$refs.mytree.getCheckedNodes().forEach(item=>{
+            menuId+=item.id+",";
+          })
+          var params = new URLSearchParams();
+          params.append("menuId", menuId);
+          params.append("roleId", rid);
+          this.$axios.post("setauthc.action",params)
+            .then(response => {
+              if(response.data==true){
+                alert("授权成功")
+              }else{
+                alert("授权失败")
+              }
+            }).catch();
+          //axios 传送给后端
 
+        }else{
+          alert("请选择角色再提交")
+        }
 
       }
     },

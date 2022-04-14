@@ -175,7 +175,7 @@
         this.$refs.editUser.submitUpload("editform");
       },
       addUser(){
-        this.$refs.addView.submitUpload("addform");
+        this.$refs.addView.submitUpload("addForm");
 
       },
       openaddwin(){

@@ -80,7 +80,7 @@ width="35%" center>
       },
       //去打开对话框
         opensupplier(id) {
-          alert(id)
+        /*  alert(id)*/
         console.log(id)
         this.dialogVisible = true;
         this.shop_add_id = id;

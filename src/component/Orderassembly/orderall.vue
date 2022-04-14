@@ -29,6 +29,10 @@
     size="mini"
     type="danger"
     @click="addspingcart(scope1.$index, scope1.row.proid)" v-if="scope.row.status==1">加入购物车</el-button>
+  <el-button
+    size="mini"
+    type="danger"
+    @click="sqtuikuan(scope.$index, scope.row)" v-if="scope.row.status==5">申请退货</el-button>
 </template>
           </el-table-column>
 
@@ -46,10 +50,10 @@
       <template slot-scope="scope">
         <el-button
           size="mini"
-          @click="updatestatus(scope.$index, scope.row)" v-if="scope.row.status==2">取消订单</el-button>
+          @click="qxddorder(scope.$index, scope.row,true)" v-if="scope.row.status==2">取消订单</el-button>
         <el-button
           size="mini"
-          @click="updatestatus(scope.$index, scope.row)" v-if="scope.row.status==3">取消订单</el-button>
+          @click="qxddorder(scope.$index, scope.row,false)" v-if="scope.row.status==3">取消订单</el-button>
         <el-button
           size="mini"
           type="danger"
@@ -57,11 +61,11 @@
         <el-button
           size="mini"
           type="danger"
-          @click="handleDelete(scope.$index, scope.row)" v-if="scope.row.status==2">付款</el-button>
+          @click="fk(scope.$index, scope.row)" v-if="scope.row.status==2">付款</el-button>
         <el-button
           size="mini"
           type="danger"
-          @click="handleDelete(scope.$index, scope.row)" v-if="scope.row.status==5">待评价</el-button>
+          @click="pj(scope.$index, scope.row)" v-if="scope.row.evaluate==2">待评价</el-button>
         <el-button
           size="mini"
           type="danger"
@@ -70,6 +74,10 @@
           size="mini"
           type="danger"
           @click="addgwc(scope.$index, scope.row)" v-if="scope.row.status==1">加入购物车</el-button>
+        <el-button
+          size="mini"
+          type="danger"
+          @click="sqtuikuan(scope.$index, scope.row)" v-if="scope.row.status==5">申请退货</el-button>
       </template>
     </el-table-column>
   </el-table>
@@ -82,10 +90,25 @@
     layout="total, sizes, prev, pager, next, jumper"
     :total="total">
   </el-pagination>
+
+  <!--  编辑页面-->
+  <el-dialog
+    title="退货申请表"
+    :visible.sync="editdialogVisible"
+    width="30%"
+    :before-close="handleClose">
+    <!-- 动态组件   指定添加vue页面在模态框显示-->
+    <component ref="eds" is="returngoods"></component>
+
+    <el-button type="primary" @click="qdreturngoods">确 定</el-button>
+    <el-button @click="editdialogVisible = false">取 消</el-button>
+
+  </el-dialog>
 </div>
 </template>
 
 <script>
+import returngoods from "../Commodity/returngoods";
 export default {
   name: "orderall",
   data(){
@@ -98,7 +121,11 @@ export default {
       pagesize:5,   //页size
       total:1,   //查询到的总记录数量
       gwcall:[],
+      editdialogVisible:false,
     }
+  },
+  components:{
+    returngoods
   },
   methods: {
     //根据当前登录id查询订单
@@ -113,6 +140,24 @@ export default {
         this.list = res.data.records;
         console.log(this.list)
       }).catch()
+    },
+    //付款
+    fk(a,b){
+        var params = new URLSearchParams();
+        console.log(b)
+        params.append("orderid",b.orderid);
+        params.append("uid",b.orderid);
+        this.$axios.post("fkorder.action",params).then(res=>{
+          this.$message.success(res.data.msg);
+          if (res.data.code==0){
+        console.log(1)
+          }
+          this.queryorderdfk();
+        }).catch();
+    },
+    //评价
+    pj(){
+
     },
     //分页控件
     handleSizeChange(val) { //分页控件  页面size改变 触发  val参数就是选择的条数
@@ -149,6 +194,7 @@ export default {
       params.append("uid",b.uid);
       this.$axios.post("addgwc.action",params).then(res=>{
         this.$message.success(res.data.msg);
+        this.queryorderdfk();
       }).catch();
     },
     //单个购物车添加
@@ -161,18 +207,74 @@ export default {
 
       this.$axios.post("addspingcart.action",params).then(res=>{
         this.$message.success(res.data.msg);
+        this.queryorderdfk();
       }).catch();
     },
+    //确认收货
     confirmorder(a,b){
       console.log(b)
       var params = new URLSearchParams();
       params.append("orderid",b.orderid);
 
       this.$axios.post("cofirmorder.action",params).then(res=>{
-        this.$message.error(res.data.msg);
+        this.$message.success(res.data.msg);
+        this.queryorderdfk();
       }).catch()
     },
-  },
+    //取消订单
+    qxddorder(a,b,boolea){
+
+        var params = new URLSearchParams();
+        params.append("orderid",b.orderid);
+        params.append("status",1);
+      params.append("boolea",boolea);
+        this.$axios.post("qxddorder,action",params).then(res=>{
+          this.$message.success(res.data.msg);
+          this.queryorderdfk();
+        }).catch()
+      },
+    //取消付款过的订单
+    qxfkorder(a,b){
+      var params = new URLSearchParams();
+      params.append("orderid",b.orderid);
+      params.append("status",1);
+      this.$axios.post("qxfkorder",params).then(res=>{
+        this.$message.success(res.data.msg);
+        this.queryorderdfk();
+      }).catch()
+    },
+    //打开退货窗口
+    sqtuikuan(a,b){
+      var id;
+      this.editdialogVisible=true;
+      console.log(b.ordderdetails);
+      b.ordderdetails.forEach(item=>{
+        id = item.id;
+      })
+      //根据id查询数据
+      this.$nextTick(item=>{
+        this.$refs.eds.getdata(b.orderid,id);
+      })
+
+    },
+    //窗口关闭确认
+    handleClose(done) {
+      this.$confirm('确认关闭？')
+        .then(_ => {
+          this.editdialogVisible = false
+          this.adddialogVisible = false
+          this.$refs.eds.fileList=[];
+
+        })
+        .catch(_ => {});
+    },
+    //点击确定按钮，执行returngoods.vue组件中添加添加方法
+    qdreturngoods(){
+      this.editdialogVisible = false;
+      this.$refs.eds.submitUpload();
+    },
+    },
+
 
 
   mounted(){

@@ -5,7 +5,20 @@
      密码: <el-input type="text" v-model="pwd"></el-input><br>
      手机号:<el-input type="text" v-model="phone"></el-input><br>
      余额: <el-input type="text" v-model="umoney"></el-input><br>
-     头像:<el-input type="text" v-model="img"></el-input><br>
+
+     <el-upload
+       class="avatar-uploader"
+       action="#"
+       :file-list="fileList"
+       :on-change="changeFile"
+       :auto-upload="false"
+       list-type="picture-card">
+       <img v-if="imageUrl" :src="imge" class="avatar">
+       <i v-else class="el-icon-plus avatar-uploader-icon"></i>
+     </el-upload>
+
+     <br><br>
+
      <span>省</span>
      <el-select @change="fun1" v-model="sheng" placeholder="请选择" >
        <el-option v-for="p in provice"  :value="p.id" :label="p.name"></el-option>
@@ -29,12 +42,13 @@
         name: "zlwh",
       data(){
         return{
+          imageUrl:"",
           uname: "",
           loginname: "",
           pwd: "",
           phone: "",
           umoney: "",
-          img: "",
+          imge: "",
           shaddress: "",
           xxaddr:"",
           shi:"",
@@ -42,7 +56,8 @@
           qu:"",
           provice:[],
           ctiy:[],
-          district:[]
+          district:[],
+          fileList:[]
         }
       },
       methods:{
@@ -56,19 +71,21 @@
               this.pwd=res.data.password;
               this.phone=res.data.phone;
               this.umoney=res.data.umoney;
-              this.img=res.data.img;
+              this.imge=res.data.imgpath;
               this.shaddress=res.data.shaddress;
             }).catch()
           },
         update(){
-          var params=new URLSearchParams();
-          params.append("id",2);
-          params.append("username",this.uname);
-          params.append("loginname",this.loginname);
-          params.append("password",this.pwd);
-          params.append("phone",this.phone);
-          params.append("umoney",this.umoney);
-          params.append("img",this.img);
+          var formData = new FormData();
+          formData.append("id",2);
+          formData.append("username",this.uname);
+          formData.append("loginname",this.loginname);
+          formData.append("password",this.pwd);
+          formData.append("phone",this.phone);
+          formData.append("umoney",this.umoney);
+          this.fileList.forEach(item => {
+              formData.append('file', item.raw)  //新选择的文件
+          })
           for(let a=0;a<this.provice.length;a++){
             if(this.sheng==this.provice[a].id){
               this.shaddress=this.provice[a].name;
@@ -86,10 +103,21 @@
           }
           this.shaddress+=this.xxaddr
           console.log(this.shaddress);
-          params.append("shaddress",this.shaddress);
-          this.$axios.post("updatesh.action",params).then(res=>{
-            alert(res.data.msg)
-          }).catch()
+          formData.append("shaddress",this.shaddress);
+          this.$axios({
+            method: "post",
+            url: "updatesh.action",
+            data: formData,
+            headers: {
+              'Content-Type': 'multipart/form-data'
+            }
+          }).then(res => {
+
+              this.$message.success(res.data.msg);
+
+          }).catch(err=>{
+            this.$message.warning(err);
+          })
         },
         fun1(){
           var _this = this;
@@ -114,6 +142,12 @@
           ).catch(
 
           )
+        },
+
+        //每次文件改变选择，都将最新的选择文件 更新到data中的头像数组中
+        changeFile(file, fileList) {
+
+          this.fileList = fileList;
         }
         },
       created(){
@@ -141,6 +175,28 @@
 
 </script>
 
-<style scoped>
-
+  <style scoped>
+    .avatar-uploader .el-upload {
+      border: 1px dashed #d9d9d9;
+      border-radius: 6px;
+      cursor: pointer;
+      position: relative;
+      overflow: hidden;
+    }
+    .avatar-uploader .el-upload:hover {
+      border-color: #409EFF;
+    }
+    .avatar-uploader-icon {
+      font-size: 28px;
+      color: #8c939d;
+      width: 178px;
+      height: 178px;
+      line-height: 178px;
+      text-align: center;
+    }
+    .avatar {
+      width: 178px;
+      height: 178px;
+      display: block;
+    }
 </style>

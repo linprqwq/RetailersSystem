@@ -99,6 +99,9 @@
             <el-table-column
               prop="proimag"
               label="商品图片">
+              <template slot-scope="scope">
+                <img :src="scope.row.proimage" style="width: 80px;height: 80px">
+              </template>
             </el-table-column>
             <el-table-column
               prop="prosprice"

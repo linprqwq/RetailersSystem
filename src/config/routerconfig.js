@@ -20,6 +20,8 @@ import Dshorder from "../component/Shorder/Dshorder";
 import Dthorder from "../component/Shorder/Dthorder";
 import Yrhorder from "../component/Shorder/Yrhorder";
 import Zlwh from "../component/shzlwh/Zlwh";
+import Shzy from "../component/Shbj/Shzy";
+import Recharge from "../component/PersonalCenter/Recharge";
 import Supplier_registration from "../component/supplier/Supplier_registration";
 //Vue组件使用Vue-router组件*******************
 Vue.use(VueRouter)
@@ -117,11 +119,22 @@ var routes=[
     name: "myshoppingkk",
     component: myshoppingkk
   },
+  //购物车空空
+  {
+    path: "/shzy",
+    component: Shzy
+  },
   //供应商
   {
     path: "/Supplier_registration",
     name: "Supplier_registration",
     component: myshoppingkk
+  },
+  //充值
+  {
+    path: "/Recharge",
+    name: "Recharge",
+    component: Recharge
   }
 
 ]

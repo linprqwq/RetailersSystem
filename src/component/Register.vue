@@ -9,7 +9,7 @@
       </div>
     </div>
     <div class="middle">
-      <el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-width="100px" class="demo-ruleForm">
+      <el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-width="100px" class="demo-ruleForm" >
         <el-form-item
           label="昵称"
           prop="username">
@@ -20,8 +20,8 @@
           prop="loginname">
           <el-input  v-model.number="ruleForm.loginname" autocomplete="off"></el-input>
         </el-form-item>
-        <el-form-item label="密码" prop="password1">
-          <el-input type="password" v-model="ruleForm.password1" autocomplete="off"></el-input>
+        <el-form-item label="密码" prop="password" >
+          <el-input type="password" v-model="ruleForm.password"  autocomplete="off"></el-input>
         </el-form-item>
         <el-form-item label="确认密码" prop="password2">
           <el-input type="password" v-model="ruleForm.password2"  autocomplete="off"></el-input>
@@ -30,17 +30,14 @@
           label="手机号"
           prop="phone"
         >
-          <el-input type="phone" v-model.number="ruleForm.phone" autocomplete="off"></el-input>
+          <el-input type="number" v-model.number="ruleForm.phone" autocomplete="off"></el-input>
         </el-form-item>
         <el-form-item label="头像">
           <el-upload
             class="upload-demo"
             ref="upload"
             action="#"
-            :before-remove="beforeRemove"
             :limit="1"
-            :on-change="changeFile"
-            :on-exceed="handleExceed"
             :file-list="fileList"
             list-type="picture-card"
             :auto-upload="false"
@@ -83,9 +80,9 @@ export default {
       }
     };
     var testusername = (rule, value, callback) => {
-      console.log(this.username)
+      console.log()
       var params = new URLSearchParams()
-      params.append("username",this.username)
+      params.append("username", this.ruleForm.username)
       this.$axios.post("checkusername.action", params).then(val => {
         if (val.data != 0) {
           callback(new Error("用户名重复"))
@@ -96,10 +93,11 @@ export default {
     };
     var testloginname = (rule, val, callback) => {
       var params = new URLSearchParams()
-      params.append("loginname",this.loginname)
+      params.append("loginname", this.ruleForm.loginname)
       this.$axios.post("checkloginname.action", params).then(val => {
         if (val.data != 0) {
           callback(new Error("登录账号重复"))
+          console.log(this.ruleForm)
         } else {
           callback()
         }
@@ -114,6 +112,7 @@ export default {
       }
     }
     return {
+      loadingInstance: null,
       fileList: [],
       ruleForm: {
         password: "",
@@ -123,7 +122,7 @@ export default {
         phone: "",
       },
       rules: {
-        password: [
+        password1: [
           {validator: validatePass, trigger: 'blur'}
         ],
         password2: [
@@ -147,102 +146,50 @@ export default {
   methods: {
     submitForm(formName) {
       this.$refs[formName].validate((valid) => {
-
         if (valid) {
-          // //将需要提交的文件，和附带的数据，append  FormData中 然后提交
-          // var formData = new FormData();
-          // //先组装表单简单数据
-          // /*  formData.append('name', this.addform.name)
-          //   formData.append('type', this.addform.type)
-          //   formData.append('price', this.addform.price)*/
-          //
-          // Object.keys(this.ruleForm).forEach(item=>{
-          //   formData.append(item, this.ruleForm[item])
-          // })
-          // //循环文件数组   将多个文件保存入formdata中
-          // this.fileList.forEach(item => {
-          //   formData.append('file', item.raw)
-          // })
-          // this.sendFile(formData)
-          const  qwq = Loading.service()
-          console.log('成功!');
+          this.go()
         } else {
-          alert('检查');
+          console.log('error submit!!');
           return false;
         }
       });
     },
-    //真正进行异步，保存数据的方法
-    sendFile(data) {
-      //等待效果
-      const loading = this.$loading({
+    go(){
+      var formData = new FormData();
+      Object.keys(this.ruleForm).forEach(itme=>{
+        formData.append(itme,this.ruleForm[itme])
+      })
+      this.fileList.forEach(item=>{
+        formData.append('file',item.raw)
+      })
+      this.sendFile(formData)
+    },
+    sendFile(data){
+      this.loadingInstance = Loading.service({
+        text:'桥豆麻袋',
         lock: true,
-        text: '添加中，请稍等...',
         spinner: 'el-icon-loading',
         background: 'rgba(0, 0, 0, 0.7)'
-      })
-      //异步提交
+      });
       this.$axios({
-        method: 'post',
-        url: 'registerUser.action',
-        data: data,
+        method:'post',
+        url:'registeruser.action',
+        data:data,
         headers: {
           'Content-Type': 'multipart/form-data'
         }
-      }).then(response => {
-        if(response.data){
-          //结束等待效果
-          loading.close()
-          //弹出结果消息
-          this.$message({
-            showClose: true,
-            message: '上传成功',
-            type: 'success'
-          })
-          this.formReset()// 上传成功清空
-          // //更新父页面数据
-          // this.$parent.$parent.getdata();
-        }else{
-          //结束等待效果
-          loading.close()
-          //弹出结果消息
-          this.$message({
-            showClose: true,
-            message: '上传失败',
-            type: 'warning'
-          })
+      }).then(val=>{
+          if(val!=0){
+            setTimeout(()=>{
+              this.loadingInstance.close();
+              this.$message.success("注册成功 正在去往登录界面")
+             setTimeout(()=>{
+               this.$router.push("/login")
+             },2000)
+            },2000)
+          }
         }
-
-      }).catch(error => {
-        console.log(error)
-        alert("错误")
-        loading.close()
-      });
-    },
-  formReset() { // 重置
-    this.ruleform = {
-      password: "",
-      password2: "",
-      username: "",
-      loginname: "",
-      phone: "",
-    }
-    this.fileList = [];  //添加完成后，上传文件控件内容清空
-  },
-
-    //移除文件 更新头像数组数据
-    beforeRemove(file, fileList) {
-      if (this.$confirm(`确定移除 ${file.name}？`)) {
-        this.fileList = fileList;
-      }
-    },
-    //每次文件改变选择，都将最新的选择文件 更新到data中的头像数组中
-    changeFile(file, fileList) {
-      console.log(file.raw)
-      this.fileList = fileList;
-    },
-    handleExceed(files, fileList) {
-      this.$message.warning(`当前限制选择 1 个文件，本次选择了 ${files.length} 个文件，共选择了 ${files.length} 个文件`)
+      ).catch()
     }
   }
 }

@@ -11,6 +11,7 @@
               </div>
             </div>
           </el-col>
+          <el-col :span="12" :offset="10">   <el-button @click="zx()" type="danger" size="mini"  style="" >注销</el-button></el-col>
         </el-row>
       </el-header>
       <el-container>
@@ -92,10 +93,11 @@
   import ShJlView from "./commecial/ShJlView";
   import ShView from "./commecial/ShView";
   import GygoodsShView from "./Gys/GygoodsShView";
+  import commmodity from "./shop/commmodity";
     export default {
         name: "SystemList",
       components:{
-        Welcome,EmpView,AuthcView,UserView,CgsqView,GysShView,GysShJlView,ShView,ShJlView,GygoodsShView
+        Welcome,EmpView,AuthcView,UserView,CgsqView,GysShView,GysShJlView,ShView,ShJlView,commmodity,GygoodsShView
       },
       data(){
         return {
@@ -123,6 +125,15 @@
                 console.log(this.circleUrl)
               }).catch();
           },
+        zx(){
+          localStorage.clear()
+          sessionStorage.clear()
+          this.$router.push("/Emplogin")
+          history.pushState(null, null, document.URL);
+          window.addEventListener("popstate",function(e) {
+            history.pushState(null, null, document.URL);
+          }, false);
+        },
         addTab(targetName,vuename) {
           //数组找有没有
           var obj= this.editableTabs.find(item=>item.title == targetName);
@@ -185,15 +196,12 @@
     color: #333;
     text-align: center;
   }
-  .el-menu{
-    position: relative;
-    top: -25px;
-  }
+
   .el-aside {
 
     color: #333;
     height: 100%;
-    background-color: white;
+    background-color: #424242;
   }
   .component{
 
@@ -201,7 +209,7 @@
     background-color: pink;
   }
   .el-main {
-    width: 100%;
+    width: 90%;
     background-color: palegoldenrod;
     text-align: center;
   }

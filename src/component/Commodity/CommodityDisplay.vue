@@ -269,7 +269,8 @@ export default {
       commodityList:"",
       tp:[],
       userid: sessionStorage.getItem('user'),
-      useridd: sessionStorage.getItem('id')
+      useridd: sessionStorage.getItem('id'),
+      cartcount:0
     }
   },
   components:{
@@ -294,15 +295,6 @@ export default {
           })
         });
         //刷新购物车
-        if(this.useridd!=null){
-          var params= new URLSearchParams();
-          params.append("id",this.useridd)
-          this.$axios.post("cartcount.action",params).then(
-            val=>{
-              _this.cartcount=val.data
-            }
-          ).catch()
-        }
       }
     },
   },

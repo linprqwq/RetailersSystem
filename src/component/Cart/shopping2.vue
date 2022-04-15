@@ -4,7 +4,7 @@
     <div class="cart-group">
       <div class="sellect-all">
         <div class="radio">
-          <el-checkbox :indeterminate="isIndeterminate"
+          <el-checkbox
                        v-model="checkAll"
                        @change="handleCheckAllChange">全选
           </el-checkbox>
@@ -43,7 +43,7 @@
       </div>
       <div class="cart-subtotal">
         <div class="radio">
-          <el-checkbox :indeterminate="isIndeterminate"
+          <el-checkbox
                        v-model="checkAll"
                        @change="handleCheckAllChange">全选
           </el-checkbox>
@@ -66,8 +66,9 @@ export default {
   data() {
     return {
       quantity: 4,
+      //全选
       checkAll: false,
-      isIndeterminate: false,
+      //总金额
       totalPrice: 0,
       allgoods: [],
       cart: [],
@@ -92,8 +93,8 @@ export default {
           params.append("cartid", id);
           params.append("pdjj", boolean)
           this.$axios.post("gwcssjj.action", params).then(res => {
-
             this.queryshopping();
+
           }).catch();
         } else {
           return
@@ -105,6 +106,7 @@ export default {
       this.$axios.post("gwcssjj.action", params).then(res => {
 
         this.queryshopping();
+        this.setCart()
       }).catch();
     },
     //查询当前用户购物车
@@ -120,7 +122,6 @@ export default {
     //全选
     handleCheckAllChange(val) {
       console.log(val)
-      this.isIndeterminate = false;
       if (val == false) {
         for (let i in this.allgoods) {
           this.allgoods[i].ck = false
@@ -164,26 +165,24 @@ export default {
       this.checkAll = this.allgoods.every(function (obj) {
         return obj.ck == true
       })
-      this.isIndeterminate = false
+      this.checkAll = false
       this.setCart()
     },
     //购物车状态
     setCart() {
-      let totalPrice = 0
-      let allChecked = true
+      //总金额
+      this.totalPrice = 0
+
       this.allgoods.forEach((v, i) => {
         if (v.ck) {
-          totalPrice += v.commodity.prosprice * v.quantity
-        } else {
-          allChecked = false
+          this.totalPrice += v.commodity.prosprice * v.quantity
         }
       })
-      this.allChecked = allChecked
-      this.totalPrice = totalPrice
     }
   },
   created() {
     this.queryshopping();
+
   }
 
 

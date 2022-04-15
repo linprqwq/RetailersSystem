@@ -57,6 +57,7 @@ export default {
       formData.append("orddid",this.addForm.id)
       formData.append("tmoney",this.addForm.totalpirce)
       formData.append("thyy",this.addForm.thyy)
+
       Object.keys(this.addForm).forEach(item=>{
         formData.append(item, this.addForm[item])
       })
@@ -79,7 +80,7 @@ export default {
       //异步提交
       this.$axios({
         method: 'post',
-        url: 'addgoods.action',
+        url: 'orderthuo.action',
         data: data,
         headers: {
           'Content-Type': 'multipart/form-data'

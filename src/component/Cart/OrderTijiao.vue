@@ -198,7 +198,14 @@ export default {
       //订单总价
       params.append("zprice",this.zongmoney)
       this.$axios.post("usertijiaodd.action", params).then(res => {
-       this.$message.error(res.data.msg);
+       if (res.data.code==0){
+         this.$message.error(res.data.msg);
+         this.$router.push('/personalCenter')
+         this.$emit("event-name")
+       }else{
+         this.$message.error(res.data.msg);
+         this.$router.push('/personalCenter')
+       }
       }).catch()
     },
     //购物车数量加减跟删除

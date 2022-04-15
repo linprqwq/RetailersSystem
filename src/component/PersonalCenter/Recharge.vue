@@ -85,6 +85,10 @@ export default {
         this.$message.warning("请输入金额");
         return;
       }
+      if (this.rechargeParams.umoney>=1000){
+        this.$message.warning("金额过大");
+        return;
+      }
       // this.$router.push({path: '/code'});
 
       this.$axios.post("usreinforecharge.action", qs.stringify(this.rechargeParams)).then((res) => {

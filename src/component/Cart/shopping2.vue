@@ -22,7 +22,7 @@
           <div class="product-detail">
             <div class="img">
 
-              <img :src="'http://127.0.0.1:9090/RetailersBackSystem/'+item.commodity.proimage" alt="图片出错">
+              <img :src="'http://127.0.0.1:9090/RetailersBackSystem/'+item.commodity.prozimg" alt="图片出错">
 
             </div>
             <!--          '../../image/dddbbt2.png'-->

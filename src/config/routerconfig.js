@@ -25,6 +25,7 @@ import Shzy from "../component/Shbj/Shzy";
 import Recharge from "../component/PersonalCenter/Recharge";
 import commmodity from "../component/shop/commmodity";
 import Supplier_registration from "../component/supplier/Supplier_registration";
+import Thorder from "../component/Shorder/Thorder";
 //Vue组件使用Vue-router组件*******************
 Vue.use(VueRouter)
 

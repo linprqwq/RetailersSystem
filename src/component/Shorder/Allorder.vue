@@ -154,13 +154,14 @@
           pageno:1,   //页码
           pagesize:5,   //页size
           total:1,
+          useridd:sessionStorage.getItem('id'),
           editmodalVisible:false
         }
       },
       methods:{
           getdata(){
             var params=new URLSearchParams();
-            params.append("sid",2);
+            params.append("sid",this.useridd);
             params.append("pageno",this.pageno);
             params.append("pagesize",this.pagesize);
             this.$axios.post("queryshorder.action",params).then(res=>{

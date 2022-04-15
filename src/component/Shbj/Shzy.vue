@@ -1,5 +1,5 @@
 <template>
-  <el-container>
+ <!-- <el-container>
     <el-header >商户系统</el-header>
     <el-container>
       <el-aside width="200px"><el-menu
@@ -27,18 +27,47 @@
       </el-menu></el-aside>
       <el-main><router-view></router-view></el-main>
     </el-container>
-  </el-container>
+  </el-container>-->
+  <div>
+    <el-tabs v-model="activeName" >
+      <el-tab-pane label="全部订单" name="first"><Allorder></Allorder> </el-tab-pane>
+      <el-tab-pane label="待收货订单" name="second"><Dshorder></Dshorder></el-tab-pane>
+      <el-tab-pane label="待提货订单" name="third"><Dthorder></Dthorder></el-tab-pane>
+      <el-tab-pane label="已提货订单" name="fourth"><Yrhorder></Yrhorder></el-tab-pane>
+      <el-tab-pane label="退货订单" name="hhhh"><Thorder></Thorder></el-tab-pane>
+      <el-tab-pane label="资料维护" name="jjjj"><Zlwh></Zlwh></el-tab-pane>
+    </el-tabs>
+  </div>
 </template>
 
 
 <script>
+  import Allorder from "../Shorder/Allorder";
+  import Dshorder from "../Shorder/Dshorder";
+  import Dthorder from "../Shorder/Dthorder";
+  import Yrhorder from "../Shorder/Yrhorder";
+  import Thorder from "../Shorder/Thorder";
+  import Zlwh from "../shzlwh/Zlwh";
+
     export default {
-        name: "Shzy"
+        name: "Shzy",
+      data(){
+          return{
+            activeName:"first"
+          }
+      },components:{
+        Allorder,
+        Dshorder,
+        Dthorder,
+        Yrhorder,
+        Thorder,
+        Zlwh
+      }
     }
 </script>
 
 <style scoped>
-  .el-header, .el-footer {
+ /* .el-header, .el-footer {
     background-color: #409EFF;
     color: #333;
     line-height: 60px;
@@ -52,7 +81,7 @@
 .el-main {
 
 }
-
+*/
 
 
 

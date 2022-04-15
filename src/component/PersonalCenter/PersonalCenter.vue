@@ -10,29 +10,24 @@
         <el-tab-pane label="我的自提点" name="second">地址组件</el-tab-pane>
         <el-tab-pane label="个人信息维护" name="third">个人信息维护组件</el-tab-pane>
         <el-tab-pane label="充值" name="fourth"><Recharge></Recharge></el-tab-pane>
-        <el-tab-pane label="商户" name="sh">商户</el-tab-pane>
-        <el-tab-pane label="供销商" name="gys">
-        <el-tab-pane label="我的自提点">地址组件</el-tab-pane>
-        <el-tab-pane label="个人信息维护">个信息组件</el-tab-pane>
-        <el-tab-pane label="充值">充值组件</el-tab-pane>
         <el-tab-pane label="商户">
           <div v-if="shsatae==1">
-          <Shzy></Shzy>
-        </div>
+            <Shzy></Shzy>
+          </div>
           <div v-else-if="shsatae==0">
-         请先变成商户
+            请先变成商户
           </div>
           <div v-else-if="identity==3">
             你已是供销商了
           </div>
         </el-tab-pane>
         <el-tab-pane label="供销商">
-              <div v-if="gysState==1">
-                <tabs></tabs>
-              </div>
-              <div v-else-if="gysState==0">
-                <supplier_registration></supplier_registration>
-              </div>
+          <div v-if="gysState==1">
+            <tabs></tabs>
+          </div>
+          <div v-else-if="gysState==0">
+            <supplier_registration></supplier_registration>
+          </div>
           <div v-else-if="identity==2">
             你已是商户了
           </div>

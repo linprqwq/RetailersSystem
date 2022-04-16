@@ -16,7 +16,6 @@
       </el-header>
       <el-container>
         <el-aside width="200px">
-          菜单
           <el-menu
             default-active="1"
             class="el-menu-vertical-demo"
@@ -93,11 +92,11 @@
   import ShJlView from "./commecial/ShJlView";
   import ShView from "./commecial/ShView";
   import GygoodsShView from "./Gys/GygoodsShView";
-  import commmodity from "./shop/commmodity";
+
     export default {
-        name: "SystemList",
+      name: "SystemList",
       components:{
-        Welcome,EmpView,AuthcView,UserView,CgsqView,GysShView,GysShJlView,ShView,ShJlView,commmodity,GygoodsShView
+        Welcome,EmpView,AuthcView,UserView,CgsqView,GysShView,GysShJlView,ShView,ShJlView,GygoodsShView
       },
       data(){
         return {
@@ -177,8 +176,8 @@
         }
       },
       created(){   //钩子函数   对象创建好 后执行此方法
-        this.getdata()
-        this.empdata()
+        this.getdata();
+        this.empdata();
       }
     }
 </script>
@@ -201,7 +200,7 @@
 
     color: #333;
     height: 100%;
-    background-color: #424242;
+    background-color: white;
   }
   .component{
 

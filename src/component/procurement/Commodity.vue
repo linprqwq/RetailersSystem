@@ -1,6 +1,7 @@
 <template>
      <div>
          <el-table
+           ref="tbl"
            :data="commoData"
            tooltip-effect="dark"
            @selection-change="handleSelectionChange"

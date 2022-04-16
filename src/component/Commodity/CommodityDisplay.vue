@@ -269,7 +269,8 @@ export default {
       commodityList:"",
       tp:[],
       userid: sessionStorage.getItem('user'),
-      useridd: sessionStorage.getItem('id')
+      useridd: sessionStorage.getItem('id'),
+      cartcount:0
     }
   },
   components:{
@@ -286,8 +287,14 @@ export default {
         params.append("uid",this.useridd)
         params.append("cid",this.comqwq)
         this.$axios.post("addspingcart.action",params).then(res=>{
-          console.log(res.data.msg);
-        }).catch();
+          this.$message("添加成功了在购物车等哥哥")
+        }).catch(err=>{
+          this.$message.err("接口请求失败"+err)
+          setTimeout(()=>{
+            this.$router.go(0)
+          })
+        });
+        //刷新购物车
       }
     },
   },

@@ -93,8 +93,10 @@
   import ShView from "./commecial/ShView";
   import GygoodsShView from "./Gys/GygoodsShView";
 
+  import commmodity from "./shop/commmodity";
+  import addcommodity from "./shop/addcommodity";
     export default {
-      name: "SystemList",
+        name: "SystemList",
       components:{
         Welcome,EmpView,AuthcView,UserView,CgsqView,GysShView,GysShJlView,ShView,ShJlView,GygoodsShView
       },
@@ -176,8 +178,8 @@
         }
       },
       created(){   //钩子函数   对象创建好 后执行此方法
-        this.getdata();
-        this.empdata();
+        this.getdata()
+        this.empdata()
       }
     }
 </script>

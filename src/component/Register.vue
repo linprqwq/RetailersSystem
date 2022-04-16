@@ -36,6 +36,7 @@
           <el-upload
             class="upload-demo"
             ref="upload"
+            :on-change="changeFile"
             action="#"
             :limit="1"
             :file-list="fileList"
@@ -46,7 +47,7 @@
           </el-upload>
         </el-form-item>
         <el-form-item>
-          <el-button type="primary" @click="submitForm('ruleForm')">提交</el-button>
+          <el-button type="primary" @click="submitForm('ruleForm')">注册</el-button>
         </el-form-item>
       </el-form>
     </div>
@@ -190,6 +191,9 @@ export default {
           }
         }
       ).catch()
+    },  //每次文件改变选择，都将最新的选择文件 更新到头像数组中
+    changeFile(file, fileList) {
+      this.fileList = fileList;
     }
   }
 }

@@ -1,24 +1,24 @@
 <template>
   <div >
 
-    <el-form :model="addform" status-icon :rules="rules" ref="addform">
+    <el-form :model="addForm" status-icon :rules="rules" ref="addForm">
       <el-form-item label="用户名" prop="username">
-        <el-input v-model="addform.username" style="width: 200px" placeholder="请输入用户名"></el-input>
+        <el-input v-model="addForm.username" style="width: 200px" placeholder="请输入用户名"></el-input>
       </el-form-item>
       <el-form-item label="登录名" prop="loginname">
-        <el-input v-model="addform.loginname" style="width: 200px" placeholder="请输入登录名"></el-input>
+        <el-input v-model="addForm.loginname" style="width: 200px" placeholder="请输入登录名"></el-input>
       </el-form-item>
       <el-form-item label="密码" prop="password">
-        <el-input type="password" v-model="addform.password" style="width: 200px" placeholder="请输入密码"></el-input>
+        <el-input type="password" v-model="addForm.password" style="width: 200px" placeholder="请输入密码"></el-input>
       </el-form-item>
       <el-form-item label="重复密码" prop="repassword">
-        <el-input type="password" v-model="addform.repassword" style="width: 200px" placeholder="请输入重复密码"></el-input>
+        <el-input type="password" v-model="addForm.repassword" style="width: 200px" placeholder="请输入重复密码"></el-input>
       </el-form-item>
       <el-form-item label="手机号" prop="phone">
-        <el-input v-model="addform.phone" style="width: 200px" placeholder="请输入手机号"></el-input>
+        <el-input v-model="addForm.phone" style="width: 200px" placeholder="请输入手机号"></el-input>
       </el-form-item>
       <el-form-item label="地址">
-        <el-input v-model="addform.address" style="width: 200px" placeholder="请输入地址"></el-input>
+        <el-input v-model="addForm.address" style="width: 200px" placeholder="请输入地址"></el-input>
       </el-form-item>
       <el-form-item label="头像">
         <el-upload
@@ -74,8 +74,8 @@
           if (value === '') {
             callback(new Error('请输入密码'));
           } else {
-            if (this.addform.repassword != '') {
-              this.$refs.addform.validateField('repassword');
+            if (this.addForm.repassword != '') {
+              this.$refs.addForm.validateField('repassword');
             }
             callback();
           }
@@ -83,7 +83,7 @@
         var validatePass2 = (rule, value, callback) => {
           if (value === '') {
             callback(new Error('请再次输入密码'));
-          } else if (value != this.addform.password) {
+          } else if (value != this.addForm.password) {
             callback(new Error('两次输入密码不一致!'));
           } else {
             callback();
@@ -92,7 +92,7 @@
         return {
           repassword:"",
           fileList: [], //选择的头像列表
-          addform: {
+          addForm: {
           }, //添加页面保存的数据，提交用
           rules: {
             password: [
@@ -120,12 +120,12 @@
               //将需要提交的文件，和附带的数据，append  FormData中 然后提交
               var formData = new FormData();
               //先组装表单简单数据
-              /*  formData.append('name', this.addform.name)
-                formData.append('type', this.addform.type)
-                formData.append('price', this.addform.price)*/
+              /*  formData.append('name', this.addForm.name)
+                formData.append('type', this.addForm.type)
+                formData.append('price', this.addForm.price)*/
 
-              Object.keys(this.addform).forEach(item=>{
-                formData.append(item, this.addform[item])
+              Object.keys(this.addForm).forEach(item=>{
+                formData.append(item, this.addForm[item])
               })
               //循环文件数组   将多个文件保存入formdata中
               this.fileList.forEach(item => {
@@ -189,7 +189,7 @@
           }
         },
         formReset() { // 重置
-          this.addform = {
+          this.addForm = {
             username: '',
             loginname: '',
             password: '',

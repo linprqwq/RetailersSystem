@@ -1,6 +1,7 @@
 import Vue from 'vue'
 
 //导入router.js
+
 import VueRouter from 'vue-router'
 import Login from '../component/Login'
 import Index from '../component/Index'
@@ -22,7 +23,9 @@ import Yrhorder from "../component/Shorder/Yrhorder";
 import Zlwh from "../component/shzlwh/Zlwh";
 import Shzy from "../component/Shbj/Shzy";
 import Recharge from "../component/PersonalCenter/Recharge";
+import commmodity from "../component/shop/commmodity";
 import Supplier_registration from "../component/supplier/Supplier_registration";
+import Thorder from "../component/Shorder/Thorder";
 //Vue组件使用Vue-router组件*******************
 Vue.use(VueRouter)
 

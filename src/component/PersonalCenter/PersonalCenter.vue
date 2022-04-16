@@ -2,27 +2,40 @@
   <div>
     <top></top>
 
-    <div class="mi-orderlist">
-      <el-tabs :tab-position="tabPosition"  style="height: 100%;">
-        <el-tab-pane label="我的个人中心" >
-          <orderall></orderall>
+
+      <el-tabs :tab-position="tabPosition" v-model="activeName1"  style="height: 100%; width: 100%; ">
+        <el-tab-pane label="我的个人中心" name="first">
+          <orderall @event-name="update"></orderall>
         </el-tab-pane>
-        <el-tab-pane label="我的自提点">地址组件</el-tab-pane>
-        <el-tab-pane label="个人信息维护">个人信息维护组件</el-tab-pane>
-        <el-tab-pane label="充值"><Recharge></Recharge></el-tab-pane>
-        <el-tab-pane label="商户">商户</el-tab-pane>
+        <el-tab-pane label="我的自提点" name="second">地址组件</el-tab-pane>
+        <el-tab-pane label="个人信息维护" name="third">个人信息维护组件</el-tab-pane>
+        <el-tab-pane label="充值" name="fourth"><Recharge></Recharge></el-tab-pane>
+        <el-tab-pane label="商户">
+          <div v-if="shsatae==1">
+            <Shzy></Shzy>
+          </div>
+          <div v-else-if="shsatae==0">
+            请先变成商户
+          </div>
+          <div v-else-if="identity==3">
+            你已是供销商了
+          </div>
+        </el-tab-pane>
         <el-tab-pane label="供销商">
-              <div v-if="gysState==1">
-                <tabs></tabs>
-              </div>
-              <div v-else-if="gysState==0">
-                <supplier_registration></supplier_registration>
-              </div>
+          <div v-if="gysState==1">
+            <tabs></tabs>
+          </div>
+          <div v-else-if="gysState==0">
+            <supplier_registration></supplier_registration>
+          </div>
+          <div v-else-if="identity==2">
+            你已是商户了
+          </div>
         </el-tab-pane>
       </el-tabs>
     </div>
 
-  </div>
+
 </template>
 
 <script>
@@ -31,6 +44,8 @@ import orderall from "../Orderassembly/orderall";
 import Supplier_registration from "../supplier/Supplier_registration";
 import tabs from "../supplier/tabs";
 import Recharge from "./Recharge";
+import Shzy from "../Shbj/Shzy";
+
 export default {
   name: "PersonalCenter",
   data() {
@@ -39,6 +54,9 @@ export default {
       useridd: sessionStorage.getItem('id'),
       tabPosition: 'left',
       gysState:"",
+      shsatae:"",
+      identity:"",
+      activeName1:"first"
     }
   },
   components: {
@@ -46,7 +64,7 @@ export default {
     top: IndexTop,
     orderall,
     Recharge,
-
+    Shzy,
     tabs
   },
   computed: {
@@ -55,12 +73,20 @@ export default {
     },
   },
   methods:{
+    update() {
+console.log(1)
+      // 修改activeName1的名称
+      this.activeName1 = 'fourth';
+    },
+
     userGysone(){
       let params=new URLSearchParams();
       params.append("id",this.useridd);
       this.$axios.get("queryUserGysone.action/",{params:params}).
       then(response=>{
         this.gysState=response.data.gysState
+        this.shsatae=response.data.shState
+        this.identity=response.data.identity
       }).catch();
     }
   },

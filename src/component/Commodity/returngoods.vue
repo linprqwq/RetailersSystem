@@ -1,12 +1,12 @@
 <template>
   <div >
 
-    <el-form :model="addform" >
+    <el-form :model="addForm" >
       <el-form-item label="退货商品">
-        <el-input v-model="addform.proname" style="width: 200px" disabled></el-input>
+        <el-input v-model="addForm.proname" style="width: 200px" disabled></el-input>
       </el-form-item>
       <el-form-item label="退货原因">
-        <el-select v-model="addform.thyy" placeholder="请选择退货原因" style="width: 200px">
+        <el-select v-model="addForm.thyy" placeholder="请选择退货原因" style="width: 200px">
           <el-option label="收到商品破损" value="收到商品破损"></el-option>
           <el-option label="商品错发、漏发" value="商品错发、漏发"></el-option>
           <el-option label="收到商品与描述不符" value="收到商品与描述不符"></el-option>
@@ -15,7 +15,7 @@
         </el-select>
       </el-form-item>
       <el-form-item label="商品总价格" >
-        <el-input v-model="addform.totalpirce" style="width: 200px" :min="1" label="商品价格" disabled></el-input>
+        <el-input v-model="addForm.totalpirce" style="width: 200px" :min="1" label="商品价格" disabled></el-input>
 
       </el-form-item>
       <el-form-item label="商品图片">
@@ -44,7 +44,7 @@ export default {
   data() {
     return {
       fileList: [], //选择的头像列表
-      addform: {} //编辑页面保存的数据，提交用
+      addForm: {} //编辑页面保存的数据，提交用
     }
   },
   methods: {
@@ -54,11 +54,12 @@ export default {
       //将需要提交的文件，和附带的数据，append  FormData中 然后提交
       var formData = new FormData();
       //先组装表单简单数据
-      formData.append("orddid",this.addform.id)
-      formData.append("tmoney",this.addform.totalpirce)
-      formData.append("thyy",this.addform.thyy)
-      Object.keys(this.addform).forEach(item=>{
-        formData.append(item, this.addform[item])
+      formData.append("orddid",this.addForm.id)
+      formData.append("tmoney",this.addForm.totalpirce)
+      formData.append("thyy",this.addForm.thyy)
+
+      Object.keys(this.addForm).forEach(item=>{
+        formData.append(item, this.addForm[item])
       })
       //循环文件数组   将多个文件保存入formdata中
       this.fileList.forEach(item => {
@@ -79,7 +80,7 @@ export default {
       //异步提交
       this.$axios({
         method: 'post',
-        url: 'addgoods.action',
+        url: 'orderthuo.action',
         data: data,
         headers: {
           'Content-Type': 'multipart/form-data'
@@ -107,7 +108,7 @@ export default {
       }
     },
     formReset() { // 重置
-      this.addform = {
+      this.addForm = {
         proname: '',
         thyy: '',
         totalpirce: ''
@@ -121,7 +122,7 @@ export default {
       params.append("id",orddid);
       this.$axios.post("queryordd.action",params).then(res=>{
         //普通数据显示
-        this.addform = res.data;
+        this.addForm = res.data;
         console.log(res.data);
       }).catch();
     }

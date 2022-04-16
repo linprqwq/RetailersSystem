@@ -50,7 +50,7 @@
         }
         console.log(this.pid)
 //去调用异步，进行数据添加，需要去审核
-        if(this.pid!=null){
+        if(this.pid!=""){
           this.$axios.put("goodsSupplied/addsupplierSupplyOfGoods.action", goodsuppplier)
             .then(res => {
               if (res.data.x) {

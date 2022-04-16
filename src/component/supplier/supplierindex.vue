@@ -61,11 +61,9 @@ width="35%" center>
 
       methods:{
         getData(){
-
-          let params= {
-            //存入当前用户id
-            id:sessionStorage.getItem('id')
-          };
+            let params={
+              id:sessionStorage.getItem("id")
+            };
         Object.keys(this.shop).forEach(item=>{
               params[item]=this.shop[item];
         })

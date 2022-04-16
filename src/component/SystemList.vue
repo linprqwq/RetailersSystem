@@ -16,7 +16,6 @@
       </el-header>
       <el-container>
         <el-aside width="200px">
-          菜单
           <el-menu
             default-active="1"
             class="el-menu-vertical-demo"
@@ -92,13 +91,14 @@
   import GysShJlView from "./Gys/GysShJlView";
   import ShJlView from "./commecial/ShJlView";
   import ShView from "./commecial/ShView";
+  import GygoodsShView from "./Gys/GygoodsShView";
+
   import commmodity from "./shop/commmodity";
   import addcommodity from "./shop/addcommodity";
     export default {
         name: "SystemList",
       components:{
-        Welcome,EmpView,AuthcView,UserView,CgsqView,GysShView,GysShJlView,ShView,ShJlView,
-        commmodity,addcommodity
+        Welcome,EmpView,AuthcView,UserView,CgsqView,GysShView,GysShJlView,ShView,ShJlView,GygoodsShView
       },
       data(){
         return {
@@ -202,7 +202,7 @@
 
     color: #333;
     height: 100%;
-    background-color: #424242;
+    background-color: white;
   }
   .component{
 

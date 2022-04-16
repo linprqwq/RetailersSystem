@@ -49,7 +49,7 @@
             label="地址">
           </el-table-column>
           <el-table-column
-            prop="img"
+            prop="imgpath"
             label="用户头像"
             width="100">
             <template slot-scope="scope">

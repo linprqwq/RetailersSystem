@@ -89,10 +89,7 @@
     <!--            size="mini"-->
     <!--            type="danger"-->
     <!--            @click="deleteorderbyid(scope5.$index, scope5.row)" v-if="scope5.row.status==1">删除订单</el-button>-->
-    <!--          <el-button-->
-    <!--            size="mini"-->
-    <!--            type="danger"-->
-    <!--            @click="addgwc(scope5.$index, scope5.row)" v-if="scope5.row.status==5">加入购物车</el-button>-->
+
 
     <!--        </template>-->
     <!--      </el-table-column>-->
@@ -107,33 +104,31 @@
     <!--      :total="total">-->
     <!--    </el-pagination>-->
 
-    <!--    &lt;!&ndash;  退货页面&ndash;&gt;-->
-    <!--    <el-dialog-->
-    <!--      title="退货申请表"-->
-    <!--      :visible.sync="editdialogVisible"-->
-    <!--      width="30%"-->
-    <!--      :before-close="handleClose">-->
-    <!--      &lt;!&ndash; 动态组件   指定添加vue页面在模态框显示&ndash;&gt;-->
-    <!--      <component ref="eds" is="returngoods"></component>-->
+        <!--  退货页面-->
+        <el-dialog
+          title="退货申请表"
+          :visible.sync="thVisible"
+          width="30%"
+          :before-close="handleClose">
+          <!-- 动态组件   指定添加vue页面在模态框显示-->
+          <component ref="thref" is="returngoods" v-bind:thVisible = "thVisible" v-on:success="success(res)"></component>
+          <el-button type="primary" @click="qdreturngoods('thref')">确 定</el-button>
+          <el-button @click="thVisible = false">取 消</el-button>
+        </el-dialog>
+        <!--  评价页面-->
+        <el-dialog
+          title="评价商品"
+          :visible.sync="pjVisible"
+          width="30%"
+          :before-close="handleClose">
+          <!-- 动态组件   指定添加vue页面在模态框显示-->
+          <component ref="eds" is="Pj"></component>
 
-    <!--      <el-button type="primary" @click="qdreturngoods">确 定</el-button>-->
-    <!--      <el-button @click="editdialogVisible = false">取 消</el-button>-->
+          <el-button type="primary" @click="pjtijiao">确 定</el-button>
+          <el-button @click="pjVisible = false">取 消</el-button>
 
-    <!--    </el-dialog>-->
-    <!--    &lt;!&ndash;  评价页面&ndash;&gt;-->
-    <!--    <el-dialog-->
-    <!--      title="评价商品"-->
-    <!--      :visible.sync="editdialogVisible1"-->
-    <!--      width="30%"-->
-    <!--      :before-close="handleClose">-->
-    <!--      &lt;!&ndash; 动态组件   指定添加vue页面在模态框显示&ndash;&gt;-->
-    <!--      <component ref="eds" is="Pj"></component>-->
+        </el-dialog>
 
-    <!--      <el-button type="primary" @click="pjtijiao">确 定</el-button>-->
-    <!--      <el-button @click="editdialogVisible1 = false">取 消</el-button>-->
-
-    <!--    </el-dialog>-->
-    <!--  </div>-->
 
   </div>
   <div>
@@ -172,6 +167,22 @@
 <!--            <el-tag v-if="scope.row.isReturn==1">待商家确认退货</el-tag>-->
 <!--            <el-tag type="success" v-if="scope.row.isReturn==2">待退款</el-tag>-->
 <!--          </template>-->
+    <template  slot-scope="scope">
+                    <el-button
+                      size="mini"
+                      type="danger"
+                      @click="sqtuikuan(o, scope.row)" v-if="scope.row.refund==0&&o.status==5">申请退货</el-button>
+      &nbsp;&nbsp;&nbsp;
+                      <el-button
+                        size="mini"
+                        type="danger"
+                        @click="pingjia(scope.$index, scope.row)" v-if="scope.row.evaluatea==2&&o.status==5">待评价</el-button>
+      <br><br>
+                      <el-button
+                        size="mini"
+                        type="danger"
+                        @click="addgwc(scope.$index, scope.row)" v-if="o.status==5 || o.status==1">加入购物车</el-button>
+    </template>
         </el-table-column>
         <el-table-column label="实付款">
           {{o.payment}}元
@@ -188,16 +199,16 @@
             </template>
         </el-table-column>
         <el-table-column label="操作">
-          <template>
-            <div v-if="o.status=='2'">
-              <el-button size="mini" type="primary" @click="fk(o.orderid,2)">立即付款</el-button>
+          <template slot-scope="scope2">
+            <div >
+              <el-button size="mini" type="primary" v-if="o.status=='2'" @click="fk(scope2.$index, scope2.row)">立即付款</el-button>
               <br>
-              <el-button size="mini" @click="qxddorder(o.orderid,2,true)">取消订单</el-button>
+              <el-button size="mini" v-if="o.status=='3'" @click="qxddorder(o.orderid,2,true)">取消订单</el-button>
             </div>
             <div>
-              <el-button type="mini" v-if="o.status=='5'" @click="pay(o.orderid,'5')">确认收货</el-button>
+              <el-button type="mini" v-if="o.status=='4'" @click="confirmorder(scope2.$index, scope2.row)">确认收货</el-button>
               <br>
-              <el-button size="mini" type="danger" v-if="o.status=='3' "
+              <el-button size="mini" type="danger" v-if="o.status=='5' "
                          @click="qxddorder(o.orderid,5,false)">删除订单
               </el-button>
 
@@ -277,9 +288,9 @@ export default {
       gwcall:[],
       rowspan: 0,
       //退货
-      editdialogVisible:false,
+      thVisible:false,
       //评价
-      editdialogVisible1:false,
+      pjVisible:false,
     }
   },
   components:{
@@ -291,6 +302,10 @@ export default {
 
   },
   methods: {
+    //接受子组件的事件调用
+    success(res){
+      this.thVisible=res;
+    },
     objectspanmethod({row, column, rowIndex, columnIndex}){
       if (columnIndex === 5) {
         if (rowIndex === 0) {
@@ -307,6 +322,20 @@ export default {
         }
       }
       if (columnIndex === 6) {
+        if (rowIndex === 0) {
+          let o1 = this.list.find(item => item.orderid == row.orderid);
+          return {
+            rowspan: o1.ordderdetails.length,
+            colspan: 1
+          };
+        } else {
+          return {
+            rowspan: 0,
+            colspan: 0
+          };
+        }
+      }
+      if (columnIndex === 7) {
         if (rowIndex === 0) {
           let o1 = this.list.find(item => item.orderid == row.orderid);
           return {
@@ -379,13 +408,11 @@ export default {
 
     //多个购物车添加
     addgwc(a,b){
-    b.ordderdetails.forEach(item=>{
-      this.gwcall.push(item.proid)
-    })
+      this.gwcall.push(b.proid)
       var  params = new URLSearchParams();
 
       params.append("arr",this.gwcall);
-      params.append("uid",b.uid);
+      params.append("uid",this.useridd);
       this.$axios.post("addgwc.action",params).then(res=>{
         this.$message.success(res.data.msg);
         this.queryorderdfk();
@@ -429,51 +456,44 @@ export default {
       },
     //打开退货窗口
     sqtuikuan(a,b){
-      var id;
-      this.editdialogVisible=true;
-      console.log(b.ordderdetails);
-      b.ordderdetails.forEach(item=>{
-        id = item.id;
-      })
+
+      this.thVisible=true;
+
       //根据id查询数据
       this.$nextTick(item=>{
-        this.$refs.eds.getdata(b.orderid,id);
+        this.$refs.thref.thgetdata(a.orderid,b.id);
       })
 
     },
     //评价
     pingjia(a,b){
-      this.editdialogVisible1=true;
+      this.pjVisible=true;
       console.log(b)
       this.$nextTick(item=>{
-        this.$refs.eds.getdata(b);
+        this.$refs.eds.pjgetdata(b);
       })
 
     },
     //评价提交
     pjtijiao(){
-
-        this.editdialogVisible = false;
-        this.editdialogVisible1=false;
         this.$refs.eds.pjtijiao();
-
+      this.thVisible = false;
+      this.pjVisible=false;
     },
     //窗口关闭确认
     handleClose(done) {
       this.$confirm('确认关闭？')
         .then(_ => {
-          this.editdialogVisible = false
-          this.editdialogVisible1=false;
+          this.thVisible = false
+          this.pjVisible=false;
           this.$refs.eds.fileList=[];
 
         })
         .catch(_ => {});
     },
     //退货提交
-    qdreturngoods(){
-      this.editdialogVisible = false;
-      this.editdialogVisible1=false;
-      this.$refs.eds.submitUpload();
+    qdreturngoods(formName){
+      this.$refs.thref.thtj(formName);
     },
     },
 

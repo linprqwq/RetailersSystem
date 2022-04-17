@@ -55,7 +55,7 @@ export default {
     }
   },
   methods:{
-    getdata(b){
+    pjgetdata(b){
 
       this.pjsp = b;
     },

@@ -47,9 +47,9 @@
           if (valid) {
             this.$axios.put("shopinfo.action/updatashop.action", this.editTypeForm).then(res => {
               if (res.data.code > 0) {
-                this.$parent.$parent.dislogVisible = false;
                 this.$parent.$parent.getTypes();
                 this.$message.success(res.data.msg);
+                this.$parent.$parent.dialogVisible=false;
               } else {
                 this.$message.error(res.data.msg);
               }

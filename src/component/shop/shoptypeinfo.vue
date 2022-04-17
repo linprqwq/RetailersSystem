@@ -1,6 +1,8 @@
 <template>
   <div>
-    <el-table :data="shoptyps" style="width: 50%">
+    <el-button  class="addbtn" type="warning" @click="openaddwin">添加</el-button>
+    <br><br>
+    <el-table :data="shoptyps" style="width: 60%" >
       <el-table-column prop="name" label="分类名"></el-table-column>
       <el-table-column label="操作" width="300">
         <template slot="header" slot-scope="scope">
@@ -18,6 +20,21 @@
       </el-table-column>
     </el-table>
 
+
+    <!--  添加页面-->
+    <el-dialog
+      title="添加商品分类信息"
+      :visible.sync="adddialogVisible"
+      width="40%"
+      :before-close="handleClose">
+      <!-- 动态组件   指定添加vue页面在模态框显示-->
+      <component ref="addshoptype" is="addshoptype"></component>
+
+      <el-button type="primary" @click="addtype">确 定</el-button>
+      <el-button @click="adddialogVisible = false">取 消</el-button>
+
+    </el-dialog>
+
   <!--编辑对话框-->
     <el-dialog
     title="=编辑"
@@ -30,6 +47,7 @@
 
     <!--//分页-->
     <el-pagination
+      class="addbtn"
       @size-change="handleSizeChange"
       @current-change="handleCurrentChange"
       :current-page="pageno"
@@ -44,6 +62,7 @@
 <script>
 
   import eitshoptype from "./eitshoptype";
+  import addshoptype from "./addshoptype";
 
     export default {
         name: "shoptypeinfo",
@@ -56,7 +75,8 @@
             pageno: 1,
             pagesize: 5,
             total: 1,
-            dialogVisible:false
+            dialogVisible:false,
+            adddialogVisible:false
         }
       },
       methods:{
@@ -79,6 +99,14 @@
         search(){
           this.getTypes();
         },
+        openaddwin(){
+          this.adddialogVisible=true;
+        },
+        addtype(){
+          this.$refs.addshoptype.submitUpload("addForm");
+          this.adddialogVisible=false;
+          this.getTypes();
+        },
         eidt(id){
             this.dialogVisible=true;
           this.$nextTick(item=>{
@@ -99,7 +127,7 @@
      this.$confirm('确认删除该分类吗?','提示',{
       confirmButtonText:'确定',
        showConfirmButton:'取消',
-      type:"warning"
+       type:"warning"
      }).then(()=>{
         this.$axios.delete("shopinfo.action/delshopid.action/"+id).
         then(res=>{
@@ -110,9 +138,11 @@
               this.$message.error(res.data.msg);
             }
         }).catch(error=>{
-          this.$message.error(error);
-        })
-     })
+          this.$message.error(error);   //去添加错误捕获
+       })
+     }).catch(error=>{     //去添加错误捕获
+
+     });
 
         },
         handleSizeChange(val){
@@ -134,11 +164,16 @@
           this.getTypes();
       },
       components:{
-        eitshoptype
+        eitshoptype,
+        addshoptype
       }
     }
 </script>
 
 <style scoped>
+
+  .addbtn{
+    float: left;
+  }
 
 </style>

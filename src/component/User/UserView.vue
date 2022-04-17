@@ -118,6 +118,7 @@
       <el-button @click="adddialogVisible = false">取 消</el-button>
 
     </el-dialog>
+
     <!--  编辑页面-->
     <el-dialog
       title="编辑用户信息"
@@ -176,7 +177,6 @@
       },
       addUser(){
         this.$refs.addView.submitUpload("addForm");
-
       },
       openaddwin(){
         this.adddialogVisible=true;

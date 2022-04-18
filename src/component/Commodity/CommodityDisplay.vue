@@ -82,7 +82,7 @@
         </div>
       </el-tab-pane>
       <el-tab-pane label="用户评论" name="second">
-        <div class="detail-box">
+        <div class="detail-box" style="height: 700px;">
          <div class="img-box">
            <sppl>
            </sppl>

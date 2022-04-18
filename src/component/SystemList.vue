@@ -4,7 +4,7 @@
       <el-header>
         <el-row class="demo-avatar demo-basic">
           <el-col :span="1">
-            <div style="width: 90px;" class="sub-title">{{empname}}，欢迎登录</div>
+            <div style="width: 280px;" class="sub-title">{{empname}}，欢迎登录兴盛优选后台管理系统</div>
             <div class="demo-basic--circle">
               <div class="block">
                 <el-avatar shape="square" :size="35" :src="circleUrl"></el-avatar>
@@ -100,7 +100,7 @@
         name: "SystemList",
       components:{
         Welcome,EmpView,AuthcView,UserView,CgsqView,GysShView,GysShJlView,ShView,ShJlView,GygoodsShView,commmodity,addcommodity,
-        CgShView,shoptypeinfo
+        CgShView,shoptypeinfo,CgJlView
       },
       data(){
         return {

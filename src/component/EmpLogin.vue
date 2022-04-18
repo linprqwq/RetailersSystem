@@ -1,11 +1,13 @@
 <template>
+
   <div id="app">
-    <el-form :model="empForm" status-icon ref="ruleForm" label-width="100px" class="demo-ruleForm">
+    <el-form :model="empForm" ref="ruleForm" :rules="rules" class="login-box">
+      <h3 class="login-title">兴盛优选后台管理系统</h3>
       <el-form-item label="账号" prop="empLoginname">
-        <el-input type="text" v-model="empForm.empLoginname" autocomplete="off"></el-input>
+        <el-input type="text" placeholder="请输入账号" v-model="empForm.empLoginname"></el-input>
       </el-form-item>
       <el-form-item label="密码" prop="emppassword">
-        <el-input type="password" v-model="empForm.emppassword" autocomplete="off"></el-input>
+        <el-input type="password" placeholder="请输入密码" v-model="empForm.emppassword"></el-input>
       </el-form-item>
       <el-form-item>
         <el-button type="primary" @click="login(empForm)">登录</el-button>
@@ -23,6 +25,18 @@
             empForm: {
               empLoginname: '',
               emppassword: ''
+            },
+            rules: {
+              empLoginname: [{
+                required: true,
+                message: '请输入用户名',
+                trigger: 'blur'
+              }],
+              emppassword: [{
+                required: true,
+                message: '请输入密码',
+                trigger: 'blur'
+              }]
             }
           }
       },
@@ -56,5 +70,16 @@
 </script>
 
 <style scoped>
+  .login-box {
+    width: 350px;
+    margin: 120px auto;
+    border: 1px solid #DCDFE6;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 30px #DCDFE6;
+  }
 
+  .login-title {
+    text-align: center;
+  }
 </style>

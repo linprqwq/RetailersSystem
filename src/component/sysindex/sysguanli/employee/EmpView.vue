@@ -113,6 +113,16 @@
         <el-form-item label="地址" :label-width="formLabelWidth">
           <el-input v-model="addform.empAddress" autocomplete="off"></el-input>
         </el-form-item>
+        <template>
+          角色:<el-select  v-model="id" placeholder="请选择">
+            <el-option
+              v-for="item in options"
+              :key="item.id"
+              :label="item.roleName"
+              :value="item.id">
+            </el-option>
+          </el-select>
+        </template><br><br>
         <el-form-item label="头像">
           <el-upload
             class="upload-demo"
@@ -182,7 +192,7 @@
             ]
           },
 
-
+          roleid:{},
           name:'',
           formLabelWidth:'100px',
           tableData:[],
@@ -256,13 +266,18 @@
 
        /* 用户添加*/
         handleAdd(row){
+          this.$axios.post("queryrolesbyidname.action/").then(response=>{
+            alert(11111111)
+            this.tableData.forEach( (item)=> {
+              item.empImg = this.path+item.empImg;
+            })
+          }).catch();
           console.log(row)
          this.editmodalVisible02=true;
          this.editform=row;
         },
         add(addform){
           var formData = new FormData();
-
           Object.keys(this.addform).forEach(key=>{
             console.log(key)
             formData.append(key, this.addform[key])
@@ -335,7 +350,7 @@
           }
         },
         formReset() { // 重置
-          this.addform = {
+        this.addform = {
             empName:"",
             empLoginname:"",
             empPassword:"",

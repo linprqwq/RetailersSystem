@@ -4,9 +4,7 @@
      登录名: <el-input type="text" v-model="loginname"></el-input><br>
      密码: <el-input type="text" v-model="pwd"></el-input><br>
      手机号:<el-input type="text" v-model="phone"></el-input><br>
-     余额: <el-input type="text" v-model="umoney"></el-input><br>
-
-     <el-upload
+    商户地址图片 <el-upload
        class="avatar-uploader"
        action="#"
        :file-list="fileList"
@@ -42,12 +40,12 @@
         name: "zlwh",
       data(){
         return{
+          useridd:sessionStorage.getItem('id'),
           imageUrl:"",
           uname: "",
           loginname: "",
           pwd: "",
           phone: "",
-          umoney: "",
           imge: "",
           shaddress: "",
           xxaddr:"",
@@ -64,25 +62,23 @@
 
           selsid(){
             var params=new URLSearchParams()
-            params.append("id",2);
+            params.append("id",this.useridd);
             this.$axios.post("selsid.action",params).then(res=>{
             this.uname=res.data.username;
               this.loginname=res.data.loginname;
               this.pwd=res.data.password;
               this.phone=res.data.phone;
-              this.umoney=res.data.umoney;
-              this.imge=res.data.imgpath;
+              this.imge=res.data.shimag;
               this.shaddress=res.data.shaddress;
             }).catch()
           },
         update(){
           var formData = new FormData();
-          formData.append("id",2);
+          formData.append("id",this.useridd);
           formData.append("username",this.uname);
           formData.append("loginname",this.loginname);
           formData.append("password",this.pwd);
           formData.append("phone",this.phone);
-          formData.append("umoney",this.umoney);
           this.fileList.forEach(item => {
               formData.append('file', item.raw)  //新选择的文件
           })

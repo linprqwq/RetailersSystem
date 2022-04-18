@@ -11,11 +11,11 @@
         <el-tab-pane label="个人信息维护" name="third">个人信息维护组件</el-tab-pane>
         <el-tab-pane label="充值" name="fourth"><Recharge></Recharge></el-tab-pane>
         <el-tab-pane label="商户">
-          <div v-if="shsatae==1">
+          <div v-if="identity==2">
             <Shzy></Shzy>
           </div>
-          <div v-else-if="shsatae==0">
-            请先变成商户
+          <div v-else-if="identity==1">
+          <Zcsh></Zcsh>
           </div>
           <div v-else-if="identity==3">
             你已是供销商了
@@ -45,6 +45,8 @@ import Supplier_registration from "../supplier/Supplier_registration";
 import tabs from "../supplier/tabs";
 import Recharge from "./Recharge";
 import Shzy from "../Shbj/Shzy";
+import Zcsh from "../User/Zcsh";
+
 
 export default {
   name: "PersonalCenter",
@@ -65,7 +67,8 @@ export default {
     orderall,
     Recharge,
     Shzy,
-    tabs
+    tabs,
+    Zcsh
   },
   computed: {
     showLoginname() {

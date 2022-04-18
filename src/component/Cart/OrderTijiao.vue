@@ -92,7 +92,7 @@
       width="50%"
       >
       <el-select  v-model="sheng" @change="fun1" placeholder="----请选择---">
-        <el-option  v-for="p in provice" :value="p.id" :label="p.name" @click.native="shenglabel=p.name">{{p.name}}</el-option>
+        <el-option  v-for="p in provice" :value="p.id" :label="p.name" @click.native="querysh(shenglabel=p.name)">{{p.name}}</el-option>
       </el-select>
       <el-select v-model="shi"  @change="fun2" placeholder="----请选择---">
         <el-option  v-for="c in ctiy" :value="c.id" :label="c.name" @click.native="shilabel=c.name">{{c.name}}</el-option>
@@ -101,7 +101,8 @@
         <el-option v-for="d in district" :value="d.id" :label="d.name" @click.native="qqlabel=d.name">{{d.name}}</el-option>
       </el-select>
       <br>
-      <el-input placeholder="请输入具体地址" v-model="addr" style="width: 400px;margin-top: 20px"></el-input>
+      <el-radio v-for="po in pos" label="1" style="margin-top: 20px">{{po.shaddress}}</el-radio>
+      <span v-show="pos==null || pos=='' ">你选的地方暂时没有商户入驻请换个地方吧</span>
       <span  slot="footer" class="dialog-footer">
     <el-button @click="dialogVisible = false">取 消</el-button>
     <el-button type="primary" @click="qwq">确 定</el-button>
@@ -124,7 +125,6 @@ export default {
       jsljgm: [],
       user:[],
       dialogVisible:false,
-      addr:"",
       shi:"",
       sheng:"",
       provice:[],
@@ -133,13 +133,27 @@ export default {
       qq:"",
       shenglabel:"",
       qqlabel:"",
-      shilabel:""
+      shilabel:"",
+      pos:[]
     }
   },
   components: {
     top: IndexTop,
   },
   methods: {
+    //寻找商户地址
+    querysh(){
+      var _this=this
+      var params=new URLSearchParams()
+      params.append("shaddress",_this.shenglabel)
+      this.$axios.post("querylikesh.action",params).then(val=>{
+          _this.pos=val.data
+          _this.pos.forEach(item=>{
+            console.log(item.shaddress)
+          })
+        }
+      ).catch()
+    },
     //新增地址
     qwq(){
       this.loadingInstance = Loading.service({
@@ -149,7 +163,7 @@ export default {
         background: 'rgba(0, 0, 0, 0.7)'
       });
        var _this=this
-        var arr=[_this.shenglabel,_this.qqlabel,_this.shilabel,_this.addr]
+        var arr=[_this.shenglabel,_this.shilabel,_this.qqlabel,_this.addr]
        var str=arr.join("")
        var params = new URLSearchParams();
        params.append("shaddress",str)

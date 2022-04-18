@@ -91,23 +91,20 @@
       :visible.sync="dialogVisible"
       width="50%"
       >
-      <select v-model="sheng" @change="fun1">
-        <option value="-1">----请选择---</option>
-        <option v-for="p in provice" :value="p.id">{{p.name}}</option>
-      </select>
-      <select v-model="shi"  @change="fun2">
-        <option value="-1">----请选择---</option>
-        <option  v-for="c in ctiy" :value="c.id">{{c.name}}</option>
-      </select>
-      <select>
-        <option value="-1">----请选择---</option>
-        <option v-for="d in district" :value="d.id">{{d.name}}</option>
-      </select>
+      <el-select  v-model="sheng" @change="fun1" placeholder="----请选择---">
+        <el-option  v-for="p in provice" :value="p.id" :label="p.name" @click.native="shenglabel=p.name">{{p.name}}</el-option>
+      </el-select>
+      <el-select v-model="shi"  @change="fun2" placeholder="----请选择---">
+        <el-option  v-for="c in ctiy" :value="c.id" :label="c.name" @click.native="shilabel=c.name">{{c.name}}</el-option>
+      </el-select>
+      <el-select v-model="qq" placeholder="----请选择---">
+        <el-option v-for="d in district" :value="d.id" :label="d.name" @click.native="qqlabel=d.name">{{d.name}}</el-option>
+      </el-select>
       <br>
       <el-input placeholder="请输入具体地址" v-model="addr" style="width: 400px;margin-top: 20px"></el-input>
-      <span slot="footer" class="dialog-footer">
+      <span  slot="footer" class="dialog-footer">
     <el-button @click="dialogVisible = false">取 消</el-button>
-    <el-button type="primary" @click="dialogVisible = false">确 定</el-button>
+    <el-button type="primary" @click="qwq">确 定</el-button>
   </span>
     </el-dialog>
   </div>
@@ -115,8 +112,10 @@
 
 <script>
 import IndexTop from "../User/IndexTop";
+import {Loading} from "_element-ui@2.15.6@element-ui";
 
 export default {
+  inject:["reload"],
   name: "OrderTijiao",
   data() {
     return {
@@ -127,23 +126,52 @@ export default {
       user:[],
       dialogVisible:false,
       addr:"",
-      shi:"-1",
-      sheng:"-1",
+      shi:"",
+      sheng:"",
       provice:[],
       ctiy:[],
       district:[],
+      qq:"",
+      shenglabel:"",
+      qqlabel:"",
+      shilabel:""
     }
   },
   components: {
     top: IndexTop,
   },
   methods: {
+    //新增地址
+    qwq(){
+      this.loadingInstance = Loading.service({
+        text:'桥豆麻袋',
+        lock: true,
+        spinner: 'el-icon-loading',
+        background: 'rgba(0, 0, 0, 0.7)'
+      });
+       var _this=this
+        var arr=[_this.shenglabel,_this.qqlabel,_this.shilabel,_this.addr]
+       var str=arr.join("")
+       var params = new URLSearchParams();
+       params.append("shaddress",str)
+       params.append("id",_this.uid)
+       this.$axios.post("addshaddress.action",params).then(val=>{
+         if(val!=null){
+          setTimeout(()=>{
+            this.loadingInstance.close();
+            this.$message.success("添加成功")
+            this.reload()
+          },500)
+         }
+       }).catch()
+       _this.dialogVisible=false
+    },
     //选择市
     fun2(){
       var _this = this;
       var params=new URLSearchParams();
       params.append("id",this.shi)
-      this.$axios.post("queryChinaByshi.action",params).then(val=>{
+      this.$axios.post("queryChinaByQu.action",params).then(val=>{
           _this.district=val.data
       }
       ).catch()
@@ -153,14 +181,20 @@ export default {
       var _this = this;
       var params=new URLSearchParams();
       params.append("id",this.sheng)
-      this.$axios.post("queryChinaByPid.action",params).then(val=>{
+      this.$axios.post("queryChinaByShi.action",params).then(val=>{
         _this.ctiy=val.data
         }
       ).catch()
     },
     //添加地址
     open(){
-
+      //选择省
+      var _this=this;
+     this.$nextTick(jj=>{
+       this.$axios.post("queryAllSheng.action").then(val=>{
+         _this.provice=val.data;
+       }).catch()
+     })
     },
     //查询当前用户购物车和商品
     queryusergwc() {
@@ -256,12 +290,6 @@ export default {
   },
   created() {
     this.queryusergwc();
-
-    //选择省
-    var _this=this;
-    this.$axios.post("queryAllChina.action").then(val=>{
-      _this.provice=val.data;
-    }).catch()
   }
 }
 </script>

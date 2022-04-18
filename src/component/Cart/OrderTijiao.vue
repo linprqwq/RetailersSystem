@@ -112,8 +112,7 @@
 
 <script>
 import IndexTop from "../User/IndexTop";
-
-
+import {Loading} from "element-ui";
 export default {
   inject:["reload"],
   name: "OrderTijiao",
@@ -141,14 +140,14 @@ export default {
     top: IndexTop,
   },
   methods: {
-    // 新增地址
+    //新增地址
     qwq(){
-      // this.loadingInstance = Loading.service({
-      //   text:'桥豆麻袋',
-      //   lock: true,
-      //   spinner: 'el-icon-loading',
-      //   background: 'rgba(0, 0, 0, 0.7)'
-      // });
+      this.loadingInstance = Loading.service({
+        text:'桥豆麻袋',
+        lock: true,
+        spinner: 'el-icon-loading',
+        background: 'rgba(0, 0, 0, 0.7)'
+      });
        var _this=this
         var arr=[_this.shenglabel,_this.qqlabel,_this.shilabel,_this.addr]
        var str=arr.join("")
@@ -158,7 +157,7 @@ export default {
        this.$axios.post("addshaddress.action",params).then(val=>{
          if(val!=null){
           setTimeout(()=>{
-            // this.loadingInstance.close();
+            this.loadingInstance.close();
             this.$message.success("添加成功")
             this.reload()
           },500)
@@ -198,13 +197,9 @@ export default {
     },
     //查询当前用户购物车和商品
     queryusergwc() {
-if (this.userinfo.length>=1){
-  this.userinfo.forEach(item => {
-    this.list.push(item.cid)
-  })
-}else{
-  this.list.push(this.userinfo.cid)
-}
+      this.userinfo.forEach(item => {
+        this.list.push(item.cid)
+      })
       var params = new URLSearchParams();
 
       params.append("list", this.list);
@@ -241,7 +236,7 @@ if (this.userinfo.length>=1){
          this.$router.push('/personalCenter')
          this.$emit("event-name")
        }else{
-         this.$message.success(res.data.msg);
+         this.$message.error(res.data.msg);
          this.$router.push('/personalCenter')
        }
       }).catch()
@@ -273,6 +268,8 @@ if (this.userinfo.length>=1){
     },
   },
   computed: {
+
+
     //总金额
     zongmoney: function () {
       let s = 0;

@@ -95,11 +95,12 @@
   import CgShView from "./procurement/CgShView";
   import commmodity from "./shop/commmodity";
   import addcommodity from "./shop/addcommodity";
+  import shoptypeinfo from "./shop/shoptypeinfo";
     export default {
         name: "SystemList",
       components:{
         Welcome,EmpView,AuthcView,UserView,CgsqView,GysShView,GysShJlView,ShView,ShJlView,GygoodsShView,commmodity,addcommodity,
-        CgShView
+        CgShView,shoptypeinfo
       },
       data(){
         return {

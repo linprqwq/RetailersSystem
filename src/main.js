@@ -17,6 +17,7 @@ import Zlwh from "./component/shzlwh/Zlwh";
 import Allorder from "./component/Shorder/Allorder";
 import commmodity from "./component/shop/commmodity";
 import addcommodity from "./component/shop/addcommodity";
+import shoptypeinfo from "./component/shop/shoptypeinfo";
 Vue.use(ElementUI)
 //axios
 import  Axios from 'axios'
@@ -28,6 +29,6 @@ Vue.prototype.$axios = Axios
 
 new Vue({
   el: '#app',
-  render: h => h(App),
+  render: h => h(shoptypeinfo),
   router:Router,
 })

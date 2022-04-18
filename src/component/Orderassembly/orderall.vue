@@ -336,6 +336,7 @@ export default {
     //评价提交
     pjtijiao(pjName){
         this.$refs.pjref.pjtijiao(pjName);
+      this.$router.go(0);
     },
     //窗口关闭确认
     handleClose(done) {
@@ -351,6 +352,7 @@ export default {
     //退货提交
     qdreturngoods(formName){
       this.$refs.thref.thtj(formName);
+      this.$router.go(0);
     },
     dianji(id){
       this.$router.push({

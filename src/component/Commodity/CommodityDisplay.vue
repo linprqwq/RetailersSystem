@@ -59,14 +59,14 @@
             </div>
           </div>
 
-          <div class="btn-box">
+          <div class="btn-box" >
             <div class="sale-btn">
               <a href="#" class="btn-primary" @click="addspingcart">加入购物车</a>
             </div>
             <div class="favorite-btn">
-              <a href="#">
+              <a href="#"   @click="ljgmaddgwc">
                 <i></i>
-                喜欢
+                立即购买
               </a>
             </div>
           </div>
@@ -303,6 +303,17 @@ export default {
         });
         //刷新购物车
       }
+    },
+    ljgmaddgwc(){
+      var param  = new URLSearchParams();
+      param.append("cid",this.$route.query.comid);
+      param.append("uid",this.useridd);
+      this.$axios.post("ljgmaddgwc.action",param).then(res=>{
+
+          var arr = JSON.stringify(res.data)
+          this.$router.push({path: '/ordertijiao', name: 'ordertijiao', query: {res: arr}})
+
+      }).catch()
     },
   },
   created() {

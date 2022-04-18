@@ -4,7 +4,7 @@
     <div class="bj1">
         <div class="topd">
           <div class="tu">
-            <a href="#"><img :src="require('../image/logo-mi2.png')" alt="图片出错"></a>
+            <a href="#">   <img src="src/image/xs.jpg" alt=""></a>
           </div>
           <div class="topdzh">
             <a href="#shuiguo" id="xm">水果</a>
@@ -289,7 +289,7 @@
       </div>
       <div class="zuihouxiaozi">
         <div class="zuihouxiaozitu">
-          <img :src="require('../image/logo-mi2.png')" alt="图片出错" height="70px" width="70px">
+          <img src="src/image/xs.jpg" alt="图片出错" height="70px" width="70px">
         </div>
         <div class="zuihouxiaozizi">
           <a href="#">兴盛商城 |</a>

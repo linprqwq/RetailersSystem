@@ -94,7 +94,7 @@
   import ShJlView from "./commecial/ShJlView";
   import ShView from "./commecial/ShView";
   import SysRole from "./sysindex/sysguanli/sysrole/SysRole";
-
+import CgJlView from "./procurement/CgJlView";
   import GygoodsShView from "./Gys/GygoodsShView";
   import CgShView from "./procurement/CgShView";
   import commmodity from "./shop/commmodity";

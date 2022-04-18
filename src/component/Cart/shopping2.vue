@@ -1,6 +1,13 @@
 <template>
   <div>
     <top></top>
+    <div class="top">
+      <div class="logo">
+        <img src="src/image/xs.jpg" alt="">
+      </div>
+      <span class="myziti">我的购物车</span>
+
+    </div>
     <div class="cart-group">
       <div class="sellect-all">
         <div class="radio">
@@ -47,7 +54,7 @@
                        v-model="checkAll"
                        @change="handleCheckAllChange">全选
           </el-checkbox>
-          <el-button type="warning" plain>批量删除</el-button>
+          <el-button type="warning" plain @click="plsccartid()">批量删除</el-button>
         </div>
         <div class="total">
           金额 : <span style="color:#e33333">${{ totalPrice }}</span>
@@ -188,6 +195,24 @@ export default {
         }
       })
     },
+    plsccartid(){
+      this.allgoods.forEach(item => {
+        if (item.ck == true) {
+          this.jiesuanlist.push(item.cartid);
+        }
+      })
+      if (this.jiesuanlist.length == 0) {
+        this.$message.error('请选择商品');
+        return
+      }
+      console.log(this.jiesuanlist)
+      var params  = new URLSearchParams();
+      params.append("list",this.jiesuanlist);
+      this.$axios.post("cartplscid.action",params).then(res=>{
+        this.$message.success(res.data.msg)
+        this.$router.go(0);
+      }).catch()
+    },
   },
   created() {
     this.queryshopping();
@@ -199,6 +224,20 @@ export default {
 </script>
 
 <style scoped>
+.top {
+  background-color: #ffffff;
+  width: 100%;
+  height: 102px;
+  border-bottom: 2px solid #FF7529;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.logo {
+  position: absolute;
+  left: 60px;
+}
 .btn-add,
 .btn-sub {
   width: 1.5rem;

@@ -22,7 +22,7 @@
           <div class="product-detail">
             <div class="img">
 
-              <img :src="'http://127.0.0.1:9090/RetailersBackSystem/'+item.commodity.prozimg" alt="图片出错">
+              <img :src="'http://127.0.0.1:9090/RetailersBackSystem/'+item.commodity.prozimg" alt="图片出错" @click="dianji(item.cid)">
 
             </div>
             <!--          '../../image/dddbbt2.png'-->
@@ -47,6 +47,7 @@
                        v-model="checkAll"
                        @change="handleCheckAllChange">全选
           </el-checkbox>
+          <el-button type="warning" plain>批量删除</el-button>
         </div>
         <div class="total">
           金额 : <span style="color:#e33333">${{ totalPrice }}</span>
@@ -178,7 +179,15 @@ export default {
           this.totalPrice += v.commodity.prosprice * v.quantity
         }
       })
-    }
+    },
+    dianji(id){
+      this.$router.push({
+        path: '/CommodityDisplay',
+        query: {
+          comid: id
+        }
+      })
+    },
   },
   created() {
     this.queryshopping();

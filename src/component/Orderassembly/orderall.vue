@@ -53,7 +53,7 @@
           </template>
           <template slot-scope="scope">
             <img :src="'/src/'+scope.row.proimage"
-                 width="80px" height="100px" alt="err">
+                 width="80px" height="100px" alt="err" @click="dianji(scope.row.proid)">
           </template>
         </el-table-column>
         <el-table-column label="商品" prop="proname"></el-table-column>
@@ -351,6 +351,14 @@ export default {
     //退货提交
     qdreturngoods(formName){
       this.$refs.thref.thtj(formName);
+    },
+    dianji(id){
+      this.$router.push({
+        path: '/CommodityDisplay',
+        query: {
+          comid: id
+        }
+      })
     },
     },
 

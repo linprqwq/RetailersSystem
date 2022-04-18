@@ -99,6 +99,9 @@
             <el-table-column
               prop="proimag"
               label="商品图片">
+              <template slot-scope="scope">
+                <img :src="scope.row.proimage" style="width: 80px;height: 80px">
+              </template>
             </el-table-column>
             <el-table-column
               prop="prosprice"
@@ -151,13 +154,14 @@
           pageno:1,   //页码
           pagesize:5,   //页size
           total:1,
+          useridd:sessionStorage.getItem('id'),
           editmodalVisible:false
         }
       },
       methods:{
           getdata(){
             var params=new URLSearchParams();
-            params.append("sid",2);
+            params.append("sid",this.useridd);
             params.append("pageno",this.pageno);
             params.append("pagesize",this.pagesize);
             this.$axios.post("queryshorder.action",params).then(res=>{

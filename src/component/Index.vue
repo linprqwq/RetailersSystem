@@ -2,23 +2,23 @@
   <div>
     <top></top>
     <div class="bj1">
-      <div class="topd">
-        <div class="tu">
-          <a href="#"><img :src="require('../image/logo-mi2.png')" alt="图片出错"></a>
+        <div class="topd">
+          <div class="tu">
+            <a href="#"><img :src="require('../image/logo-mi2.png')" alt="图片出错"></a>
+          </div>
+          <div class="topdzh">
+            <a href="#shuiguo" id="xm">水果</a>
+            <a href="#haixiang" id="hm">海鲜</a>
+            <a href="#roulei" id="ds">肉类</a>
+            <a href="#" id="bjbb">冷饮</a>
+            <a href="#" id="jd">速食</a>
+            <a href="#" id="lyq">蔬菜</a>
+            <a href="#">选购</a>
+            <a href="#">服务</a>
+            <a href="#">社区</a>
+          </div>
+          <!--      //搜索-->
         </div>
-        <div class="topdzh">
-          <a href="#shuiguo" id="xm">水果</a>
-          <a href="#haixiang" id="hm">海鲜</a>
-          <a href="#roulei" id="ds">肉类</a>
-          <a href="#" id="bjbb">冷饮</a>
-          <a href="#" id="jd">速食</a>
-          <a href="#" id="lyq">蔬菜</a>
-          <a href="#">选购</a>
-          <a href="#">服务</a>
-          <a href="#">社区</a>
-        </div>
-        <!--      //搜索-->
-      </div>
       <div class="tope">
         <div class="zuozi">
           <a href="#" class="top-left1">手机 电话卡</a>
@@ -104,43 +104,15 @@
           <p>水果</p>
         </div>
         <div class="xiatu">
-          <div class="xiatu1">
+          <div class="xiatu1" >
             <a href="#"><img :src="require('../image/商品左边背景图2.png')" alt="图片出错" height="298px" width="233px"></a>
           </div>
-          <div class="xiatu2" @click="$router.push('/CommodityDisplay')">
-            <a href="#"><img :src="require('../image/百香果1.jpg')"  alt="图片出错" height="196px" width="233px"></a>
-            <p>小米全面屏电视65英寸 E65X</p>
-            <span>全面屏设计</span>
+          <div class="xiatu2" :value="com.id" v-for="(com,index) in commoditysg"><!--//v-for="(com,index) in commodity"-->
+            <a href="#"><img  :src="'/src/'+com.prozimg"  alt="图片出错" height="196px" width="233px" @click="dianji(com.id)"></a>
+            <p>{{com.proname}}</p>
+            <span>{{com.prosubtitle}}</span>
             <div class="nei1">
-              <p>2888元</p>
-              <span>3299元</span>
-            </div>
-          </div>
-          <div class="xiatu3">
-            <a href="#"><img :src="require('../image/石榴1.jpg')" alt="图片出错" height="196px" width="233px"></a>
-            <p>全面屏电视 E43K</p>
-            <span>全面屏设计，海量内容</span>
-            <div class="nei2">
-              <p>1288元</p>
-              <span>1599元</span>
-            </div>
-          </div>
-          <div class="xiatu4">
-            <a href="#"><img :src="require('../image/芒果1.jpg')" alt="图片出错" height="196px" width="233px"></a>
-            <p>小米电视4A 70英寸</p>
-            <span>大屏更享受</span>
-            <div class="nei3">
-              <p>3388元</p>
-              <span>3999元</span>
-            </div>
-          </div>
-          <div class="xiatu5">
-            <a href="#"><img :src="require('../image/荔枝11.jpg')" alt="图片出错" height="196px" width="233px"></a>
-            <p>米家互联网对开门冰箱 540L</p>
-            <span>重磅新品福利特惠</span>
-            <div class="nei4">
-              <p>2888元</p>
-              <span>3699元</span>
+              <p>{{com.prosprice}}元</p>
             </div>
           </div>
         </div>
@@ -156,39 +128,12 @@
           <div class="xiatu1">
             <a href="#"><img :src="require('../image/商品左边背景图3.png')" alt="图片出错" height="298px" width="233px"></a>
           </div>
-          <div class="xiatu2">
-            <a href="#"><img :src="require('../image/火龙果1.jpg')" alt="图片出错" height="160px" width="160px"></a>
-            <p>Note 10 Pro</p>
-            <span>天玑1100年度旗舰芯，VC液冷散热</span>
+          <div class="xiatu2" v-for="com in commodityhx1">
+            <a href="#"><img :src="'/src/'+com.prozimg" alt="图片出错" height="160px" width="160px" @click="dianji(com.id)"></a>
+            <p>{{com.proname}}</p>
+            <span>{{com.prosubtitle}}</span>
             <div class="nei1">
-              <p>1699元起</p>
-              <span></span>
-            </div>
-          </div>
-          <div class="xiatu3">
-            <a href="#"><img :src="require('../image/猕猴桃27.jpg')" alt="图片出错" height="160px" width="160px"></a>
-            <p> Redmi Note 10 5G</p>
-            <span>5G小金刚，旗舰长续航</span>
-            <div class="nei2">
-              <p>1099元起</p>
-              <span></span>
-            </div>
-          </div>
-          <div class="xiatu4">
-            <a href="#"><img :src="require('../image/蟠桃1.jpg')" alt="图片出错" height="160px" width="160px"></a>
-            <p>小米MIX FOLD</p>
-            <span>大屏更享受</span>
-            <div class="nei3">
-              <p>9999元起</p>
-              <span></span>
-            </div>
-          </div>
-          <div class="xiatu5">
-            <a href="#"><img :src="require('../image/血橙1.jpg')" alt="图片出错" height="160px" width="160px"></a>
-            <p>小米11 Ultra</p>
-            <span>1/1.12''GN2｜2K四微曲屏</span>
-            <div class="nei4">
-              <p>5999元起</p>
+              <p>{{com.prosprice}}元</p>
               <span></span>
             </div>
           </div>
@@ -199,40 +144,12 @@
           <div class="xiatu1">
             <a href="#"><img :src="require('../image/商品左边背景图3.png')" alt="图片出错" height="298px" width="233px"></a>
           </div>
-          <div class="xiatu2">
-            <a href="#"><img :src="require('../image/西瓜2.jpg')" alt="图片出错" height="160px" width="160px"></a>
-            <p> 小米11 Pro</p>
-            <span>1/1.12''GN2｜骁龙888</span>
+          <div class="xiatu2" v-for="com in commodityhx2">
+            <a href="#"><img :src="'/src/'+com.prozimg" alt="图片出错" height="160px" width="160px" @click="dianji(com.id)"></a>
+            <p>{{com.proname}}</p>
+            <span>{{com.prosubtitle}}</span>
             <div class="nei1">
-              <p>4999元起</p>
-              <span></span>
-            </div>
-          </div>
-          <div class="xiatu3">
-            <a href="#"><img :src="require('../image/车厘子6.jpg')" alt="图片出错" height="160px" width="160px"></a>
-            <p> Redmi Note 10 5G</p>
-            <span>5G小金刚，旗舰长续航</span>
-            <div class="nei2">
-              <p>2299元起</p>
-              <span></span>
-            </div>
-          </div>
-          <div class="xiatu4">
-            <a href="#"><img :src="require('../image/释迦果1.jpg')" alt="图片出错" height="160px" width="160px"></a>
-            <p>K40 游戏增强版</p>
-            <span>轻薄电竞设计</span>
-            <div class="nei3">
-              <p>1999元起</p>
-              <span></span>
-            </div>
-          </div>
-          <div class="xiatu5">
-            <a href="#"><img :src="require('../image/青梅1.jpg')" alt="图片出错" height="160px" width="160px"></a>
-            <p>小米11 Ultra</p>
-            <span>1/1.12''GN2｜2K四微曲屏</span>
-            <div class="nei4">
-              <p>3999元</p>
-              <span></span>
+              <p>{{com.prosprice}}元</p>
             </div>
           </div>
         </div>
@@ -248,40 +165,12 @@
           <div class="xiatu1">
             <a href="#"><img :src="require('../image/商品左边背景图1.png')" alt="图片出错" height="298px" width="233px"></a>
           </div>
-          <div class="xiatu2">
-            <a href="#"><img :src="require('../image/橘子.jpg')" alt="图片出错" height="196px" width="233px"></a>
-            <p>小米真无线蓝牙耳机Air 2 Pro</p>
-            <span> 主动降噪/持久续航/无线充</span>
+          <div class="xiatu2" v-for="com in commodityrl">
+            <a href="#"><img :src="'/src/'+com.prozimg" alt="图片出错" height="196px" width="233px" @click="dianji(com.id)"></a>
+            <p>{{com.proname}}</p>
+            <span>{{com.prosubtitle}}</span>
             <div class="nei1">
-              <p>649元</p>
-              <span>699元</span>
-            </div>
-          </div>
-          <div class="xiatu3">
-            <a href="#"><img :src="require('../image/干杏2.jpg')" alt="图片出错" height="196px" width="233px"></a>
-            <p> 高速无线充套装</p>
-            <span>快速无线闪充，Qi充电标准</span>
-            <div class="nei2">
-              <p>149元</p>
-              <span></span>
-            </div>
-          </div>
-          <div class="xiatu4">
-            <a href="#"><img :src="require('../image/哈密瓜18.jpg')" alt="图片出错" height="196px" width="233px"></a>
-            <p>小米真无线蓝牙耳机Air 2s</p>
-            <span>全面升级，智慧真无线</span>
-            <div class="nei3">
-              <p>359元</p>
-              <span>399元</span>
-            </div>
-          </div>
-          <div class="xiatu5">
-            <a href="#"><img :src="require('../image/榴莲2.jpg')" alt="图片出错" height="196px" width="233px"></a>
-            <p>Redmi AirDots 2真无线蓝牙耳机</p>
-            <span>支持蓝牙5.0，自动秒连，拿起就能用</span>
-            <div class="nei4">
-              <p>89元</p>
-              <span>99元</span>
+              <p>{{com.prosprice}}元</p>
             </div>
           </div>
         </div>
@@ -465,7 +354,10 @@ export default {
     return {
       userid: sessionStorage.getItem('user'),
       useridd: sessionStorage.getItem('id'),
-      commodity: [],
+      commoditysg: [],
+      commodityhx1:[],
+      commodityhx2:[],
+      commodityrl:[],
       cartcount: 0,
       num: 1,
       carouseData: [
@@ -501,15 +393,48 @@ export default {
       } else {
         this.$router.push('/shopping2');
       }
-    }
+    },
+    dianji(id){
+      this.$router.push({
+        path: '/CommodityDisplay',
+        query: {
+          comid: id
+        }
+      })
+    },
+
   },
   created() {
     var _this = this;
     this.$axios.post("queryAllcom.action").then(val => {
       val.data.forEach(key=>{
-        console.log(key.prozimg+"******")
+        console.log(key+"加载完毕")
       })
-      _this.commodity = val.data
+      _this.commoditysg = val.data.splice(0,4)
+      _this.commoditysg.forEach(itme=>{
+        console.log(itme.prozimg)
+      })
+    }).catch()
+
+    this.$axios.post("queryAllcomhs.action").then(val => {
+      val.data.forEach(key=>{
+        console.log(key+"加载完毕")
+      })
+      _this.commodityhx1 = val.data.splice(0,4)
+    }).catch()
+
+    this.$axios.post("queryAllcomhs.action").then(val => {
+      val.data.forEach(key=>{
+        console.log(key+"加载完毕")
+      })
+      _this.commodityhx2 = val.data.splice(4,8)
+    }).catch()
+
+    this.$axios.post("queryAllcomrl.action").then(val => {
+      val.data.forEach(key=>{
+        console.log(key+"加载完毕")
+      })
+      _this.commodityrl = val.data
     }).catch()
     if (this.useridd != null) {
       var params = new URLSearchParams();

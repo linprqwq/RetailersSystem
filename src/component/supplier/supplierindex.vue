@@ -61,8 +61,9 @@ width="35%" center>
 
       methods:{
         getData(){
-            let params={};
-            params["id"]=1;
+            let params={
+              id:sessionStorage.getItem("id")
+            };
         Object.keys(this.shop).forEach(item=>{
               params[item]=this.shop[item];
         })
@@ -79,7 +80,7 @@ width="35%" center>
       },
       //去打开对话框
         opensupplier(id) {
-          alert(id)
+        /*  alert(id)*/
         console.log(id)
         this.dialogVisible = true;
         this.shop_add_id = id;

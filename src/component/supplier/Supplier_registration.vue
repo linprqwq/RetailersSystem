@@ -7,7 +7,7 @@
           <!--分类组件-->
           <goods_category ref="goods_category"></goods_category>
 
-        <el-form-item label="去上传营业执照">
+        <el-form-item label="头像">
           <el-upload
             :limit="1"
             list-type="picture-card"
@@ -56,6 +56,7 @@
         //获取选择的商品分类数组、
         var  formData=new FormData();
        /* formData.append("id",1);//this.addForm.id);*/
+        this.addForm["supplierGoodsCategoryList"]=this.$refs["goods_category"].ShopTypeInfos;
 
         formData.append("id",this.addForm.id);
         Object.keys(this.$refs["goods_category"].ShopTypeInfos).forEach(index=>{

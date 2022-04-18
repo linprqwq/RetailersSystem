@@ -90,10 +90,24 @@ export default {
           })
         }
       }).catch()
-    }
+    },
+    mounted() {
+      //关闭浏览器去清空浏览器缓存在 localstorage中的数据
+      window.onbeforeunload=function (e) {
+        let storage=window.localStorage;
+        storage.clear();
+      }
+
+    },
+
   }
+
 }
+
+
 </script>
+
+
 
 <style scoped>
 * {

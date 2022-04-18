@@ -49,7 +49,7 @@
             label="地址">
           </el-table-column>
           <el-table-column
-            prop="img"
+            prop="imgpath"
             label="用户头像"
             width="100">
             <template slot-scope="scope">
@@ -92,6 +92,7 @@
             </template>
           </el-table-column>
         </el-table>
+
         <!-- 分页控件-->
         <el-pagination
           @size-change="handleSizeChange"
@@ -117,6 +118,7 @@
       <el-button @click="adddialogVisible = false">取 消</el-button>
 
     </el-dialog>
+
     <!--  编辑页面-->
     <el-dialog
       title="编辑用户信息"
@@ -174,8 +176,7 @@
         this.$refs.editUser.submitUpload("editform");
       },
       addUser(){
-        this.$refs.addView.submitUpload("addform");
-
+        this.$refs.addView.submitUpload("addForm");
       },
       openaddwin(){
         this.adddialogVisible=true;

@@ -17,6 +17,9 @@ import Supplier_registration from "./component/supplier/Supplier_registration";
 import App from "./App";
 import Zlwh from "./component/shzlwh/Zlwh";
 import Allorder from "./component/Shorder/Allorder";
+import commmodity from "./component/shop/commmodity";
+import addcommodity from "./component/shop/addcommodity";
+import shoptypeinfo from "./component/shop/shoptypeinfo";
 Vue.use(ElementUI)
 //axios
 import  Axios from 'axios'

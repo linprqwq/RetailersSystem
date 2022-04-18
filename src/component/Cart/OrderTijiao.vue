@@ -5,29 +5,24 @@
       <div class="header">
       </div>
     </div>
-
-    <h2 class="common_title">收货人
-      <el-input style="width: 150px" :value="user.username"></el-input>&nbsp;手机号码
-      <el-input style="width: 150px" :value="user.phone">{</el-input>
-    </h2>
-
+    <h2 class="common_title">填写并核对订单信息</h2>
+    <h2 class="common_title">{{user.username}}请确认信息</h2>
+<!--      <el-input style="width: 150px" :value="user.username"></el-input>&nbsp;手机号码-->
+<!--      <el-input style="width: 150px" :value="user.phone"></el-input>-->
     <br><br>
     <h3 class="common_title">确认收货地址</h3>
 
     <div class="common_list_con clearfix">
       <dl>
         <dt>寄送到：</dt>
-        <dd><input type="radio" name="" checked="">北京市 海淀区 东北旺西路8号中关村软件园 （李思 收） 182****7528</dd>
+        <dd><input type="radio" name="" checked=""><span v-show="user.shaddress==null || user.shaddress==''">请添加新地址</span>{{user.shaddress}}</dd>
       </dl>
-      <a href="#" class="edit_site">切换</a>
-
+      <a href="#" class="edit_site" @click="open(dialogVisible=true)">新增收货地址</a>
     </div>
 
     <h3 class="common_title">支付方式</h3>
     <div class="common_list_con clearfix">
       <div class="pay_style_con clearfix">
-        <input type="radio" name="pay_style" checked>
-        <label class="weixin">微信支付</label>
         <input type="radio" name="pay_style">
         <label ><span>余额:{{user.umoney}}</span></label>
       </div>
@@ -45,7 +40,7 @@
       </ul>
       <ul class="goods_list_td clearfix" v-for="(item,index) in jsljgm">
         <li class="col01">{{ index + 1 }}</li>
-        <li class="col02"><img :src="require('../../image/dddbbt2.png')" alt="图片出错"></li>
+        <li class="col02"><img :src="'/src/'+item.commodity.prozimg" alt="图片出错"></li>
         <li class="col03">{{ item.commodity.proname }}</li>
         <li class="col04">500g</li>
         <li class="col05">{{ item.commodity.prosprice }}</li>
@@ -84,13 +79,37 @@
       <p>电话：010-****888 京ICP备*******8号</p>
     </div>
 
-    <div class="popup_con">
+    <div class="popup_con" >
       <div class="popup">
         <p>订单提交成功！</p>
       </div>
 
       <div class="mask"></div>
     </div>
+    <el-dialog
+      title="新增地址"
+      :visible.sync="dialogVisible"
+      width="50%"
+      >
+      <select v-model="sheng" @change="fun1">
+        <option value="-1">----请选择---</option>
+        <option v-for="p in provice" :value="p.id">{{p.name}}</option>
+      </select>
+      <select v-model="shi"  @change="fun2">
+        <option value="-1">----请选择---</option>
+        <option  v-for="c in ctiy" :value="c.id">{{c.name}}</option>
+      </select>
+      <select>
+        <option value="-1">----请选择---</option>
+        <option v-for="d in district" :value="d.id">{{d.name}}</option>
+      </select>
+      <br>
+      <el-input placeholder="请输入具体地址" v-model="addr" style="width: 400px;margin-top: 20px"></el-input>
+      <span slot="footer" class="dialog-footer">
+    <el-button @click="dialogVisible = false">取 消</el-button>
+    <el-button type="primary" @click="dialogVisible = false">确 定</el-button>
+  </span>
+    </el-dialog>
   </div>
 </template>
 
@@ -106,13 +125,43 @@ export default {
       uid: sessionStorage.getItem('id'),
       jsljgm: [],
       user:[],
-
+      dialogVisible:false,
+      addr:"",
+      shi:"-1",
+      sheng:"-1",
+      provice:[],
+      ctiy:[],
+      district:[],
     }
   },
   components: {
     top: IndexTop,
   },
   methods: {
+    //选择市
+    fun2(){
+      var _this = this;
+      var params=new URLSearchParams();
+      params.append("id",this.shi)
+      this.$axios.post("queryChinaByshi.action",params).then(val=>{
+          _this.district=val.data
+      }
+      ).catch()
+    },
+    //选择省
+    fun1(){
+      var _this = this;
+      var params=new URLSearchParams();
+      params.append("id",this.sheng)
+      this.$axios.post("queryChinaByPid.action",params).then(val=>{
+        _this.ctiy=val.data
+        }
+      ).catch()
+    },
+    //添加地址
+    open(){
+
+    },
     //查询当前用户购物车和商品
     queryusergwc() {
       this.userinfo.forEach(item => {
@@ -144,8 +193,19 @@ export default {
       params.append("list", this.list);
       //商品地址id
 
+      //当前状态 （有无付款）
+      params.append("status",2);
+      //订单总价
+      params.append("zprice",this.zongmoney)
       this.$axios.post("usertijiaodd.action", params).then(res => {
-        alert(res.data.msg)
+       if (res.data.code==0){
+         this.$message.error(res.data.msg);
+         this.$router.push('/personalCenter')
+         this.$emit("event-name")
+       }else{
+         this.$message.error(res.data.msg);
+         this.$router.push('/personalCenter')
+       }
       }).catch()
     },
     //购物车数量加减跟删除
@@ -175,6 +235,8 @@ export default {
     },
   },
   computed: {
+
+
     //总金额
     zongmoney: function () {
       let s = 0;
@@ -194,6 +256,12 @@ export default {
   },
   created() {
     this.queryusergwc();
+
+    //选择省
+    var _this=this;
+    this.$axios.post("queryAllChina.action").then(val=>{
+      _this.provice=val.data;
+    }).catch()
   }
 }
 </script>
@@ -224,7 +292,9 @@ body {
 html, body {
   height: 100%
 }
-
+li{
+  list-style: none;
+}
 /* 顶部样式 */
 .header_con {
   background-color: #f7f7f7;

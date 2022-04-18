@@ -1,5 +1,8 @@
 <template>
   <div>
+    姓名：<el-input type="text" v-model="name" style="width: 50%"></el-input>
+    <el-button type="danger"  @click="queryemployeelike">查询</el-button>
+    <el-button type="success" @click="handleAdd()">添加</el-button>
     <el-table
       :data="tableData"
       style="width: 100%">
@@ -46,10 +49,10 @@
           <el-button
             size="mini" type="success"
             @click="openeditwin(scope.row.id)">编辑</el-button>
-          <el-button
+          <!--<el-button
             size="mini"
             @click="handleAdd(scope.row)"
-          >添加</el-button>
+          >添加</el-button>-->
           <el-popconfirm
             title="确定删除吗？"
             @confirm="handleDelete(scope.row.id)"
@@ -88,15 +91,18 @@
 
    <!--&lt;!&ndash; &lt;!&ndash; 添加模态框&ndash;&gt;&ndash;&gt;-->
     <el-dialog title="用户添加" :visible.sync="editmodalVisible02">
-      <el-form >
+      <el-form  :model="addform" status-icon :rules="rules" ref="addform" label-width="100px" class="demo-addform">
         <el-form-item label="用户名" :label-width="formLabelWidth">
           <el-input v-model="addform.empName" autocomplete="off"></el-input>
         </el-form-item>
         <el-form-item label="账号" :label-width="formLabelWidth">
           <el-input v-model="addform.empLoginname" autocomplete="off"></el-input>
         </el-form-item>
-        <el-form-item label="密码" :label-width="formLabelWidth">
-          <el-input v-model="addform.empPassword" autocomplete="off"></el-input>
+        <el-form-item label="密码" prop="empPassword" :label-width="formLabelWidth">
+          <el-input v-model="addform.empPassword" type="password" autocomplete="off"></el-input>
+        </el-form-item>
+        <el-form-item label="确认密码" prop="empPassword1" :label-width="formLabelWidth">
+          <el-input v-model="addform.empPassword1" type="password" autocomplete="off"></el-input>
         </el-form-item>
         <el-form-item label="电话" :label-width="formLabelWidth">
           <el-input v-model="addform.empPhone" autocomplete="off"></el-input>
@@ -127,11 +133,9 @@
       </el-form>
       <div slot="footer" class="dialog-footer">
         <el-button @click="editmodalVisible02 = false">取 消</el-button>
-        <el-button type="primary" @click="add">确 定</el-button>
+        <el-button type="primary" @click="add('addform')">确 定</el-button>
       </div>
     </el-dialog>
-
-
   </div>
 </template>
 
@@ -140,7 +144,46 @@
     export default {
         name: "EmpView",
       data(){
+        var validatePass = (rule, value, callback) => {
+          if (value === '') {
+            callback(new Error('请输入密码'));
+          } else {
+            if (this.addform.empPassword !== '') {
+              this.$refs.addform.validateField('empPassword');
+            }
+            callback();
+          }
+        };
+        var validatePass2 = (rule, value, callback) => {
+          if (value === '') {
+            callback(new Error('请再次输入密码'));
+          } else if (value !== this.addform.empPassword) {
+            callback(new Error('两次输入密码不一致!'));
+          } else {
+            callback();
+          }
+        };
+
         return {
+          addform:{
+            empName:"",empLoginname:"",empPassword:"",empPassword1:"",empPhone:"",empMoney:"",empAddress:"",empImg:"",
+
+
+          },//添加页面数据对象
+          rules: {
+            empPassword: [
+              { validator: validatePass, trigger: 'blur' }
+            ],
+            empPassword1: [
+              { validator: validatePass2, trigger: 'blur' }
+            ],
+            empLoginname: [
+              { validator:'blur' }
+            ]
+          },
+
+
+          name:'',
           formLabelWidth:'100px',
           tableData:[],
           pageno:1,   //页码
@@ -150,9 +193,7 @@
           editmodalVisible02:false,
           editform:{},   //编辑页面数据 对象
          /* addform: {}, //添加页面保存的数据，提交用*/
-          addform:{
-            empName:"",empLoginname:"",empPassword:"",empPhone:"",empMoney:"",empAddress:"",empImg:""
-          },//添加页面数据对象
+
           path:"http://127.0.0.1:9090/RetailersBackSystem/",
           editdialogVisible:false
         }
@@ -162,15 +203,21 @@
           var params = new URLSearchParams();
           params.append("pageno",this.pageno);
           params.append("pagesize",this.pagesize);
+          params.append("empName",this.name)
 
-          this.$axios.get("/queryallsysempd.action",params)
+          this.$axios.get("/queryallsysempd.action",{params:params})
             .then(response=>{
-              this.tableData = response.data.rows;//获取所有要展示的数据
+              this.tableData = response.data.records;//获取所有要展示的数据
               this.total = response.data.total; //总记录数量
               this.tableData.forEach( (item)=> {
                 item.empImg = this.path+item.empImg;
               })
             }).catch();
+        },
+        queryemployeelike(){
+
+          this.name = this.name
+          this.getdata();
         },
         handleSizeChange(val) { //分页控件  页面size改变 触发  val参数就是选择的条数
           console.log(`每页 ${val} 条`);
@@ -213,7 +260,7 @@
          this.editmodalVisible02=true;
          this.editform=row;
         },
-        add(){
+        add(addform){
           var formData = new FormData();
 
           Object.keys(this.addform).forEach(key=>{
@@ -253,6 +300,14 @@
                 message: '上传成功',
                 type: 'success'
               })
+
+
+             /* this.$message({
+
+                showClose: true,
+                message: '上传成功',
+                type: 'success'
+              })*/
               this.formReset()// 上传成功清空
               //更新父页面数据
               this.getdata();
@@ -289,7 +344,7 @@
             empAddress:"",
             empImg:"",
           }
-        }
+        },
       },
       components:{
         EmpSys

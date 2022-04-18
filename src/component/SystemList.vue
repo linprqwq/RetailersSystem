@@ -82,6 +82,7 @@
 </template>
 
 <script>
+  import SysMenus from "./sysindex/sysguanli/sysmenus/SysMenus";
   import Welcome from "./Welcome";
   import EmpView from "./sysindex/sysguanli/employee/EmpView";
   import AuthcView from "./sysindex/sysguanli/authcs/AuthcView";
@@ -91,10 +92,12 @@
   import GysShJlView from "./Gys/GysShJlView";
   import ShJlView from "./commecial/ShJlView";
   import ShView from "./commecial/ShView";
+  import SysRole from "./sysindex/sysguanli/sysrole/SysRole";
+
     export default {
         name: "SystemList",
       components:{
-        Welcome,EmpView,AuthcView,UserView,CgsqView,GysShView,GysShJlView,ShView,ShJlView
+        Welcome,EmpView,AuthcView,UserView,CgsqView,GysShView,GysShJlView,ShView,ShJlView,SysRole,SysMenus
       },
       data(){
         return {

@@ -2,11 +2,8 @@
   <div >
 
     <el-form :model="editform" >
-      <el-form-item label="id">
-        <el-input v-model="editform.id"></el-input>
-      </el-form-item>
       <el-form-item label="编号">
-        <el-input v-model="editform.empName"></el-input>
+        <el-input v-model="editform.id"></el-input>
       </el-form-item>
       <el-form-item label="用户名">
         <el-input v-model="editform.empName" autocomplete="off"></el-input>

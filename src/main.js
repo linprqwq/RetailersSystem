@@ -6,6 +6,8 @@ import 'element-ui/lib/theme-chalk/index.css'
 import CommodityDisplay from "./component/Commodity/CommodityDisplay";
 import ShoppingFalst from './component/Cart/ShoppingFalst'
 import Router from './config/routerconfig'
+import SysMenus from "./component/sysindex/sysguanli/sysmenus/SysMenus";
+import SysRole from "./component/sysindex/sysguanli/sysrole/SysRole";
 import shopping from "./component/Cart/shopping2";
 import PersonalCenter from "./component/PersonalCenter/PersonalCenter";
 import OrderTijiao from "./component/Cart/OrderTijiao";

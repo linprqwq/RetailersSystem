@@ -56,6 +56,12 @@
      <el-button @click="adddialogVisible = false">取 消</el-button>
 
    </el-dialog>
+   <div v-if="CgTable.length>0" >
+     <el-row style="padding: 10px 0;">
+       <el-col :span="3" :offset="14">总价格:{{totalMoney}}</el-col>
+       <el-col :span="3" :offset="1">总采购数量:{{totalNum}}</el-col>
+     </el-row>
+   </div>
  </div>
 
 </template>
@@ -75,6 +81,22 @@
             multipleSelection:[]
           }
       },
+      computed: {
+        totalNum() {
+          let num = 0;
+          this.multipleSelection.forEach(item => {
+            num += item.shopNum;
+          })
+          return num;
+        },
+        totalMoney() {
+          let money = 0;
+          this.multipleSelection.forEach(item => {
+            money += item.supplierPrice * item.shopNum;
+          })
+          return money + "元";
+        }
+      },
       components:{
         Commodity
       },
@@ -86,7 +108,7 @@
             //组装数据
             this.multipleSelection.forEach(item => {
               //获取所有的供应商id
-              suppliersIds.add(item.supplyId);
+               suppliersIds.add(item.supplyId);
             });
             suppliersIds.forEach(item => {
               var purchaseInfo = {supplyId: item};
@@ -94,19 +116,18 @@
               this.multipleSelection.forEach(item2 => {
                 if (item == item2.supplyId) {
                   var detail = {
-                    goodsupplid: item2.goodsupplid,
+                    shopId: item2.supplyId,
                     shopNum: item2.shopNum
                   }
                   details.push(detail);
                 }
               });
-              purchaseInfo["purchaseDetails"] = details;
+              purchaseInfo["purchaseDetailInfoList"] = details;
               purchaseInfos.push(purchaseInfo);
             });
-            this.$axios
-              .post("purchase/purchase.action", purchaseInfos)
+            this.$axios.post("purchaseInfo/addpurchase.action", purchaseInfos)
               .then(res => {
-                if (res.data.code == "0") {
+                if (res.data.code >0) {
                   this.$message.success(res.data.msg);
                   this.resetForm();
                 } else {
@@ -119,6 +140,9 @@
           }else{
             this.$message.error("请选择再提交采购单")
           }
+        },
+        resetForm() {//重置
+          this.CgTable = [];
         },
         handleSelectionChange(val){
           this.multipleSelection=val;
@@ -138,10 +162,13 @@
         addPrice(index){
           //选择供应商时添加价格
           let obj = this.goodsupplier.find(item => {
+            console.log(item.id+"  "+this.CgTable[index].goodsupplid)
             return item.id == this.CgTable[index].goodsupplid;
           })
+          console.log(obj.supplierPrice);
+          console.log(obj.userinfo.id);
           this.CgTable[index].supplierPrice = obj.supplierPrice;
-          this.CgTable[index].gysId = obj.userinfo.id;
+          this.CgTable[index].supplyId = obj.userinfo.id;
         },
         //删除当前一行采购申请表
         getGooodSuppliers() {

@@ -51,7 +51,8 @@ export default {
         thyy:[
           { required: true, message: '请选择退货原因', trigger: 'click' }
         ]
-      }
+      },
+
     }
   },
   methods: {

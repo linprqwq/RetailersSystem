@@ -21,14 +21,6 @@
         <!--      //搜索-->
       </div>
     </div>
-    <div class="nav-bar" >
-      <div class="con">
-        <div class="con-info">
-          <h2>{{commodityList.proname}}</h2>
-          <a href="#">用户评价</a>
-        </div>
-      </div>
-    </div>
     <div class="page">
       <div class="page-box">
         <div class="page-img">
@@ -81,11 +73,23 @@
         </div>
       </div>
     </div>
-    <div class="detail-box">
-      <div class="img-box">
-        <img :src="'/src/'+commodityList.proimage" alt="维护中"/>
-      </div>
-    </div>
+    <el-tabs v-model="spxqtabs">
+      <el-tab-pane label="用户管理" name="first">
+        <div class="detail-box">
+          <div class="img-box">
+            <img :src="'/src/'+commodityList.proimage" alt="维护中"/>
+          </div>
+        </div>
+      </el-tab-pane>
+      <el-tab-pane label="用户评论" name="second">
+        <div class="detail-box">
+         <div class="img-box">
+           <sppl>
+           </sppl>
+         </div>
+        </div></el-tab-pane>
+    </el-tabs>
+
 
     <div class="site-footer">
       <div class="wenzitiao">
@@ -259,6 +263,7 @@
 
 <script>
 import IndexTop from "../User/IndexTop";
+import sppl from "./sppl";
 export default {
   name: "CommodityDisplay",
 
@@ -270,11 +275,13 @@ export default {
       tp:[],
       userid: sessionStorage.getItem('user'),
       useridd: sessionStorage.getItem('id'),
-      cartcount:0
+      cartcount:0,
+      spxqtabs:'first',
     }
   },
   components:{
-   top: IndexTop
+   top: IndexTop,
+    sppl
   },
   methods:{
     //加入购物车

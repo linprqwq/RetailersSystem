@@ -29,6 +29,6 @@ Vue.prototype.$axios = Axios
 
 new Vue({
   el: '#app',
-  render: h => h(shoptypeinfo),
+  render: h => h(App),
   router:Router,
 })

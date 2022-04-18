@@ -2,107 +2,6 @@
 
 <div>
   <div>
-    <!--  <div>-->
-    <!--    <el-tabs v-model="activeName" @tab-click="queryorderdfk">-->
-    <!--      <el-tab-pane label="全部订单" ></el-tab-pane>-->
-    <!--      <el-tab-pane label="待付款订单" name="2"></el-tab-pane>-->
-    <!--      <el-tab-pane label="待收货订单" name="4"></el-tab-pane>-->
-    <!--      <el-tab-pane label="已提货订单" name="5"></el-tab-pane>-->
-    <!--      <el-tab-pane label="已取消订单" name="1"></el-tab-pane>-->
-    <!--    </el-tabs>-->
-
-    <!--    <el-table-->
-    <!--      :data="list"-->
-    <!--      border-->
-    <!--      style="width: 100%;height: 100%"  >-->
-    <!--      <el-table-column-->
-    <!--        prop="orderid"-->
-    <!--        label="订单编号"-->
-    <!--        width="180">-->
-    <!--      </el-table-column>-->
-
-    <!--      <el-table-column label="商品信息">-->
-    <!--        <template slot-scope="scope">-->
-    <!--          <el-table border :data='scope.row.ordderdetails' :span-method="objectspanmethod">-->
-    <!--            <el-table-column label="头像" style="height: 50px;width: 50px;">-->
-    <!--              <template slot-scope="scope" style="height: 50px;width: 50px;">-->
-    <!--                <img :src="'/src/'+scope.row.proimage" style="height: 50px;width: 50px;">-->
-    <!--              </template>-->
-    <!--            </el-table-column>-->
-    <!--            <el-table-column prop='proname' label="订单商品"></el-table-column>-->
-    <!--            <el-table-column prop='quantity' label="数量"></el-table-column>-->
-    <!--            <el-table-column v-if="scope.row.status==1" label="操作">-->
-    <!--              <template  slot-scope="scope1">-->
-    <!--                <el-button-->
-    <!--                  size="mini"-->
-    <!--                  type="danger"-->
-    <!--                  @click="addspingcart(scope1.$index, scope1.row.proid)" v-if="scope.row.status==1">加入购物车</el-button>-->
-    <!--              </template>-->
-    <!--            </el-table-column>-->
-    <!--            <el-table-column v-if="scope.row.status==5" label="操作">-->
-    <!--              <template slot-scope="scope3" >-->
-    <!--                <el-button-->
-    <!--                  size="mini"-->
-    <!--                  type="danger"-->
-    <!--                  @click="sqtuikuan(scope3.$index, scope3.row)" v-if="scope3.row.refund==0">申请退货</el-button>-->
-    <!--              </template>-->
-    <!--            </el-table-column>-->
-    <!--            <el-table-column v-if="scope.row.status==5&&scope.row.ordderdetails.length>1">-->
-    <!--              <template  slot-scope="scope2">-->
-    <!--                <el-button-->
-    <!--                  size="mini"-->
-    <!--                  type="danger"-->
-    <!--                  @click="pingjia(scope2.$index, scope2.row)" v-if="scope2.row.evaluatea==2">待评价</el-button>-->
-    <!--              </template>-->
-    <!--            </el-table-column>-->
-    <!--          </el-table>-->
-
-    <!--        </template>-->
-    <!--      </el-table-column>-->
-
-    <!--      <el-table-column-->
-    <!--        prop="zprice"-->
-    <!--        label="总价"-->
-    <!--      >-->
-    <!--      </el-table-column>-->
-    <!--      <el-table-column label="操作">-->
-    <!--        <template slot-scope="scope5">-->
-    <!--          <el-button-->
-    <!--            size="mini"-->
-    <!--            @click="qxddorder(scope5.$index, scope5.row,true)" v-if="scope5.row.status==2">取消订单</el-button>-->
-    <!--          <el-button-->
-    <!--            size="mini"-->
-    <!--            @click="qxddorder(scope5.$index, scope5.row,false)" v-if="scope5.row.status==3">取消订单</el-button>-->
-    <!--          <el-button-->
-    <!--            size="mini"-->
-    <!--            type="danger"-->
-    <!--            @click="confirmorder(scope5.$index, scope5.row)" v-if="scope5.row.status==4">确认收货</el-button>-->
-    <!--          <el-button-->
-    <!--            size="mini"-->
-    <!--            type="danger"-->
-    <!--            @click="fk(scope5.$index, scope5.row)" v-if="scope5.row.status==2">付款</el-button>-->
-    <!--          <el-button-->
-    <!--            size="mini"-->
-    <!--            type="danger"-->
-    <!--            @click="pingjia(scope5.$index, scope5.row)" v-if="scope5.row.ordderdetails.length<=1&&scope5.row.ordderdetails.evaluatea==2">待评价</el-button>-->
-    <!--          <el-button-->
-    <!--            size="mini"-->
-    <!--            type="danger"-->
-    <!--            @click="deleteorderbyid(scope5.$index, scope5.row)" v-if="scope5.row.status==1">删除订单</el-button>-->
-
-
-    <!--        </template>-->
-    <!--      </el-table-column>-->
-    <!--    </el-table>-->
-    <!--    <el-pagination-->
-    <!--      @size-change="handleSizeChange"-->
-    <!--      @current-change="handleCurrentChange"-->
-    <!--      :current-page="pageno"-->
-    <!--      :page-sizes="[5, 10, 15, 20]"-->
-    <!--      :page-size="pagesize"-->
-    <!--      layout="total, sizes, prev, pager, next, jumper"-->
-    <!--      :total="total">-->
-    <!--    </el-pagination>-->
 
         <!--  退货页面-->
         <el-dialog
@@ -122,9 +21,9 @@
           width="30%"
           :before-close="handleClose">
           <!-- 动态组件   指定添加vue页面在模态框显示-->
-          <component ref="eds" is="Pj"></component>
+          <component ref="pjref" is="Pj" v-on:success="success(res)"></component>
 
-          <el-button type="primary" @click="pjtijiao">确 定</el-button>
+          <el-button type="primary" @click="pjtijiao('pjref')">确 定</el-button>
           <el-button @click="pjVisible = false">取 消</el-button>
 
         </el-dialog>
@@ -161,11 +60,7 @@
         <el-table-column label="单价(元)" prop="prosprice"></el-table-column>
         <el-table-column label="数量" prop="quantity"></el-table-column>
         <el-table-column label="商品操作">
-<!--          <template slot-scope="scope">-->
-<!--            <el-button v-if="scope.row.isReturn==0 &&o.orderState=='o-6'" @click="openWindow(scope.row.id)" round>退货</el-button>-->
-<!--            <el-tag type="warning" v-if="o.orderState=='o-1'">等待付款</el-tag>-->
-<!--            <el-tag v-if="scope.row.isReturn==1">待商家确认退货</el-tag>-->
-<!--            <el-tag type="success" v-if="scope.row.isReturn==2">待退款</el-tag>-->
+
 <!--          </template>-->
     <template  slot-scope="scope">
                     <el-button
@@ -194,8 +89,7 @@
             <el-tag type="success" v-if="o.status=='5'">已提货</el-tag>
             <el-tag type="success" v-if="o.status=='1'">已取消</el-tag>
             <el-tag type="success" v-if="o.status=='3'">已付款</el-tag>
-<!--            <el-tag type="success" v-if="o.status=='6'">已付款</el-tag>-->
-<!--            <el-tag type="success" v-if="o.status=='7'">交易关闭</el-tag>-->
+
             </template>
         </el-table-column>
         <el-table-column label="操作">
@@ -217,47 +111,7 @@
         </el-table-column>
       </el-table>
     </div>
-<!--    <el-row class="mytop" v-if="orders.length>0">-->
-<!--&lt;!&ndash;      <el-col :span="4">&ndash;&gt;-->
-<!--&lt;!&ndash;        <el-pagination&ndash;&gt;-->
-<!--&lt;!&ndash;          @size-change="handleSizeChange"&ndash;&gt;-->
-<!--&lt;!&ndash;          @current-change="handleCurrentChange"&ndash;&gt;-->
-<!--&lt;!&ndash;          :current-page="pageno"&ndash;&gt;-->
-<!--&lt;!&ndash;          :page-sizes="[5, 10, 15, 20]"&ndash;&gt;-->
-<!--&lt;!&ndash;          :page-size="pagesize"&ndash;&gt;-->
-<!--&lt;!&ndash;          layout="total, sizes, prev, pager, next, jumper"&ndash;&gt;-->
-<!--&lt;!&ndash;          :total="total"&ndash;&gt;-->
-<!--&lt;!&ndash;        >&ndash;&gt;-->
-<!--&lt;!&ndash;        </el-pagination>&ndash;&gt;-->
-<!--&lt;!&ndash;      </el-col>&ndash;&gt;-->
-<!--    </el-row>-->
-<!--    <div>-->
-<!--      <el-dialog-->
-<!--        :show-close="false"-->
-<!--        :visible.sync="dialogVisible"-->
-<!--        width="25%">-->
-<!--        <pay-money2 ref="payMoney2"></pay-money2>-->
-<!--      </el-dialog>-->
-<!--    </div>-->
-<!--    <div>-->
-<!--      <el-dialog-->
-<!--        :visible.sync="dialogVisible2"-->
-<!--        :before-close="handleClose"-->
-<!--        width="50%">-->
-<!--        <add-return-shop ref="addReturnShop"></add-return-shop>-->
-<!--      </el-dialog>-->
-<!--    </div>-->
-<!--    <div>-->
-<!--      <el-dialog-->
-<!--        :visible.sync="dialogVisible3"-->
-<!--        :before-close="handleClose3"-->
-<!--        width="50%">-->
-<!--        <evaluate-view ref="evaluateView"></evaluate-view>-->
-<!--      </el-dialog>-->
-<!--    </div>-->
-<!--    <div>-->
-<!--      <el-empty v-if="orders.length==0" description="暂无数据"></el-empty>-->
-<!--    </div>-->
+
         <el-pagination
           @size-change="handleSizeChange"
           @current-change="handleCurrentChange"
@@ -291,6 +145,7 @@ export default {
       thVisible:false,
       //评价
       pjVisible:false,
+      res:false,
     }
   },
   components:{
@@ -305,6 +160,8 @@ export default {
     //接受子组件的事件调用
     success(res){
       this.thVisible=res;
+      this.pjVisible=res;
+      this.queryorderdfk();
     },
     objectspanmethod({row, column, rowIndex, columnIndex}){
       if (columnIndex === 5) {
@@ -357,6 +214,8 @@ export default {
       params.append("pagesize",this.pagesize);
       params.append("uid",this.useridd);
       params.append("status",this.activeName);
+      this.pjVisible = false;
+      this.thVisible = false;
 
       this.$axios.post("queryuserorder.action",params).then(res=>{
         this.total = res.data.total; //总记录数量
@@ -470,15 +329,13 @@ export default {
       this.pjVisible=true;
       console.log(b)
       this.$nextTick(item=>{
-        this.$refs.eds.pjgetdata(b);
+        this.$refs.pjref.pjgetdata(b);
       })
 
     },
     //评价提交
-    pjtijiao(){
-        this.$refs.eds.pjtijiao();
-      this.thVisible = false;
-      this.pjVisible=false;
+    pjtijiao(pjName){
+        this.$refs.pjref.pjtijiao(pjName);
     },
     //窗口关闭确认
     handleClose(done) {
@@ -486,7 +343,7 @@ export default {
         .then(_ => {
           this.thVisible = false
           this.pjVisible=false;
-          this.$refs.eds.fileList=[];
+          this.$refs.pjref.fileList=[];
 
         })
         .catch(_ => {});

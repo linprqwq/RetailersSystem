@@ -96,8 +96,9 @@ export default {
 
     },
     //修改仓库
-    updatewarehoures(){
+    updatewarehoures(index,wh){
       //模态框展示
+      console.log(wh.id)
     },
     //查看商品详情
     querywarexqbyid(){

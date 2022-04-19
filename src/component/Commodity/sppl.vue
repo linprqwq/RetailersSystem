@@ -4,7 +4,7 @@
     <br><br><br><br><br>
     <el-col :span="24">
 
-      <img :src="'/src/'+a.userinfo.imgpath" style="height: 50px;width: 50px;">
+      <img :src="'/src/'+a.userinfo.img" style="height: 50px;width: 50px;">
       <span id="span">{{a.userinfo.username}}</span>
       <el-rate
         v-model="a.tscore" disabled

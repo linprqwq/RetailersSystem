@@ -25,7 +25,7 @@
           list-type="picture-card"
           action="#"
           :auto-upload="false"
-          :accept="accept"
+          :limit="1"
           :file-list="fileList"
           :on-change="changeImag"
           :before-remove="beforeRemove"
@@ -50,7 +50,6 @@
     data() {
       return {
         dialogVisible: false,  //模态框状态
-        accept: ".jpg,.png",//图片格式
         editForm: {id: ""},
         fileList: [],//文件集合
         shopTypes: [],//加载商品分类
@@ -87,11 +86,10 @@
       getData(id) {
         this.$axios.get("queryspid.action/" + id).then((res => {
           this.editForm = res.data;
-          console.log(this.editForm);
             this.fileList.push({
-              name: res.data.prozimg,
+              name: res.data.proimage,
               raw: '',
-              url: "http://localhost:9090/RetailersBackSystem/" + res.data.prozimg
+              url: "http://localhost:9090/RetailersBackSystem/" + res.data.proimage
             })
         }))
       },
@@ -103,24 +101,21 @@
           //提交修改表单
           this.$refs[forName].validate((valid) => {
           if (valid) {
-
             var formData = new FormData;
             //组装普通数据
             Object.keys(this.editForm).forEach((key) => {
-              if (key != "image" && key != "type" && key != "quantity") {
+              if (key != "imags" && key != "type" && key != "quantity" && key!="shopTypeInfo" && key!="supplierGoodsCategory") {
                 formData.append(key, this.editForm[key])
               }
             })
-
-            // //组装文件数据
+            // // //组装文件数据
             this.fileList.forEach(item => {
               if (item.raw == '') {
                 formData.append("filenames",item.name)  //保存的文件数据
               } else {
-                formData.append("files", item.raws);
+                formData.append("files", item.raw);
               }
             })
-
             // //真正的提交
             this.sendFile(formData);
           } else {
@@ -130,7 +125,6 @@
         })
       },
       sendFile(data) {
-        console.log(data)
         this.$axios({
           method: "post",
           url:"editcom.action",
@@ -144,7 +138,7 @@
             this.$refs["editForm"].resetFields()
             this.fileList = [];
             this.$parent.$parent.dialogVisible = false;
-            this.$parent.$parent.getShopData();
+            this.$parent.$parent. getdata();
           } else {
             this.$message.error(res.data.msg);
           }

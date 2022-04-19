@@ -116,7 +116,7 @@
               this.multipleSelection.forEach(item2 => {
                 if (item == item2.supplyId) {
                   var detail = {
-                    shopId: item2.supplyId,
+                    shopId: item2.goodsupplid,
                     shopNum: item2.shopNum
                   }
                   details.push(detail);
@@ -127,7 +127,7 @@
             });
             this.$axios.post("purchaseInfo/addpurchase.action", purchaseInfos)
               .then(res => {
-                if (res.data.code >0) {
+                if (res.data.code ==1) {
                   this.$message.success(res.data.msg);
                   this.resetForm();
                 } else {

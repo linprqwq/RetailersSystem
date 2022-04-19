@@ -1,22 +1,22 @@
 <template>
   <div>
     <el-form :model="editformsysmenus">
-      <el-form-item label="id">
-        <el-input v-model="editformsysmenus.id"></el-input>
+      <el-form-item label="编号">
+        <el-input v-model="editformsysmenus.id" ></el-input>
       </el-form-item>
-      <el-form-item label="parentId">
+      <el-form-item label="父编号">
         <el-input v-model="editformsysmenus.parentId" autocomplete="off" ></el-input>
       </el-form-item>
-      <el-form-item label="name">
+      <el-form-item label="菜单名">
         <el-input v-model="editformsysmenus.name" autocomplete="off"></el-input>
       </el-form-item>
-      <el-form-item label="linkUrl">
+      <el-form-item label="菜单地址">
         <el-input v-model="editformsysmenus.linkUrl" autocomplete="off"></el-input>
       </el-form-item>
-      <el-form-item label="iconUrl">
+      <el-form-item label="图标地址">
         <el-input v-model="editformsysmenus.iconUrl" autocomplete="off"></el-input>
       </el-form-item>
-      <el-form-item label="status">
+      <el-form-item label="状态">
         <el-input v-model="editformsysmenus.status" autocomplete="off"></el-input>
       </el-form-item>
     </el-form>

@@ -34,7 +34,7 @@
       getObject(id) {
         this.shopId = id;
         //根据商品id去 获取商品表数据
-        this.$axios.get("queryspid.action/" + id, null).then(response => {
+        this.$axios.get("selectsid.action?id=" + id, null).then(response => {
           this.shop = response.data;
           console.log(response.data)
         })

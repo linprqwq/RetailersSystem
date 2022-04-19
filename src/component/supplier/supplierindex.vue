@@ -17,7 +17,7 @@
       <!--  <el-table-column prop="date" label="商品编号" width="180"></el-table-column>-->
       <el-table-column prop="proname" label="商品名称" width="180"></el-table-column>
       <el-table-column prop="prodetails" label="商品详情" width="180"></el-table-column>
-      <el-table-column prop="prosprice" label="商品价格" width="180"></el-table-column>
+      <!--<el-table-column prop="prosprice" label="商品价格" width="180"></el-table-column>-->
       <el-table-column prop="createtime" label="日期" width="180"></el-table-column>
       <el-table-column label="操作">
         <template slot-scope="scope">

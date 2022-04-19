@@ -26,7 +26,16 @@
       },
       methods:{
 
-        getAllshopTypeInfos(){
+        getAllshopTypeInfos(ShopTypeInfos){
+
+          //检查父组件是否传来数据
+          if(ShopTypeInfos!=undefined){
+            //传来展示数据，存入展示数据内
+            this.ShopTypeInfos=ShopTypeInfos;
+            //将展示数据设置为锁定项
+            this.lockData=ShopTypeInfos;
+          }
+
                   //调用异步 去查询没有被删除的商品的分类
                   this.$axios.get("shopinfo.action/queryallshoptype.action",null).
                   then((respone=>{ //异步调用后成功执行

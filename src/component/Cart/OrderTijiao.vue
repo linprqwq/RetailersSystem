@@ -272,9 +272,13 @@ export default {
     },
     //查询当前用户购物车和商品
     queryusergwc() {
-      this.userinfo.forEach(item => {
-        this.list.push(item.cid)
-      })
+if (this.userinfo.length>=1){
+  this.userinfo.forEach(item => {
+    this.list.push(item.cid)
+  })
+}else{
+  this.list.push(this.userinfo.cid)
+}
       var params = new URLSearchParams();
 
       params.append("list", this.list);
@@ -293,28 +297,39 @@ export default {
     },
     //提交订单
     ordertijiaodd() {
-      var params = new URLSearchParams();
-      //用户id
-      params.append("uid", this.uid);
+      console.log(this.user)
+      if (this.user.address==null||this.user.address==''){
+        this.$message.error("请选择地址")
+        return false;
+      }else{
+        var params = new URLSearchParams();
+        //用户id
+        params.append("uid", this.uid);
 
-      //商品id
-      params.append("list", this.list);
-      //商品地址id
+        //商品id
+        params.append("list", this.list);
+        //商品地址id
+        this.pos.forEach(item=>{
+          if (item.shaddress==this.user.address){
+            params.append("sid",item.id);
+          }
+        })
+        //当前状态 （有无付款）
+        params.append("status",2);
+        //订单总价
+        params.append("zprice",this.zongmoney)
+        this.$axios.post("usertijiaodd.action", params).then(res => {
+          if (res.data.code==0){
+            this.$message.error(res.data.msg);
+            this.$router.push('/personalCenter')
+            this.$emit("event-name")
+          }else{
+            this.$message.success(res.data.msg);
+            this.$router.push('/personalCenter')
+          }
+        }).catch()
+      }
 
-      //当前状态 （有无付款）
-      params.append("status",2);
-      //订单总价
-      params.append("zprice",this.zongmoney)
-      this.$axios.post("usertijiaodd.action", params).then(res => {
-       if (res.data.code==0){
-         this.$message.error(res.data.msg);
-         this.$router.push('/personalCenter')
-         this.$emit("event-name")
-       }else{
-         this.$message.error(res.data.msg);
-         this.$router.push('/personalCenter')
-       }
-      }).catch()
     },
     //购物车数量加减跟删除
     jj(id, boolean, sl) {

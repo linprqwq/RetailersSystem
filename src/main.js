@@ -22,6 +22,7 @@ import addcommodity from "./component/shop/addcommodity";
 import shoptypeinfo from "./component/shop/shoptypeinfo";
 import tabs from "./component/supplier/tabs";
 import supplierfh from "./component/supplier/supplierfh";
+import CommodityClass from "./component/Commodity/CommodityClass";
 Vue.use(ElementUI)
 //axios
 import  Axios from 'axios'

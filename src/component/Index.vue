@@ -21,7 +21,7 @@
         </div>
       <div class="tope">
         <div class="zuozi" >
-          <a href="#" class="top-left1" v-for="comclass in commodityComClass">{{comclass.name}}</a>
+          <a href="#" class="top-left1" v-for="comclass in commodityComClass" @click="goclass(comclass.id)">{{comclass.name}}</a>
         </div>
         <div class="youtu">
           <div class="qwq">
@@ -394,17 +394,24 @@ export default {
         }
       })
     },
-
+    goclass(id){
+      this.$router.push({
+        path:"/CommodityClass",
+        query:{
+          classidd:id
+        }
+      })
+    }
   },
   created() {
     var _this = this;
     this.$axios.post("queryAllcom.action").then(val => {
       val.data.forEach(key=>{
-        console.log(key+"加载完毕")
+        //console.log(key+"加载完毕")
       })
       _this.commoditysg = val.data.splice(0,4)
       _this.commoditysg.forEach(itme=>{
-        console.log(itme.prozimg)
+        //console.log(itme.prozimg)
       })
     }).catch()
 
@@ -441,7 +448,7 @@ export default {
     this.$axios.post("/shopinfo.action/queryallcomclass.action").then(val=>{
       _this.commodityComClass=val.data
       _this.commodityComClass.forEach(item=>{
-        console.log(item.name)
+        console.log("加载完成")
       })
     }).catch()
   }

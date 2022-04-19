@@ -37,22 +37,34 @@
       :total="total">
     </el-pagination>
 
-    <!--  退货页面-->
+    <!--  添加页面-->
     <el-dialog
       title="新增仓库"
       :visible.sync="AddCk"
       width="30%"
       :before-close="handleClose">
       <!-- 动态组件   指定添加vue页面在模态框显示-->
-      <component ref="awhref" is="AddWareHouse"v-on:success="success(false)"></component>
+      <component ref="awhref" is="AddWareHouse"v-on:success="success(false)" @spfldy="spfldy"></component>
       <el-button type="primary" @click="AddWHouse('awhref')">确 定</el-button>
       <el-button @click="AddCk = false">取 消</el-button>
+    </el-dialog>
+    <!--  修改页面-->
+    <el-dialog
+      title="修改仓库"
+      :visible.sync="UpdateCk"
+      width="30%"
+      :before-close="handleClose">
+      <!-- 动态组件   指定添加vue页面在模态框显示-->
+      <component ref="updateckref" is="UpdateCk"v-on:success="success(false)" @spfldy="spfldy"></component>
+      <el-button type="primary" @click="UpdateWareHouse('updateckref')">确 定</el-button>
+      <el-button @click="UpdateCk = false">取 消</el-button>
     </el-dialog>
   </div>
 </template>
 
 <script>
 import AddWareHouse from "./AddWareHouse";
+import UpdateCk from "./UpdateCk";
 export default {
   name: "CkView",
   data(){
@@ -64,10 +76,12 @@ export default {
       search: '',
       ckmName:'',
       AddCk:false,
+      UpdateCk:false,
     }
   },
   components:{
-    AddWareHouse
+    AddWareHouse,
+    UpdateCk,
   },
   methods:{
     //查询仓库
@@ -98,11 +112,20 @@ export default {
     //修改仓库
     updatewarehoures(index,wh){
       //模态框展示
-      console.log(wh.id)
+      this.UpdateCk = true;
+      setTimeout(() => {
+        console.log(wh.id);
+        this.$refs.updateckref.warehousemtkzs(wh);
+      }, 3000);
+
     },
     //查看商品详情
     querywarexqbyid(){
       //模态框展示
+    },
+    //商品分类调用
+    spfldy(){
+      this.$refs.awhref.queryspfenlei()
     },
     addwarehouse(){
     this.AddCk = true;

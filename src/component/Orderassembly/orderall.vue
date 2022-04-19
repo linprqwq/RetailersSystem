@@ -103,7 +103,7 @@
               <el-button type="mini" v-if="o.status=='4'" @click="confirmorder(scope2.$index, scope2.row)">确认收货</el-button>
               <br>
               <el-button size="mini" type="danger" v-if="o.status=='5' "
-                         @click="qxddorder(o.orderid,5,false)">删除订单
+                         @click="deleteorderbyid(o.orderid)">删除订单
               </el-button>
 
             </div>
@@ -253,11 +253,11 @@ export default {
 
     },
     //删除当前订单
-    deleteorderbyid(index,row){
-      console.log(row);
+    deleteorderbyid(orderid){
+      console.log(orderid);
       var orderallparams  = new URLSearchParams();
 
-      orderallparams.append("orderid",row.orderid)
+      orderallparams.append("orderid",orderid)
 
       this.$axios.post("delorder.action",orderallparams).then(res=>{
         this.$message.success(res.data.msg);

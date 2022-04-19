@@ -94,7 +94,7 @@
   import ShJlView from "./commecial/ShJlView";
   import ShView from "./commecial/ShView";
   import SysRole from "./sysindex/sysguanli/sysrole/SysRole";
-import CgJlView from "./procurement/CgJlView";
+  import CgJlView from "./procurement/CgJlView";
   import GygoodsShView from "./Gys/GygoodsShView";
   import CgShView from "./procurement/CgShView";
   import commmodity from "./shop/commmodity";
@@ -177,8 +177,9 @@ import CgJlView from "./procurement/CgJlView";
           this.editableTabs = tabs.filter(tab => tab.name !== targetName);
         } ,
         getdata() {   //获取数据的方法
-
-          this.$axios.post("querymenuspidandrid.action")
+          var params =new URLSearchParams();
+          params.append("eid",sessionStorage.getItem("eid"))
+          this.$axios.post("querymenuspidandrid.action",params)
             .then(response => {
               this.menudata = response.data;//获取所有要展示的数据
 

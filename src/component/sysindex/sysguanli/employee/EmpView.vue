@@ -266,12 +266,12 @@
 
        /* 用户添加*/
         handleAdd(row){
-          this.$axios.post("queryrolesbyidname.action/").then(response=>{
+       /*   this.$axios.post("queryrolesbyidname.action/").then(response=>{
             alert(11111111)
             this.tableData.forEach( (item)=> {
               item.empImg = this.path+item.empImg;
             })
-          }).catch();
+          }).catch();*/
           console.log(row)
          this.editmodalVisible02=true;
          this.editform=row;

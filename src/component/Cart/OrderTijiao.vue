@@ -113,6 +113,8 @@
 
 <script>
 import IndexTop from "../User/IndexTop";
+/*import {Loading} from "_element-ui@2.15.6@element-ui";*/
+
 import {Loading} from "element-ui";
 export default {
   inject:["reload"],
@@ -125,6 +127,7 @@ export default {
       jsljgm: [],
       user:[],
       dialogVisible:false,
+      addr:"",
       shi:"",
       sheng:"",
       provice:[],

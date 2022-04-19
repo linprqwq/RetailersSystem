@@ -141,8 +141,8 @@ export default {
       qqlabel:"",
       shilabel:"",
       pos:[],
-      redio:null,
-      addr:"",
+      redio:null
+
     }
   },
   components: {

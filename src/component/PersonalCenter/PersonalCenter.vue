@@ -22,10 +22,10 @@
           </div>
         </el-tab-pane>
         <el-tab-pane label="供销商">
-          <div v-if="gysState==1">
+          <div v-if="identity==3">
             <tabs></tabs>
           </div>
-          <div v-else-if="gysState==0">
+          <div v-else-if="identity==1">
             <supplier_registration></supplier_registration>
           </div>
           <div v-else-if="identity==2">

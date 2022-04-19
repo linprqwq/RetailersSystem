@@ -25,7 +25,7 @@
         this.$axios.post("qeruyshys.action",params).then(res=>{
 
           this.$nextTick(item=>{
-            for(var i=0;i<=11;i++){
+            for(var i=0;i<=res.data.length-1;i++){
             this.arr1.push(res.data[i].mm+"月份");
             this.arr2.push(res.data[i].smoney);
             }

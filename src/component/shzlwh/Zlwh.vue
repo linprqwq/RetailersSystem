@@ -119,7 +119,7 @@
           var _this = this;
           var params=new URLSearchParams();
           params.append("pid",this.sheng)
-          this.$axios.post("queryChinaByPid.action",params).then(
+          this.$axios.post("queryChinaByShi.action",params).then(
             function (val){
               _this.ctiy=val.data
             }
@@ -131,7 +131,7 @@
           var _this = this;
           var params=new URLSearchParams();
           params.append("pid",this.shi)
-          this.$axios.post("queryChinaByshi.action",params).then(
+          this.$axios.post("queryChinaByQu.action",params).then(
             function (val){
               _this.district=val.data
             }
@@ -154,7 +154,7 @@
         var _this=this;
         var params=new URLSearchParams();
         params.append("pid",0);
-        this.$axios.post("queryAllChina.action",params).then(
+        this.$axios.post("queryAllSheng.action",params).then(
           function (val){
 
               _this.provice=val.data;

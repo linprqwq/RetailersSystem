@@ -20,6 +20,8 @@ import Allorder from "./component/Shorder/Allorder";
 import commmodity from "./component/shop/commmodity";
 import addcommodity from "./component/shop/addcommodity";
 import shoptypeinfo from "./component/shop/shoptypeinfo";
+import tabs from "./component/supplier/tabs";
+import supplierfh from "./component/supplier/supplierfh";
 Vue.use(ElementUI)
 //axios
 import  Axios from 'axios'

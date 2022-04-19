@@ -288,6 +288,9 @@ export default {
     addspingcart(){
       if(this.userid==null){
         this.$message.warning("异样顶针 鉴定为假 请去登录")
+        setTimeout(() => {
+          this.$router.push('/login')
+        }, 2000);
       }else{
         var params = new URLSearchParams();
         //加入购物车  商品id 用户id 商品数量默认为1   如果购物车已有 购物车商品数量加1
@@ -304,16 +307,24 @@ export default {
         //刷新购物车
       }
     },
+    //立即购买
     ljgmaddgwc(){
-      var param  = new URLSearchParams();
-      param.append("cid",this.$route.query.comid);
-      param.append("uid",this.useridd);
-      this.$axios.post("ljgmaddgwc.action",param).then(res=>{
+      if (this.userid==null){
+        this.$message.warning("异样顶针 鉴定为假 请去登录")
+        setTimeout(() => {
+          this.$router.push('/login')
+        }, 2000);
+      }else{
+        var param  = new URLSearchParams();
+        param.append("cid",this.$route.query.comid);
+        param.append("uid",this.useridd);
+        this.$axios.post("ljgmaddgwc.action",param).then(res=>{
 
           var arr = JSON.stringify(res.data)
           this.$router.push({path: '/ordertijiao', name: 'ordertijiao', query: {res: arr}})
 
-      }).catch()
+        }).catch()
+      }
     },
   },
   created() {

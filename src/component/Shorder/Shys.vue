@@ -21,13 +21,16 @@
       shys(){
         console.log("2")
         var params=new URLSearchParams();
-        params.append("uid",1)
+        params.append("uid",this.useridd)
         this.$axios.post("qeruyshys.action",params).then(res=>{
 
           this.$nextTick(item=>{
-            this.arr1.push(res.data[0].mm);
-            this.arr2.push(res.data[0].smoney);
+            for(var i=0;i<=11;i++){
+            this.arr1.push(res.data[i].mm+"月份");
+            this.arr2.push(res.data[i].smoney);
+            }
           })
+
           this.getdata();
 
 

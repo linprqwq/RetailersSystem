@@ -20,17 +20,8 @@
           <!--      //搜索-->
         </div>
       <div class="tope">
-        <div class="zuozi">
-          <a href="#" class="top-left1">手机 电话卡</a>
-          <a href="#" class="top-left1">电视 盒子</a>
-          <a href="#" class="top-left2">笔记本 显示器</a>
-          <a href="#" class="top-left3">家电 插线板</a>
-          <a href="#" class="top-left4">出行 穿戴</a>
-          <a href="#">智能 路由器</a>
-          <a href="#">电源 配件</a>
-          <a href="#">健康 儿童</a>
-          <a href="#">耳机 音响</a>
-          <a href="#">生活 箱包</a>
+        <div class="zuozi" >
+          <a href="#" class="top-left1" v-for="comclass in commodityComClass">{{comclass.name}}</a>
         </div>
         <div class="youtu">
           <div class="qwq">
@@ -358,6 +349,7 @@ export default {
       commodityhx1:[],
       commodityhx2:[],
       commodityrl:[],
+      commodityComClass:[],
       cartcount: 0,
       num: 1,
       carouseData: [
@@ -445,6 +437,13 @@ export default {
         }
       ).catch()
     }
+
+    this.$axios.post("/shopinfo.action/queryallcomclass.action").then(val=>{
+      _this.commodityComClass=val.data
+      _this.commodityComClass.forEach(item=>{
+        console.log(item.name)
+      })
+    }).catch()
   }
 }
 </script>

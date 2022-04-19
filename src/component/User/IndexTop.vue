@@ -65,7 +65,8 @@ export default {
     },
     gwc(){
       if (this.userid==null){
-        this.$router.push('/ShoppingFalst');
+      this.$message.error("请先登录")
+        this.$router.push('/login');
       }else if (this.cartcount==0){
         this.$router.push('/myshoppingkk');
       }else{

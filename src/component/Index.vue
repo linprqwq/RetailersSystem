@@ -4,7 +4,7 @@
     <div class="bj1">
         <div class="topd">
           <div class="tu">
-            <a href="#"><img :src="require('../image/logo-mi2.png')" alt="图片出错"></a>
+            <a href="#">   <img src="src/image/xs.jpg" alt=""></a>
           </div>
           <div class="topdzh">
             <a href="#shuiguo" id="xm">水果</a>
@@ -20,17 +20,8 @@
           <!--      //搜索-->
         </div>
       <div class="tope">
-        <div class="zuozi">
-          <a href="#" class="top-left1">手机 电话卡</a>
-          <a href="#" class="top-left1">电视 盒子</a>
-          <a href="#" class="top-left2">笔记本 显示器</a>
-          <a href="#" class="top-left3">家电 插线板</a>
-          <a href="#" class="top-left4">出行 穿戴</a>
-          <a href="#">智能 路由器</a>
-          <a href="#">电源 配件</a>
-          <a href="#">健康 儿童</a>
-          <a href="#">耳机 音响</a>
-          <a href="#">生活 箱包</a>
+        <div class="zuozi" >
+          <a href="#" class="top-left1" v-for="comclass in commodityComClass" @click="goclass(comclass.id)">{{comclass.name}}</a>
         </div>
         <div class="youtu">
           <div class="qwq">
@@ -289,7 +280,7 @@
       </div>
       <div class="zuihouxiaozi">
         <div class="zuihouxiaozitu">
-          <img :src="require('../image/logo-mi2.png')" alt="图片出错" height="70px" width="70px">
+          <img src="src/image/xs.jpg" alt="图片出错" height="70px" width="70px">
         </div>
         <div class="zuihouxiaozizi">
           <a href="#">兴盛商城 |</a>
@@ -358,6 +349,7 @@ export default {
       commodityhx1:[],
       commodityhx2:[],
       commodityrl:[],
+      commodityComClass:[],
       cartcount: 0,
       num: 1,
       carouseData: [
@@ -402,17 +394,24 @@ export default {
         }
       })
     },
-
+    goclass(id){
+      this.$router.push({
+        path:"/CommodityClass",
+        query:{
+          classidd:id
+        }
+      })
+    }
   },
   created() {
     var _this = this;
     this.$axios.post("queryAllcom.action").then(val => {
       val.data.forEach(key=>{
-        console.log(key+"加载完毕")
+        //console.log(key+"加载完毕")
       })
       _this.commoditysg = val.data.splice(0,4)
       _this.commoditysg.forEach(itme=>{
-        console.log(itme.prozimg)
+        //console.log(itme.prozimg)
       })
     }).catch()
 
@@ -445,6 +444,13 @@ export default {
         }
       ).catch()
     }
+
+    this.$axios.post("/shopinfo.action/queryallcomclass.action").then(val=>{
+      _this.commodityComClass=val.data
+      _this.commodityComClass.forEach(item=>{
+        console.log("加载完成")
+      })
+    }).catch()
   }
 }
 </script>

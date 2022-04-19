@@ -60,16 +60,16 @@
         //清空图片数组
         this.fileList = [];
         //调用异步,去根据id查询用户
-        this.$axios.get("selsid.action?id=" + this.ruleForm.id, null).
+        this.$axios.get("queryUserById.action/"+this.ruleForm.id, null).
         then(response => {
           this.ruleForm = response.data;
           response.data.supplierGoodsCategoryList.forEach(item=>{
             this.ShopTypeInfos.push(item.sortId);
           });
           this.fileList.push({
-            name: response.data.businessImg,
+            name: response.data.imgpath,
             raw: '',
-            url: "http://127.0.0.1:9090/demo/" + response.data.businessImg
+            url: "http://localhost:9090/RetailersBackSystem/" + response.data.imgpath
           });
           //调用子组件函数，为商品分类添加数据
           this.$refs.goods_category.getAllshopTypeInfos(this.ShopTypeInfos);

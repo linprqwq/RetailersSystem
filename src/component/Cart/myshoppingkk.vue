@@ -1,5 +1,6 @@
 <template>
   <div>
+    <top></top>
     <div id="app">
       <div class="top">
         <div class="logo">
@@ -11,13 +12,11 @@
       <div class="cart-recomd">
         <div class="cart-dady">
           <div class="cart-ts">
-            <img src="images/shopping.jpg" alt="">
+            <img src="src/image/shopping.jpg" alt="">
           </div>
           <div class="cart-ts2">
             <h1>您的购物车还是空的！</h1>
-            <price>登录后将显示您之前加入的商品</price>
             <div class="cart-btu">
-              <button class="a1"><a href="#" @click="$router.push('/login')">立即登录</a></button>
               <button class="a2"><a href="#" @click="$router.push('/')">马上去购物</a></button>
             </div>
           </div>
@@ -189,8 +188,13 @@
 </template>
 
 <script>
+import IndexTop from "../User/IndexTop";
 export default {
-  name: "myshoppingkk"
+  name: "myshoppingkk",
+
+  components: {
+    top: IndexTop,
+  },
 }
 </script>
 

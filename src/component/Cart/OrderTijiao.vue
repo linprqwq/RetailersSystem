@@ -6,16 +6,17 @@
       </div>
     </div>
     <h2 class="common_title">填写并核对订单信息</h2>
-    <h2 class="common_title">{{user.username}}请确认信息</h2>
-<!--      <el-input style="width: 150px" :value="user.username"></el-input>&nbsp;手机号码-->
-<!--      <el-input style="width: 150px" :value="user.phone"></el-input>-->
+    <h2 class="common_title">请确认信息
+      <el-input style="width: 150px" :value="user.username"></el-input>&nbsp;手机号码
+      <el-input style="width: 150px" :value="user.phone"></el-input>
+    </h2>
     <br><br>
     <h3 class="common_title">确认收货地址</h3>
 
     <div class="common_list_con clearfix">
       <dl>
         <dt>寄送到：</dt>
-        <dd><input type="radio" name="" checked=""><span v-show="user.shaddress==null || user.shaddress==''">请添加新地址</span>{{user.shaddress}}</dd>
+        <dd><input type="radio" name="" checked=""><span v-show="user.address==null || user.address==''">请添加新地址</span>{{user.address}}</dd>
       </dl>
       <a href="#" class="edit_site" @click="open(dialogVisible=true)">新增收货地址</a>
     </div>
@@ -91,23 +92,23 @@
       :visible.sync="dialogVisible"
       width="50%"
       >
-      <select v-model="sheng" @change="fun1">
-        <option value="-1">----请选择---</option>
-        <option v-for="p in provice" :value="p.id">{{p.name}}</option>
-      </select>
-      <select v-model="shi"  @change="fun2">
-        <option value="-1">----请选择---</option>
-        <option  v-for="c in ctiy" :value="c.id">{{c.name}}</option>
-      </select>
-      <select>
-        <option value="-1">----请选择---</option>
-        <option v-for="d in district" :value="d.id">{{d.name}}</option>
-      </select>
+      <el-select  v-model="sheng" @change="fun1" placeholder="----请选择---">
+        <el-option  v-for="p in provice" :value="p.id" :label="p.name" @click.native="queryshsheng(shenglabel=p.name)">{{p.name}}</el-option>
+      </el-select>
+      <el-select v-model="shi"  @change="fun2" placeholder="----请选择---">
+        <el-option  v-for="c in ctiy" :value="c.id" :label="c.name" @click.native="queryshshi(shilabel=c.name)">{{c.name}}</el-option>
+      </el-select>
+      <el-select v-model="qq" placeholder="----请选择---">
+        <el-option v-for="d in district" :value="d.id" :label="d.name" @click.native="queryshqu(qqlabel=d.name)">{{d.name}}</el-option>
+      </el-select>
       <br>
-      <el-input placeholder="请输入具体地址" v-model="addr" style="width: 400px;margin-top: 20px"></el-input>
-      <span slot="footer" class="dialog-footer">
+      <el-radio-group v-model="redio">
+      <el-radio  v-for="po in pos"  style="margin-top: 20px"   :label="po.shaddress"></el-radio>
+      </el-radio-group>
+      <span v-show="pos==null || pos=='' ">你选的地方暂时没有商户入驻请换个地方吧</span>
+      <span  slot="footer" class="dialog-footer">
     <el-button @click="dialogVisible = false">取 消</el-button>
-    <el-button type="primary" @click="dialogVisible = false">确 定</el-button>
+    <el-button type="primary" @click="qwq">确 定</el-button>
   </span>
     </el-dialog>
   </div>
@@ -115,8 +116,11 @@
 
 <script>
 import IndexTop from "../User/IndexTop";
+/*import {Loading} from "_element-ui@2.15.6@element-ui";*/
 
+import {Loading} from "element-ui";
 export default {
+  inject:["reload"],
   name: "OrderTijiao",
   data() {
     return {
@@ -127,23 +131,124 @@ export default {
       user:[],
       dialogVisible:false,
       addr:"",
-      shi:"-1",
-      sheng:"-1",
+      shi:"",
+      sheng:"",
       provice:[],
       ctiy:[],
       district:[],
+      qq:"",
+      shenglabel:"",
+      qqlabel:"",
+      shilabel:"",
+      pos:[],
+      redio:null
+
     }
   },
   components: {
     top: IndexTop,
   },
   methods: {
+    //寻找商户地址按省
+    queryshsheng(){
+      var _this=this
+      var params=new URLSearchParams()
+      params.append("shaddress",_this.shenglabel)
+      this.$axios.post("querylikesh.action",params).then(val=>{
+          _this.pos=val.data
+          _this.pos.forEach(item=>{
+            console.log(item.shaddress)
+          })
+        }
+      ).catch()
+    },
+    //寻找商户地址按市
+    queryshshi(){
+      var _this=this
+      var params=new URLSearchParams()
+      if(_this.shenglabel==null){
+        _this.shenglabel=null
+      }
+     if(_this.shilabel==null){
+       _this.shilabel=null
+     }
+     var stqwq=[_this.shenglabel,_this.shilabel]
+      var str=stqwq.join("")
+       params.append("shaddress",str)
+      // params.append("shaddress",_this.shilabel)
+      this.$axios.post("querylikesh.action",params).then(val=>{
+          _this.pos=val.data
+          _this.pos.forEach(item=>{
+            console.log(item.shaddress)
+          })
+        }
+      ).catch()
+    },
+    //寻找商户地址按区
+    queryshqu(){
+      var _this=this
+      var params=new URLSearchParams()
+      if(_this.shenglabel==null){
+        _this.shenglabel=null
+      }
+      if(_this.shilabel==null){
+        _this.shilabel=null
+      }
+      if(_this.qqlabel==null){
+        _this.qqlabel==null
+      }
+      var stqwq=[_this.shenglabel,_this.shilabel,_this.qqlabel]
+      var str=stqwq.join("")
+      params.append("shaddress",str)
+      // params.append("shaddress",_this.shilabel)
+      this.$axios.post("querylikesh.action",params).then(val=>{
+          _this.pos=val.data
+          _this.pos.forEach(item=>{
+            console.log(item.shaddress+"204行")
+          })
+        }
+      ).catch()
+    },
+    //新增地址
+    qwq(){
+      this.loadingInstance = Loading.service({
+        text:'桥豆麻袋',
+        lock: true,
+        spinner: 'el-icon-loading',
+        background: 'rgba(0, 0, 0, 0.7)'
+      });
+      var _this=this
+      if (_this.redio == null || _this.redio=='') {
+        this.$message({
+          type: 'warning',
+          message: '请选择一条数据!'
+        })
+        _this.dialogVisible=true
+        this.loadingInstance.close();
+        return false;
+      }
+       //  var arr=[_this.shenglabel,_this.shilabel,_this.qqlabel,_this.addr]
+       // var str=arr.join("")
+       var params = new URLSearchParams();
+       params.append("address",_this.redio)
+       params.append("id",_this.uid)
+       this.$axios.post("addaddress.action",params).then(val=>{
+         if(val!=null){
+          setTimeout(()=>{
+            this.loadingInstance.close();
+            this.$message.success("添加成功")
+            this.reload()
+            _this.dialogVisible=false
+          },500)
+         }
+       }).catch()
+    },
     //选择市
     fun2(){
       var _this = this;
       var params=new URLSearchParams();
       params.append("id",this.shi)
-      this.$axios.post("queryChinaByshi.action",params).then(val=>{
+      this.$axios.post("queryChinaByQu.action",params).then(val=>{
           _this.district=val.data
       }
       ).catch()
@@ -153,20 +258,30 @@ export default {
       var _this = this;
       var params=new URLSearchParams();
       params.append("id",this.sheng)
-      this.$axios.post("queryChinaByPid.action",params).then(val=>{
+      this.$axios.post("queryChinaByShi.action",params).then(val=>{
         _this.ctiy=val.data
         }
       ).catch()
     },
     //添加地址
     open(){
-
+      //选择省
+      var _this=this;
+     this.$nextTick(jj=>{
+       this.$axios.post("queryAllSheng.action").then(val=>{
+         _this.provice=val.data;
+       }).catch()
+     })
     },
     //查询当前用户购物车和商品
     queryusergwc() {
-      this.userinfo.forEach(item => {
-        this.list.push(item.cid)
-      })
+if (this.userinfo.length>=1){
+  this.userinfo.forEach(item => {
+    this.list.push(item.cid)
+  })
+}else{
+  this.list.push(this.userinfo.cid)
+}
       var params = new URLSearchParams();
 
       params.append("list", this.list);
@@ -185,28 +300,39 @@ export default {
     },
     //提交订单
     ordertijiaodd() {
-      var params = new URLSearchParams();
-      //用户id
-      params.append("uid", this.uid);
+      console.log(this.user)
+      if (this.user.address==null||this.user.address==''){
+        this.$message.error("请选择地址")
+        return false;
+      }else{
+        var params = new URLSearchParams();
+        //用户id
+        params.append("uid", this.uid);
 
-      //商品id
-      params.append("list", this.list);
-      //商品地址id
+        //商品id
+        params.append("list", this.list);
+        //商品地址id
+        this.pos.forEach(item=>{
+          if (item.shaddress==this.user.address){
+            params.append("sid",item.id);
+          }
+        })
+        //当前状态 （有无付款）
+        params.append("status",2);
+        //订单总价
+        params.append("zprice",this.zongmoney)
+        this.$axios.post("usertijiaodd.action", params).then(res => {
+          if (res.data.code==0){
+            this.$message.error(res.data.msg);
+            this.$router.push('/personalCenter')
+            this.$emit("event-name")
+          }else{
+            this.$message.success(res.data.msg);
+            this.$router.push('/personalCenter')
+          }
+        }).catch()
+      }
 
-      //当前状态 （有无付款）
-      params.append("status",2);
-      //订单总价
-      params.append("zprice",this.zongmoney)
-      this.$axios.post("usertijiaodd.action", params).then(res => {
-       if (res.data.code==0){
-         this.$message.error(res.data.msg);
-         this.$router.push('/personalCenter')
-         this.$emit("event-name")
-       }else{
-         this.$message.error(res.data.msg);
-         this.$router.push('/personalCenter')
-       }
-      }).catch()
     },
     //购物车数量加减跟删除
     jj(id, boolean, sl) {
@@ -256,12 +382,6 @@ export default {
   },
   created() {
     this.queryusergwc();
-
-    //选择省
-    var _this=this;
-    this.$axios.post("queryAllChina.action").then(val=>{
-      _this.provice=val.data;
-    }).catch()
   }
 }
 </script>

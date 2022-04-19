@@ -40,6 +40,8 @@
       :total="total"
     >
     </el-pagination>
+
+
     <el-dialog
       title="采购单详情"
       :visible.sync="dialogVisible"

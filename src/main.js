@@ -6,6 +6,8 @@ import 'element-ui/lib/theme-chalk/index.css'
 import CommodityDisplay from "./component/Commodity/CommodityDisplay";
 import ShoppingFalst from './component/Cart/ShoppingFalst'
 import Router from './config/routerconfig'
+import SysMenus from "./component/sysindex/sysguanli/sysmenus/SysMenus";
+import SysRole from "./component/sysindex/sysguanli/sysrole/SysRole";
 import shopping from "./component/Cart/shopping2";
 import PersonalCenter from "./component/PersonalCenter/PersonalCenter";
 import OrderTijiao from "./component/Cart/OrderTijiao";
@@ -18,6 +20,9 @@ import Allorder from "./component/Shorder/Allorder";
 import commmodity from "./component/shop/commmodity";
 import addcommodity from "./component/shop/addcommodity";
 import shoptypeinfo from "./component/shop/shoptypeinfo";
+import tabs from "./component/supplier/tabs";
+import supplierfh from "./component/supplier/supplierfh";
+import CommodityClass from "./component/Commodity/CommodityClass";
 Vue.use(ElementUI)
 //axios
 import  Axios from 'axios'

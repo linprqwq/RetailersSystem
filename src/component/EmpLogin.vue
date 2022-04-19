@@ -57,7 +57,6 @@
 
                 sessionStorage.setItem("empname",response.data.empName);
                 sessionStorage.setItem("eid",response.data.id);
-
                 this.$router.push("/syslist")
               }else{
                 alert("登录失败")

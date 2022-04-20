@@ -97,12 +97,14 @@
             <div >
               <el-button size="mini" type="primary" v-if="o.status=='2'" @click="fk(scope2.$index, scope2.row)">立即付款</el-button>
               <br>
-              <el-button size="mini" v-if="o.status=='3'" @click="qxddorder(o.orderid,2,true)">取消订单</el-button>
+              <el-button size="mini" v-if="o.status=='3'" @click="qxddorder(o.orderid,false)">取消订单</el-button>
+              <br>
+              <el-button size="mini" v-if="o.status=='2'" @click="qxddorder(o.orderid,true)">取消订单</el-button>
             </div>
             <div>
               <el-button type="mini" v-if="o.status=='4'" @click="confirmorder(scope2.$index, scope2.row)">确认收货</el-button>
               <br>
-              <el-button size="mini" type="danger" v-if="o.status=='5' "
+              <el-button size="mini" type="danger" v-if="o.status=='5'|| o.status=='1' "
                          @click="deleteorderbyid(o.orderid)">删除订单
               </el-button>
 
@@ -302,10 +304,10 @@ export default {
       }).catch()
     },
     //取消订单
-    qxddorder(a,b,boolea){
+    qxddorder(a,boolea){
 
         var params = new URLSearchParams();
-        params.append("orderid",b.orderid);
+        params.append("orderid",a);
         params.append("status",1);
       params.append("boolea",boolea);
         this.$axios.post("qxddorder,action",params).then(res=>{

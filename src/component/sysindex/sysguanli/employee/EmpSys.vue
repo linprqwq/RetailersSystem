@@ -12,7 +12,7 @@
         <el-input v-model="editform.empLoginname" autocomplete="off"></el-input>
       </el-form-item>
       <el-form-item label="密码">
-        <el-input v-model="editform.empPassword" autocomplete="off"></el-input>
+        <el-input  type="password" v-model="editform.empPassword" autocomplete="off"></el-input>
       </el-form-item>
       <el-form-item label="电话">
         <el-input v-model="editform.empPhone" autocomplete="off"></el-input>

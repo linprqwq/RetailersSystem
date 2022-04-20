@@ -5,8 +5,8 @@
       <el-tab-pane label="供应商管理页面" name="first"><supplierindex></supplierindex> </el-tab-pane>
       <el-tab-pane label="修改" name="fourth"><eiitsupplier></eiitsupplier>  </el-tab-pane>
       <el-tab-pane label="处理采购单发货" name="second"> <supplierfh></supplierfh> </el-tab-pane>
-      <el-tab-pane label="供应商订单记录" name="third">供应商订单记录</el-tab-pane>
-      <el-tab-pane label="统计" name="five">统计</el-tab-pane>
+      <el-tab-pane label="供应商品维护" name="third">供应商品维护</el-tab-pane>
+      <el-tab-pane label="供应订单历史记录" name="five">供应订单记录</el-tab-pane>
     </el-tabs>
   </div>
 

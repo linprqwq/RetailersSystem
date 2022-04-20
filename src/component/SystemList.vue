@@ -98,13 +98,13 @@
   import commmodity from "./shop/commmodity";
   import addcommodity from "./shop/addcommodity";
   import shoptypeinfo from "./shop/shoptypeinfo";
-  import CgJlView from "./procurement/CgJlView";
   import CkView from "./Ck/CkView";
 
     export default {
         name: "SystemList",
       components:{
-        Welcome,EmpView,AuthcView,UserView,CgsqView,GysShView,GysShJlView,ShView,ShJlView,SysRole,SysMenus,
+        Welcome,EmpView,AuthcView,UserView,CgsqView,
+        GysShView,GysShJlView,ShView,ShJlView,SysRole,
         GygoodsShView,commmodity,addcommodity,
         CgShView,shoptypeinfo,
         CgJlView,CkView
@@ -179,11 +179,15 @@
         } ,
         getdata() {   //获取数据的方法
 
-          this.$axios.post("querymenuspidandrid.action")
+          var params=new URLSearchParams();
+          params.append("eid",sessionStorage.getItem("eid"))
+          this.$axios.post("querymenuspidandrid.action",params)
             .then(response => {
               this.menudata = response.data;//获取所有要展示的数据
 
             }).catch();
+
+
         }
       },
       created(){   //钩子函数   对象创建好 后执行此方法

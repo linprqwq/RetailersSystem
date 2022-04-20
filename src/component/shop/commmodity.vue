@@ -17,28 +17,27 @@
             v-model="shop.proname"
             size="mini"
             @blur="search"
-
             placholder="请输入商品名去搜索"/>
         </template>
 
         <template slot-scope="scope">
 
-          <el-button size="mini" v-if="scope.row.status==0"
+          <el-button type="primary" size="mini" v-if="scope.row.status==0"
                      @click="sj(scope.row.id,1)">
             上架
           </el-button>
 
-          <el-button size="mini" v-if="scope.row.status==1"
+          <el-button type="primary" size="mini" v-if="scope.row.status==1"
                      @click="sj(scope.row.id,0)">
             下架
           </el-button>
 
-          <el-button size="mini" icon="el-icon-edit"
+          <el-button type="warning" size="mini" icon="el-icon-edit"
                      @click="editsp(scope.row.id)">
             编辑
           </el-button>
 
-          <el-button size="mini" icon="el-icon-delete"
+          <el-button type="danger" size="mini" icon="el-icon-delete"
                      @click="deshop(scope.row.id)">
             删除
           </el-button>
@@ -174,16 +173,13 @@
         }).catch(error => {     //去添加错误捕获
 
         });
-
-      }, sj(id,state) {
+      },
+      sj(id,state) {
         //上架
         if (state==1) {
           this.$refs.upcommtity.shop.id=id;
           this.$refs.upcommtity.shop.status = state;
-          this.$refs.upcommtity.dialogVisible = false;
-          this.$nextTick(item => {
-            this.$refs.upcommtity.getSj();
-          })
+          this.$refs.upcommtity.dialogVisible = true;
         } else {
           //去下架
           var shop = {id: id, status: state}
@@ -202,7 +198,6 @@
     created() {
       this.getdata();
     }
-
   }
 </script>
 

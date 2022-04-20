@@ -108,9 +108,9 @@
           this.getTypes();
         },
         eidt(id){
-            this.dialogVisible=true;
+          this.dialogVisible=true;
           this.$nextTick(item=>{
-          this.$refs.eitshoptype.getdata(id);
+            this.$refs.eitshoptype.getdata(id);
           })
 
         },
@@ -146,7 +146,6 @@
 
         },
         handleSizeChange(val){
-            console.log(this.pagesize)
             //每页范围
           this.pagesize=val;
           this.getTypes();
@@ -154,7 +153,6 @@
         },
         handleCurrentChange(val){
             //当前页
-          console.log(this.pageno);
           this.pageno=val;
           this.getTypes();
         }

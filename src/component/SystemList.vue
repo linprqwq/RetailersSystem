@@ -16,7 +16,6 @@
       </el-header>
       <el-container>
         <el-aside width="200px">
-          菜单
           <el-menu
             default-active="1"
             class="el-menu-vertical-demo"
@@ -83,7 +82,6 @@
 </template>
 
 <script>
-  import SysMenus from "./sysindex/sysguanli/sysmenus/SysMenus";
   import Welcome from "./Welcome";
   import EmpView from "./sysindex/sysguanli/employee/EmpView";
   import AuthcView from "./sysindex/sysguanli/authcs/AuthcView";
@@ -94,20 +92,20 @@
   import ShJlView from "./commecial/ShJlView";
   import ShView from "./commecial/ShView";
   import SysRole from "./sysindex/sysguanli/sysrole/SysRole";
-  import CgJlView from "./procurement/CgJlView";
   import GygoodsShView from "./Gys/GygoodsShView";
   import CgShView from "./procurement/CgShView";
   import commmodity from "./shop/commmodity";
   import addcommodity from "./shop/addcommodity";
   import shoptypeinfo from "./shop/shoptypeinfo";
+  import CgJlView from "./procurement/CgJlView";
   import CkView from "./Ck/CkView";
-
+  import WahourSgather from "./wahous/WahourSgather";
     export default {
         name: "SystemList",
       components:{
-        Welcome,EmpView,AuthcView,UserView,CgsqView,GysShView,GysShJlView,ShView,ShJlView,SysRole,SysMenus,
+        Welcome,EmpView,AuthcView,UserView,CgsqView,GysShView,GysShJlView,ShView,ShJlView,SysRole,
         GygoodsShView,commmodity,addcommodity,
-        CgShView,shoptypeinfo,
+        CgShView,shoptypeinfo,WahourSgather,
         CgJlView,CkView
       },
       data(){
@@ -129,11 +127,11 @@
           empdata(){
            var name = sessionStorage.getItem("empname");
            var eid =  sessionStorage.getItem("eid");
+           console.log(eid)
             this.empname=name;
             this.$axios.get("queryempbyid.action/"+eid)
               .then(response => {
                this.circleUrl =this.path+ response.data.empImg;//获取所有要展示的数据
-                console.log(this.circleUrl)
               }).catch();
           },
         zx(){
@@ -179,12 +177,11 @@
           this.editableTabs = tabs.filter(tab => tab.name !== targetName);
         } ,
         getdata() {   //获取数据的方法
-          var params =new URLSearchParams();
+          var params=new URLSearchParams();
           params.append("eid",sessionStorage.getItem("eid"))
           this.$axios.post("querymenuspidandrid.action",params)
             .then(response => {
               this.menudata = response.data;//获取所有要展示的数据
-
             }).catch();
         }
       },

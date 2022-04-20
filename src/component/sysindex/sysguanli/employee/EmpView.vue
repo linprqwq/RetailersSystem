@@ -67,7 +67,7 @@
     </el-table>
 
     <el-dialog
-      title="编辑用户"
+      title="用户"
       :visible.sync="editdialogVisible"
       width="30%">
       <!-- 动态组件   指定添加vue页面在模态框显示-->
@@ -242,6 +242,8 @@
           this.getdata()
         },
         handleDelete(id){
+         /* alert(id)*/
+          confirm("你确定要删除吗")
            this.$axios.post("delesysemployees.action/"+id).then(response=>{
              //刷新
              this.getdata();

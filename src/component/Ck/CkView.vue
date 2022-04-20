@@ -3,7 +3,9 @@
 
     <el-input v-model="ckmName" placeholder="请输入您要查询的仓库名" style="width: 200px;"></el-input>
     <el-button type="primary" @click="queryallck()">查询</el-button><br><br>
-    <el-button type="primary" @click="addwarehouse()" style="position: relative;left: -800px">添加仓库</el-button>
+    <el-button type="primary" @click="addwarehouse()" style="position: relative;left: -600px">添加仓库</el-button>
+
+    <el-button icon="el-icon-refresh-left" circle @click="queryallck" style="position: relative;left: 600px"></el-button>
     <el-table
       :data="ckall"
       style="width: 100%">
@@ -14,6 +16,18 @@
       <el-table-column
         label="仓库最大库存"
         prop="warMaxStock">
+      </el-table-column>
+
+      <el-table-column label="仓库分类" width="180">
+
+          <template slot-scope="scope">
+            <el-popover trigger="hover" placement="top">
+              <p>{{ scope.row.shoptypename }}</p>
+              <div slot="reference" class="name-wrapper">
+                <el-tag size="medium">查看分类详情</el-tag>
+              </div>
+            </el-popover>
+          </template>
       </el-table-column>
       <el-table-column>
         <template slot-scope="scope">
@@ -26,6 +40,7 @@
             @click="querywarexqbyid(scope.$index, scope.row)">查看仓库详情</el-button>
         </template>
       </el-table-column>
+
     </el-table>
     <el-pagination
       @size-change="handleSizeChange"
@@ -37,22 +52,35 @@
       :total="total">
     </el-pagination>
 
-    <!--  退货页面-->
+    <!--  添加页面-->
     <el-dialog
       title="新增仓库"
       :visible.sync="AddCk"
       width="30%"
       :before-close="handleClose">
       <!-- 动态组件   指定添加vue页面在模态框显示-->
-      <component ref="awhref" is="AddWareHouse"v-on:success="success(false)"></component>
+      <component ref="awhref" is="AddWareHouse"v-on:success="qx(true)" ></component>
       <el-button type="primary" @click="AddWHouse('awhref')">确 定</el-button>
-      <el-button @click="AddCk = false">取 消</el-button>
+      <el-button @click="qx(true)">取 消</el-button>
+    </el-dialog>
+    <!--  修改页面-->
+    <el-dialog
+      title="修改仓库"
+      :visible.sync="UpdateCk"
+      width="30%"
+      :before-close="handleClose">
+      <!-- 动态组件   指定添加vue页面在模态框显示-->
+      <component ref="updateckref" is="UpdateCk"v-on:success="qx(false)" ></component>
+      <el-button type="primary" @click="UpdateWareHouse('updateckref')">确 定</el-button>
+      <el-button @click="qx(false)">取 消</el-button>
+
     </el-dialog>
   </div>
 </template>
 
 <script>
 import AddWareHouse from "./AddWareHouse";
+import UpdateCk from "./UpdateCk";
 export default {
   name: "CkView",
   data(){
@@ -64,10 +92,12 @@ export default {
       search: '',
       ckmName:'',
       AddCk:false,
+      UpdateCk:false,
     }
   },
   components:{
-    AddWareHouse
+    AddWareHouse,
+    UpdateCk,
   },
   methods:{
     //查询仓库
@@ -98,12 +128,17 @@ export default {
     //修改仓库
     updatewarehoures(index,wh){
       //模态框展示
-      console.log(wh.id)
+      this.UpdateCk = true;
+      this.$nextTick(item=>{
+        this.$refs.updateckref.warehousemtkzs(wh);
+      })
+
     },
     //查看商品详情
     querywarexqbyid(){
       //模态框展示
     },
+    //打开添加模态框
     addwarehouse(){
     this.AddCk = true;
     },
@@ -112,16 +147,35 @@ export default {
       this.$confirm('确认关闭？')
         .then(_ => {
           this.AddCk = false
+          this.UpdateCk = false;
+          this.$refs.updateckref.value=[];
+          this.$refs.updateckref.mtkwarehouse= {};
+          this.$refs.awhref.AddWhouse={};
+          this.$refs.awhref.fl=[];
         })
         .catch(_ => {});
     },
-    //接受子组件的事件调用
-    success(res){
-      this.AddCk=res;
-      this.queryallck();
-    },
+    //添加仓库
     AddWHouse(formName){
       this.$refs.awhref.addcka(formName);
+    },
+    //修改仓库
+    UpdateWareHouse(formName){
+      this.$refs.updateckref.UpdateWareHouse(formName);
+    },
+    //取消模态框
+    qx(boole){
+      if (boole){
+        this.AddCk = false
+        this.$refs.awhref.AddWhouse={};
+        this.$refs.awhref.fl=[];
+        this.queryallck();
+      }else{
+        this.UpdateCk = false;
+        this.$refs.updateckref.value=[];
+        this.$refs.updateckref.mtkwarehouse= {};
+        this.queryallck();
+      }
     }
   },
 
@@ -132,5 +186,11 @@ export default {
 </script>
 
 <style scoped>
-
+.el-dropdown-link {
+  cursor: pointer;
+  color: #409EFF;
+}
+.el-icon-arrow-down {
+  font-size: 12px;
+}
 </style>

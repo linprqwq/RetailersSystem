@@ -13,7 +13,7 @@
       </el-table-column>
       <el-table-column>
         <template slot-scope="scope">
-          <el-link type="info" @click="cgShDetail(scope.row.id)">查看详情</el-link>
+          <el-link type="info" @click="showdetail(scope.row.id)">查看详情</el-link>
         </template>
       </el-table-column>
       <el-table-column width="200">
@@ -92,12 +92,16 @@
         handleClose() {
           //关闭
           this.dialogVisible=false;
-          this.purchaseDetails=[];
+          this.$refs.cgshde.purchaseDetails=[];
         },
-        cgShDetail(pid) {
+        showdetail(pid) {
           this.dialogVisible = true;
-          this.$refs.cgshde.purchaseDetail.pid = pid;
-          this.$refs.cgshde.getData();
+
+          this.$nextTick(item=>{
+            this.$refs.cgshde.purchaseDetail.pid = pid;
+            this.$refs.cgshde.getData();
+          })
+
         },
         search() {
           this.getPurchases();

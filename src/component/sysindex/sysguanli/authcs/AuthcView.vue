@@ -71,37 +71,15 @@
             }).catch();
           return;
         }
+        this.$axios.get("querymenuformenuroleid.action/"+roleId)
+          .then(res=>{
+            res.data.forEach(item=>{
+              this.mids.push(item.mid);
+            })
+          }).catch()
         this.$axios.get("querymenuforleft.action/" + roleId)
           .then(response => {
             //循环一级菜单
-            response.data.forEach(item=>{
-              //检查是否有子菜单
-              if(item.childMenu.length>0){
-                //有子菜单，循环二级子菜单
-                item.childMenu.forEach(citem=>{
-                  //检查是否有子菜单
-                  if(citem.childMenu.length>0){
-                    //有子菜单，循环三级子菜单
-                    citem.childMenu.forEach(ccitem=>{
-                      //检查状态是否为选中
-                      if(ccitem.ischeck){
-                        this.mids.push(ccitem.id);
-                      }
-                    })
-                  }else {
-                    //没有子菜单，检查状态是否为选中
-                    if(citem.ischeck){
-                      this.mids.push(citem.id);
-                    }
-                  }
-                })
-              }else {
-                //没有子菜单，检查状态是否为选中
-                if(item.ischeck){
-                  this.mids.push(item.id);
-                }
-              }
-            })
             this.authcdata = response.data;
           }).catch();
 
@@ -116,7 +94,7 @@
         if(this.opvalue!=""){
           //授权按钮按下
           //获取下拉框的角色id
-          let  rid= this.opvalue;
+          let rid= this.opvalue;
           //获取树形选中的菜单id//则返回目前被选中的节点所组成的数组
           let menuId="";
           this.$refs.mytree.getCheckedNodes().forEach(item=>{

@@ -58,7 +58,8 @@
           </el-table-column>
           <el-table-column
             prop="ustate"
-            label="状态">
+            label="状态"
+            width="100">
             <template slot-scope="scope">
               <span v-if="scope.row.ustate==0">正常</span>
               <span v-else-if="scope.row.ustate==1">冻结</span>
@@ -66,17 +67,26 @@
             </template>
           </el-table-column>
           <el-table-column
-            label="操作">
+            label="操作"
+            width="200">
             <template slot-scope="scope">
-              <el-popconfirm
-                title="确定要冻结此用户吗？"
-                @confirm="dongjie(scope.row)"
-              >
+              <div v-if="scope.row.ustate==0">
+                <el-popconfirm
+                  title="确定要冻结此用户吗？"
+                  @confirm="dongjie(scope.row,1)"
+                >
+                  <el-button
+                    size="mini"
+                    type="warning"
+                    slot="reference">冻结</el-button>
+                </el-popconfirm>
+              </div>
+              <div v-if="scope.row.ustate==1">
                 <el-button
                   size="mini"
-                  type="warning"
-                  slot="reference">冻结</el-button>
-              </el-popconfirm>
+                  type="primary"
+                  slot="reference" @click="dongjie(scope.row,0)">解冻</el-button>
+              </div>
               <el-button
                 size="mini"
                 @click="handleEdit(scope.row)">编辑</el-button>
@@ -160,8 +170,8 @@
       AddView,EditUserView
     },
     methods:{
-      dongjie(row){
-        this.$axios.put("updstateuser.action",{"ustate":1,"id":row.id})
+      dongjie(row,state){
+        this.$axios.put("updstateuser.action",{"ustate":state,"id":row.id})
           .then(response=>{
           if(response.data.code=="1"){
             alert(response.data.msg)

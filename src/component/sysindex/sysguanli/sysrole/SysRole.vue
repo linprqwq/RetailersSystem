@@ -17,12 +17,15 @@
         label="角色"
         width="180">
       </el-table-column>
+
       <el-table-column
         prop="remark"
         label="状态"
         width="180">
       </el-table-column>
+
       <el-table-column>
+
         <template slot-scope="scope">
         <!--  <el-button
             size="mini" type="success"
@@ -123,11 +126,13 @@
             }).catch();
         },
         handleSizeChange(val) { //分页控件  页面size改变 触发  val参数就是选择的条数
+          /*alert(1111);*/
           console.log(`每页 ${val} 条`);
           this.pagesize = val;
           this.getdata()
         },
         handleCurrentChange(val) { //页码改变 触发  val  当前准备跳转的页码
+          /*alert(2222222);*/
           console.log(`当前页: ${val}`);
           this.pageno = val;
           this.getdata()
@@ -147,6 +152,7 @@
 
         /*编辑角色*/
         openeditwinupdatasysrole(id){
+        /*  alert(id)*/
           this.updatadialogVisible=true;
           this.$nextTick(item=>{
             this.$refs.updatasysrole.getdataByide(id);

@@ -26,6 +26,7 @@ import Recharge from "../component/PersonalCenter/Recharge";
 import commmodity from "../component/shop/commmodity";
 import Supplier_registration from "../component/supplier/Supplier_registration";
 import Thorder from "../component/Shorder/Thorder";
+import CommodityClass from "../component/Commodity/CommodityClass";
 //Vue组件使用Vue-router组件*******************
 Vue.use(VueRouter)
 
@@ -138,8 +139,13 @@ var routes=[
     path: "/Recharge",
     name: "Recharge",
     component: Recharge
+  },
+  //商品分类
+  {
+    path:"/CommodityClass",
+    name:"CommodityClass",
+    component: CommodityClass
   }
-
 ]
 
 //路由管理器

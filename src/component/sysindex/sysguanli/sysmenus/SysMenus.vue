@@ -75,7 +75,6 @@
       width="30%">
       <!-- 动态组件   指定添加vue页面在模态框显示-->
       <component ref="updatamenus" is="UpDataMenus"></component>
-
       <el-button type="primary" @click="updatatgoodmenus">确 定</el-button>
       <el-button @click="updatadialogVisiblemenus = false">取 消</el-button>
 
@@ -127,8 +126,6 @@
           params.append("pagesize", this.pagesize);
           params.append("name",this.menus)
          /* params.append("roleName",this.role)*/
-
-
           this.$axios.get("querysysmenus.action", {params:params})
             .then(response => {
               this.tableData = response.data.rows;//获取所有要展示的数据
@@ -136,13 +133,11 @@
             }).catch();
         },
         handleSizeChange(val) { //分页控件  页面size改变 触发  val参数就是选择的条数
-          alert(1111);
           console.log(`每页 ${val} 条`);
           this.pagesize = val;
           this.getdata()
         },
         handleCurrentChange(val) { //页码改变 触发  val  当前准备跳转的页码
-          alert(2222222);
           console.log(`当前页: ${val}`);
           this.pageno = val;
           this.getdata()
@@ -151,7 +146,6 @@
         /*添加角色*/
         openeditwinsysmenus(){
           this.editdialogVisiblesysmenus=true;
-
         },
         editgoodsysmenus(){
           this.$refs.addsysmenus.submitUploadsysmenusadd();
@@ -162,7 +156,6 @@
 
         /*编辑角色*/
         openeditwinupdatasymenus(id){
-          alert(id)
           this.updatadialogVisiblemenus=true;
           this.$nextTick(item=>{
             this.$refs.updatamenus.getdataByide(id);
@@ -185,7 +178,6 @@
         },
         /*/!*查询*!/*/
         querysysmenuslike(){
-          alert(11111111)
           alert(this.menus)
           this.menus=this.menus;
           this.getdata();

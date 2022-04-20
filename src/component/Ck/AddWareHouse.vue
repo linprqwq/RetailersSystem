@@ -27,7 +27,7 @@ export default {
   data(){
     var checkAge = (rule, value, callback) => {
       setTimeout(() => {
-        if (!Number.isInteger(value)) {
+        if (!Number.isInteger((Number(value)))) {
           callback(new Error('只能是数字'));
         } else {
           if (value<1) {
@@ -45,11 +45,14 @@ export default {
       fllist:[],
 
       rules:{
-        warName:[{ required: true, message: '仓库名不能为空'}],
-        warMaxStock:[{validator:checkAge,trigger: 'change' }],
+        warName:[{ required: true, message: '仓库名不能为空' ,trigger: 'click'}],
+        warMaxStock:[{validator:checkAge,trigger: 'click' }],
       },
 
     }
+  },
+  props:{
+
   },
   methods:{
     addcka(formName){
@@ -95,7 +98,7 @@ export default {
             this.$message.error(res.data.msg);
           }else{
             this.$message.success(res.data.msg);
-            this.$emit('success',false);
+            this.$emit('success',true);
           }
       }).catch();
     }

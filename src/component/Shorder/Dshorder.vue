@@ -163,7 +163,7 @@
         getdata(){
           var params=new URLSearchParams();
           params.append("sid",this.useridd);
-          params.append("status",4);
+          params.append("status",3);
           params.append("pageno",this.pageno);
           params.append("pagesize",this.pagesize);
           this.$axios.post("queryshdshorder.action",params).then(res=>{

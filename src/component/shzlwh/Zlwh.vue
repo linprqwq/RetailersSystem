@@ -25,7 +25,7 @@
      </el-select>
      <el-select v-model="qq" placeholder="----请选择---">
        <el-option v-for="d in district" :value="d.id" :label="d.name" >{{d.name}}</el-option>
-     </el-select>
+     </el-select><br>
      详细地址: <el-input type="text" v-model="xxaddr"></el-input><br>
      <el-button type="primary" @click="update">修改</el-button>
    </div>

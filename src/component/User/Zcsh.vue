@@ -13,19 +13,15 @@
 
   <br><br>
 
-  <span>省</span>
-  <el-select @change="fun1" v-model="sheng" placeholder="请选择" >
-    <el-option v-for="p in provice"  :value="p.id" :label="p.name"></el-option>
-  </el-select>
-  <span>市</span>
-  <el-select @change="fun2" v-model="shi"  placeholder="请选择">
-    <el-option  v-for="c in ctiy" :value="c.id" :label="c.name"></el-option>
-  </el-select>
-  <span>区</span>
-  <el-select  placeholder="请选择" v-model="qu" >
-
-    <el-option  v-for="d in district" :value="d.id" :label="d.name"></el-option>
-  </el-select><br>
+    <el-select  v-model="sheng" @change="fun1" placeholder="----请选择---">
+      <el-option  v-for="p in provice" :value="p.id" :label="p.name" >{{p.name}}</el-option>
+    </el-select>
+    <el-select v-model="shi"  @change="fun2" placeholder="----请选择---">
+      <el-option  v-for="c in ctiy" :value="c.id" :label="c.name" >{{c.name}}</el-option>
+    </el-select>
+    <el-select v-model="qq" placeholder="----请选择---">
+      <el-option v-for="d in district" :value="d.id" :label="d.name" >{{d.name}}</el-option>
+    </el-select><br>
   详细地址: <el-input type="text" v-model="xxaddr"></el-input><br>
   <el-button type="primary" @click="zc">修改</el-button>
   </div>
@@ -40,7 +36,7 @@
           imageUrl:"",
           shi:"",
           sheng:"",
-          qu:"",
+          qq:"",
           provice:[],
           ctiy:[],
           district:[],
@@ -87,29 +83,34 @@
             this.$message.warning(err);
           })
         },
+        open(){
+          //选择省
+          var _this=this;
+          this.$nextTick(jj=>{
+            this.$axios.post("queryAllSheng.action").then(val=>{
+              _this.provice=val.data;
+            }).catch()
+          })
+        },
         fun1(){
           var _this = this;
           var params=new URLSearchParams();
-          params.append("pid",this.sheng)
-          this.$axios.post("queryChinaByShi.action",params).then(
-            function (val){
+          params.append("id",this.sheng)
+          this.$axios.post("queryChinaByShi.action",params).then(val=>{
               _this.ctiy=val.data
             }
-          ).catch(
+          ).catch()
 
-          )
         },
         fun2(){
           var _this = this;
           var params=new URLSearchParams();
-          params.append("pid",this.shi)
-          this.$axios.post("queryChinaByQu.action",params).then(
-            function (val){
+          params.append("id",this.shi)
+          this.$axios.post("queryChinaByQu.action",params).then(val=>{
               _this.district=val.data
             }
-          ).catch(
+          ).catch()
 
-          )
         },
         //每次文件改变选择，都将最新的选择文件 更新到data中的头像数组中
         changeFile(file, fileList) {
@@ -118,23 +119,7 @@
         }
       },
       created(){
-        //等vue中 data和事件 函数都初始化了 调用该方法
-        //1.给data中的roles数组赋值
-        //2.怎么样异步实现获取数据
-        var _this=this;
-        var params=new URLSearchParams();
-        params.append("pid",0);
-        this.$axios.post("queryAllSheng.action",params).then(
-          function (val){
-
-            _this.provice=val.data;
-
-          }
-        ).catch(
-          function (err){
-            alert(err)
-          }
-        )
+        this.open();
       }
     }
 </script>

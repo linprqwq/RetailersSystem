@@ -301,16 +301,12 @@ if (this.userinfo.length>=1){
         this.user = res.data;
         console.log(this.user.shaddress)
         var params3 = new URLSearchParams()
-        params3.append("address",this.user.address)
-        params3.append("id",this.user.id)
+        params3.append("shaddress",this.user.address)
         this.$axios.post("queryshidd.action",params3).then(val=>{
           console.log("進來的商戶id"+val.data.id)
           this.shid=val.data.id
         }).catch()
       }).catch()
-
-
-
     },
     //提交订单
     ordertijiaodd() {
@@ -326,26 +322,21 @@ if (this.userinfo.length>=1){
 
         //商品id
         params.append("list", this.list);
-        //商品地址id
-        // this.pos.forEach(item=>{
-        //   if (item.shaddress==this.user.address){
-        //     params.append("sid",item.id);
-        //   }
-        // })
         //当前状态 （有无付款）
-      //   params.append("status",2);
-      //   //订单总价
-      //   params.append("zprice",this.zongmoney)
-      //   this.$axios.post("usertijiaodd.action", params).then(res => {
-      //     if (res.data.code==0){
-      //       this.$message.error(res.data.msg);
-      //       this.$router.push('/personalCenter')
-      //       this.$emit("event-name")
-      //     }else{
-      //       this.$message.success(res.data.msg);
-      //       this.$router.push('/personalCenter')
-      //     }
-      //   }).catch()
+        params.append("status",2);
+        //订单总价
+        params.append("zprice",this.zongmoney)
+        params.append('sid',this.shid)
+        this.$axios.post("usertijiaodd.action", params).then(res => {
+          if (res.data.code==0){
+            this.$message.error(res.data.msg);
+            this.$router.push('/personalCenter')
+            this.$emit("event-name")
+          }else{
+            this.$message.success(res.data.msg);
+            this.$router.push('/personalCenter')
+          }
+        }).catch()
       }
 
     },

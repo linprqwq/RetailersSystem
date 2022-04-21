@@ -140,9 +140,9 @@ export default {
       shenglabel:"",
       qqlabel:"",
       shilabel:"",
-      pos:[],
-      redio:null
-
+      pos:null,
+      redio:null,
+      shid:null
     }
   },
   components: {
@@ -242,6 +242,12 @@ export default {
           },500)
          }
        }).catch()
+      var params2 = new URLSearchParams();
+      params2.append("shaddress",_this.redio)
+      this.$axios.post("queryshid.action",params2).then(val=>{
+        console.log(val.data.id)
+        _this.shid=val.data.id
+      }).catch()
     },
     //选择市
     fun2(){

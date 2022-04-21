@@ -86,7 +86,8 @@
         this.$refs.goods_category.ShopTypeInfos.forEach(item=>{
           data.append("ids",item);
         })
-        //图片
+
+
         data.append("img",this.img.raw);
         console.log(this.img);
         //调用异步，进行数据修改

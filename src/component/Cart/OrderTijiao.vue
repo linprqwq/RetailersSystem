@@ -16,7 +16,7 @@
     <div class="common_list_con clearfix">
       <dl>
         <dt>寄送到：</dt>
-        <dd><input type="radio" name="" checked=""><span v-show="user.address==null || user.address==''">请添加新地址</span>{{user.address}}</dd>
+        <dd><input type="radio" name="" checked=""><span  v-show="user.address==null || user.address==''">请添加新地址</span>{{user.address}}</dd>
       </dl>
       <a href="#" class="edit_site" @click="open(dialogVisible=true)">新增收货地址</a>
     </div>
@@ -142,14 +142,13 @@ export default {
       shilabel:"",
       pos:null,
       redio:null,
-      shid:null
+      shid:null,
     }
   },
   components: {
     top: IndexTop,
   },
   methods: {
-    //寻找商户地址按省
     queryshsheng(){
       var _this=this
       var params=new URLSearchParams()
@@ -227,8 +226,6 @@ export default {
         this.loadingInstance.close();
         return false;
       }
-       //  var arr=[_this.shenglabel,_this.shilabel,_this.qqlabel,_this.addr]
-       // var str=arr.join("")
        var params = new URLSearchParams();
        params.append("address",_this.redio)
        params.append("id",_this.uid)
@@ -244,8 +241,9 @@ export default {
        }).catch()
       var params2 = new URLSearchParams();
       params2.append("shaddress",_this.redio)
+      console.log("單選框的值"+_this.redio)
       this.$axios.post("queryshid.action",params2).then(val=>{
-        console.log(val.data.id)
+        console.log(val.data.id+"選擇的id")
         _this.shid=val.data.id
       }).catch()
     },
@@ -301,12 +299,23 @@ if (this.userinfo.length>=1){
       params2.append("id",this.uid);
       this.$axios.post("selsid.action", params2).then(res => {
         this.user = res.data;
-        console.log(this.user)
+        console.log(this.user.shaddress)
+        var params3 = new URLSearchParams()
+        params3.append("address",this.user.address)
+        params3.append("id",this.user.id)
+        this.$axios.post("queryshidd.action",params3).then(val=>{
+          console.log("進來的商戶id"+val.data.id)
+          this.shid=val.data.id
+        }).catch()
       }).catch()
+
+
+
     },
     //提交订单
     ordertijiaodd() {
       console.log(this.user)
+      console.log(this.shid)
       if (this.user.address==null||this.user.address==''){
         this.$message.error("请选择地址")
         return false;
@@ -318,25 +327,25 @@ if (this.userinfo.length>=1){
         //商品id
         params.append("list", this.list);
         //商品地址id
-        this.pos.forEach(item=>{
-          if (item.shaddress==this.user.address){
-            params.append("sid",item.id);
-          }
-        })
+        // this.pos.forEach(item=>{
+        //   if (item.shaddress==this.user.address){
+        //     params.append("sid",item.id);
+        //   }
+        // })
         //当前状态 （有无付款）
-        params.append("status",2);
-        //订单总价
-        params.append("zprice",this.zongmoney)
-        this.$axios.post("usertijiaodd.action", params).then(res => {
-          if (res.data.code==0){
-            this.$message.error(res.data.msg);
-            this.$router.push('/personalCenter')
-            this.$emit("event-name")
-          }else{
-            this.$message.success(res.data.msg);
-            this.$router.push('/personalCenter')
-          }
-        }).catch()
+      //   params.append("status",2);
+      //   //订单总价
+      //   params.append("zprice",this.zongmoney)
+      //   this.$axios.post("usertijiaodd.action", params).then(res => {
+      //     if (res.data.code==0){
+      //       this.$message.error(res.data.msg);
+      //       this.$router.push('/personalCenter')
+      //       this.$emit("event-name")
+      //     }else{
+      //       this.$message.success(res.data.msg);
+      //       this.$router.push('/personalCenter')
+      //     }
+      //   }).catch()
       }
 
     },
@@ -367,8 +376,6 @@ if (this.userinfo.length>=1){
     },
   },
   computed: {
-
-
     //总金额
     zongmoney: function () {
       let s = 0;
@@ -2033,3 +2040,10 @@ li{
   color: #ff8800;
 }
 </style>
+<!--var _this=this;-->
+<!--var params2 = new URLSearchParams();-->
+<!--params2.append("shaddress",_this.user.shaddress)-->
+<!--this.$axios.post("queryshid.action",params2).then(val=>{-->
+<!--_this.shid=val.data.id-->
+<!--console.log( _this.shid)-->
+<!--}).catch()-->

@@ -96,6 +96,7 @@
   import CgJlView from "./procurement/CgJlView";
   import CkView from "./Ck/CkView";
   import CkShView from "./Ck/CkShView";
+  import SysMenus from "./sysindex/sysguanli/sysmenus/SysMenus";
 
 
   import WahourSgather from "./wahous/WahourSgather";
@@ -105,7 +106,7 @@
         Welcome,EmpView,AuthcView,UserView,CgsqView,GysShView,GysShJlView,ShView,ShJlView,SysRole,
         GygoodsShView,commmodity,addcommodity,
         CgShView,shoptypeinfo,WahourSgather,
-        CgJlView,CkView
+        CgJlView,CkView,CkShView,SysMenus
       },
       data(){
         return {

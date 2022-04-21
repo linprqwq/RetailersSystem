@@ -113,8 +113,8 @@
         <el-form-item label="地址" :label-width="formLabelWidth">
           <el-input v-model="addform.empAddress" autocomplete="off"></el-input>
         </el-form-item>
-        <template>
-          角色:<el-select  v-model="id" placeholder="请选择">
+       <template>
+          角色:<el-select multiple  v-model="roid" placeholder="请选择">
             <el-option
               v-for="item in options"
               :key="item.id"
@@ -194,7 +194,9 @@
 
           roleid:{},
           name:'',
+          options:[],//用来存放角色
           formLabelWidth:'100px',
+          roid:[],
           tableData:[],
           pageno:1,   //页码
           pagesize:5,   //页size
@@ -266,12 +268,11 @@
 
        /* 用户添加*/
         handleAdd(row){
-       /*   this.$axios.post("queryrolesbyidname.action/").then(response=>{
-            alert(11111111)
-            this.tableData.forEach( (item)=> {
-              item.empImg = this.path+item.empImg;
-            })
-          }).catch();*/
+         this.$axios.post("queryrolesbyidname.action/").
+         then(response=>{
+           console.log(response.data)
+           this.options = response.data
+          }).catch();
           console.log(row)
          this.editmodalVisible02=true;
          this.editform=row;
@@ -283,7 +284,9 @@
             formData.append(key, this.addform[key])
           })
             formData.append('file',  this.fileList[0].raw)
-
+          this.roid.forEach(item=>{
+            formData.append('rids',  item);
+          })
           //将组装好的数据 进行下一步 异步提交
           this.sendFile(formData)
 
@@ -297,6 +300,16 @@
             spinner: 'el-icon-loading',
             background: 'rgba(0, 0, 0, 0.7)'
           })
+        /*  //角色异步提交
+        this.$axios({
+            method: 'post',
+            url: 'addroloemp.action',
+            data: data,
+            headers: {
+              'Content-Type': 'multipart/form-data'
+            }
+          })*/
+
           //异步提交
           this.$axios({
             method: 'post',
@@ -364,10 +377,11 @@
       components:{
         EmpSys
       },
-
-
       created(){
           this.getdata()
+        this.handleAdd()
+        /*this.sendFile()*/
+
       }
     }
 </script>

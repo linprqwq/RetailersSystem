@@ -75,7 +75,6 @@
       width="30%">
       <!-- 动态组件   指定添加vue页面在模态框显示-->
       <component ref="updatamenus" is="UpDataMenus"></component>
-
       <el-button type="primary" @click="updatatgoodmenus">确 定</el-button>
       <el-button @click="updatadialogVisiblemenus = false">取 消</el-button>
 
@@ -127,8 +126,6 @@
           params.append("pagesize", this.pagesize);
           params.append("name",this.menus)
          /* params.append("roleName",this.role)*/
-
-
           this.$axios.get("querysysmenus.action", {params:params})
             .then(response => {
               this.tableData = response.data.rows;//获取所有要展示的数据
@@ -151,7 +148,6 @@
         /*添加角色*/
         openeditwinsysmenus(){
           this.editdialogVisiblesysmenus=true;
-
         },
         editgoodsysmenus(){
           this.$refs.addsysmenus.submitUploadsysmenusadd();
@@ -185,6 +181,7 @@
         },
         /*/!*查询*!/*/
         querysysmenuslike(){
+          alert(this.menus)
          /* alert(11111111)*/
         /*  alert(this.menus)*/
           this.menus=this.menus;

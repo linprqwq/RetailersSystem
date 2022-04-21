@@ -19,6 +19,11 @@ import Zlwh from "./component/shzlwh/Zlwh";
 import Allorder from "./component/Shorder/Allorder";
 import commmodity from "./component/shop/commmodity";
 import tabs from "./component/supplier/tabs";
+import supplierfh from "./component/supplier/supplierfh";
+import CommodityClass from "./component/Commodity/CommodityClass";
+import whsupplier from "./component/supplier/whsupplier";
+import selectgyorder from "./component/supplier/selectgyorder";
+
 Vue.use(ElementUI)
 //axios
 import  Axios from 'axios'

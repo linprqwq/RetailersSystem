@@ -3,37 +3,39 @@
     <top></top>
 
 
-      <el-tabs :tab-position="tabPosition" v-model="activeName1"  style="height: 100%; width: 100%; ">
-        <el-tab-pane label="我的个人中心" name="first">
-          <orderall @event-name="update"></orderall>
-        </el-tab-pane>
-        <el-tab-pane label="我的自提点" name="second">地址组件</el-tab-pane>
-        <el-tab-pane label="个人信息维护" name="third">个人信息维护组件</el-tab-pane>
-        <el-tab-pane label="充值" name="fourth"><Recharge></Recharge></el-tab-pane>
-        <el-tab-pane label="商户">
-          <div v-if="identity==2">
-            <Shzy></Shzy>
-          </div>
-          <div v-else-if="identity==1">
+    <el-tabs :tab-position="tabPosition" v-model="activeName1" style="height: 100%; width: 100%; ">
+      <el-tab-pane label="我的个人中心" name="first">
+        <orderall @event-name="update"></orderall>
+      </el-tab-pane>
+      <el-tab-pane label="我的自提点" name="second">地址组件</el-tab-pane>
+      <el-tab-pane label="个人信息维护" name="third">个人信息维护组件</el-tab-pane>
+      <el-tab-pane label="充值" name="fourth">
+        <Recharge></Recharge>
+      </el-tab-pane>
+      <el-tab-pane label="商户">
+        <div v-if="identity==2">
+          <Shzy></Shzy>
+        </div>
+        <div v-else-if="identity==1">
           <Zcsh></Zcsh>
-          </div>
-          <div v-else-if="identity==3">
-            你已是供销商了
-          </div>
-        </el-tab-pane>
-        <el-tab-pane label="供销商">
-          <div v-if="identity==3">
-            <tabs></tabs>
-          </div>
-          <div v-else-if="identity==1">
-            <supplier_registration></supplier_registration>
-          </div>
-          <div v-else-if="identity==2">
-            你已是商户了
-          </div>
-        </el-tab-pane>
-      </el-tabs>
-    </div>
+        </div>
+        <div v-else-if="identity==3">
+          你已是供销商了
+        </div>
+      </el-tab-pane>
+      <el-tab-pane label="供销商">
+        <div v-if="identity==3">
+          <tabs></tabs>
+        </div>
+        <div v-else-if="identity==1">
+          <supplier_registration></supplier_registration>
+        </div>
+        <div v-else-if="identity==2">
+          你已是商户了
+        </div>
+      </el-tab-pane>
+    </el-tabs>
+  </div>
 
 
 </template>
@@ -55,10 +57,10 @@ export default {
       userid: sessionStorage.getItem('user'),
       useridd: sessionStorage.getItem('id'),
       tabPosition: 'left',
-      gysState:"",
-      shsatae:"",
-      identity:"",
-      activeName1:"first"
+      gysState: "",
+      shsatae: "",
+      identity: "",
+      activeName1: "first"
     }
   },
   components: {
@@ -75,25 +77,24 @@ export default {
       return this.userid
     },
   },
-  methods:{
+  methods: {
     update() {
-console.log(1)
+      console.log(1)
       // 修改activeName1的名称
       this.activeName1 = 'fourth';
     },
 
-    userGysone(){
-      let params=new URLSearchParams();
-      params.append("id",this.useridd);
-      this.$axios.get("queryUserGysone.action/",{params:params}).
-      then(response=>{
-        this.gysState=response.data.gysState
-        this.shsatae=response.data.shState
-        this.identity=response.data.identity
+    userGysone() {
+      let params = new URLSearchParams();
+      params.append("id", this.useridd);
+      this.$axios.get("queryUserGysone.action/", {params: params}).then(response => {
+        this.gysState = response.data.gysState
+        this.shsatae = response.data.shState
+        this.identity = response.data.identity
       }).catch();
     }
   },
-  created(){
+  created() {
     this.userGysone()
   }
 }

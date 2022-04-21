@@ -394,11 +394,11 @@ export default {
         }
       })
     },
-    goclass(id){
+    goclass(classid){
       this.$router.push({
         path:"/CommodityClass",
         query:{
-          classidd:id
+          csid:classid
         }
       })
     }

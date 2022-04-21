@@ -60,7 +60,7 @@
                 this.goodsSuppliedData = response.data.records;//获取所有要展示的数据
                 this.total = response.data.total; //总记录数量
                 console.log(response);
-                this.tableData.forEach((item)=> {
+                this.goodsSuppliedData.forEach((item)=> {
                   item.imgpath = this.path+item.imgpath;
                 })
 
@@ -87,6 +87,7 @@
               if(res.data.code=="1"){
                 // this.$message.success(res.data.msg);
                 alert(res.data.msg)
+                this.getdata();
               }else {
                 // this.$message.error(res.data.msg);
                 alert(res.data.msg)

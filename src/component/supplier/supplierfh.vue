@@ -109,8 +109,10 @@
         //去查看详情
         showDetail(pid){
           this.dialogVisible=true;
-          this.$refs.cgshde.purchaseDetail.pid=pid;
-          this.$refs.cgshde.getData();
+          this.$nextTick(item=>{
+            this.$refs.cgshde.purchaseDetail.pid=pid;
+            this.$refs.cgshde.getData();
+          })
         },
         //发货商品
         fhgoods(id){

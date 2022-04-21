@@ -293,6 +293,7 @@ if (this.userinfo.length>=1){
 
       params.append("list", this.list);
       params.append("uid", this.uid);
+      params.append("sid",this.shid);
 
       this.$axios.post("queryusergwc", params).then(res => {
         this.jsljgm = res.data;

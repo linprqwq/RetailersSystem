@@ -16,7 +16,7 @@
     <div class="common_list_con clearfix">
       <dl>
         <dt>寄送到：</dt>
-        <dd><input type="radio" name="" checked=""><span  v-show="user.address==null || user.address==''">请添加新地址</span>{{user.address}}</dd>
+        <dd><input type="radio" name="" checked=""><span v-show="user.address==null || user.address==''">请添加新地址</span>{{user.address}}</dd>
       </dl>
       <a href="#" class="edit_site" @click="open(dialogVisible=true)">新增收货地址</a>
     </div>
@@ -50,8 +50,8 @@
           <input type="button" class="btn-add" value="+" @click="jj(item.cartid,false)"></li>
         <li class="col07">{{ item.commodity.prosprice * item.quantity }}</li>
       </ul>
-
     </div>
+
 
     <h3 class="common_title">总金额结算</h3>
 
@@ -142,13 +142,14 @@ export default {
       shilabel:"",
       pos:null,
       redio:null,
-      shid:null,
+      shid:null
     }
   },
   components: {
     top: IndexTop,
   },
   methods: {
+    //寻找商户地址按省
     queryshsheng(){
       var _this=this
       var params=new URLSearchParams()
@@ -226,6 +227,8 @@ export default {
         this.loadingInstance.close();
         return false;
       }
+       //  var arr=[_this.shenglabel,_this.shilabel,_this.qqlabel,_this.addr]
+       // var str=arr.join("")
        var params = new URLSearchParams();
        params.append("address",_this.redio)
        params.append("id",_this.uid)
@@ -367,6 +370,8 @@ if (this.userinfo.length>=1){
     },
   },
   computed: {
+
+
     //总金额
     zongmoney: function () {
       let s = 0;
@@ -2031,10 +2036,3 @@ li{
   color: #ff8800;
 }
 </style>
-<!--var _this=this;-->
-<!--var params2 = new URLSearchParams();-->
-<!--params2.append("shaddress",_this.user.shaddress)-->
-<!--this.$axios.post("queryshid.action",params2).then(val=>{-->
-<!--_this.shid=val.data.id-->
-<!--console.log( _this.shid)-->
-<!--}).catch()-->

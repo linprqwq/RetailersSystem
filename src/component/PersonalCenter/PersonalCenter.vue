@@ -13,25 +13,19 @@
         <Recharge></Recharge>
       </el-tab-pane>
       <el-tab-pane label="商户">
-        <div v-if="identity==2">
+        <div v-if="shsatae==1">
           <Shzy></Shzy>
         </div>
         <div v-else-if="identity==1">
           <Zcsh></Zcsh>
         </div>
-        <div v-else-if="identity==3">
-          你已是供销商了
-        </div>
       </el-tab-pane>
       <el-tab-pane label="供销商">
-        <div v-if="identity==3">
+        <div v-if="gysState==1">
           <tabs></tabs>
         </div>
         <div v-else-if="identity==1">
           <supplier_registration></supplier_registration>
-        </div>
-        <div v-else-if="identity==2">
-          你已是商户了
         </div>
       </el-tab-pane>
     </el-tabs>

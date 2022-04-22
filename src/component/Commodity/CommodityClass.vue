@@ -25,9 +25,9 @@ export default {
    _this.classid=_this.$route.query.csid
     this.$nextTick(yy=>{
       var params=new URLSearchParams()
-      params.append("shoptype",_this.classid)
+      params.append("shopType",_this.classid)
       this.$axios.post("queryIdIsClass.action",params).then(val=>{
-        _this.classarr=val.data
+        _this.classarr=val.data.records;
         _this.classarr.forEach(item=>{
           console.log(item)
         })

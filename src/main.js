@@ -23,6 +23,7 @@ import supplierfh from "./component/supplier/supplierfh";
 import CommodityClass from "./component/Commodity/CommodityClass";
 import whsupplier from "./component/supplier/whsupplier";
 import selectgyorder from "./component/supplier/selectgyorder";
+import Loadingqwq from "./config/Loading"
 
 Vue.use(ElementUI)
 //axios

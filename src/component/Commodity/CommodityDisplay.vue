@@ -37,12 +37,7 @@
           </div>
           <div class="address-box">
             <div class="address-info">
-              <img src="../../image/addr.jpg" width="20px" height="20px">
-              <span>北京</span>
-              <span>北京市</span>
-              <span>海淀区</span>
-              <span>清河街道</span>
-              <a href="#">修改</a>
+
             </div>
             <div class="info">
               <span>库存剩余{{commodityList.quantity}}</span>

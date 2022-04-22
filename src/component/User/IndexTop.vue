@@ -4,18 +4,7 @@
       <div class="zhong">
         <div class="zuo">
           <a href="#" @click="$router.push('/')">兴盛商城</a>
-          <a href="#">XISI</a>
-          <a href="#">loT</a>
-          <a href="#">云服务</a>
-          <a href="#">天星数科</a>
-          <a href="#">有品</a>
-          <a href="#">小爱开放平台</a>
-          <a href="#">企业团购</a>
-          <a href="#">资质证照</a>
-          <a href="#">协议规则</a>
-          <a href="#">下载app</a>
-          <a href="#">智能生活</a>
-          <a href="#">Select Location</a>
+
         </div>
         <div class="you" >
           <a class="mzz" v-show="userid!=null" @click="$router.push('/personalCenter')">{{userid}}</a>
@@ -40,6 +29,7 @@
 
 <script>
 export default {
+
   name: "Index",
   data(){
     return{
@@ -81,7 +71,8 @@ export default {
       sessionStorage.clear()
       this.$message.success("注销成功")
       setTimeout(()=>{
-        this.$router.go(0)
+        this.$router.push("/");
+        this.$router.go(0);
       },200)
 
 

@@ -192,6 +192,7 @@
         uptsaatus(row){
               var params=new URLSearchParams();
               params.append("orderid",row.orderid);
+          params.append("status",4);
               this.$axios.post("uptorderdsh.action",params).then(res=>{
                 this.$message.success(res.data.msg);
                 this.getdata()

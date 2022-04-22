@@ -338,6 +338,7 @@
 
 <script>
 import IndexTop from "./User/IndexTop";
+import {showLoading,hideLoading} from "../config/Loading";
 
 export default {
   name: "Index",
@@ -394,17 +395,18 @@ export default {
         }
       })
     },
-    goclass(id){
+    goclass(classid){
       this.$router.push({
         path:"/CommodityClass",
         query:{
-          classidd:id
+          csid:classid
         }
       })
     }
   },
   created() {
     var _this = this;
+    showLoading()
     this.$axios.post("queryAllcom.action").then(val => {
       val.data.forEach(key=>{
         //console.log(key+"加载完毕")
@@ -433,7 +435,7 @@ export default {
       val.data.forEach(key=>{
         console.log(key+"加载完毕")
       })
-      _this.commodityrl = val.data
+      _this.commodityrl = val.data.splice(0,4)
     }).catch()
     if (this.useridd != null) {
       var params = new URLSearchParams();
@@ -451,6 +453,7 @@ export default {
         console.log("加载完成")
       })
     }).catch()
+    hideLoading()
   }
 }
 </script>

@@ -98,7 +98,7 @@
         <el-form-item label="用户名" :label-width="formLabelWidth">
           <el-input v-model="addform.empName" autocomplete="off"></el-input>
         </el-form-item>
-        <el-form-item label="账号" :label-width="formLabelWidth">
+        <el-form-item label="账号" prop="empLoginname" :label-width="formLabelWidth">
           <el-input v-model="addform.empLoginname" autocomplete="off"></el-input>
         </el-form-item>
         <el-form-item label="密码" prop="empPassword" :label-width="formLabelWidth">
@@ -107,13 +107,13 @@
         <el-form-item label="确认密码" prop="empPassword1" :label-width="formLabelWidth">
           <el-input v-model="addform.empPassword1" type="password" autocomplete="off"></el-input>
         </el-form-item>
-        <el-form-item label="电话" :label-width="formLabelWidth">
+        <el-form-item label="电话" prop="empPhone" :label-width="formLabelWidth">
           <el-input v-model="addform.empPhone" autocomplete="off"></el-input>
         </el-form-item>
-        <el-form-item label="金额" :label-width="formLabelWidth">
+        <el-form-item label="金额" prop="empMoney" :label-width="formLabelWidth">
           <el-input v-model="addform.empMoney" autocomplete="off"></el-input>
         </el-form-item>
-        <el-form-item label="地址" :label-width="formLabelWidth">
+        <el-form-item label="地址" prop="empAddress" :label-width="formLabelWidth">
           <el-input v-model="addform.empAddress" autocomplete="off"></el-input>
         </el-form-item>
         <template>
@@ -377,22 +377,23 @@
       },
       formReset() { // 重置
         this.addform = {
-          empName: "",
-          empLoginname: "",
-          empPassword: "",
-          empPhone: "",
-          empMoney: "",
-          empAddress: "",
-          empImg: "",
-        }
+            empName:"",
+            empLoginname:"",
+            empPassword:"",
+            empPhone:"",
+            empMoney:"",
+            empAddress:"",
+            empImg:"",
+          }
+        },
       },
-    },
-    components: {
-      EmpSys
-    },
-    created() {
-      this.getdata()
-      /*this.sendFile()*/
+      components:{
+        EmpSys
+      },
+      created(){
+          this.getdata()
+        this.handleAdd()
+        /*this.sendFile()*/
 
     }
   }

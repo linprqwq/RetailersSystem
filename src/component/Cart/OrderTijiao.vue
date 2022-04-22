@@ -50,8 +50,8 @@
           <input type="button" class="btn-add" value="+" @click="jj(item.cartid,false)"></li>
         <li class="col07">{{ item.commodity.prosprice * item.quantity }}</li>
       </ul>
-
     </div>
+
 
     <h3 class="common_title">总金额结算</h3>
 
@@ -140,9 +140,9 @@ export default {
       shenglabel:"",
       qqlabel:"",
       shilabel:"",
-      pos:[],
-      redio:null
-
+      pos:null,
+      redio:null,
+      shid:null
     }
   },
   components: {
@@ -242,6 +242,13 @@ export default {
           },500)
          }
        }).catch()
+      var params2 = new URLSearchParams();
+      params2.append("shaddress",_this.redio)
+      console.log("單選框的值"+_this.redio)
+      this.$axios.post("queryshid.action",params2).then(val=>{
+        console.log(val.data.id+"選擇的id")
+        _this.shid=val.data.id
+      }).catch()
     },
     //选择市
     fun2(){
@@ -286,6 +293,7 @@ if (this.userinfo.length>=1){
 
       params.append("list", this.list);
       params.append("uid", this.uid);
+      params.append("sid",this.shid);
 
       this.$axios.post("queryusergwc", params).then(res => {
         this.jsljgm = res.data;
@@ -295,12 +303,19 @@ if (this.userinfo.length>=1){
       params2.append("id",this.uid);
       this.$axios.post("selsid.action", params2).then(res => {
         this.user = res.data;
-        console.log(this.user)
+        console.log(this.user.shaddress)
+        var params3 = new URLSearchParams()
+        params3.append("shaddress",this.user.address)
+        this.$axios.post("queryshidd.action",params3).then(val=>{
+          console.log("進來的商戶id"+val.data.id)
+          this.shid=val.data.id
+        }).catch()
       }).catch()
     },
     //提交订单
     ordertijiaodd() {
       console.log(this.user)
+      console.log(this.shid)
       if (this.user.address==null||this.user.address==''){
         this.$message.error("请选择地址")
         return false;
@@ -311,16 +326,11 @@ if (this.userinfo.length>=1){
 
         //商品id
         params.append("list", this.list);
-        //商品地址id
-        this.pos.forEach(item=>{
-          if (item.shaddress==this.user.address){
-            params.append("sid",item.id);
-          }
-        })
         //当前状态 （有无付款）
         params.append("status",2);
         //订单总价
         params.append("zprice",this.zongmoney)
+        params.append('sid',this.shid)
         this.$axios.post("usertijiaodd.action", params).then(res => {
           if (res.data.code==0){
             this.$message.error(res.data.msg);

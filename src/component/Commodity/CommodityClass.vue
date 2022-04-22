@@ -15,8 +15,16 @@
            <p>{{cs.prosprice}}元</p>
          </div>
        </div>
-
       </div>
+<!--  <el-pagination-->
+<!--    @size-change="handleSizeChange"-->
+<!--    @current-change="handleCurrentChange"-->
+<!--    :current-page="pageno"-->
+<!--    :page-sizes="[5, 10, 15, 20]"-->
+<!--    :page-size="pagesize"-->
+<!--    layout="total, sizes, prev, pager, next, jumper"-->
+<!--    :total="total">-->
+<!--  </el-pagination>-->
   <div v-if="tips!=''" class="tips">
     <span>{{tips}}</span>
   </div>
@@ -35,7 +43,10 @@ export default {
       classid:null,
       classarr:[],
       sp:"",
-      tips:''
+      tips:'',
+      pageno: 1,   //页码
+      pagesize: 5,   //页size
+      total: 1,   //查询到的总记录数量
     }
   },
   components:{
@@ -65,7 +76,18 @@ export default {
           comid: id
         }
       })
-    }
+    },
+    // //分页控件
+    // handleSizeChange(val) { //分页控件  页面size改变 触发  val参数就是选择的条数
+    //   this.pagesize = val;
+    //   this.querysp()
+    // },
+    // //页码发生改变
+    // handleCurrentChange(val) { //页码改变 触发  val  当前准备跳转的页码
+    //   this.pageno = val;
+    //   this.querysp()
+    //
+    // }
   },
   created() {
     var _this=this;

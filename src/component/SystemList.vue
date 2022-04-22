@@ -79,7 +79,6 @@
 
 <script>
   import Welcome from "./Welcome";
-  import SysMenus from "./sysindex/sysguanli/sysmenus/SysMenus";
   import EmpView from "./sysindex/sysguanli/employee/EmpView";
   import AuthcView from "./sysindex/sysguanli/authcs/AuthcView";
   import UserView from "./User/UserView";
@@ -107,7 +106,7 @@
         Welcome,EmpView,AuthcView,UserView,CgsqView,GysShView,GysShJlView,SysMenus,ShView,ShJlView,SysRole,
         GygoodsShView,commmodity,addcommodity,
         CgShView,shoptypeinfo,WahourSgather,
-        CgJlView,CkView,CkShView,SysMenus
+        CgJlView,CkView,CkShView,
       },
       data(){
         return {

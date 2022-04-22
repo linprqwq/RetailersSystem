@@ -90,11 +90,12 @@ export default {
           this.$axios.post("orderpj.action",pamram).then(res=>{
             if (res.data.code==0){
               this.$message.error(res.data.msg);
+              this.$emit('success',false);
             }else{
               this.$message.success(res.data.msg);
+              this.$emit('success',false);
             }
           }).catch()
-          this.$emit('success',false);
 
         } else {
           console.log('error submit!!');

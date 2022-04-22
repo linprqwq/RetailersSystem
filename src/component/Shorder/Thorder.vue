@@ -95,7 +95,6 @@
               this.$axios.post("queryreturnstop.action",params).then(res=>{
                 this.tableData=res.data.records;//获取所有要展示的数据
                 this.total = res.data.total; //总记录数量
-                console.log( this.tableData)
               }).catch()
           },
         handleSizeChange(val) { //分页控件  页面size改变 触发  val参数就是选择的条数

@@ -13,27 +13,27 @@
     <el-table-column
       label="商品图片"
       width="180">
-      <template slot-scope="scope">
-        {{scope.row.olist[0].proimage}}
+      <template slot-scope="scope" >
+        <img :src="scope.row.olist[0].proimage" style="width: 80px;height: 80px">
       </template>
     </el-table-column>
     <el-table-column
       label="商品单价"
-      width="180">
+      width="150">
       <template slot-scope="scope">
         {{scope.row.olist[0].prosprice}}
       </template>
     </el-table-column>
     <el-table-column
       label="商品数量"
-      width="180">
+      width="150">
       <template slot-scope="scope">
         {{scope.row.olist[0].quantity}}
       </template>
     </el-table-column>
     <el-table-column
       label="商品总价"
-      width="180">
+      width="150">
       <template slot-scope="scope">
         {{scope.row.olist[0].totalpirce}}
       </template>
@@ -41,7 +41,7 @@
     <el-table-column
       prop="tmoney"
       label="退款金额"
-      width="180">
+      width="150">
     </el-table-column>
     <el-table-column
       prop="thtime"

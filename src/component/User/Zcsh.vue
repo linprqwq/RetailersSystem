@@ -3,11 +3,12 @@
   商户地址图片 <el-upload
   class="avatar-uploader"
   action="#"
+  :limit="1"
   :file-list="fileList"
   :on-change="changeFile"
   :auto-upload="false"
   list-type="picture-card">
-  <img v-if="imageUrl" :src="imge" class="avatar">
+  <img v-if="imageUrl" :src="imageUrl" class="avatar">
   <i v-else class="el-icon-plus avatar-uploader-icon"></i>
 </el-upload>
 
@@ -67,6 +68,7 @@
             }
           }
           this.shaddress+=this.xxaddr
+
           formData.append("shaddress",this.shaddress);
           this.$axios({
             method: "post",

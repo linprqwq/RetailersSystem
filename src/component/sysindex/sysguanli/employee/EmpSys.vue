@@ -1,26 +1,26 @@
 <template>
   <div >
 
-    <el-form :model="editform" >
+    <el-form :model="editform" status-icon :rules="rules" ref="editform" >
       <el-form-item label="编号">
         <el-input v-model="editform.id"></el-input>
       </el-form-item>
-      <el-form-item label="用户名">
-        <el-input v-model="editform.empName" autocomplete="off"></el-input>
+      <el-form-item label="用户名" prop="empName" >
+        <el-input v-model="editform.empName"  autocomplete="off"></el-input>
       </el-form-item>
-      <el-form-item label="账号">
-        <el-input v-model="editform.empLoginname" autocomplete="off"></el-input>
+      <el-form-item label="账号" prop="empLoginname" >
+        <el-input v-model="editform.empLoginname"  autocomplete="off"></el-input>
       </el-form-item>
-      <el-form-item label="密码">
+      <el-form-item label="密码" prop="empPassword"  >
         <el-input  type="password" v-model="editform.empPassword" autocomplete="off"></el-input>
       </el-form-item>
-      <el-form-item label="电话">
-        <el-input v-model="editform.empPhone" autocomplete="off"></el-input>
+      <el-form-item label="电话" prop="empPhone" >
+        <el-input v-model="editform.empPhone"  autocomplete="off"></el-input>
       </el-form-item>
-      <el-form-item label="金额">
-        <el-input v-model="editform.empMoney" autocomplete="off"></el-input>
+      <el-form-item label="金额" prop="empLoginname" >
+        <el-input v-model="editform.empMoney" prop="empLoginname"  autocomplete="off"></el-input>
       </el-form-item>
-      <el-form-item label="地址">
+      <el-form-item label="地址" prop="empAddress" >
         <el-input v-model="editform.empAddress" autocomplete="off"></el-input>
       </el-form-item>
       <el-form-item label="头像">
@@ -48,6 +48,23 @@
         name: "EmpSys",
       data() {
         return {
+          rules: {
+            empPassword: [
+              {  required: true, message: '请输入密码', trigger: 'blur' }
+            ],
+            empName:[
+              {  required: true, message: '用户名不为空', trigger: 'blur' }
+            ],
+            empLoginname:[
+              {  required: true, message: '账号不能为空',trigger: 'blur' }
+            ],
+            empMoney:[
+              { required: true, message: 'money不能为空', trigger: 'blur'}
+            ],
+            empAddress:[
+              { required: true, message: '地址不能为空', trigger: 'blur'}
+            ]
+          },
           fileList: [], //选择的头像列表
           editform: {} //编辑页面保存的数据，提交用
         }
@@ -55,31 +72,38 @@
       methods: {
         //提交修改
         submitUpload() {
-          //将需要提交的文件，和附带的数据，append  FormData中 然后提交
-          var formData = new FormData();
-          //先组装表单简单数据
-          formData.append('id', this.editform.id)
-          formData.append('empName', this.editform.empName)
-          formData.append('empLoginname', this.editform.empLoginname)
-          formData.append('empPassword', this.editform.empPassword)
-          formData.append('empPhone', this.editform.empPhone)
-          formData.append('empMoney', this.editform.empMoney)
-          formData.append('empAddress', this.editform.empAddress)
-          formData.append('empImg', this.editform.empImg)
-          this.fileList.forEach(item => {
-            console.log(item.raw)
-            if(item.raw==''){
-              formData.append('filenames', item.name)  //db中保存的文件数据
-            }else{
-              formData.append('file', item.raw)  //新选择的文件
+          this.$refs.editform.validate((valid) =>{
+            if(valid){
+              //将需要提交的文件，和附带的数据，append  FormData中 然后提交
+              var formData = new FormData();
+              //先组装表单简单数据
+              formData.append('id', this.editform.id)
+              formData.append('empName', this.editform.empName)
+              formData.append('empLoginname', this.editform.empLoginname)
+              formData.append('empPassword', this.editform.empPassword)
+              formData.append('empPhone', this.editform.empPhone)
+              formData.append('empMoney', this.editform.empMoney)
+              formData.append('empAddress', this.editform.empAddress)
+              formData.append('empImg', this.editform.empImg)
+              this.fileList.forEach(item => {
+                console.log(item.raw)
+                if(item.raw==''){
+                  formData.append('filenames', item.name)  //db中保存的文件数据
+                }else{
+                  formData.append('file', item.raw)  //新选择的文件
+                }
+              })
+              /* console.log(this.fileList);
+               formData.append("file",this.fileList[0].raw);*/
+
+
+              //将组装好的数据 进行下一步 异步提交
+              this.sendFile(formData)
+            }else {
+              console.log('error submit!!');
+              return false;
             }
           })
-           /* console.log(this.fileList);
-            formData.append("file",this.fileList[0].raw);*/
-
-
-          //将组装好的数据 进行下一步 异步提交
-          this.sendFile(formData)
         },
         //真正进行异步，保存数据的方法
         sendFile(data) {

@@ -83,6 +83,7 @@
 
 <script>
   import Welcome from "./Welcome";
+  import SysMenus from "./sysindex/sysguanli/sysmenus/SysMenus";
   import EmpView from "./sysindex/sysguanli/employee/EmpView";
   import AuthcView from "./sysindex/sysguanli/authcs/AuthcView";
   import UserView from "./User/UserView";
@@ -103,7 +104,7 @@
     export default {
         name: "SystemList",
       components:{
-        Welcome,EmpView,AuthcView,UserView,CgsqView,GysShView,GysShJlView,ShView,ShJlView,SysRole,
+        Welcome,EmpView,AuthcView,UserView,CgsqView,GysShView,GysShJlView,SysMenus,ShView,ShJlView,SysRole,
         GygoodsShView,commmodity,addcommodity,
         CgShView,shoptypeinfo,WahourSgather,
         CgJlView,CkView

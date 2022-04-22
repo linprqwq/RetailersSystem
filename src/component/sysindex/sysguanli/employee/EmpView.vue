@@ -92,10 +92,10 @@
    <!--&lt;!&ndash; &lt;!&ndash; 添加模态框&ndash;&gt;&ndash;&gt;-->
     <el-dialog title="用户添加" :visible.sync="editmodalVisible02">
       <el-form  :model="addform" status-icon :rules="rules" ref="addform" label-width="100px" class="demo-addform">
-        <el-form-item label="用户名" :label-width="formLabelWidth">
+        <el-form-item label="用户名" prop="empName" :label-width="formLabelWidth">
           <el-input v-model="addform.empName" autocomplete="off"></el-input>
         </el-form-item>
-        <el-form-item label="账号" :label-width="formLabelWidth">
+        <el-form-item label="账号" prop="empLoginname" :label-width="formLabelWidth">
           <el-input v-model="addform.empLoginname" autocomplete="off"></el-input>
         </el-form-item>
         <el-form-item label="密码" prop="empPassword" :label-width="formLabelWidth">
@@ -104,13 +104,13 @@
         <el-form-item label="确认密码" prop="empPassword1" :label-width="formLabelWidth">
           <el-input v-model="addform.empPassword1" type="password" autocomplete="off"></el-input>
         </el-form-item>
-        <el-form-item label="电话" :label-width="formLabelWidth">
+        <el-form-item label="电话" prop="empPhone" :label-width="formLabelWidth">
           <el-input v-model="addform.empPhone" autocomplete="off"></el-input>
         </el-form-item>
-        <el-form-item label="金额" :label-width="formLabelWidth">
+        <el-form-item label="金额" prop="empMoney" :label-width="formLabelWidth">
           <el-input v-model="addform.empMoney" autocomplete="off"></el-input>
         </el-form-item>
-        <el-form-item label="地址" :label-width="formLabelWidth">
+        <el-form-item label="地址" prop="empAddress" :label-width="formLabelWidth">
           <el-input v-model="addform.empAddress" autocomplete="off"></el-input>
         </el-form-item>
        <template>
@@ -158,9 +158,7 @@
           if (value === '') {
             callback(new Error('请输入密码'));
           } else {
-            if (this.addform.empPassword !== '') {
-              this.$refs.addform.validateField('empPassword');
-            }
+
             callback();
           }
         };
@@ -173,7 +171,43 @@
             callback();
           }
         };
+        var vallidateempname=(rule, value, callback)=>{
+          if (!value) {
+            return callback(new Error('用户名不能为空'));
+          }else{
+            callback();
+          }
+        };
+        var vallidateempLoginname=(rule, value, callback)=>{
+          if (!value) {
+            return callback(new Error('登录名不能为空'));
+          }else{
+            callback();
+          };
 
+
+        };
+        var validateempPhone=(rule,value,callback)=>{
+          if (!value) {
+            return callback(new Error('手机号码不能为为空'));
+          }else{
+            callback();
+          };
+        };
+        var validateempMoney=(rule,value,callback)=>{
+          if (!value) {
+            return callback(new Error('金额不能为为空'));
+          }else {
+            callback();
+          }
+        };
+        var validateempAddress=(rule,value,callback)=> {
+          if (!value) {
+            return callback(new Error('地址不能为为空'));
+          } else {
+            callback();
+          }
+        };
         return {
           addform:{
             empName:"",empLoginname:"",empPassword:"",empPassword1:"",empPhone:"",empMoney:"",empAddress:"",empImg:"",
@@ -187,8 +221,20 @@
             empPassword1: [
               { validator: validatePass2, trigger: 'blur' }
             ],
-            empLoginname: [
-              { validator:'blur' }
+            empName:[
+              { validator: vallidateempname, trigger: 'blur' }
+            ],
+            empLoginname:[
+              { validator: vallidateempLoginname, trigger: 'blur' }
+            ],
+            empPhone:[
+              {validator: validateempPhone, trigger: 'blur'}
+            ],
+            empMoney:[
+              {validator: validateempMoney, trigger: 'blur'}
+            ],
+            empAddress:[
+              {validator: validateempAddress, trigger: 'blur'}
             ]
           },
 
@@ -243,7 +289,6 @@
         },
         handleDelete(id){
          /* alert(id)*/
-          confirm("你确定要删除吗")
            this.$axios.post("delesysemployees.action/"+id).then(response=>{
              //刷新
              this.getdata();
@@ -278,7 +323,23 @@
          this.editform=row;
         },
         add(addform){
-          var formData = new FormData();
+          this.$refs[addform].validate((valid) =>{
+              if (valid) {
+                var formData = new FormData();
+                Object.keys(this.addform).forEach(key=>{
+                  console.log(key)
+                  formData.append(key, this.addform[key])
+                })
+                formData.append('file',  this.fileList[0].raw)
+                this.roid.forEach(item=>{
+                  formData.append('rids',  item);
+                })
+                //将组装好的数据 进行下一步 异步提交
+                this.sendFile(formData)
+          }else {
+              }
+          });
+        /*  var formData = new FormData();
           Object.keys(this.addform).forEach(key=>{
             console.log(key)
             formData.append(key, this.addform[key])
@@ -286,9 +347,9 @@
             formData.append('file',  this.fileList[0].raw)
           this.roid.forEach(item=>{
             formData.append('rids',  item);
-          })
-          //将组装好的数据 进行下一步 异步提交
-          this.sendFile(formData)
+          })*/
+        /*  //将组装好的数据 进行下一步 异步提交
+          this.sendFile(formData)*/
 
 
         },
@@ -311,7 +372,15 @@
           })*/
 
           //异步提交
-          this.$axios({
+          /*this.$refs[addform].validate((valid) => {
+            if (valid) {
+              alert('submit!');
+            } else {
+              console.log('error submit!!');
+              return false;
+            }
+          });*/
+        this.$axios({
             method: 'post',
             url: 'addsysemployees.action',
             data: data,
@@ -371,6 +440,7 @@
             empMoney:"",
             empAddress:"",
             empImg:"",
+          empPassword1:""
           }
         },
       },
@@ -379,7 +449,7 @@
       },
       created(){
           this.getdata()
-        this.handleAdd()
+       /* this.handleAdd()*/
         /*this.sendFile()*/
 
       }

@@ -132,17 +132,17 @@ export default {
         this.total = res.data.total; //总记录数量
         this.ckall = res.data.records;
 
-      }).catch()
+      }).catch();
     },
     //分页控件
     handleSizeChange(val) { //分页控件  页面size改变 触发  val参数就是选择的条数
       this.pagesize = val;
-      this.queryallck()
+      this.queryallck();
     },
     //页码发生改变
     handleCurrentChange(val) { //页码改变 触发  val  当前准备跳转的页码
       this.pageno = val;
-      this.queryallck()
+      this.queryallck();
 
     },
     //修改仓库
@@ -200,7 +200,7 @@ export default {
     //取消模态框
     qx(boole) {
       if (boole==1) {
-        this.AddCk = false
+        this.AddCk = false;
         this.$refs.awhref.AddWhouse = {};
         this.$refs.awhref.fl = [];
         this.queryallck();

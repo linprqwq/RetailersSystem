@@ -75,10 +75,6 @@
       </el-container>
     </el-container>
   </div>
-
-
-
-
 </template>
 
 <script>
@@ -100,6 +96,10 @@
   import shoptypeinfo from "./shop/shoptypeinfo";
   import CgJlView from "./procurement/CgJlView";
   import CkView from "./Ck/CkView";
+  import CkShView from "./Ck/CkShView";
+  import SysMenus from "./sysindex/sysguanli/sysmenus/SysMenus";
+
+
   import WahourSgather from "./wahous/WahourSgather";
     export default {
         name: "SystemList",
@@ -107,7 +107,7 @@
         Welcome,EmpView,AuthcView,UserView,CgsqView,GysShView,GysShJlView,SysMenus,ShView,ShJlView,SysRole,
         GygoodsShView,commmodity,addcommodity,
         CgShView,shoptypeinfo,WahourSgather,
-        CgJlView,CkView
+        CgJlView,CkView,CkShView,SysMenus
       },
       data(){
         return {
@@ -133,6 +133,7 @@
             this.$axios.get("queryempbyid.action/"+eid)
               .then(response => {
                this.circleUrl =this.path+ response.data.empImg;//获取所有要展示的数据
+                console.log(this.circleUrl)
               }).catch();
           },
         zx(){
@@ -183,6 +184,7 @@
           this.$axios.post("querymenuspidandrid.action",params)
             .then(response => {
               this.menudata = response.data;//获取所有要展示的数据
+
             }).catch();
         }
       },

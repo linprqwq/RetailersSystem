@@ -31,14 +31,15 @@
 
     </div>
     <div>
-      <el-row align="middle" class="mytop" v-if="list.length>0">
-        <el-col :span="4">
-          <el-input v-model="list.orderid" placeholder="请输入订单号">
-            <el-button slot="append" @click="queryorderdfk" icon="el-icon-search"></el-button>
-          </el-input>
-        </el-col>
-      </el-row>
+
       <el-tabs v-model="activeName" @tab-click="queryorderdfk">
+        <el-row align="middle" class="mytop" v-if="list.length>0">
+          <el-col :span="4">
+            <el-input v-model="list.orderid" placeholder="请输入订单号">
+              <el-button slot="append" @click="queryorderdfk" icon="el-icon-search"></el-button>
+            </el-input>
+          </el-col>
+        </el-row>
         <el-tab-pane label="全部订单"></el-tab-pane>
         <el-tab-pane label="待付款订单" name="2"></el-tab-pane>
         <el-tab-pane label="待收货订单" name="4"></el-tab-pane>

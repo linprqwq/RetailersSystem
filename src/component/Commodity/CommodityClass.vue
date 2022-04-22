@@ -7,7 +7,7 @@
     <el-button plain round class="ebt" @click="querysp">确定</el-button>
   </div>
       <div id="memunav">
-       <div class="menudiv" v-for="cs in classarr">
+       <div class="menudiv" v-for="cs in classarr" @click="dianji(cs.id)">
          <a href="#"><img :src="'/src/'+cs.prozimg" alt="" alt="图片出错" height="196px" width="233px"></a>
          <p>{{cs.proname}}</p>
          <span>{{cs.prosubtitle}}</span>
@@ -56,6 +56,14 @@ export default {
         }
       }).catch(val=>{
         console.log(val.data)
+      })
+    },
+    dianji(id){
+      this.$router.push({
+        path: '/CommodityDisplay',
+        query: {
+          comid: id
+        }
       })
     }
   },

@@ -19,31 +19,32 @@
               @click="update(scope.row.id)"
             >修改
             </el-button>
+            <el-button  type="primary" size="mini" v-if="scope.row.isDelete==1" @click="gy(scope.row.id,0)">恢复供应</el-button>
+            <el-button type="success" size="mini" v-if="scope.row.isDelete==0" @click="gy(scope.row.id,1)">取消供应</el-button>
+
           </template>
         </el-table-column>
       </el-table>
     </div>
 
 
-
     <div>
       <component ref="editwhsupplie" is="editwhsupplier"></component>
     </div>
 
-   <div>
-     <!-- 分页 -->
-     <el-pagination
-       @size-change="handleSizeChange"
-       @current-change="handleCurrentChange"
-       :current-page="pageno"
-       :page-sizes="[5, 10, 15, 20]"
-       :page-size="pagesize"
-       layout="total, sizes, prev, pager, next, jumper"
-       :total="total"
-     >
-     </el-pagination>
-   </div>
-
+    <div>
+      <!-- 分页 -->
+      <el-pagination
+        @size-change="handleSizeChange"
+        @current-change="handleCurrentChange"
+        :current-page="pageno"
+        :page-sizes="[5, 10, 15, 20]"
+        :page-size="pagesize"
+        layout="total, sizes, prev, pager, next, jumper"
+        :total="total"
+      >
+      </el-pagination>
+    </div>
 
   </div>
 
@@ -70,8 +71,7 @@
           pId: sessionStorage.getItem("id"),
           pageno: this.pageno,
           pagesize: this.pagesize,
-          isCheck:1,
-          isDelete:0
+          isCheck: 1
         }
         //去查询供应商维护表里面的数据
         this.$axios.get("goodsSupplied/queryALlPage.action",
@@ -93,6 +93,28 @@
         })
 
       },
+      gy(id,state){
+        console.log(state)
+        let supplierSupplyOfGoods={
+          id:id,
+          isDelete:state
+        }
+        this.$axios.put("goodsSupplied/updatadelte.action",supplierSupplyOfGoods).
+        then(res=>{
+          if (res.data.x==true){
+            this.$message.success(res.data.msg);
+            this.value=false;
+          }else {
+            this.$message.success(res.data.msg);
+            this.value=true;
+          }
+          this.getData();
+        }).catch(error=>{
+          this.$message.success(error);
+        })
+
+      },
+
       handleSizeChange(val) {
         //每页范围
         this.pagesize = val;
@@ -105,7 +127,7 @@
       }
 
     },
-    components:{
+    components: {
       editwhsupplier
     },
     created() {

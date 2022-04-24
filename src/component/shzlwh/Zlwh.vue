@@ -8,6 +8,7 @@
        class="avatar-uploader"
        action="#"
        :file-list="fileList"
+       :limit="1"
        :on-change="changeFile"
        :auto-upload="false"
        list-type="picture-card">
@@ -18,13 +19,13 @@
      <br><br>
 
      <el-select  v-model="sheng" @change="fun1" placeholder="----请选择---">
-       <el-option  v-for="p in provice" :value="p.id" :label="p.name" >{{p.name}}</el-option>
+       <el-option  v-for="p in provice" :value="p.id+''" :label="p.name" >{{p.name}}</el-option>
      </el-select>
      <el-select v-model="shi"  @change="fun2" placeholder="----请选择---">
-       <el-option  v-for="c in ctiy" :value="c.id" :label="c.name" >{{c.name}}</el-option>
+       <el-option  v-for="c in ctiy" :value="c.id+''" :label="c.name" >{{c.name}}</el-option>
      </el-select>
      <el-select v-model="qq" placeholder="----请选择---">
-       <el-option v-for="d in district" :value="d.id" :label="d.name" >{{d.name}}</el-option>
+       <el-option v-for="d in district" :value="d.id+''" :label="d.name" >{{d.name}}</el-option>
      </el-select><br>
      详细地址: <el-input type="text" v-model="xxaddr"></el-input><br>
      <el-button type="primary" @click="update">修改</el-button>
@@ -51,7 +52,9 @@
           provice:[],
           ctiy:[],
           district:[],
-          fileList:[]
+          fileList:[],
+          ssqid:""
+
         }
       },
       methods:{
@@ -59,13 +62,19 @@
           selsid(){
             var params=new URLSearchParams()
             params.append("id",this.useridd);
-            this.$axios.post("selsid.action",params).then(res=>{
+            this.$axios.post("shzlwh.action",params).then(res=>{
             this.uname=res.data.username;
               this.loginname=res.data.loginname;
               this.pwd=res.data.password;
               this.phone=res.data.phone;
               this.imge=res.data.shimag;
               this.shaddress=res.data.shaddress;
+              this.sheng=res.data.ssq.sheng
+              this.shi=res.data.ssq.shi
+              this.qq=res.data.ssq.qu
+              this.open();
+              this.fun1();
+              this.fun2();
             }).catch()
           },
         update(){
@@ -94,8 +103,11 @@
             }
           }
           this.shaddress+=this.xxaddr
+           this.ssqid=this.sheng+"-"+this.shi+"-"+this.qq;
+          console.log(this.ssqid)
           console.log(this.shaddress);
           formData.append("shaddress",this.shaddress);
+          formData.append("ssqid",this.ssqid);
           this.$axios({
             method: "post",
             url: "updatesh.action",
@@ -152,7 +164,7 @@
         //1.给data中的roles数组赋值
         //2.怎么样异步实现获取数据
         this.selsid();
-this.open();
+
       }
 
     }

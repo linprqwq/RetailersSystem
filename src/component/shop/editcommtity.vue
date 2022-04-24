@@ -84,7 +84,7 @@
         })
       },
       getData(id) {
-        this.$axios.get("queryspid.action/" + id).then((res => {
+        this.$axios.get("queryspid.action?id=" + id).then((res => {
           this.editForm = res.data;
             this.fileList.push({
               name: res.data.proimage,

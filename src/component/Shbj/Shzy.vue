@@ -35,7 +35,9 @@
       <el-tab-pane label="待提货订单" name="third"><Dthorder></Dthorder></el-tab-pane>
       <el-tab-pane label="已提货订单" name="fourth"><Yrhorder></Yrhorder></el-tab-pane>
       <el-tab-pane label="退货订单" name="hhhh"><Thorder></Thorder></el-tab-pane>
-      <el-tab-pane label="资料维护" name="jjjj"><Zlwh></Zlwh></el-tab-pane>
+      <el-tab-pane label="资料维护" name="jjjj">
+        <component is="Zlwh"></component>
+      </el-tab-pane>
       <el-tab-pane label="商户营收" name="yyyy"><Shys></Shys></el-tab-pane>
     </el-tabs>
   </div>

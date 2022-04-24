@@ -37,12 +37,7 @@
           </div>
           <div class="address-box">
             <div class="address-info">
-              <img src="../../image/addr.jpg" width="20px" height="20px">
-              <span>北京</span>
-              <span>北京市</span>
-              <span>海淀区</span>
-              <span>清河街道</span>
-              <a href="#">修改</a>
+
             </div>
             <div class="info">
               <span>库存剩余{{commodityList.quantity}}</span>
@@ -145,7 +140,7 @@
           </div>
           <div class="f4">
             <div class="xiada4">
-              关于小米
+              关于兴盛
             </div>
             <div class="xiali4">
               <ul>
@@ -190,7 +185,7 @@
               <ul>
                 <li>8：00-18：00（仅收市花费）</li>
                 <li><a href="#" class="diyia"><img :src="require('../../image/客服.png')" alt="图片出错">人工客服</a></li>
-                <li class="diera">关注小米：<a href="#"><img class="dd" :src="require('../../image/微博.png')" alt="图片出错"
+                <li class="diera">关注兴盛：<a href="#"><img class="dd" :src="require('../../image/微博.png')" alt="图片出错"
                                                         height="22px" width="22px
                                 "></a><a href="#"><img class="tt" :src="require('../../image/微信.png')" alt="图片出错"
                                                        height="22px"

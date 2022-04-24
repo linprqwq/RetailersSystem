@@ -16,7 +16,7 @@
         <div v-if="shsatae==1">
           <Shzy></Shzy>
         </div>
-        <div v-else-if="identity==1">
+        <div v-else-if="identity==1 || shsatae==null">
           <Zcsh></Zcsh>
         </div>
       </el-tab-pane>
@@ -24,7 +24,7 @@
         <div v-if="gysState==1">
           <tabs></tabs>
         </div>
-        <div v-else-if="identity==1">
+        <div v-if="identity==1 || gysState==null ">
           <supplier_registration></supplier_registration>
         </div>
       </el-tab-pane>

@@ -7,10 +7,16 @@
       <el-table-column label="采购时间" prop="ptime"></el-table-column>
       <el-table-column label="采购数量" prop="totalNum"></el-table-column>
       <el-table-column label="采购总价" prop="totalMoney"></el-table-column>
+      <el-table-column label="发货状态">
+        <template slot-scope="scope">
+          <el-tag  type="warring" v-if="scope.row.isShipments==0&&scope.row.isAudit==2">未发货</el-tag>
+          <el-tag type="success" v-if="scope.row.isShipments==1">已发货</el-tag>
+        </template>
+      </el-table-column>
 
       <el-table-column label="操作">
         <template slot-scope="scope">
-          <el-button type="primary" @click="cgdetiles(scope.row.id)">采购详情</el-button>
+          <el-button size="mini" type="primary" @click="cgdetiles(scope.row.id)">采购详情</el-button>
         </template>
 
       </el-table-column>
@@ -61,7 +67,9 @@
             total:1,
             dialogVisible:false   //状态
           }
-      },methods:{
+      },
+      methods:{
+
         handleClose(){
           this.dialogVisible=false;
           this.$refs.cgshde.purchaseDetails=[];

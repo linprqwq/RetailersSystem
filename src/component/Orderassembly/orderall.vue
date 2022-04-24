@@ -34,11 +34,6 @@
 
       <el-tabs v-model="activeName" @tab-click="queryorderdfk">
         <el-row align="middle" class="mytop" v-if="list.length>0">
-          <el-col :span="4">
-            <el-input v-model="list.orderid" placeholder="请输入订单号">
-              <el-button slot="append" @click="queryorderdfk" icon="el-icon-search"></el-button>
-            </el-input>
-          </el-col>
         </el-row>
         <el-tab-pane label="全部订单"></el-tab-pane>
         <el-tab-pane label="待付款订单" name="2"></el-tab-pane>
@@ -48,16 +43,16 @@
       </el-tabs>
       <div v-for=" o in list">
         <el-table border :data="o.ordderdetails" :span-method="objectspanmethod">
-          <el-table-column width="250">
-            <template slot="header">
-              订单号:{{ o.orderid }}
-            </template>
+          <el-table-column label="订单编号" prop="orderid">
+
+          </el-table-column>
+          <el-table-column width="250" label="商品图">
             <template slot-scope="scope">
               <img :src="'/src/'+scope.row.proimage"
                    width="80px" height="100px" alt="err" @click="dianji(scope.row.proid)">
             </template>
           </el-table-column>
-          <el-table-column label="商品" prop="proname"></el-table-column>
+          <el-table-column label="商品名" prop="proname"></el-table-column>
           <el-table-column label="单价(元)" prop="prosprice"></el-table-column>
           <el-table-column label="数量" prop="quantity"></el-table-column>
           <el-table-column label="商品操作">
@@ -69,7 +64,7 @@
                 type="danger"
                 @click="sqtuikuan(o, scope.row)" v-if="scope.row.refund==0&&o.status==5">申请退货
               </el-button>
-              &nbsp;&nbsp;&nbsp;
+              <br><br>
               <el-button
                 size="mini"
                 type="danger"
@@ -186,6 +181,20 @@ export default {
         }
       }
       if (columnIndex === 6) {
+        if (rowIndex === 0) {
+          let o1 = this.list.find(item => item.orderid == row.orderid);
+          return {
+            rowspan: o1.ordderdetails.length,
+            colspan: 1
+          };
+        } else {
+          return {
+            rowspan: 0,
+            colspan: 0
+          };
+        }
+      }
+      if (columnIndex === 0) {
         if (rowIndex === 0) {
           let o1 = this.list.find(item => item.orderid == row.orderid);
           return {
@@ -343,7 +352,6 @@ export default {
     //评价提交
     pjtijiao(pjName) {
       this.$refs.pjref.pjtijiao(pjName);
-      this.$router.go(0);
     },
     //窗口关闭确认
     handleClose(done) {

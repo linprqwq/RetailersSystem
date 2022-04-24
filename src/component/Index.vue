@@ -109,7 +109,7 @@
         </div>
       </div>
       <div class="ditu">
-        <a href="#"><img :src="require('../image/底图.png')" alt="图片出错" width="1227px"></a>
+        <a href="#"><img :src="require('../image/1.png')" alt="图片出错" width="1227px"></a>
       </div>
       <div class="xiaxia" id="haixiang">
         <div class="xiazi">
@@ -146,7 +146,7 @@
         </div>
       </div>
       <div class="ditu2">
-        <a href="#"><img :src="require('../image/mensuo2.jpg')" alt="图片出错" width="1227px"></a>
+        <a href="#"><img :src="require('../image/2.jpg')" alt="图片出错" width="1227px"></a>
       </div>
       <div class="xiaxia" id="roulei">
         <div class="xiazi">
@@ -167,7 +167,7 @@
         </div>
       </div>
       <div class="ditu3">
-        <a href="#"><img :src="require('../image/ywwq2.jpg')" alt="图片出错" width="1227px"></a>
+        <a href="#"><img :src="require('../image/3.jpg')" alt="图片出错" width="1227px"></a>
       </div>
       <div class="wenzitiao">
         <div class="wenzitiaoxia">
@@ -222,7 +222,7 @@
           </div>
           <div class="f4">
             <div class="xiada4">
-              关于小米
+              关于兴盛
             </div>
             <div class="xiali4">
               <ul>
@@ -267,7 +267,7 @@
               <ul>
                 <li>8：00-18：00（仅收市花费）</li>
                 <li><a href="#" class="diyia"><img :src="require('../image/客服.png')" alt="图片出错">人工客服</a></li>
-                <li class="diera">关注小米：<a href="#"><img class="dd" :src="require('../image/微博.png')" alt="图片出错"
+                <li class="diera">关注兴盛：<a href="#"><img class="dd" :src="require('../image/微博.png')" alt="图片出错"
                                                         height="22px" width="22px
                                 "></a><a href="#"><img class="tt" :src="require('../image/微信.png')" alt="图片出错"
                                                        height="22px"
@@ -338,6 +338,7 @@
 
 <script>
 import IndexTop from "./User/IndexTop";
+import {showLoading,hideLoading} from "../config/Loading";
 
 export default {
   name: "Index",
@@ -405,6 +406,7 @@ export default {
   },
   created() {
     var _this = this;
+    showLoading()
     this.$axios.post("queryAllcom.action").then(val => {
       val.data.forEach(key=>{
         //console.log(key+"加载完毕")
@@ -433,7 +435,7 @@ export default {
       val.data.forEach(key=>{
         console.log(key+"加载完毕")
       })
-      _this.commodityrl = val.data
+      _this.commodityrl = val.data.splice(0,4)
     }).catch()
     if (this.useridd != null) {
       var params = new URLSearchParams();
@@ -451,6 +453,7 @@ export default {
         console.log("加载完成")
       })
     }).catch()
+    hideLoading()
   }
 }
 </script>

@@ -2,15 +2,15 @@
   <div >
     <!--:visible.sync="editdialogVisiblesysrole" -->
     <el-form :model="addform">
-      <el-form-item label="id">
+      <!--<el-form-item label="id">
         <el-input v-model="addform.id"></el-input>
-      </el-form-item>
+      </el-form-item>-->
       <el-form-item label="角色">
         <el-input v-model="addform.roleName"></el-input>
       </el-form-item>
-      <el-form-item label="状态">
+      <!--<el-form-item label="状态">
         <el-input v-model="addform.remark" autocomplete="off"></el-input>
-      </el-form-item>
+      </el-form-item>-->
     </el-form>
   </div>
 </template>

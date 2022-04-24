@@ -62,7 +62,7 @@
           selsid(){
             var params=new URLSearchParams()
             params.append("id",this.useridd);
-            this.$axios.post("selsid.action",params).then(res=>{
+            this.$axios.post("shzlwh.action",params).then(res=>{
             this.uname=res.data.username;
               this.loginname=res.data.loginname;
               this.pwd=res.data.password;

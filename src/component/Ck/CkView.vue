@@ -4,7 +4,7 @@
     <el-input v-model="ckmName" placeholder="请输入您要查询的仓库名" style="width: 200px;"></el-input>
     <el-button type="primary" @click="queryallck()">查询</el-button>
     <br><br>
-    <el-button type="primary" @click="addwarehouse()" style="position: relative;left: -600px">添加仓库</el-button>
+    <el-button type="primary" @click="addwarehouse()" style="position: relative;left: -500px">添加仓库</el-button>
 
     <el-button icon="el-icon-refresh-left" circle @click="queryallck"
                style="position: relative;left: 600px"></el-button>
@@ -127,6 +127,7 @@ export default {
       params.append("pagesize", this.pagesize);
       //仓库名
       params.append("warName", this.ckmName);
+      params.append("isCheck", 1);
 
       this.$axios.post("queryallck.action", params).then(res => {
         this.total = res.data.total; //总记录数量
@@ -182,12 +183,8 @@ export default {
           this.$refs.updateckref.value = [];
           this.$refs.updateckref.mtkwarehouse = {};
 
-
-
-
         })
-        .catch(_ => {
-        });
+        .catch(_ => {});
     },
     //添加仓库
     AddWHouse(formName) {

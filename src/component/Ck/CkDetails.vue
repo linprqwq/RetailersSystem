@@ -67,7 +67,6 @@ export default {
   },
   methods: {
     querywaredetails(row) {
-      console.log(row)
       var params = new URLSearchParams();
       params.append("pageno", this.pageno);
       params.append("pagesize", this.pagesize);

@@ -97,7 +97,7 @@
   import CkView from "./Ck/CkView";
   import CkShView from "./Ck/CkShView";
   import SysMenus from "./sysindex/sysguanli/sysmenus/SysMenus";
-
+  import CkpzView from "./wahous/CkpzView";
 
   import WahourSgather from "./wahous/WahourSgather";
     export default {
@@ -106,7 +106,7 @@
         Welcome,EmpView,AuthcView,UserView,CgsqView,GysShView,GysShJlView,ShView,ShJlView,SysRole,
         GygoodsShView,commmodity,addcommodity,
         CgShView,shoptypeinfo,WahourSgather,
-        CgJlView,CkView,CkShView,SysMenus
+        CgJlView,CkView,CkShView,SysMenus,CkpzView
       },
       data(){
         return {

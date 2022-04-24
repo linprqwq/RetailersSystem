@@ -32,7 +32,16 @@
       layout="total, sizes, prev, pager, next, jumper"
       :total="total"
     ></el-pagination>
-
+<div>
+  <el-dialog
+    title="采购单详情"
+    :visible.sync="dialogVisible"
+    width="50%"
+    :before-close="handleClose">
+    <component ref="cgshde" is="CgShDetails"></component>
+    <el-button type="primary" @click="dialogVisible=false">关闭</el-button>
+  </el-dialog>
+</div>
 
     <!--查询等待分配的供应商商品对话框-->
     <div>
@@ -48,7 +57,7 @@
             :visible.sync="t2_Visible"
             width="50%"
             append-to-body>
-            <component ref="" is=""></component>
+            <component ref="purchasedialog2" is="PurchaseDialog2"></component>
             <div slot="footer" class="dialog-footer">
               <el-button @click="t2_Visible = false">取 消</el-button>
             </div>
@@ -64,7 +73,8 @@
 
 <script>
     import PurchaseDialog1 from "./PurchaseDialog1";
-
+    import PurchaseDialog2 from "./PurchaseDialog2";
+    import CgShDetails from "../procurement/CgShDetails";
     export default {
         name: "WahourSgather",
       data() {
@@ -72,7 +82,7 @@
           t1_Visible:false,
           t2_Visible:false,
           purchases: [],
-          purchase: {buyNumber: "", isAudit: 0},
+          purchase: {buyNumber: "", isAudit: 1,isShipments:1},
           pageno: 1,
           pagesize: 5,
           total: 1,
@@ -80,7 +90,7 @@
         }
       },
       components:{
-        PurchaseDialog1
+        PurchaseDialog1,PurchaseDialog2,CgShDetails
       },
       methods:{
         getPurchases() {
@@ -135,6 +145,14 @@
             this.$refs.purchasedialog1.getData(id);
           });
         },
+        openPurchasedialog2(id,specifiedState){
+          //打开对话框
+          this.t2_Visible=true;
+          //调用子组件函数
+          this.$nextTick(item=>{
+            this.$refs.purchasedialog2.getData(id,specifiedState);
+          })
+        },
         search() {
           this.getPurchases();
         },
@@ -147,6 +165,13 @@
           //当前页
           this.pageno = val;
           this.getPurchases();
+        },
+        showdetail(pid){
+          this.dialogVisible = true;
+          this.$nextTick(item=>{
+            this.$refs.cgshde.purchaseDetail.pid = pid;
+            this.$refs.cgshde.getData();
+          })
         }
       },
       created() {

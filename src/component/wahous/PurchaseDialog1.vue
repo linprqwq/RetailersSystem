@@ -85,7 +85,7 @@
           sessionStorage.setItem("purchaseInfoId",id);
           this.purchaseInfoId=id;
           //调用父组件函数，打开对话框，并且传入仓库选择状态
-          this.$parent.$parent.PurchaseDialog2(id,specifiedState);
+          this.$parent.$parent.openPurchasedialog2(id,specifiedState);
         },
         submit(){
           //最终提交

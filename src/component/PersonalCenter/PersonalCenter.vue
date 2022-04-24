@@ -4,10 +4,10 @@
 
 
     <el-tabs :tab-position="tabPosition" v-model="activeName1" style="height: 100%; width: 100%; ">
-      <el-tab-pane label="我的个人中心" name="first">
+      <el-tab-pane label="我的订单" name="first">
         <orderall @event-name="update"></orderall>
       </el-tab-pane>
-      <el-tab-pane label="我的自提点" name="second">地址组件</el-tab-pane>
+      <el-tab-pane label="我的自提点" name="second"><Addrsh></Addrsh></el-tab-pane>
       <el-tab-pane label="个人信息维护" name="third">个人信息维护组件</el-tab-pane>
       <el-tab-pane label="充值" name="fourth">
         <Recharge></Recharge>
@@ -42,6 +42,7 @@ import tabs from "../supplier/tabs";
 import Recharge from "./Recharge";
 import Shzy from "../Shbj/Shzy";
 import Zcsh from "../User/Zcsh";
+import Addrsh from "./Addrsh";
 
 
 export default {
@@ -64,7 +65,8 @@ export default {
     Recharge,
     Shzy,
     tabs,
-    Zcsh
+    Zcsh,
+    Addrsh
   },
   computed: {
     showLoginname() {

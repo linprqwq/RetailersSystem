@@ -27,6 +27,7 @@ import commmodity from "../component/shop/commmodity";
 import Supplier_registration from "../component/supplier/Supplier_registration";
 import Thorder from "../component/Shorder/Thorder";
 import CommodityClass from "../component/Commodity/CommodityClass";
+import Addrsh from "../component/PersonalCenter/Addrsh";
 //Vue组件使用Vue-router组件*******************
 Vue.use(VueRouter)
 
@@ -145,6 +146,11 @@ var routes=[
     path:"/CommodityClass",
     name:"CommodityClass",
     component: CommodityClass
+  },
+  {
+    path: "/Addrsh",
+    name:"Addrsh",
+    component: Addrsh
   }
 ]
 

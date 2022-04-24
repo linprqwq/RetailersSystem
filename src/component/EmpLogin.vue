@@ -51,7 +51,7 @@
                 "empPassword":empForm.emppassword}})
             .then(response=>{
                //总记录数量
-              if(response.data!=null){
+              if(response.data!=""){
                 alert("登录成功")
                 // window.location.href="SystemList.vue"
 

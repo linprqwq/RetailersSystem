@@ -1,13 +1,14 @@
 <template>
   <div >
     <el-form :model="editformsysrle">
-      <!--<el-form-item label="id">
+    <!--  <el-form-item label="id">
         <el-input v-model="editformsysrle.id"></el-input>
       </el-form-item>-->
       <el-form-item label="角色">
         <el-input v-model="editformsysrle.roleName"></el-input>
       </el-form-item>
-      <!--<el-form-item label="状态">
+
+     <!-- <el-form-item label="状态">
         <el-input v-model="editformsysrle.remark" autocomplete="off"></el-input>
       </el-form-item>-->
     </el-form>

@@ -18,11 +18,11 @@
         width="180">
       </el-table-column>
 
-      <el-table-column
+    <!--  <el-table-column
         prop="remark"
         label="状态"
         width="180">
-      </el-table-column>
+      </el-table-column>-->
 
       <el-table-column>
 

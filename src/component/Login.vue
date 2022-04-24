@@ -34,7 +34,7 @@
                 <a href="#"><span></span>微信</a>
               </li>
               <li>
-                <a href="#"><i></i>立即注册</a>
+                <a @click="zc"><i></i>立即注册</a>
               </li>
             </ul>
             <div class="none" id="none">
@@ -58,6 +58,9 @@ export default {
     }
   },
   methods:{
+    zc(){
+      this.$router.push("/Register");
+    },
     logindl(){
       var params= new URLSearchParams();
       params.append("loginname",this.loginqwq.zhh)

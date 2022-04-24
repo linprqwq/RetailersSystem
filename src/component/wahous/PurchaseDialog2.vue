@@ -2,7 +2,7 @@
   <div>
     <el-table :data="warehouseInfoList">
       <el-table-column prop="warName" label="仓库名"></el-table-column>
-      <el-table-column prop="warehouseDetailsInfoList[0].shopInfo.shopName" label="商品名"></el-table-column>
+      <el-table-column prop="warehouseDetailsInfoList[0].commodity.proname" label="商品名"></el-table-column>
       <el-table-column prop="warehouseDetailsInfoList[0].lockStock" label="锁定库存"></el-table-column>
       <el-table-column prop="warehouseDetailsInfoList[0].maxNum" label="最大存储量"></el-table-column>
       <el-table-column label="操作">

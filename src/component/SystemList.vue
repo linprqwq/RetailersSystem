@@ -4,14 +4,17 @@
       <el-header>
         <el-row class="demo-avatar demo-basic">
           <el-col :span="1">
-            <div style="width: 280px;" class="sub-title">{{empname}}，欢迎登录兴盛优选后台管理系统</div>
-            <div class="demo-basic--circle">
+            <div style="width: 280px;" class="sub-title">{{empname}}，欢迎登录兴盛优选管理系统
+              <el-col style="position: relative;left: -100px;" :span="12" :offset="10">   <el-button @click="zx()" type="danger" size="mini"  style="" >注销</el-button></el-col>
+            </div>
+
+            <div class="demo-basic--circle"  id="img1">
               <div class="block">
-                <el-avatar shape="square" :size="35" :src="circleUrl"></el-avatar>
+                <el-avatar  style="position: relative;top: -28px;"  shape="square" :size="35" :src="circleUrl"></el-avatar>
               </div>
             </div>
           </el-col>
-          <el-col :span="12" :offset="10">   <el-button @click="zx()" type="danger" size="mini"  style="" >注销</el-button></el-col>
+
         </el-row>
       </el-header>
       <el-container>
@@ -97,16 +100,16 @@
   import CkView from "./Ck/CkView";
   import CkShView from "./Ck/CkShView";
   import SysMenus from "./sysindex/sysguanli/sysmenus/SysMenus";
-
+  import CkpzView from "./wahous/CkpzView";
 
   import WahourSgather from "./wahous/WahourSgather";
     export default {
         name: "SystemList",
       components:{
-        Welcome,EmpView,AuthcView,UserView,CgsqView,GysShView,GysShJlView,SysMenus,ShView,ShJlView,SysRole,
+        Welcome,EmpView,AuthcView,UserView,CgsqView,GysShView,GysShJlView,ShView,ShJlView,SysRole,
         GygoodsShView,commmodity,addcommodity,
         CgShView,shoptypeinfo,WahourSgather,
-        CgJlView,CkView,CkShView,
+        CgJlView,CkView,CkShView,SysMenus,CkpzView
       },
       data(){
         return {

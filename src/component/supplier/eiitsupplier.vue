@@ -63,6 +63,7 @@
         this.$axios.get("queryUserById.action/"+this.ruleForm.id, null).
         then(response => {
           this.ruleForm = response.data;
+          this.ShopTypeInfos=[]   //清空
           response.data.supplierGoodsCategoryList.forEach(item=>{
             this.ShopTypeInfos.push(item.sortId);
           });
